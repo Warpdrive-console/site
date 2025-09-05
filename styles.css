@@ -19,7 +19,7 @@
 
 html,
 body {
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -28,6 +28,7 @@ body {
     background: radial-gradient(1200px 700px at 80% -10%, rgba(198, 142, 199, .18), transparent 60%),
         radial-gradient(1000px 600px at -10% 10%, rgba(207, 176, 211, .14), transparent 55%),
         linear-gradient(180deg, #0b0c10, var(--bg));
+    background-repeat: no-repeat;
     color: var(--text);
     line-height: 1.6;
 }
