@@ -265,3 +265,117 @@ a:hover {
         padding: .75rem 0;
     }
 }
+
+.blog {
+    padding: 3rem 0 4rem;
+}
+
+.blog h2 {
+    text-align: center;
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    letter-spacing: .2px;
+    background: linear-gradient(180deg, #fff, #eae6f3 30%, var(--accent-1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
+}
+
+.post {
+    background: linear-gradient(180deg, rgba(21, 23, 34, .9), rgba(21, 23, 34, .7));
+    border: 1px solid rgba(191, 195, 201, .16);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .04);
+}
+
+.post:hover {
+    transform: translateY(-2px);
+    border-color: rgba(207, 176, 211, .35);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .45), 0 4px 12px rgba(198, 142, 199, .2);
+}
+
+.post-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-thumbnail {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: rgba(14, 15, 19, .6);
+    border-bottom: 1px solid rgba(191, 195, 201, .12);
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    opacity: 0.95;
+}
+
+.post:hover .post-thumbnail img {
+    transform: scale(1.06);
+    opacity: 1;
+}
+
+.post-content {
+    padding: 1.1rem;
+}
+
+.post-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: .2px;
+    color: var(--text);
+}
+
+.post-description {
+    margin: 0 0 0.8rem 0;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-date {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--silver-3);
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+.blog-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+}
+
+@media (max-width: 900px) {
+    .posts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .posts {
+        grid-template-columns: 1fr;
+    }
+}
