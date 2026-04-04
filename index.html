@@ -809,14 +809,11 @@ footer::before {
   position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.8;
 }
 
-/* ─── TABLET (max 900px) ─────────────────────────────────────────── */
 @media (max-width:900px) {
   .spec-layout { grid-template-columns:repeat(2,1fr); }
 }
 
-/* ─── MOBILE (max 767px) ─────────────────────────────────────────── */
 @media (max-width:767px) {
-  /* Nav — logo + hamburger only, everything else hidden */
   .nav-center    { display:none; }
   .nav-btn       { display:none; }
   .nav-btn-ghost { display:none; }
@@ -835,7 +832,6 @@ footer::before {
     letter-spacing: 0.08em;
   }
 
-  /* Mobile menu enhancements */
   .mobile-menu { padding:68px 24px 40px; }
   .mobile-menu a { font-size:clamp(22px,7vw,36px); padding:18px 0; }
   .mobile-menu-social {
@@ -855,10 +851,8 @@ footer::before {
     clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
   }
 
-  /* Sections */
   section { padding:52px 18px; }
 
-  /* Hero */
   .hero {
     padding: 52px 18px 160px;
     padding-top: 80px;
@@ -872,7 +866,6 @@ footer::before {
   .hero-cta { flex-direction:column; align-items:stretch; gap:10px; }
   .btn-primary,.btn-secondary { width:100%; text-align:center; padding:15px 20px; }
 
-  /* Hero stats bar */
   .hero-stats { flex-wrap:wrap; }
   .hero-stats .stat {
     flex: 0 0 33.33%;
@@ -885,7 +878,6 @@ footer::before {
   .stat-val   { font-size:clamp(14px,4vw,22px); }
   .stat-label { font-size:7px; }
 
-  /* Identity grid */
   .identity-grid {
     grid-template-columns: 1fr;
     gap: 2px;
@@ -893,12 +885,10 @@ footer::before {
   .id-card { padding: 20px 18px; }
   .id-body  { font-size:13px; }
 
-  /* Specs */
   .spec-layout { grid-template-columns:1fr 1fr; gap:2px; }
   .spec-cell   { padding:14px 12px; }
   .spec-banner { padding:14px 16px; }
 
-  /* Store / tiers */
   .tier {
     flex-wrap: wrap;
     gap: 8px;
@@ -910,7 +900,6 @@ footer::before {
   .tier-cut  { flex: 0 0 auto; font-size:clamp(16px,4vw,22px); }
   .tier-stripe { width:3px; }
 
-  /* Physical */
   .physical-layout { grid-template-columns:1fr; gap:24px; }
   .disc-stage { padding:28px; }
   .disc-visual { width:clamp(120px,36vw,180px); height:clamp(120px,36vw,180px); }
@@ -918,20 +907,17 @@ footer::before {
   .disc-info h3 { font-size:clamp(14px,4vw,20px); margin-bottom:14px; }
   .disc-fact { padding:10px 12px; font-size:12px; gap:10px; }
 
-  /* Banks */
   .banks-layout { grid-template-columns:1fr; gap:24px; }
   .banks-grid   { grid-template-columns:repeat(3,1fr); gap:2px; }
   .banks-card   { padding:14px 8px; }
   .banks-emoji  { font-size:clamp(20px,5vw,28px); }
   .banks-mood   { font-size:7px; }
 
-  /* Social / feature list */
   .feature-row  { padding:12px 14px; gap:12px; }
   .feature-text { font-size:13px; }
   .feature-sub  { font-size:10px; }
   .rotur-pill   { padding:7px 14px; }
 
-  /* Pricing */
   .price-layout { grid-template-columns:1fr; gap:20px; }
   .price-card   { padding:24px 20px; }
   .price-amount { font-size:clamp(52px,16vw,80px); }
@@ -944,24 +930,19 @@ footer::before {
   .ks-tier-name { font-size:8px; }
   .ks-tier-val  { font-size:clamp(10px,3vw,13px); }
 
-  /* Section typography */
   .section-title { font-size:clamp(22px,7vw,40px); margin-bottom:24px; }
   .section-eyebrow { font-size:9px; }
 
-  /* Footer */
   .footer-layout { grid-template-columns:1fr; gap:28px; }
   .footer-bottom { flex-direction:column; align-items:flex-start; gap:8px; }
   footer { padding:40px 18px 32px; }
 
-  /* Marquees — keep readable on small screens */
   .marquee-item   { font-size:9px; letter-spacing:0.18em; }
   .marquee-item-sm{ font-size:7px; }
 
-  /* Disable heavy parallax on touch */
   .bg-shapes,.bg-laser,.bg-speedlines { transform:none !important; }
 }
 
-/* ─── SMALL MOBILE (max 480px) ───────────────────────────────────── */
 @media (max-width:480px) {
   nav { height:52px; }
   .nav-logo { font-size:12px; letter-spacing:0.08em; }
@@ -989,7 +970,6 @@ footer::before {
   section { padding:44px 16px; }
   footer  { padding:36px 16px 28px; }
 
-  /* Tiers stack more comfortably */
   .tier { flex-direction:column; gap:6px; padding:14px 14px; }
   .tier-cut { align-self:flex-end; }
   .tier-num { font-size:clamp(16px,5vw,24px); }
@@ -1398,7 +1378,7 @@ footer::before {
       <div class="tier-num">01</div>
       <div class="tier-info">
         <div class="tier-name">Storefront - Official</div>
-        <div class="tier-desc">Curated digital storefront. Quality bar, free to submit.</div>
+        <div class="tier-desc">Curated digital storefront. Quality bar, free to submit, any genre, age-rating, and engine welcome. Developers get 90% of the profit per unit sold!</div>
       </div>
       <div class="tier-cut" style="background:linear-gradient(135deg,var(--pink-hot),var(--purple-logo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">90%</div>
     </div>
@@ -1407,7 +1387,7 @@ footer::before {
       <div class="tier-num">02</div>
       <div class="tier-info">
         <div class="tier-name">Physical - Disc</div>
-        <div class="tier-desc">DVD games. Custom Casings, Printed Discs, and even collector's editions.</div>
+        <div class="tier-desc">DVD games. Custom Casings, Printed Discs, and even collector's editions. Physically produced, sold, and distributed. Developers get 70% of the profit per unit sold!</div>
       </div>
       <div class="tier-cut" style="color:var(--silver)">70%</div>
     </div>
@@ -1416,7 +1396,7 @@ footer::before {
       <div class="tier-num">03</div>
       <div class="tier-info">
         <div class="tier-name">Open-Ware</div>
-        <div class="tier-desc">3rd party store. Install required. No monetization needed. The place for fan-games, emulators, and mods!</div>
+        <div class="tier-desc">3rd party store. Install required. No monetization needed. The place for fan-games, emulators, and mods! The Open-Ware store!</div>
       </div>
       <div class="tier-cut" style="color:var(--silver-dim);font-size:13px;">FREE</div>
     </div>
@@ -1657,7 +1637,7 @@ footer::before {
     </div>
     <div class="ks-card reveal">
       <div class="ks-title">◈ Kickstarter Coming</div>
-      <p class="ks-body">Pre-order batch size determined by demand. <strong>Plenty of color customization</strong> available. Quality over Quantity.</p>
+      <p class="ks-body">Pre-order batch size determined by demand. <strong>Plenty of color customization</strong> available. Quality over Quantity. Not to mention, there's a handful of tiers for different budgets!</p>
       <div class="ks-tiers">
         <div class="ks-tier"><span class="ks-tier-name">Thank You + Stickers</span><span class="ks-tier-val">~$15</span></div>
         <div class="ks-tier"><span class="ks-tier-name">Physical Game</span><span class="ks-tier-val">~$25</span></div>
@@ -1841,3 +1821,4 @@ hamburger.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
