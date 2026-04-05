@@ -17,106 +17,96 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{background:var(--black);color:var(--silver-hi);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden}
-
-.void-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.void-blob{position:absolute;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;filter:blur(90px);will-change:transform,border-radius}
-.vb1{width:700px;height:600px;background:radial-gradient(ellipse,var(--purple-deep),transparent 70%);top:-12%;left:-6%;opacity:0.35;animation:bd1 55s linear infinite,bm1 13s ease-in-out infinite}
-.vb2{width:500px;height:440px;background:radial-gradient(ellipse,rgba(204,46,138,0.4),transparent 70%);bottom:8%;right:-9%;opacity:0.2;animation:bd2 75s linear infinite,bm2 17s ease-in-out infinite}
-.vb3{width:380px;height:360px;background:radial-gradient(ellipse,rgba(0,229,255,0.25),transparent 70%);top:45%;left:48%;opacity:0.08;animation:bd3 65s linear infinite,bm1 22s ease-in-out 5s infinite}
-.vb4{width:650px;height:500px;background:radial-gradient(ellipse,rgba(191,47,255,0.22),transparent 70%);top:65%;right:25%;opacity:0.1;animation:bd2 85s linear infinite,bm2 15s ease-in-out 3s infinite}
-.vb5{width:300px;height:280px;background:radial-gradient(ellipse,rgba(255,34,163,0.3),transparent 70%);top:18%;left:68%;opacity:0.09;animation:bd3 48s linear infinite,bm1 19s ease-in-out 7s infinite}
-
-@keyframes bm1{0%{border-radius:40% 60% 70% 30%/40% 50% 60% 50%}25%{border-radius:70% 30% 50% 50%/30% 60% 40% 70%}50%{border-radius:50% 60% 30% 70%/60% 40% 70% 30%}75%{border-radius:30% 70% 60% 40%/50% 70% 30% 60%}100%{border-radius:40% 60% 70% 30%/40% 50% 60% 50%}}
-@keyframes bm2{0%{border-radius:60% 40% 30% 70%/50% 60% 40% 50%}33%{border-radius:30% 70% 60% 40%/70% 30% 50% 60%}66%{border-radius:50% 50% 40% 60%/40% 60% 70% 30%}100%{border-radius:60% 40% 30% 70%/50% 60% 40% 50%}}
-@keyframes bd1{0%{transform:translate(0,0) scale(1)}25%{transform:translate(50px,35px) scale(1.04)}50%{transform:translate(15px,70px) scale(0.96)}75%{transform:translate(-35px,25px) scale(1.02)}100%{transform:translate(0,0) scale(1)}}
-@keyframes bd2{0%{transform:translate(0,0) scale(1) rotate(0deg)}33%{transform:translate(-45px,-25px) scale(1.06) rotate(4deg)}66%{transform:translate(25px,-50px) scale(0.94) rotate(-3deg)}100%{transform:translate(0,0) scale(1) rotate(0deg)}}
-@keyframes bd3{0%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(-60px,40px) rotate(6deg)}100%{transform:translate(0,0) rotate(0deg)}}
-
-.ambient-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.amb-orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;animation:ambDrift linear infinite}
-.amb1{width:420px;height:320px;background:radial-gradient(ellipse,rgba(107,31,160,0.18),transparent 70%);top:10%;left:15%;animation-duration:70s;animation-delay:0s;opacity:0.7}
+body{background:var(--black);color:var(--silver-hi);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:auto}
+ 
+.void-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}
+.void-blob{
+  position:absolute;border-radius:50%;
+  filter:blur(90px);will-change:transform;
+  transform:translate3d(0,0,0);backface-visibility:hidden;
+}
+@media(min-width:768px){
+  .vb1{animation:bd1 55s linear infinite}
+  .vb2{animation:bd2 75s linear infinite}
+  .vb3{animation:bd3 65s linear infinite}
+  .vb4{animation:bd2 85s linear infinite}
+  .vb5{animation:bd3 48s linear infinite}
+}
+.vb1{width:700px;height:600px;background:radial-gradient(ellipse,var(--purple-deep),transparent 70%);top:-12%;left:-6%;opacity:0.35}
+.vb2{width:500px;height:440px;background:radial-gradient(ellipse,rgba(204,46,138,0.4),transparent 70%);bottom:8%;right:-9%;opacity:0.2}
+.vb3{width:380px;height:360px;background:radial-gradient(ellipse,rgba(0,229,255,0.25),transparent 70%);top:45%;left:48%;opacity:0.08}
+.vb4{width:650px;height:500px;background:radial-gradient(ellipse,rgba(191,47,255,0.22),transparent 70%);top:65%;right:25%;opacity:0.1}
+.vb5{width:300px;height:280px;background:radial-gradient(ellipse,rgba(255,34,163,0.3),transparent 70%);top:18%;left:68%;opacity:0.09}
+@keyframes bd1{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(50px,35px,0)}50%{transform:translate3d(15px,70px,0)}75%{transform:translate3d(-35px,25px,0)}100%{transform:translate3d(0,0,0)}}
+@keyframes bd2{0%{transform:translate3d(0,0,0)}33%{transform:translate3d(-45px,-25px,0)}66%{transform:translate3d(25px,-50px,0)}100%{transform:translate3d(0,0,0)}}
+@keyframes bd3{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(-60px,40px,0)}100%{transform:translate3d(0,0,0)}}
+ 
+.ambient-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}
+.amb-orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;display:none;transform:translate3d(0,0,0);backface-visibility:hidden}
+@media(min-width:768px){.amb-orb{display:block;animation:ambDrift linear infinite}.amb4,.amb5,.amb6{display:none}}
+@media(min-width:1024px){.amb4,.amb5,.amb6{display:block}}
+.amb1{width:420px;height:320px;background:radial-gradient(ellipse,rgba(107,31,160,0.18),transparent 70%);top:10%;left:15%;animation-duration:70s;opacity:0.7}
 .amb2{width:300px;height:260px;background:radial-gradient(ellipse,rgba(255,34,163,0.12),transparent 70%);top:55%;left:70%;animation-duration:85s;animation-delay:-20s;opacity:0.65}
 .amb3{width:380px;height:300px;background:radial-gradient(ellipse,rgba(0,229,255,0.10),transparent 70%);top:30%;left:40%;animation-duration:95s;animation-delay:-40s;opacity:0.5}
 .amb4{width:260px;height:220px;background:radial-gradient(ellipse,rgba(191,47,255,0.13),transparent 70%);top:75%;left:20%;animation-duration:78s;animation-delay:-10s;opacity:0.6}
 .amb5{width:340px;height:280px;background:radial-gradient(ellipse,rgba(255,90,175,0.09),transparent 70%);top:5%;left:80%;animation-duration:110s;animation-delay:-55s;opacity:0.55}
 .amb6{width:200px;height:180px;background:radial-gradient(ellipse,rgba(0,229,255,0.08),transparent 70%);top:85%;left:55%;animation-duration:62s;animation-delay:-30s;opacity:0.45}
-.amb-page{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;opacity:0;transition:opacity 2s ease;z-index:0}
+.amb-page{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;opacity:0;transition:opacity 2s ease;z-index:0;transform:translate3d(0,0,0)}
 .amb-page.visible{opacity:1}
-
-@keyframes ambDrift{
-  0%{transform:translate(0,0) scale(1)}
-  20%{transform:translate(40px,-30px) scale(1.05)}
-  40%{transform:translate(-25px,50px) scale(0.95)}
-  60%{transform:translate(60px,20px) scale(1.08)}
-  80%{transform:translate(-40px,-20px) scale(0.97)}
-  100%{transform:translate(0,0) scale(1)}
-}
-
+@keyframes ambDrift{0%{transform:translate3d(0,0,0)}20%{transform:translate3d(40px,-30px,0)}40%{transform:translate3d(-25px,50px,0)}60%{transform:translate3d(60px,20px,0)}80%{transform:translate3d(-40px,-20px,0)}100%{transform:translate3d(0,0,0)}}
+ 
 #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(107,31,160,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(107,31,160,0.04) 1px,transparent 1px);background-size:80px 80px}
-
-.bg-scan{position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px)}
-
-.plx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;will-change:transform}
-
-.deco-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(107,31,160,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(107,31,160,0.04) 1px,transparent 1px);background-size:80px 80px;transform:translate3d(0,0,0)}
+.bg-scan{position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);transform:translate3d(0,0,0)}
+.plx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;will-change:transform;transform:translate3d(0,0,0)}
+@media(max-width:767px){.plx{display:none}}
+ 
+.deco-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}
 .deco-shape{position:absolute;opacity:0}
-.d-diamond{width:16px;height:16px;border:1px solid rgba(191,47,255,0.18);transform:rotate(45deg);animation:decoFloat 28s ease-in-out infinite}
-.d-diamond.cyan{border-color:rgba(0,229,255,0.15)}
-.d-diamond.pink{border-color:rgba(255,34,163,0.15)}
-.d-square{width:10px;height:10px;border:1px solid rgba(107,31,160,0.22);animation:decoSpin 18s linear infinite,decoFloat 26s ease-in-out infinite}
-.d-bracket{width:20px;height:20px;border-color:rgba(204,46,138,0.14);border-style:solid;animation:decoFloat 32s ease-in-out infinite}
-.d-bracket.tl{border-width:1px 0 0 1px}
-.d-bracket.br{border-width:0 1px 1px 0}
-
-.ds1{top:12%;left:8%;animation-delay:0s;opacity:1}
-.ds2{top:28%;left:92%;animation-delay:-5s;opacity:1}
-.ds3{top:55%;left:5%;animation-delay:-11s;opacity:1}
-.ds4{top:72%;left:88%;animation-delay:-18s;opacity:1}
-.ds5{top:88%;left:20%;animation-delay:-7s;opacity:1}
-.ds6{top:38%;left:50%;animation-delay:-22s;opacity:1}
-.ds7{top:6%;left:65%;animation-delay:-14s;opacity:1}
-.ds8{top:94%;left:75%;animation-delay:-3s;opacity:1}
-
-@keyframes decoFloat{0%,100%{transform:rotate(45deg) translate(0,0)}25%{transform:rotate(45deg) translate(6px,-12px)}50%{transform:rotate(45deg) translate(-5px,9px)}75%{transform:rotate(45deg) translate(9px,3px)}}
+.d-diamond{width:16px;height:16px;border:1px solid rgba(191,47,255,0.18);transform:rotate(45deg)}
+.d-diamond.cyan{border-color:rgba(0,229,255,0.15)}.d-diamond.pink{border-color:rgba(255,34,163,0.15)}
+.d-square{width:10px;height:10px;border:1px solid rgba(107,31,160,0.22)}
+@media(min-width:768px){
+  .d-diamond{animation:decoFloat 28s ease-in-out infinite}
+  .d-diamond.cyan{animation-duration:31s}.d-diamond.pink{animation-duration:25s}
+  .d-square{animation:decoSpin 18s linear infinite,decoFloat 26s ease-in-out infinite}
+}
+.ds1{top:12%;left:8%;animation-delay:0s;opacity:1}.ds2{top:28%;left:92%;animation-delay:-5s;opacity:1}
+.ds3{top:55%;left:5%;animation-delay:-11s;opacity:1}.ds4{top:72%;left:88%;animation-delay:-18s;opacity:1}
+.ds5{top:88%;left:20%;animation-delay:-7s;opacity:1}.ds6{top:38%;left:50%;animation-delay:-22s;opacity:1}
+.ds7{top:6%;left:65%;animation-delay:-14s;opacity:1}.ds8{top:94%;left:75%;animation-delay:-3s;opacity:1}
+@keyframes decoFloat{0%,100%{transform:rotate(45deg) translate3d(0,0,0)}25%{transform:rotate(45deg) translate3d(6px,-12px,0)}50%{transform:rotate(45deg) translate3d(-5px,9px,0)}75%{transform:rotate(45deg) translate3d(9px,3px,0)}}
 @keyframes decoSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,56px);height:54px;background:rgba(4,4,7,0.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+ 
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,56px);height:54px;background:rgba(4,4,7,0.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 5%,var(--pink-hot) 30%,var(--neon-purple) 70%,transparent 95%);opacity:0.3}
 .nav-brand img{width:140px;height:auto;display:block}
 .nav-brand-text{font-family:'Syne',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.08em;background:linear-gradient(90deg,var(--pink-hot),var(--purple-logo),var(--silver));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase}
-
 .nav-links{display:flex;gap:clamp(6px,1.8vw,28px);align-items:center}
 .nav-link{font-family:'Space Mono',monospace;font-size:clamp(8px,0.8vw,10px);letter-spacing:0.13em;color:var(--silver-dim);text-decoration:none;text-transform:uppercase;padding:17px 4px;position:relative;transition:color 0.3s;cursor:pointer;background:none;border:none}
 .nav-link::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--pink-hot);transform:scaleX(0);transition:transform 0.3s}
 .nav-link:hover{color:var(--neon-pink)}.nav-link:hover::after{transform:scaleX(1)}
 .nav-link.active{color:var(--pink-hot)}.nav-link.active::after{transform:scaleX(1)}
 .nav-divider{width:1px;height:18px;background:var(--border)}
-
 .nav-cta{font-family:'Space Mono',monospace;font-size:clamp(7px,0.75vw,9px);letter-spacing:0.13em;text-transform:uppercase;text-decoration:none;padding:6px 12px;color:var(--pink-hot);border:1px solid var(--border-hi);background:rgba(204,46,138,0.04);clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));transition:background 0.3s,color 0.3s;white-space:nowrap}
 .nav-cta:hover{background:rgba(204,46,138,0.12);color:var(--silver-hi)}
 .nav-ghost{font-family:'Space Mono',monospace;font-size:clamp(7px,0.75vw,9px);letter-spacing:0.13em;text-transform:uppercase;text-decoration:none;padding:6px 12px;color:var(--silver-dim);border:1px solid var(--border);background:transparent;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));transition:background 0.3s,color 0.3s;white-space:nowrap}
 .nav-ghost:hover{background:rgba(107,31,160,0.08);color:var(--silver)}
-
 .nav-right{display:flex;gap:6px;align-items:center;flex-shrink:0}
 .hamburger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer;z-index:201}
 .hamburger span{display:block;width:20px;height:1.5px;background:var(--silver-dim);transition:all 0.3s;transform-origin:center}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);background:var(--neon-pink)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);background:var(--neon-pink)}
-
-.mobile-menu{display:none;position:fixed;inset:0;z-index:190;background:rgba(4,4,7,0.97);backdrop-filter:blur(24px);padding:70px 24px 40px;flex-direction:column}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:190;background:rgba(4,4,7,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:70px 24px 40px;flex-direction:column}
 .mobile-menu.open{display:flex}
-.mobile-menu a,.mobile-menu button{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,7vw,36px);letter-spacing:0.03em;color:var(--silver-dim);text-decoration:none;text-transform:uppercase;padding:16px 0;border:none;border-bottom:1px solid var(--border);background:none;text-align:left;cursor:pointer;display:block;width:100%;transition:color 0.2s}
+.mobile-menu a,.mobile-menu button{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,7vw,36px);letter-spacing:0.03em;color:var(--silver-dim);text-decoration:none;text-transform:uppercase;padding:16px 0;border:none;border-bottom:1px solid var(--border);background:none;text-align:left;cursor:pointer;display:block;width:100%;transition:color 0.05s}
 .mobile-menu a:hover,.mobile-menu button:hover{color:var(--neon-pink)}
 .mobile-menu-actions{display:flex;gap:10px;margin-top:24px;flex-direction:column}
 .mobile-menu-actions a{font-size:11px;padding:14px 20px;text-align:center;font-family:'Space Mono',monospace;letter-spacing:0.14em;display:block}
-
-.page{display:none;position:relative;z-index:1}
-.page.active{display:block}
-
+ 
+.page{display:none;position:relative;z-index:1}.page.active{display:block}
+ 
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:80px clamp(24px,10vw,180px) clamp(140px,18vw,200px);overflow:hidden}
 .hero-content{position:relative;z-index:2;max-width:650px;width:100%}
 .hero-eyebrow{font-family:'Space Mono',monospace;font-size:clamp(9px,1vw,11px);letter-spacing:0.22em;color:var(--pink-hot);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:14px;opacity:0;animation:fu 1s ease 0.2s forwards}
@@ -132,8 +122,7 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .btn-p:hover{filter:brightness(1.15);box-shadow:0 0 50px rgba(204,46,138,0.35)}
 .btn-s{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(10px,1vw,12px);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--silver);padding:15px 32px;border:1px solid rgba(200,205,216,0.12);background:transparent;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:border-color 0.3s,color 0.3s}
 .btn-s:hover{border-color:var(--neon-cyan);color:var(--neon-cyan)}
-
-.hero-stats{position:absolute;bottom:0;left:0;right:0;display:flex;flex-wrap:wrap;z-index:2;border-top:1px solid var(--border);background:rgba(4,4,7,0.6);backdrop-filter:blur(12px);opacity:0;animation:fu 1s ease 1s forwards}
+.hero-stats{position:absolute;bottom:0;left:0;right:0;display:flex;flex-wrap:wrap;z-index:2;border-top:1px solid var(--border);background:rgba(4,4,7,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;animation:fu 1s ease 1s forwards}
 .stat{flex:1;min-width:80px;padding:clamp(12px,1.5vw,20px) clamp(14px,2.5vw,28px);border-right:1px solid var(--border);position:relative;overflow:hidden}
 .stat:last-child{border-right:none}
 .stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink-hot),var(--purple-logo));transform:scaleX(0);transform-origin:left;transition:transform 0.5s}
@@ -141,39 +130,29 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .stat-val{display:block;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(18px,2.4vw,28px);background:linear-gradient(135deg,var(--pink-hot),var(--purple-logo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .stat-label{display:block;font-family:'Space Mono',monospace;font-size:clamp(7px,0.7vw,9px);letter-spacing:0.14em;color:var(--silver-dim);text-transform:uppercase;margin-top:3px}
 @keyframes fu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-
+ 
 .mq{position:relative;z-index:1;overflow:hidden;border-top:1px solid rgba(204,46,138,0.12);border-bottom:1px solid rgba(204,46,138,0.12);background:rgba(204,46,138,0.015);padding:12px 0}
 .mq-inner{display:flex;gap:40px;white-space:nowrap}
-.mq-track{display:flex;gap:40px;animation:mqScroll 28s linear infinite;white-space:nowrap;flex-shrink:0}
+.mq-track{display:flex;gap:40px;animation:mqScroll 28s linear infinite;white-space:nowrap;flex-shrink:0;will-change:transform;transform:translate3d(0,0,0)}
 .mq-item{font-family:'Space Mono',monospace;font-size:clamp(8px,0.8vw,10px);letter-spacing:0.18em;color:rgba(200,205,216,0.22);text-transform:uppercase;flex-shrink:0}
 .mq-item.hi{color:rgba(255,34,163,0.45)}.mq-item.dot{color:rgba(107,31,160,0.25)}
-@keyframes mqScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
-
-.mq-technical .mq-item{color:rgba(0,229,255,0.18)}
-.mq-technical .mq-item.hi{color:rgba(0,229,255,0.45)}
-.mq-technical .mq-item.dot{color:rgba(0,140,200,0.25)}
+@keyframes mqScroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-100%,0,0)}}
+.mq-technical .mq-item{color:rgba(0,229,255,0.18)}.mq-technical .mq-item.hi{color:rgba(0,229,255,0.45)}.mq-technical .mq-item.dot{color:rgba(0,140,200,0.25)}
 .mq-technical{border-top-color:rgba(0,229,255,0.12);border-bottom-color:rgba(0,229,255,0.12);background:rgba(0,229,255,0.01)}
-
-.mq-developmental .mq-item{color:rgba(191,47,255,0.18)}
-.mq-developmental .mq-item.hi{color:rgba(191,47,255,0.45)}
-.mq-developmental .mq-item.dot{color:rgba(107,31,160,0.25)}
+.mq-developmental .mq-item{color:rgba(191,47,255,0.18)}.mq-developmental .mq-item.hi{color:rgba(191,47,255,0.45)}.mq-developmental .mq-item.dot{color:rgba(107,31,160,0.25)}
 .mq-developmental{border-top-color:rgba(191,47,255,0.12);border-bottom-color:rgba(191,47,255,0.12);background:rgba(191,47,255,0.01)}
-
+ 
 .showcase{position:relative;z-index:1;padding:clamp(60px,8vw,120px) clamp(24px,8vw,160px)}
 .showcase-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(32px,4vw,52px);gap:20px;flex-wrap:wrap}
-.showcase-header-left{}
 .showcase-eyebrow{font-family:'Space Mono',monospace;font-size:clamp(9px,0.85vw,10px);letter-spacing:0.28em;color:var(--pink-hot);text-transform:uppercase;margin-bottom:14px}
 .showcase-heading{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(28px,5vw,56px);line-height:1.05;text-transform:uppercase}
-
 .showcase-nav{display:flex;gap:10px;align-items:center;flex-shrink:0;padding-bottom:6px}
 .showcase-arrow{width:44px;height:44px;background:rgba(12,12,24,0.85);border:1px solid var(--border-hi);color:var(--pink-hot);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));flex-shrink:0}
 .showcase-arrow:hover:not(:disabled){background:rgba(204,46,138,0.14);border-color:var(--neon-pink);box-shadow:0 0 18px rgba(204,46,138,0.2)}
 .showcase-arrow:disabled{opacity:0.25;cursor:not-allowed}
 .showcase-arrow svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
 .showcase-carousel{position:relative;overflow:hidden}
-.showcase-track{display:flex;gap:clamp(14px,2vw,22px);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
-
+.showcase-track{display:flex;gap:clamp(14px,2vw,22px);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);will-change:transform}
 .showcase-entry{background:var(--black-panel);border:1px solid var(--border);overflow:hidden;transition:border-color 0.4s,box-shadow 0.4s,transform 0.4s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);position:relative;flex-shrink:0}
 .showcase-entry:hover{border-color:var(--border-hi);box-shadow:0 0 40px rgba(204,46,138,0.07),0 10px 36px rgba(0,0,0,0.3);transform:translateY(-3px)}
 .showcase-img{width:100%;aspect-ratio:16/9;background:var(--black-card);overflow:hidden}
@@ -185,46 +164,44 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .showcase-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.18em;color:var(--neon-cyan);text-transform:uppercase;border:1px solid rgba(0,229,255,0.2);padding:3px 8px;margin-bottom:10px;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,0 100%)}
 .showcase-title{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(14px,1.4vw,18px);letter-spacing:0.03em;color:var(--silver-hi);text-transform:uppercase;margin-bottom:8px}
 .showcase-desc{font-size:clamp(13px,1.2vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.7}
-
-.showcase-dots{display:flex;justify-content:center;gap:0px;margin-top:clamp(20px,3vw,32px)}
-.showcase-dot{width:0px;height:0px;border-radius:0%;background:rgba(200,205,216,0.15);border:0px solid rgba(0, 0, 0, 0.1);cursor:pointer;transition:all 0.3s;padding:0}
-.showcase-dot.active{background:var(--pink-hot);border-color:var(--pink-hot);box-shadow:0 0 0px rgba(0, 0, 0, 0.4)}
-
+.showcase-dots{display:flex;justify-content:center;gap:0;margin-top:clamp(20px,3vw,32px)}
+.showcase-dot{width:0;height:0;border-radius:0;background:rgba(200,205,216,0.15);border:0 solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.1s;padding:0}
+.showcase-dot.active{background:var(--pink-hot);border-color:var(--pink-hot)}
+ 
 section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8vw,160px)}
 .se{font-family:'Space Mono',monospace;font-size:clamp(9px,0.85vw,10px);letter-spacing:0.28em;color:var(--pink-hot);text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:14px}
 .se::after{content:'';flex:1;height:1px;max-width:100px;background:linear-gradient(90deg,rgba(204,46,138,0.25),transparent)}
 .st{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(28px,5vw,56px);line-height:1.05;text-transform:uppercase;margin-bottom:40px}
 .sd{font-size:clamp(14px,1.4vw,16px);font-weight:300;color:var(--silver-dim);line-height:1.8;max-width:540px;margin-bottom:44px}
-
-.gc{background:rgba(12,12,24,0.5);border:1px solid var(--border);backdrop-filter:blur(4px)}
-
+ 
 .identity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:2px}
-.id-card{background:rgba(12,12,24,0.5);border:1px solid var(--border);backdrop-filter:blur(6px);padding:clamp(24px,3.5vw,44px);position:relative;overflow:hidden;transition:border-color 0.4s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+.id-card{background:rgba(12,12,24,0.5);border:1px solid var(--border);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:clamp(24px,3.5vw,44px);position:relative;overflow:hidden;transition:border-color 0.4s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
 .id-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink-hot),var(--neon-purple));transform:scaleX(0);transform-origin:left;transition:transform 0.5s}
 .id-card:hover{border-color:var(--border-hi)}.id-card:hover::after{transform:scaleX(1)}
-.id-icon{font-size:clamp(26px,3vw,36px);margin-bottom:18px;display:block}
+.id-icon{margin-bottom:18px;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(107,31,160,0.08);border:1px solid rgba(107,31,160,0.15)}
+.id-icon svg{width:22px;height:22px}
 .id-title{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(12px,1.2vw,14px);letter-spacing:0.06em;background:linear-gradient(90deg,var(--pink-hot),var(--purple-logo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase;margin-bottom:12px}
 .id-body{font-size:clamp(13px,1.25vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.8}
 .id-body strong{color:var(--silver);font-weight:500}
-
+ 
 .spec-layout{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
 @media(min-width:768px){.spec-layout{grid-template-columns:repeat(4,1fr)}}
-.spec-cell{background:rgba(12,12,24,0.5);border:1px solid var(--border);backdrop-filter:blur(4px);padding:clamp(16px,2.2vw,26px);transition:border-color 0.3s}
+.spec-cell{background:rgba(12,12,24,0.5);border:1px solid var(--border);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:clamp(16px,2.2vw,26px);transition:border-color 0.3s}
 .spec-cell:hover{border-color:rgba(0,229,255,0.2)}
 .spec-key{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--neon-cyan);text-transform:uppercase;margin-bottom:8px;display:block;opacity:0.85}
 .spec-val{font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(13px,1.4vw,16px);color:var(--silver);display:block}
-.spec-banner{margin-top:20px;padding:clamp(18px,2.5vw,28px) clamp(22px,3.5vw,40px);background:rgba(12,12,24,0.5);border:1px solid var(--border);border-left:3px solid var(--neon-pink);backdrop-filter:blur(4px)}
+.spec-banner{margin-top:20px;padding:clamp(18px,2.5vw,28px) clamp(22px,3.5vw,40px);background:rgba(12,12,24,0.5);border:1px solid var(--border);border-left:3px solid var(--neon-pink);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .spec-banner p{font-size:clamp(12px,1.1vw,14px);font-weight:300;color:var(--silver-dim);line-height:2}
 .spec-banner strong{color:var(--neon-pink);font-weight:500}
-
+ 
+/* disc */
 .physical-layout{display:grid;grid-template-columns:1fr;gap:clamp(32px,5vw,64px);align-items:center}
 @media(min-width:768px){.physical-layout{grid-template-columns:1fr 1fr}}
 .disc-stage{display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,96px);background:rgba(12,12,24,0.35);border:1px solid var(--border);position:relative}
 .disc-stage::before,.disc-stage::after{content:'';position:absolute;width:24px;height:24px;border-color:rgba(204,46,138,0.25);border-style:solid}
-.disc-stage::before{top:14px;left:14px;border-width:1px 0 0 1px}
-.disc-stage::after{bottom:14px;right:14px;border-width:0 1px 1px 0}
+.disc-stage::before{top:14px;left:14px;border-width:1px 0 0 1px}.disc-stage::after{bottom:14px;right:14px;border-width:0 1px 1px 0}
 .disc-visual{width:clamp(140px,22vw,220px);height:clamp(140px,22vw,220px);position:relative}
-.disc-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--purple-deep),var(--purple-logo) 60deg,var(--pink-mid) 120deg,var(--pink-hot) 160deg,var(--silver) 200deg,var(--chrome) 240deg,var(--purple-logo) 300deg,var(--purple-deep) 360deg);animation:spin 14s linear infinite;box-shadow:0 0 50px rgba(204,46,138,0.25),0 0 100px rgba(107,31,160,0.1)}
+.disc-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--purple-deep),var(--purple-logo) 60deg,var(--pink-mid) 120deg,var(--pink-hot) 160deg,var(--silver) 200deg,var(--chrome) 240deg,var(--purple-logo) 300deg,var(--purple-deep) 360deg);animation:spin 14s linear infinite;box-shadow:0 0 50px rgba(204,46,138,0.25),0 0 100px rgba(107,31,160,0.1);will-change:transform;transform:translate3d(0,0,0)}
 .disc-mid{position:absolute;border-radius:50%;top:15%;left:15%;right:15%;bottom:15%;background:rgba(0,0,0,0.35);border:1px solid rgba(200,205,216,0.08)}
 .disc-hub{position:absolute;border-radius:50%;top:40%;left:40%;right:40%;bottom:40%;background:var(--black);border:2px solid rgba(200,205,216,0.2);z-index:2}
 .disc-shine{position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent 45%);z-index:3}
@@ -232,7 +209,8 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .disc-facts{display:flex;flex-direction:column;gap:2px}
 .disc-fact{padding:14px 16px;background:rgba(12,12,24,0.4);border-left:2px solid var(--purple-logo);font-size:clamp(12px,1.25vw,14px);color:var(--silver-dim);font-weight:300;line-height:1.65}
 .disc-fact strong{color:var(--silver);font-weight:500}
-
+ 
+/* rotur */
 .rotur-pill{display:inline-flex;align-items:center;gap:12px;padding:10px 20px;margin-bottom:28px;background:rgba(107,31,160,0.08);border:1px solid rgba(107,31,160,0.22);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)}
 .rotur-dot{width:6px;height:6px;border-radius:50%;background:var(--neon-pink);box-shadow:0 0 8px var(--neon-pink);animation:blink 2s ease infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.15}}
@@ -240,10 +218,12 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .feature-list{display:flex;flex-direction:column;gap:2px}
 .feature-row{display:flex;align-items:center;gap:clamp(14px,2vw,24px);padding:clamp(16px,2vw,22px) clamp(16px,3vw,28px);background:rgba(12,12,24,0.4);border:1px solid var(--border);border-left:2px solid var(--purple-deep);transition:border-left-color 0.3s,background 0.3s}
 .feature-row:hover{border-left-color:var(--neon-pink);background:rgba(204,46,138,0.02)}
-.feature-icon{font-size:clamp(16px,2vw,22px);min-width:24px;text-align:center}
+.feature-icon{min-width:38px;min-height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(107,31,160,0.06);border:1px solid rgba(107,31,160,0.12)}
+.feature-icon svg{width:18px;height:18px}
 .feature-text{font-size:clamp(13px,1.25vw,15px);font-weight:400;color:var(--silver)}
 .feature-sub{display:block;font-size:clamp(10px,1vw,12px);font-weight:300;color:var(--silver-dim);margin-top:3px}
-
+ 
+/* tiers */
 .tier-list{display:flex;flex-direction:column;gap:2px}
 .tier{display:flex;align-items:center;gap:clamp(14px,2.5vw,28px);background:rgba(12,12,24,0.5);border:1px solid var(--border);padding:clamp(18px,2.2vw,26px) clamp(20px,3.5vw,36px);position:relative;overflow:hidden;transition:border-color 0.3s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%)}
 .tier:hover{border-color:var(--border-hi)}
@@ -253,7 +233,8 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .tier-name{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(11px,1.2vw,14px);letter-spacing:0.06em;color:var(--silver);text-transform:uppercase;margin-bottom:5px}
 .tier-desc{font-size:clamp(12px,1.2vw,14px);font-weight:300;color:var(--silver-dim);line-height:1.65}
 .tier-cut{font-family:'Syne',sans-serif;font-weight:500;font-size:clamp(20px,3vw,32px);white-space:nowrap}
-
+ 
+/* banks mascot */
 .banks-layout{display:grid;grid-template-columns:1fr;gap:clamp(32px,5vw,56px);align-items:start}
 @media(min-width:768px){.banks-layout{grid-template-columns:1fr 1fr}}
 .banks-intro{font-size:clamp(14px,1.4vw,16px);font-weight:300;color:var(--silver-dim);line-height:1.8}
@@ -262,7 +243,8 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .banks-card{background:rgba(12,12,24,0.5);border:1px solid var(--border);padding:clamp(18px,2.5vw,28px) 12px;display:flex;align-items:center;justify-content:center;transition:border-color 0.3s,transform 0.3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)}
 .banks-card:hover{border-color:var(--neon-pink);transform:translateY(-4px)}
 .banks-card img{width:56px;height:56px;object-fit:contain}
-
+ 
+/* pricing */
 .price-layout{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,48px);align-items:start}
 @media(min-width:768px){.price-layout{grid-template-columns:1fr 1fr}}
 .price-card{background:rgba(12,12,24,0.55);border:1px solid var(--border);padding:clamp(28px,4.5vw,56px);position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px))}
@@ -273,7 +255,7 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .price-note{font-family:'Space Mono',monospace;font-size:clamp(8px,0.85vw,10px);letter-spacing:0.16em;color:var(--purple-logo);text-transform:uppercase;margin:8px 0 28px}
 .price-lines{display:flex;flex-direction:column;gap:14px}
 .price-line{font-size:clamp(12px,1.25vw,14px);font-weight:300;color:var(--silver-dim);line-height:1.55;padding-left:16px;position:relative}
-.price-line::before{content:'◆';position:absolute;left:0;top:1px;color:var(--pink-hot);font-size:6px;opacity:0.6}
+.price-line::before{content:'\25C6';position:absolute;left:0;top:1px;color:var(--pink-hot);font-size:6px;opacity:0.6}
 .price-line strong{color:var(--silver);font-weight:500}
 .ks-card{background:rgba(12,12,24,0.55);border:1px solid var(--border);border-left:3px solid var(--neon-cyan);padding:clamp(28px,4vw,48px)}
 .ks-title{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(16px,2.2vw,24px);text-transform:uppercase;margin-bottom:14px;color:var(--neon-cyan);text-shadow:0 0 30px rgba(0,229,255,0.2)}
@@ -283,7 +265,42 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .ks-tier{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 14px;background:rgba(0,229,255,0.02);border:1px solid rgba(0,229,255,0.06)}
 .ks-tier-name{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--silver-dim);text-transform:uppercase}
 .ks-tier-val{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(12px,1.3vw,15px);color:var(--neon-cyan)}
-
+ 
+.oss-section{position:relative;z-index:1;padding:clamp(80px,10vw,140px) clamp(24px,8vw,160px)}
+.oss-wrapper{position:relative;display:grid;grid-template-columns:1fr;gap:0;background:rgba(12,12,24,0.4);border:1px solid rgba(107,31,160,0.14);overflow:hidden;clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px))}
+@media(min-width:768px){.oss-wrapper{grid-template-columns:1fr 1fr}}
+.oss-wrapper::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-purple),var(--neon-pink));opacity:0.6;z-index:2}
+.oss-content{padding:clamp(32px,5vw,56px);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.oss-eyebrow{font-family:'Space Mono',monospace;font-size:clamp(9px,0.85vw,10px);letter-spacing:0.28em;color:var(--neon-cyan);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.oss-eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--neon-cyan);box-shadow:0 0 10px var(--neon-cyan);animation:blink 2.5s ease infinite}
+.oss-heading{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,4vw,44px);line-height:1.1;text-transform:uppercase;margin-bottom:18px;background:linear-gradient(135deg,var(--silver-hi) 30%,var(--neon-cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.oss-body{font-size:clamp(13px,1.25vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.85;margin-bottom:28px}
+.oss-body strong{color:var(--silver);font-weight:500}
+.oss-sdk-list{display:flex;flex-direction:column;gap:8px;margin-bottom:32px}
+.oss-sdk{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(0,229,255,0.02);border:1px solid rgba(0,229,255,0.08);transition:border-color 0.3s,background 0.3s}
+.oss-sdk:hover{border-color:rgba(0,229,255,0.2);background:rgba(0,229,255,0.04)}
+.oss-sdk-icon{width:32px;height:32px;border-radius:6px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.oss-sdk-icon svg{width:16px;height:16px}
+.oss-sdk-name{font-family:'Space Mono',monospace;font-size:clamp(9px,0.9vw,11px);letter-spacing:0.08em;color:var(--silver);text-transform:uppercase}
+.oss-sdk-desc{font-size:clamp(10px,0.85vw,11px);color:var(--silver-dim);font-weight:300;margin-top:2px}
+.btn-github{display:inline-flex;align-items:center;gap:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(10px,1vw,12px);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--silver-hi);padding:16px 32px;background:linear-gradient(135deg,rgba(0,229,255,0.12),rgba(191,47,255,0.12));border:1px solid rgba(0,229,255,0.25);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all 0.4s;position:relative;overflow:hidden}
+.btn-github::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,0.08),rgba(191,47,255,0.06));opacity:0;transition:opacity 0.4s}
+.btn-github:hover{border-color:var(--neon-cyan);box-shadow:0 0 40px rgba(0,229,255,0.15),0 0 80px rgba(0,229,255,0.06);transform:translateY(-2px)}
+.btn-github:hover::before{opacity:1}
+.btn-github svg{width:20px;height:20px;position:relative;z-index:1}
+.btn-github span{position:relative;z-index:1}
+.oss-visual{position:relative;display:flex;align-items:center;justify-content:center;padding:clamp(40px,5vw,64px);background:rgba(0,229,255,0.01);border-left:1px solid rgba(107,31,160,0.1);overflow:hidden}
+@media(max-width:767px){.oss-visual{border-left:none;border-top:1px solid rgba(107,31,160,0.1);min-height:200px}}
+.oss-visual-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.04) 1px,transparent 1px);background-size:28px 28px;opacity:0.5}
+.oss-terminal{position:relative;z-index:1;width:min(90%,320px);background:rgba(4,4,7,0.9);border:1px solid rgba(0,229,255,0.15);border-radius:8px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 30px rgba(0,229,255,0.05)}
+.oss-terminal-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:rgba(0,229,255,0.03);border-bottom:1px solid rgba(0,229,255,0.08)}
+.oss-terminal-dot{width:8px;height:8px;border-radius:50%}
+.oss-terminal-bar span{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.08em;color:var(--silver-dim);margin-left:8px;text-transform:uppercase}
+.oss-terminal-body{padding:16px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.9;color:var(--silver-dim)}
+.oss-terminal-body .cmd{color:var(--neon-cyan)}
+.oss-terminal-body .comment{color:rgba(153,161,178,0.35)}
+.oss-terminal-body .str{color:var(--neon-pink)}
+ 
 footer{position:relative;z-index:1;padding:clamp(48px,7vw,96px) clamp(24px,8vw,160px) clamp(32px,4vw,48px);border-top:1px solid var(--border)}
 footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pink-hot),var(--neon-purple),transparent);opacity:0.3}
 .footer-grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,48px)}
@@ -295,32 +312,35 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 .footer-links a:hover{color:var(--silver-hi)}
 .footer-bottom{margin-top:clamp(28px,4vw,48px);padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .footer-copy{font-size:11px;color:rgba(122,130,148,0.25);letter-spacing:0.04em}
-
+ 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-
-.cursor{width:5px;height:5px;border-radius:50%;background:var(--pink-hot);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen}
-.cursor-ring{width:28px;height:28px;border-radius:50%;border:1px solid rgba(204,46,138,0.3);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.25s,height 0.25s;mix-blend-mode:screen}
-
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
+ 
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
+  .mq-track,.void-blob,.amb-orb,.disc-outer{animation:none !important}
+}
 @media(max-width:567px){
   .nav-links{display:none}.nav-ghost,.nav-cta{display:none}.hamburger{display:flex}
-  .cursor,.cursor-ring{display:none}body{cursor:auto}
   nav{padding:0 16px;height:52px}
   .hero{padding:72px 20px 160px;align-items:flex-start}
   .hero-title{font-size:clamp(70px,20vw,120px)}
   .hero-cta{flex-direction:column}.btn-p,.btn-s{width:100%;text-align:center}
   .hero-stats .stat{flex:0 0 33.33%;border-bottom:1px solid var(--border)}
   .hero-stats .stat:nth-child(3n){border-right:none}
-  section,.showcase{padding:56px 20px}
+  section,.showcase,.oss-section{padding:56px 20px}
   .identity-grid{grid-template-columns:1fr}
   .physical-layout,.banks-layout,.price-layout{grid-template-columns:1fr}
   .tier{flex-wrap:wrap;gap:8px;padding:16px}
   .st,.showcase-heading{font-size:clamp(26px,8vw,42px)}
   .footer-grid{grid-template-columns:1fr}
   .showcase-header{flex-direction:column;align-items:flex-start}
-  .deco-layer{display:none}
+  .deco-layer{opacity:0.5}
+  .plx{display:none}
+  .amb-page{display:none}
+  .bg-grid{opacity:0.6}.bg-scan{display:none}
+  .vb4,.vb5{opacity:0.04}
 }
 @media(max-width:480px){
   .hero{padding:72px 16px 140px}.hero-title{font-size:clamp(60px,18vw,100px)}
@@ -328,114 +348,67 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .hero-stats .stat:nth-child(3n){border-right:1px solid var(--border)}
   .hero-stats .stat:nth-child(2n){border-right:none}
   .banks-grid{grid-template-columns:repeat(2,1fr)}
-  section,.showcase{padding:48px 16px}
+  section,.showcase,.oss-section{padding:48px 16px}
   .tier{flex-direction:column;gap:6px}.tier-cut{align-self:flex-end}
 }
 </style>
 </head>
 <body>
-
+ 
 <div class="void-layer"><div class="void-blob vb1"></div><div class="void-blob vb2"></div><div class="void-blob vb3"></div><div class="void-blob vb4"></div><div class="void-blob vb5"></div></div>
-
-<div class="ambient-layer">
-  <div class="amb-orb amb1"></div>
-  <div class="amb-orb amb2"></div>
-  <div class="amb-orb amb3"></div>
-  <div class="amb-orb amb4"></div>
-  <div class="amb-orb amb5"></div>
-  <div class="amb-orb amb6"></div>
-</div>
-
-<div class="amb-page" id="ambHome" style="width:500px;height:400px;top:20%;left:60%;background:radial-gradient(ellipse,rgba(255,34,163,0.07),transparent 70%)"></div>
-<div class="amb-page" id="ambTechnical" style="width:600px;height:400px;top:15%;left:50%;background:radial-gradient(ellipse,rgba(0,229,255,0.07),transparent 70%)"></div>
-<div class="amb-page" id="ambDevelopmental" style="width:500px;height:380px;top:25%;left:55%;background:radial-gradient(ellipse,rgba(191,47,255,0.07),transparent 70%)"></div>
-
+<div class="ambient-layer"><div class="amb-orb amb1"></div><div class="amb-orb amb2"></div><div class="amb-orb amb3"></div><div class="amb-orb amb4"></div><div class="amb-orb amb5"></div><div class="amb-orb amb6"></div></div>
+<div class="amb-page" id="ambHome" style="width:500px;height:400px;top:20%;left:60%;background:radial-gradient(ellipse,rgba(255,34,163,0.07),transparent 80%)"></div>
+<div class="amb-page" id="ambTechnical" style="width:600px;height:400px;top:15%;left:50%;background:radial-gradient(ellipse,rgba(0,229,255,0.07),transparent 80%)"></div>
+<div class="amb-page" id="ambDevelopmental" style="width:500px;height:380px;top:25%;left:55%;background:radial-gradient(ellipse,rgba(191,47,255,0.07),transparent 80%)"></div>
 <canvas id="starfield"></canvas>
-<div class="bg-grid"></div>
-<div class="bg-scan"></div>
-
+<div class="bg-grid"></div><div class="bg-scan"></div>
 <div class="deco-layer">
-  <div class="deco-shape d-diamond cyan ds1"></div>
-  <div class="deco-shape d-diamond pink ds2"></div>
-  <div class="deco-shape d-diamond ds3"></div>
-  <div class="deco-shape d-diamond cyan ds4"></div>
-  <div class="deco-shape d-square ds5"></div>
-  <div class="deco-shape d-diamond pink ds6"></div>
-  <div class="deco-shape d-square ds7"></div>
-  <div class="deco-shape d-diamond ds8"></div>
+  <div class="deco-shape d-diamond cyan ds1"></div><div class="deco-shape d-diamond pink ds2"></div>
+  <div class="deco-shape d-diamond ds3"></div><div class="deco-shape d-diamond cyan ds4"></div>
+  <div class="deco-shape d-square ds5"></div><div class="deco-shape d-diamond pink ds6"></div>
+  <div class="deco-shape d-square ds7"></div><div class="deco-shape d-diamond ds8"></div>
 </div>
-
+ 
 <div class="plx" id="pL1">
   <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <line x1="52" y1="120" x2="68" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1"/>
-    <line x1="68" y1="120" x2="52" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1"/>
-    <line x1="1380" y1="300" x2="1396" y2="284" stroke="rgba(0,229,255,0.11)" stroke-width="0.8"/>
-    <line x1="1396" y1="300" x2="1380" y2="284" stroke="rgba(0,229,255,0.11)" stroke-width="0.8"/>
-
+    <line x1="52" y1="120" x2="68" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1"/><line x1="68" y1="120" x2="52" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1"/>
+    <line x1="1380" y1="300" x2="1396" y2="284" stroke="rgba(0,229,255,0.11)" stroke-width="0.8"/><line x1="1396" y1="300" x2="1380" y2="284" stroke="rgba(0,229,255,0.11)" stroke-width="0.8"/>
     <path d="M20,20 L20,70 M20,20 L70,20" stroke="rgba(204,46,138,0.12)" stroke-width="0.8" fill="none"/>
     <path d="M1420,20 L1420,70 M1420,20 L1370,20" stroke="rgba(0,229,255,0.09)" stroke-width="0.8" fill="none"/>
     <path d="M20,880 L20,830 M20,880 L70,880" stroke="rgba(191,47,255,0.09)" stroke-width="0.8" fill="none"/>
     <path d="M1420,880 L1420,830 M1420,880 L1370,880" stroke="rgba(204,46,138,0.08)" stroke-width="0.8" fill="none"/>
-
-    <g opacity="0.08" stroke="rgba(0,229,255,1)" stroke-width="0.8" fill="none">
-      <path d="M0,350 H80 L100,330 H200 L220,350 H340 L360,330 H500" stroke-dasharray="900">
-        <animate attributeName="stroke-dashoffset" from="900" to="0" dur="10s" repeatCount="indefinite"/>
-      </path>
-    </g>
-
+    <g opacity="0.08" stroke="rgba(0,229,255,1)" stroke-width="0.8" fill="none"><path d="M0,350 H80 L100,330 H200 L220,350 H340 L360,330 H500" stroke-dasharray="900"><animate attributeName="stroke-dashoffset" from="900" to="0" dur="10s" repeatCount="indefinite"/></path></g>
     <line x1="0" y1="250" x2="1440" y2="250" stroke="rgba(204,46,138,0.03)" stroke-width="0.4" stroke-dasharray="80 200"/>
     <line x1="0" y1="650" x2="1440" y2="650" stroke="rgba(107,31,160,0.03)" stroke-width="0.4" stroke-dasharray="60 180"/>
-
     <rect x="720" y="44" width="10" height="10" fill="none" stroke="rgba(255,34,163,0.12)" stroke-width="0.7" transform="rotate(45,725,49)"/>
     <rect x="1200" y="400" width="8" height="8" fill="none" stroke="rgba(0,229,255,0.10)" stroke-width="0.5" transform="rotate(45,1204,404)"/>
-
     <polygon points="1320,160 1330,143 1350,143 1360,160 1350,177 1330,177" fill="none" stroke="rgba(0,229,255,0.06)" stroke-width="0.6"/>
     <polygon points="100,780 110,763 130,763 140,780 130,797 110,797" fill="none" stroke="rgba(204,46,138,0.06)" stroke-width="0.6"/>
   </svg>
 </div>
-
 <div class="plx" id="pL2">
   <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <line x1="1400" y1="160" x2="1416" y2="144" stroke="rgba(107,31,160,0.13)" stroke-width="0.8"/>
-    <line x1="1416" y1="160" x2="1400" y2="144" stroke="rgba(107,31,160,0.13)" stroke-width="0.8"/>
-    <line x1="40" y1="760" x2="56" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8"/>
-    <line x1="56" y1="760" x2="40" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8"/>
-
-    <rect x="1240" y="60" width="12" height="12" fill="none" stroke="rgba(191,47,255,0.14)" stroke-width="0.8">
-      <animateTransform attributeName="transform" type="rotate" from="0 1246 66" to="360 1246 66" dur="24s" repeatCount="indefinite"/>
-    </rect>
-    <rect x="180" y="480" width="10" height="10" fill="none" stroke="rgba(0,229,255,0.11)" stroke-width="0.7">
-      <animateTransform attributeName="transform" type="rotate" from="45 185 485" to="405 185 485" dur="19s" repeatCount="indefinite"/>
-    </rect>
-
-    <polygon points="0,0 40,0 0,40" fill="rgba(204,46,138,0.025)"/>
-    <polygon points="1440,0 1400,0 1440,40" fill="rgba(0,229,255,0.02)"/>
-    <polygon points="0,900 40,900 0,860" fill="rgba(191,47,255,0.02)"/>
-    <polygon points="1440,900 1400,900 1440,860" fill="rgba(204,46,138,0.02)"/>
+    <line x1="1400" y1="160" x2="1416" y2="144" stroke="rgba(107,31,160,0.13)" stroke-width="0.8"/><line x1="1416" y1="160" x2="1400" y2="144" stroke="rgba(107,31,160,0.13)" stroke-width="0.8"/>
+    <line x1="40" y1="760" x2="56" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8"/><line x1="56" y1="760" x2="40" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8"/>
+    <rect x="1240" y="60" width="12" height="12" fill="none" stroke="rgba(191,47,255,0.14)" stroke-width="0.8"><animateTransform attributeName="transform" type="rotate" from="0 1246 66" to="360 1246 66" dur="24s" repeatCount="indefinite"/></rect>
+    <rect x="180" y="480" width="10" height="10" fill="none" stroke="rgba(0,229,255,0.11)" stroke-width="0.7"><animateTransform attributeName="transform" type="rotate" from="45 185 485" to="405 185 485" dur="19s" repeatCount="indefinite"/></rect>
+    <polygon points="0,0 40,0 0,40" fill="rgba(204,46,138,0.025)"/><polygon points="1440,0 1400,0 1440,40" fill="rgba(0,229,255,0.02)"/>
+    <polygon points="0,900 40,900 0,860" fill="rgba(191,47,255,0.02)"/><polygon points="1440,900 1400,900 1440,860" fill="rgba(204,46,138,0.02)"/>
   </svg>
 </div>
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
+ 
 <nav>
-  <div class="nav-brand">
-    <img src="warpdrive-logo.png" alt="Warpdrive" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-    <span class="nav-brand-text" style="display:none">WARPDRIVE</span>
-  </div>
+  <div class="nav-brand"><img src="warpdrive-logo.png" alt="Warpdrive" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none">WARPDRIVE</span></div>
   <div class="nav-links">
     <button class="nav-link active" data-page="home">Home</button>
     <button class="nav-link" data-page="technical">Technical</button>
     <button class="nav-link" data-page="developmental">Developmental</button>
     <div class="nav-divider"></div>
-    <a href="https://github.com/Warpdrive-console" class="nav-ghost" target="_blank" rel="noopener" style="margin-left: 500px;">GitHub</a>
+    <a href="https://github.com/Warpdrive-console" class="nav-ghost" target="_blank" rel="noopener" style="margin-left:500px">GitHub</a>
     <a href="https://discord.gg/Dv6K2vNyfK" class="nav-cta" target="_blank" rel="noopener">Discord</a>
   </div>
-  <div class="nav-right">
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
+  <div class="nav-right"><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
 </nav>
-
 <div class="mobile-menu" id="mobileMenu">
   <button onclick="goPage('home')">Home</button>
   <button onclick="goPage('technical')">Technical</button>
@@ -445,17 +418,15 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <a href="https://discord.gg/Dv6K2vNyfK" class="nav-cta" target="_blank" rel="noopener" style="display:block">Discord</a>
   </div>
 </div>
-
+ 
+<!-- home page -->
 <div class="page active" id="page-home">
   <section class="hero">
     <div class="hero-content">
-      <p class="hero-eyebrow"><span class="eyebrow-line"></span>Now in development — Pre-orders Eventually</p>
-      <div class="nav-brand" style="margin-bottom:14px;"><img src="warpdrive-logo.png" alt="Warp" style="max-width:100%;width:700px;height:auto;display:block;margin-left:clamp(-85px, (768px - 100vw) * 1000, 0px)" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none;font-size:18px">WARPDRIVE</span></div>
+      <p class="hero-eyebrow"><span class="eyebrow-line"></span>Now in development &#8212; Pre-orders Eventually</p>
+      <div class="nav-brand" style="margin-bottom:14px"><img src="warpdrive-logo.png" alt="Warp" style="max-width:100%;width:700px;height:auto;display:block;margin-left:clamp(-85px,(768px - 100vw) * 1000,0px)" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none;font-size:18px">WARPDRIVE</span></div>
       <p class="hero-sub">The console built for <strong>indie culture</strong>. Physical media. Real social. <strong>Engine freedom</strong>. 90% revenue to the people who make the games.</p>
-      <div class="hero-cta">
-        <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener">Join the Discord</a>
-        <a href="#" class="btn-s" onclick="goPage('technical');return false;">Explore Hardware</a>
-      </div>
+      <div class="hero-cta"><a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener">Join the Discord</a><a href="#" class="btn-s" onclick="goPage('technical');return false;">Explore Hardware</a></div>
     </div>
     <div class="hero-stats">
       <div class="stat"><span class="stat-val">275+</span><span class="stat-label">Developers</span></div>
@@ -465,716 +436,197 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <div class="stat"><span class="stat-val">6nm</span><span class="stat-label">Process</span></div>
     </div>
   </section>
-  <div class="mq" id="mq-home">
-    <div class="mq-inner">
-      <div class="mq-track">
-        <span class="mq-item">Physical Media</span><span class="mq-item dot">◆</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">◆</span><span class="mq-item">Open Modding</span><span class="mq-item dot">◆</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">◆</span><span class="mq-item">Rotur.Dev</span><span class="mq-item dot">◆</span><span class="mq-item hi">Engine Freedom</span><span class="mq-item dot">◆</span><span class="mq-item">WebGPU</span><span class="mq-item dot">◆</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">◆</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">◆</span><span class="mq-item hi">Custom Shell Colors</span><span class="mq-item dot">◆</span>
-      </div>
-      <div class="mq-track" aria-hidden="true">
-        <span class="mq-item">Physical Media</span><span class="mq-item dot">◆</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">◆</span><span class="mq-item">Open Modding</span><span class="mq-item dot">◆</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">◆</span><span class="mq-item">Rotur.Dev</span><span class="mq-item dot">◆</span><span class="mq-item hi">Engine Freedom</span><span class="mq-item dot">◆</span><span class="mq-item">WebGPU</span><span class="mq-item dot">◆</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">◆</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">◆</span><span class="mq-item hi">Custom Shell Colors</span><span class="mq-item dot">◆</span>
-      </div>
-    </div>
-  </div>
-  </section>
-
+  <div class="mq" id="mq-home"><div class="mq-inner"><div class="mq-track"><span class="mq-item">Physical Media</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Open Modding</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Rotur.Dev</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Engine Freedom</span><span class="mq-item dot">&#9670;</span><span class="mq-item">WebGPU</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Custom Shell Colors</span><span class="mq-item dot">&#9670;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">Physical Media</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Open Modding</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Rotur.Dev</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Engine Freedom</span><span class="mq-item dot">&#9670;</span><span class="mq-item">WebGPU</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Custom Shell Colors</span><span class="mq-item dot">&#9670;</span></div></div></div>
+  <!-- add more games to the GAMES array below -->
   <script>
-  /*THIS IS WHERE YOU ADD NEW GAMES AND PROJECTS RAHHHHHHHH*/
   const GAMES = [
-    {
-      title: "Warpdrive",
-      desc: "Warpdrive is a modern game console built for indie game developers, letting you run and build games with familiar tools, while still keeping the spirit of classic disc-based systems. It blends old-school console design philosophy with a powerful, moddable platform, making it easy to create, share, and play games.",
-      img: "",
-      tag: "Hardware"
-    },
-    {
-      title: "Kiki's MicroDungeon",
-      desc: "KKMD is a colorful, 2D Rogue-like Boss rush with tile-based movement, and bullet-hell aspects. Each run varies in terms of bosses, encounters, NPCs, Upgrades, and ways to build Kiki. ",
-      img: "",
-      tag: "Game"
-    },
-    {
-      title: "Spectrum in the Void",
-      desc: "SITV is a Topdown Shoot Em' Up themed after space, abstract shapes, and neon lights. You and up to 3 other friends can blast holes through hordes of vibrant enemies. There's something kinda similar to a story involved. More or less pointing you in the right direction. You can upgrade your ship's attributes as you play, and really mess around with the interacting systems.",
-      img: "",
-      tag: "Game"
-    },
-    {
-      title: "Ode to Aetherhold",
-      desc: "Ode to Aetherhold is a topdown Action RPG made in GBStudio. It draws from Darksouls in terms of art direction, and story beats. There's real-time combat, character building, and 2 endings to this story. You're were brought back from the abyss, tugged towards the floating kingdom in the sky. Only one command plauges your mind: 'Forget me gently, and climb.' ",
-      img: "",
-      tag: "Game"
-    },
-    {
-      title: "Battle Bound",
-      desc: "A side-scrolling Online Multiplayer shooter. A handful of gamemodes, maps, customizable weapon loadouts, and character customization. So far the closest thing we have to satify the Call of Duty Player's itch.",
-      img: "",
-      tag: "Game · Fighting"
-    },
-
+    {title:"Warpdrive",desc:"Warpdrive is a modern game console built for indie game developers, letting you run and build games with familiar tools, while still keeping the spirit of classic disc-based systems. It blends old-school console design philosophy with a powerful, moddable platform, making it easy to create, share, and play games.",img:"",tag:"Hardware"},
+    {title:"Kiki's MicroDungeon",desc:"KKMD is a colorful, 2D Rogue-like Boss rush with tile-based movement, and bullet-hell aspects. Each run varies in terms of bosses, encounters, NPCs, Upgrades, and ways to build Kiki.",img:"",tag:"Game"},
+    {title:"Spectrum in the Void",desc:"SITV is a Topdown Shoot Em' Up themed after space, abstract shapes, and neon lights. You and up to 3 other friends can blast holes through hordes of vibrant enemies. There's something kinda similar to a story involved. More or less pointing you in the right direction. You can upgrade your ship's attributes as you play, and really mess around with the interacting systems.",img:"",tag:"Game"},
+    {title:"Ode to Aetherhold",desc:"Ode to Aetherhold is a topdown Action RPG made in GBStudio. It draws from Darksouls in terms of art direction, and story beats. There's real-time combat, character building, and 2 endings to this story. You're were brought back from the abyss, tugged towards the floating kingdom in the sky. Only one command plauges your mind: 'Forget me gently, and climb.'",img:"",tag:"Game"},
+    {title:"Battle Bound",desc:"A side-scrolling Online Multiplayer shooter. A handful of gamemodes, maps, customizable weapon loadouts, and character customization. So far the closest thing we have to satify the Call of Duty Player's itch.",img:"",tag:"Game &#183; Fighting"}
   ];
   </script>
-
-  <div class="showcase">
-    <div class="showcase-header reveal">
-      <div class="showcase-header-left">
-        <p class="showcase-eyebrow">Community Projects! (Work in Progress. There's a shit ton)</p>
-        <h2 class="showcase-heading">Under Construction.</h2>
-      </div>
-      <div class="showcase-nav">
-        <button class="showcase-arrow" id="carouselPrev" aria-label="Previous">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="showcase-arrow" id="carouselNext" aria-label="Next">
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
+  <div class="showcase"><div class="showcase-header reveal"><div class="showcase-header-left"><p class="showcase-eyebrow">Community Projects! (Work in Progress. There's a shit ton)</p><h2 class="showcase-heading">Under Construction.</h2></div><div class="showcase-nav"><button class="showcase-arrow" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><button class="showcase-arrow" id="carouselNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div></div><div class="showcase-carousel"><div class="showcase-track" id="carouselTrack"></div></div><div class="showcase-dots" id="carouselDots"></div></div>
+  <section>
+    <div class="reveal"><p class="se">Meet the Mascot</p><h2 class="st">Banks.</h2></div>
+    <div class="banks-layout"><div class="reveal"><p class="banks-intro">A raccoon with a <strong>purple bandana.</strong> He owns no other clothes fashionable enough to flaunt. Lazy. Gluttonous. Lurking, and stalking. He spends his days eating, drinking, sleeping, and gaming in alarming excess. He's a <strong>chud.</strong> We <strong>love</strong> him. (Made by Rigby @ToastGh0ast)</p></div><div class="banks-grid reveal"><div class="banks-card"><img src="banks-loving.png" alt="Banks"></div><div class="banks-card"><img src="banks-waving.png" alt="Banks"></div><div class="banks-card"><img src="banks-toking.png" alt="Banks"></div><div class="banks-card"><img src="banks-ew.png" alt="Banks"></div><div class="banks-card"><img src="banks-dorito.png" alt="Banks"></div><div class="banks-card"><img src="banks-autism.png" alt="Banks"></div></div></div>
+  </section>
+  <section id="ks-section">
+    <div class="reveal"><p class="se">Pre-Order</p><h2 class="st">One Price.<br>No Tricks.</h2></div>
+    <div class="price-layout">
+      <div class="price-card reveal"><div class="price-glow"></div><div class="price-amount"><sup>$</sup>225</div><div class="price-note">&#9670; Free shipping &#8212; United States</div><div class="price-lines"><div class="price-line"><strong>Warpdrive Console</strong> &#8212; customizable shell colors</div><div class="price-line"><strong>Banks Stickers</strong> &#8212; not optional. non-negotiable.</div><div class="price-line"><strong>Random Bundled Game</strong> &#8212; disc included.</div><div class="price-line"><strong>Free Shipping</strong> &#8212; USA, discounted world-wide.</div><div class="price-line"><strong>Gamepad support</strong> &#8212; BT, Wired, SNES, PS5, and most in-between.</div><div class="price-line"><strong>Printed mailerbox</strong> &#8212; inside and out</div><div class="price-line"><strong>Pre-Orders Available</strong> &#8212; Someday lmao</div></div></div>
+      <div class="ks-card reveal"><div class="ks-title">&#9672; Kickstarter Coming</div><p class="ks-body">Pre-order batch size determined by demand. <strong>Plenty of color customization</strong> available. Quality over Quantity.</p><div class="ks-tiers"><div class="ks-tier"><span class="ks-tier-name">Thank You + Stickers</span><span class="ks-tier-val">~$15</span></div><div class="ks-tier"><span class="ks-tier-name">Physical Game</span><span class="ks-tier-val">~$25</span></div><div class="ks-tier"><span class="ks-tier-name">Console Bundle</span><span class="ks-tier-val">$225</span></div><div class="ks-tier"><span class="ks-tier-name">Console + 8BitDo Controller</span><span class="ks-tier-val">~$250</span></div><div class="ks-tier"><span class="ks-tier-name">Full Bundle + Storefront Credit</span><span class="ks-tier-val">~$300</span></div></div></div>
     </div>
-    <div class="showcase-carousel">
-      <div class="showcase-track" id="carouselTrack"></div>
-    </div>
-    <div class="showcase-dots" id="carouselDots"></div>
-  </div>
-
+  </section>
 </div>
-
+ 
+<!-- technical page -->
 <div class="page" id="page-technical">
-
   <section>
     <div class="reveal"><p class="se">What is Warpdrive</p><h2 class="st">Built Different.<br>On Purpose.</h2></div>
     <div class="identity-grid">
-      <div class="id-card reveal"><span class="id-icon">🌐</span><div class="id-title">Open Source Runtime</div><p class="id-body"><strong>Web games via Chromium</strong> with WebGPU. <strong>Native ARM binaries later down the line</strong> for full-performance titles, and the freedom to choose your game engine. From unity, or GMS2, to Scratch, GBStudio, and GDevelop, with dozens of tools in-between.</p></div>
-      <div class="id-card reveal"><span class="id-icon">🎮</span><div class="id-title">Real Culture</div><p class="id-body">The console Developers grew up with Newgrounds, Itch.io, and Gamejolt. PS3, Xbox360, and Wii modding culture. <strong>Open firmware. Moddable frontend, and a homebrew launcher out of the box.</strong> Warpdrive wouldn't exist without console-modding.</p></div>
-      <div class="id-card reveal"><span class="id-icon">💿</span><div class="id-title">Physical Media</div><p class="id-body">Full-size DVD in <strong>purple collector cases</strong>. Warpdrive has a disc drive for physical games. It exists for collectors, or those without Wi-Fi. And hey, you can install the discs to storage, too.</p></div>
+      <div class="id-card reveal"><span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><div class="id-title">Open Source Runtime</div><p class="id-body"><strong>Web games via Chromium</strong> with WebGPU. <strong>Native ARM binaries later down the line</strong> for full-performance titles, and the freedom to choose your game engine. From unity, or GMS2, to Scratch, GBStudio, and GDevelop, with dozens of tools in-between.</p></div>
+      <div class="id-card reveal"><span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></span><div class="id-title">Real Culture</div><p class="id-body">The console Developers grew up with Newgrounds, Itch.io, and Gamejolt. PS3, Xbox360, and Wii modding culture. <strong>Open firmware. Moddable frontend, and a homebrew launcher out of the box.</strong> Warpdrive wouldn't exist without console-modding.</p></div>
+      <div class="id-card reveal"><span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg></span><div class="id-title">Physical Media</div><p class="id-body">Full-size DVD in <strong>purple collector cases</strong>. Warpdrive has a disc drive for physical games. It exists for collectors, or those without Wi-Fi. And hey, you can install the discs to storage, too.</p></div>
     </div>
   </section>
-    <div class="mq mq-technical" id="mq-technical">
-    <div class="mq-inner">
-      <div class="mq-track">
-        <span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">◈</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">◈</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">◈</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">◈</span><span class="mq-item">6nm Process Node</span><span class="mq-item dot">◈</span><span class="mq-item hi">Custom Armbian OS</span><span class="mq-item dot">◈</span><span class="mq-item">8x DVD Drive</span><span class="mq-item dot">◈</span><span class="mq-item hi">Open Firmware</span><span class="mq-item dot">◈</span><span class="mq-item">Purple Disc Cases</span><span class="mq-item dot">◈</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">◈</span>
-      </div>
-      <div class="mq-track" aria-hidden="true">
-        <span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">◈</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">◈</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">◈</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">◈</span><span class="mq-item">6nm Process Node</span><span class="mq-item dot">◈</span><span class="mq-item hi">Custom Armbian OS</span><span class="mq-item dot">◈</span><span class="mq-item">8x DVD Drive</span><span class="mq-item dot">◈</span><span class="mq-item hi">Open Firmware</span><span class="mq-item dot">◈</span><span class="mq-item">Purple Disc Cases</span><span class="mq-item dot">◈</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">◈</span>
-      </div>
-    </div>
-  </div>
-  <section>
+  <div class="mq mq-technical" id="mq-technical"><div class="mq-inner"><div class="mq-track"><span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">&#9672;</span><span class="mq-item">6nm Process Node</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Custom Armbian OS</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8x DVD Drive</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Open Firmware</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Purple Disc Cases</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">&#9672;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">&#9672;</span><span class="mq-item">6nm Process Node</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Custom Armbian OS</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8x DVD Drive</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Open Firmware</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Purple Disc Cases</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">&#9672;</span></div></div></div>
+  <section id="hardware-section">
     <div class="reveal"><p class="se">Under the Hood</p><h2 class="st">Serious Hardware.</h2></div>
-    <div class="spec-layout reveal">
-      <div class="spec-cell"><span class="spec-key">CPU</span><span class="spec-val">QCS6490</span></div>
-      <div class="spec-cell"><span class="spec-key">GPU</span><span class="spec-val">Adreno 643</span></div>
-      <div class="spec-cell"><span class="spec-key">RAM</span><span class="spec-val">8GB LPDDR5</span></div>
-      <div class="spec-cell"><span class="spec-key">Process Node</span><span class="spec-val">6nm</span></div>
-      <div class="spec-cell"><span class="spec-key">Storage</span><span class="spec-val">0-256 eMMC / Micro SD</span></div>
-      <div class="spec-cell"><span class="spec-key">Graphics</span><span class="spec-val">WebGPU + Vulkan Support</span></div>
-      <div class="spec-cell"><span class="spec-key">Media</span><span class="spec-val">8x DVD Drive</span></div>
-      <div class="spec-cell"><span class="spec-key">OS</span><span class="spec-val">Custom Armbian Build</span></div>
-    </div>
-    <div class="spec-banner reveal"><p>Industrial Hardware at the developer's mercy — Push it to its limits, or use it to play 30 year old games. You choose.<br><strong>The most capable indie console at this price point.</strong></p></div>
+    <div class="spec-layout reveal"><div class="spec-cell"><span class="spec-key">CPU</span><span class="spec-val">QCS6490</span></div><div class="spec-cell"><span class="spec-key">GPU</span><span class="spec-val">Adreno 643</span></div><div class="spec-cell"><span class="spec-key">RAM</span><span class="spec-val">8GB LPDDR5</span></div><div class="spec-cell"><span class="spec-key">Process Node</span><span class="spec-val">6nm</span></div><div class="spec-cell"><span class="spec-key">Storage</span><span class="spec-val">0-256 eMMC / Micro SD</span></div><div class="spec-cell"><span class="spec-key">Graphics</span><span class="spec-val">WebGPU + Vulkan Support</span></div><div class="spec-cell"><span class="spec-key">Media</span><span class="spec-val">8x DVD Drive</span></div><div class="spec-cell"><span class="spec-key">OS</span><span class="spec-val">Custom Armbian Build</span></div></div>
+    <div class="spec-banner reveal"><p>Industrial Hardware at the developer's mercy &#8212; Push it to its limits, or use it to play 30 year old games. You choose.<br><strong>The most capable indie console at this price point.</strong></p></div>
   </section>
   <section>
     <div class="reveal"><p class="se">Collector's Edition</p><h2 class="st">Hold Your Game.</h2></div>
-    <div class="physical-layout reveal">
-      <div class="disc-stage"><div class="disc-visual"><div class="disc-outer"></div><div class="disc-mid"></div><div class="disc-hub"></div><div class="disc-shine"></div></div></div>
-      <div class="disc-info"><h3>Purple Collector Cases</h3><div class="disc-facts">
-        <div class="disc-fact"><strong>Full-size DVD</strong> — 4.7GB per disc</div>
-        <div class="disc-fact"><strong>Custom Cases</strong> — A game case to match the developer's vision.</div>
-        <div class="disc-fact">Install once, <strong>play forever</strong>, no disc needed after.</div>
-        <div class="disc-fact"><strong>~$5/unit</strong> to produce. Cheap to make. Beautiful to own.</div>
-        <div class="disc-fact">Physicals granted to our <strong>favorite</strong> titles.</div>
-      </div></div>
+    <div class="physical-layout reveal"><div class="disc-stage"><div class="disc-visual"><div class="disc-outer"></div><div class="disc-mid"></div><div class="disc-hub"></div><div class="disc-shine"></div></div></div><div class="disc-info"><h3>Purple Collector Cases</h3><div class="disc-facts"><div class="disc-fact"><strong>Full-size DVD</strong> &#8212; 4.7GB per disc</div><div class="disc-fact"><strong>Custom Cases</strong> &#8212; A game case to match the developer's vision.</div><div class="disc-fact">Install once, <strong>play forever</strong>, no disc needed after.</div><div class="disc-fact"><strong>~$5/unit</strong> to produce. Cheap to make. Beautiful to own.</div><div class="disc-fact">Physicals granted to our <strong>favorite</strong> titles.</div></div></div></div>
+  </section>
+</div>
+ 
+<!-- developmental page -->
+<div class="page" id="page-developmental">
+  <section>
+    <div class="reveal"><p class="se">For Developers</p><h2 class="st">Your Game.<br>Your Cut.</h2><p class="sd">Free to develop. No gatekeeping. Four ways to ship.</p></div>
+    <div class="tier-list reveal">
+      <div class="tier"><div class="tier-stripe" style="background:linear-gradient(180deg,var(--pink-hot),var(--purple-logo))"></div><div class="tier-num">01</div><div class="tier-info"><div class="tier-name">Storefront &#8212; Official</div><div class="tier-desc">Curated digital storefront. Quality bar, free to submit. Developers get 90% of the profit!</div></div><div class="tier-cut" style="background:linear-gradient(135deg,var(--pink-hot),var(--purple-logo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">90%</div></div>
+      <div class="tier"><div class="tier-stripe" style="background:linear-gradient(180deg,var(--silver),var(--chrome))"></div><div class="tier-num">02</div><div class="tier-info"><div class="tier-name">Physical &#8212; Disc</div><div class="tier-desc">DVD games. Custom Casings, Printed Discs, collector's editions. 70% of profit!</div></div><div class="tier-cut" style="color:var(--silver)">70%</div></div>
+      <div class="tier"><div class="tier-stripe" style="background:var(--silver-dim)"></div><div class="tier-num">03</div><div class="tier-info"><div class="tier-name">Open-Ware</div><div class="tier-desc">3rd party store. Fan-games, emulators, and mods!</div></div><div class="tier-cut" style="color:var(--silver-dim);font-size:14px">FREE</div></div>
+      <div class="tier"><div class="tier-stripe" style="background:var(--purple-deep)"></div><div class="tier-num">04</div><div class="tier-info"><div class="tier-name">Homebrew</div><div class="tier-desc">Local sideloader for modders and tinkerers.</div></div><div class="tier-cut" style="color:var(--purple-logo);font-size:13px">LOCAL</div></div>
     </div>
   </section>
   <section>
     <div class="reveal"><p class="se">Powered by Rotur</p><h2 class="st">Get Social.<br>Make a Friend.</h2></div>
-    <div class="rotur-pill reveal"><div class="rotur-dot"></div><span class="rotur-label">Rotur.Dev — Mistium — LIVE</span></div>
+    <div class="rotur-pill reveal"><div class="rotur-dot"></div><span class="rotur-label">Rotur.Dev &#8212; Mistium &#8212; LIVE</span></div>
     <div class="feature-list reveal">
-      <div class="feature-row"><span class="feature-icon">👤</span><div class="feature-text">Account Profiles + Gamertag<span class="feature-sub">Sync across devices. Completely optional.</span></div></div>
-      <div class="feature-row"><span class="feature-icon">👥</span><div class="feature-text">Friends, Parties + Networking API<span class="feature-sub">Real-time. Console-native. Xbox Live energy.</span></div></div>
-      <div class="feature-row"><span class="feature-icon">🎙️</span><div class="feature-text">Voice Chat<span class="feature-sub">Built in. No app. No setup.</span></div></div>
-      <div class="feature-row"><span class="feature-icon">💬</span><div class="feature-text">Messages + Communities<span class="feature-sub">Round up your buddies, make social spaces.</span></div></div>
-      <div class="feature-row"><span class="feature-icon">🔒</span><div class="feature-text">Secure Payments via Phone<span class="feature-sub">Card info never touches the console.</span></div></div>
+      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div class="feature-text">Account Profiles + Gamertag<span class="feature-sub">Sync across devices. Completely optional.</span></div></div>
+      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="feature-text">Friends, Parties + Networking API<span class="feature-sub">Real-time. Console-native. Xbox Live energy.</span></div></div>
+      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></span><div class="feature-text">Voice Chat<span class="feature-sub">Built in. No app. No setup.</span></div></div>
+      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div class="feature-text">Messages + Communities<span class="feature-sub">Round up your buddies, make social spaces.</span></div></div>
+      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><div class="feature-text">Secure Payments via Phone<span class="feature-sub">Card info never touches the console.</span></div></div>
     </div>
   </section>
-</div>
-
-<div class="page" id="page-developmental">
-
-  <section>
-    <div class="reveal"><p class="se">For Developers</p><h2 class="st">Your Game.<br>Your Cut.</h2><p class="sd">Free to develop. No gatekeeping. Four ways to ship.</p></div>
-    <div class="tier-list reveal">
-      <div class="tier"><div class="tier-stripe" style="background:linear-gradient(180deg,var(--pink-hot),var(--purple-logo))"></div><div class="tier-num">01</div><div class="tier-info"><div class="tier-name">Storefront — Official</div><div class="tier-desc">Curated digital storefront. Quality bar, free to submit. Developers get 90% of the profit!</div></div><div class="tier-cut" style="background:linear-gradient(135deg,var(--pink-hot),var(--purple-logo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">90%</div></div>
-      <div class="tier"><div class="tier-stripe" style="background:linear-gradient(180deg,var(--silver),var(--chrome))"></div><div class="tier-num">02</div><div class="tier-info"><div class="tier-name">Physical — Disc</div><div class="tier-desc">DVD games. Custom Casings, Printed Discs, collector's editions. 70% of profit!</div></div><div class="tier-cut" style="color:var(--silver)">70%</div></div>
-      <div class="tier"><div class="tier-stripe" style="background:var(--silver-dim)"></div><div class="tier-num">03</div><div class="tier-info"><div class="tier-name">Open-Ware</div><div class="tier-desc">3rd party store. Fan-games, emulators, and mods!</div></div><div class="tier-cut" style="color:var(--silver-dim);font-size:14px;">FREE</div></div>
-      <div class="tier"><div class="tier-stripe" style="background:var(--purple-deep)"></div><div class="tier-num">04</div><div class="tier-info"><div class="tier-name">Homebrew</div><div class="tier-desc">Local sideloader for modders and tinkerers.</div></div><div class="tier-cut" style="color:var(--purple-logo);font-size:13px;">LOCAL</div></div>
-    </div>
-  </section>
-    <div class="mq mq-developmental" id="mq-developmental">
-    <div class="mq-inner">
-      <div class="mq-track">
-        <span class="mq-item">90% Revenue Share</span><span class="mq-item dot">◇</span><span class="mq-item hi">Free to Submit</span><span class="mq-item dot">◇</span><span class="mq-item">No Gatekeeping</span><span class="mq-item dot">◇</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">◇</span><span class="mq-item">Physical Discs</span><span class="mq-item dot">◇</span><span class="mq-item hi">Kickstarter Coming</span><span class="mq-item dot">◇</span><span class="mq-item">Homebrew Launcher</span><span class="mq-item dot">◇</span><span class="mq-item hi">Open Modding</span><span class="mq-item dot">◇</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">◇</span><span class="mq-item hi">$225 Launch Price</span><span class="mq-item dot">◇</span>
+  <div class="mq mq-developmental" id="mq-developmental"><div class="mq-inner"><div class="mq-track"><span class="mq-item">90% Revenue Share</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Free to Submit</span><span class="mq-item dot">&#9671;</span><span class="mq-item">No Gatekeeping</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Physical Discs</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Kickstarter Coming</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Homebrew Launcher</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Open Modding</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">$225 Launch Price</span><span class="mq-item dot">&#9671;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">90% Revenue Share</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Free to Submit</span><span class="mq-item dot">&#9671;</span><span class="mq-item">No Gatekeeping</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Physical Discs</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Kickstarter Coming</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Homebrew Launcher</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Open Modding</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">$225 Launch Price</span><span class="mq-item dot">&#9671;</span></div></div></div>
+ 
+<!-- open source section -->
+  <div class="oss-section" id="open-source-section">
+    <div class="oss-wrapper reveal">
+      <div class="oss-content">
+        <div class="oss-eyebrow">Open Source</div>
+        <h2 class="oss-heading">Built in the<br>Open.</h2>
+        <p class="oss-body">Warpdrive's runtime, development tools, and social layer are <strong>open source</strong>. No gatekept garbage, and hidden bloat. It's yours, and it's all trasperent. Fork it, audit it, break it, fix it. The entire platform is free to inspect and contribute to. Being moddable isn't a feature; it's <strong>the foundation</strong>.</p>
+        <div class="oss-sdk-list">
+          <div class="oss-sdk"><div class="oss-sdk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="oss-sdk-name">Warpdrive SDK</div><div class="oss-sdk-desc">Core dev tools &#8212; We have APIs for achievments, gamepad support, and console integration!</div></div></div>
+          <div class="oss-sdk"><div class="oss-sdk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div><div class="oss-sdk-name">Rotur API</div><div class="oss-sdk-desc">Social layer &#8212; friends, chat, multiplayer</div></div></div>
+          <div class="oss-sdk"><div class="oss-sdk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><div class="oss-sdk-name">Frontend Framework</div><div class="oss-sdk-desc">Console UI &#8212; customize the dashboard</div></div></div>
+        </div>
+        <a href="https://github.com/Warpdrive-console" class="btn-github" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="var(--silver-hi)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>View on GitHub</span>
+        </a>
       </div>
-      <div class="mq-track" aria-hidden="true">
-        <span class="mq-item">90% Revenue Share</span><span class="mq-item dot">◇</span><span class="mq-item hi">Free to Submit</span><span class="mq-item dot">◇</span><span class="mq-item">No Gatekeeping</span><span class="mq-item dot">◇</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">◇</span><span class="mq-item">Physical Discs</span><span class="mq-item dot">◇</span><span class="mq-item hi">Kickstarter Coming</span><span class="mq-item dot">◇</span><span class="mq-item">Homebrew Launcher</span><span class="mq-item dot">◇</span><span class="mq-item hi">Open Modding</span><span class="mq-item dot">◇</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">◇</span><span class="mq-item hi">$225 Launch Price</span><span class="mq-item dot">◇</span>
+      <div class="oss-visual">
+        <div class="oss-visual-grid"></div>
+        <div class="oss-terminal">
+          <div class="oss-terminal-bar"><div class="oss-terminal-dot" style="background:#ff5f57"></div><div class="oss-terminal-dot" style="background:#febc2e"></div><div class="oss-terminal-dot" style="background:#28c840"></div><span>terminal</span></div>
+          <div class="oss-terminal-body"><span class="comment"># Play around in the repo</span><br><span class="cmd">$</span> git clone warpdrive-console<br><span class="comment"># Check out our handful of APIs</span><br><span class="cmd">$</span> cd <span class="str">Warpdrive-console/Gamepad-Plus</span><br><span class="comment"># the next step</span><br><span class="cmd">$</span> random command <span class="str">@bungerdev on YT</span><br><span style="color:var(--neon-cyan)">&#10003;</span> Pretend it does something.</div>
+        </div>
       </div>
     </div>
   </div>
-  <section>
-    
-    <div class="reveal"><p class="se">Meet the Mascot</p><h2 class="st">Banks.</h2></div>
-    <div class="banks-layout">
-      <div class="reveal"><p class="banks-intro">A raccoon with a <strong>purple bandana.</strong> He owns no other clothes fashionable enough to flaunt. Lazy. Gluttonous. Lurking, and stalking. He spends his days eating, drinking, sleeping, and gaming in alarming excess. He's a <strong>chud.</strong> We <strong>love</strong> him. (Made by Rigby @ToastGh0ast)</p></div>
-      <div class="banks-grid reveal">
-        <div class="banks-card"><img src="banks-loving.png" alt="Banks"></div>
-        <div class="banks-card"><img src="banks-waving.png" alt="Banks"></div>
-        <div class="banks-card"><img src="banks-toking.png" alt="Banks"></div>
-        <div class="banks-card"><img src="banks-ew.png" alt="Banks"></div>
-        <div class="banks-card"><img src="banks-dorito.png" alt="Banks"></div>
-        <div class="banks-card"><img src="banks-autism.png" alt="Banks"></div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="reveal"><p class="se">Pre-Order</p><h2 class="st">One Price.<br>No Tricks.</h2></div>
-    <div class="price-layout">
-      <div class="price-card reveal">
-        <div class="price-glow"></div>
-        <div class="price-amount"><sup>$</sup>225</div>
-        <div class="price-note">◆ Free shipping — United States</div>
-        <div class="price-lines">
-          <div class="price-line"><strong>Warpdrive Console</strong> — customizable shell colors</div>
-          <div class="price-line"><strong>Banks Stickers</strong> — not optional. non-negotiable.</div>
-          <div class="price-line"><strong>Random Bundled Game</strong> — disc included.</div>
-          <div class="price-line"><strong>Free Shipping</strong> — USA, discounted world-wide.</div>
-          <div class="price-line"><strong>Gamepad support</strong> — BT, Wired, SNES, PS5, and most in-between.</div>
-          <div class="price-line"><strong>Printed mailerbox</strong> — inside and out</div>
-          <div class="price-line"><strong>Pre-Orders Available</strong> — Someday lmao</div>
-        </div>
-      </div>
-      <div class="ks-card reveal">
-        <div class="ks-title">◈ Kickstarter Coming</div>
-        <p class="ks-body">Pre-order batch size determined by demand. <strong>Plenty of color customization</strong> available. Quality over Quantity.</p>
-        <div class="ks-tiers">
-          <div class="ks-tier"><span class="ks-tier-name">Thank You + Stickers</span><span class="ks-tier-val">~$15</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Physical Game</span><span class="ks-tier-val">~$25</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Console Bundle</span><span class="ks-tier-val">$225</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Console + 8BitDo Controller</span><span class="ks-tier-val">~$250</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Full Bundle + Storefront Credit</span><span class="ks-tier-val">~$300</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
 </div>
-
+ 
 <footer>
   <div class="footer-grid">
-    <div>
-      <div class="nav-brand" style="margin-bottom:14px"><img src="warpdrive-logo.png" alt="Warpdrive" style="width:180px;height:auto;margin-left:-12px" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none;font-size:18px">WARPDRIVE</span></div>
-      <div class="footer-tagline">A love-letter to indie gaming.<br>The system we wish we had.</div>
-    </div>
-    <div><div class="footer-col-title">Platform</div><div class="footer-links"><a href="#" onclick="goPage('technical');return false;">Hardware</a><a href="#" onclick="goPage('developmental');return false;">Storefront</a><a href="#">Developer Docs</a><a href="https://rotur.dev/" target="_blank" rel="noopener">Rotur.Dev</a></div></div>
-    <div><div class="footer-col-title">Community</div><div class="footer-links"><a href="https://discord.gg/Dv6K2vNyfK" target="_blank" rel="noopener">Discord</a><a href="https://github.com/Warpdrive-console" target="_blank" rel="noopener">GitHub</a><a href="#">Press Kit</a><a href="#">Kickstarter</a></div></div>
+    <div><div class="nav-brand" style="margin-bottom:14px"><img src="warpdrive-logo.png" alt="Warpdrive" style="width:180px;height:auto;margin-left:-12px" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none;font-size:18px">WARPDRIVE</span></div><div class="footer-tagline">A love-letter to indie gaming.<br>The system we wish we had.</div></div>
+    <div><div class="footer-col-title">Platform</div><div class="footer-links"><a href="#" onclick="goPage('technical');setTimeout(()=>document.getElementById('hardware-section').scrollIntoView({behavior:'smooth'}),300);return false;">Hardware</a><a href="#" onclick="goPage('developmental');return false;">Storefront</a><a href="#" onclick="goPage('developmental');setTimeout(()=>document.getElementById('open-source-section').scrollIntoView({behavior:'smooth'}),300);return false;">Developer Docs</a><a href="https://rotur.dev/" target="_blank" rel="noopener">Rotur.Dev</a></div></div>
+    <div><div class="footer-col-title">Community</div><div class="footer-links"><a href="https://discord.gg/Dv6K2vNyfK" target="_blank" rel="noopener">Discord</a><a href="https://github.com/Warpdrive-console" target="_blank" rel="noopener">GitHub</a><a href="#">Press Kit</a><a href="#" onclick="goPage('home');setTimeout(()=>document.getElementById('ks-section').scrollIntoView({behavior:'smooth'}),300);return false;">Kickstarter</a></div></div>
   </div>
-  <div class="footer-bottom"><span class="footer-copy">2026 Warpdrive.</span><span class="footer-copy" style="font-family:'Space Mono',monospace;letter-spacing:0.1em">WARP·DRIVE·2026</span></div>
+  <div class="footer-bottom"><span class="footer-copy">2026 Warpdrive.</span><span class="footer-copy" style="font-family:'Space Mono',monospace;letter-spacing:0.1em">WARP&#183;DRIVE&#183;2026</span></div>
 </footer>
-
+ 
 <script>
-const sf = document.getElementById('starfield');
-const ctx = sf.getContext('2d');
-let W, H;
-let stars = [], particles = [], shootingStars = [];
-
-function resize() {
-  W = sf.width = innerWidth;
-  H = sf.height = innerHeight;
-  makeStars();
-  makeParticles();
+const isMobile=()=>window.innerWidth<768;
+const isLowEnd=()=>{if(isMobile())return true;if(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)return true;if(navigator.deviceMemory&&navigator.deviceMemory<=2)return true;return false};
+const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ 
+/* starfield */
+const sf=document.getElementById('starfield');
+const ctx=sf.getContext('2d',{alpha:true,desynchronized:true});
+let W,H,stars=[],particles=[],shootingStars=[],mobile=false,dpr=1;
+ 
+function resize(){
+  dpr=Math.min(window.devicePixelRatio||1,2);
+  W=window.innerWidth;H=window.innerHeight;
+  sf.width=W*dpr;sf.height=H*dpr;
+  sf.style.width=W+'px';sf.style.height=H+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  mobile=isMobile();makeStars();
+  mobile?makeParticlesMobile():makeParticles();
 }
-
-function makeStars() {
-  const n = Math.floor(W * H / 5500);
-  stars = Array.from({length: n}, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: Math.pow(Math.random(), 2) * 1.6 + 0.12,
-    baseA: Math.random() * 0.55 + 0.05,
-    s: Math.random() * 0.0005 + 0.00008,
-    p: Math.random() * Math.PI * 2,
-    tint: Math.random() < 0.65 ? 0 : (Math.random() < 0.55 ? 1 : 2)
-  }));
+function makeStars(){
+  const n=mobile?Math.min(90,Math.floor(W*H/9000)):Math.min(350,Math.floor(W*H/4800));
+  stars=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.pow(Math.random(),1.8)*1.8+.15,baseA:Math.random()*.35+.03,s:Math.random()*.0003+.00006,p:Math.random()*Math.PI*2,tint:Math.random()<.6?0:(Math.random()<.5?1:2)}));
 }
-
-function drawPentagon(ctx, x, y, r, angle) {
-  ctx.beginPath();
-  for (let i = 0; i < 5; i++) {
-    const a = angle + (i * 2 * Math.PI / 5) - Math.PI / 2;
-    i === 0 ? ctx.moveTo(x + r * Math.cos(a), y + r * Math.sin(a))
-             : ctx.lineTo(x + r * Math.cos(a), y + r * Math.sin(a));
-  }
-  ctx.closePath();
-}
-
-function drawHexagon(ctx, x, y, r, angle) {
-  ctx.beginPath();
-  for (let i = 0; i < 6; i++) {
-    const a = angle + (i * Math.PI / 3);
-    i === 0 ? ctx.moveTo(x + r * Math.cos(a), y + r * Math.sin(a))
-             : ctx.lineTo(x + r * Math.cos(a), y + r * Math.sin(a));
-  }
-  ctx.closePath();
-}
-
-function drawTriangle(ctx, x, y, r, angle) {
-  ctx.beginPath();
-  for (let i = 0; i < 3; i++) {
-    const a = angle + (i * 2 * Math.PI / 3) - Math.PI / 2;
-    i === 0 ? ctx.moveTo(x + r * Math.cos(a), y + r * Math.sin(a))
-             : ctx.lineTo(x + r * Math.cos(a), y + r * Math.sin(a));
-  }
-  ctx.closePath();
-}
-
-function drawCube(ctx, x, y, size, alpha, cr) {
-  const h = size * 0.58;
-  const w = size;
-  // Top face
-  ctx.beginPath();
-  ctx.moveTo(x,      y - h);
-  ctx.lineTo(x + w/2, y - h/2);
-  ctx.lineTo(x,      y);
-  ctx.lineTo(x - w/2, y - h/2);
-  ctx.closePath();
-  ctx.strokeStyle = `rgba(${cr},${alpha})`;
-  ctx.lineWidth = 0.7;
-  ctx.stroke();
-  // Left face
-  ctx.beginPath();
-  ctx.moveTo(x - w/2, y - h/2);
-  ctx.lineTo(x,      y);
-  ctx.lineTo(x,      y + h);
-  ctx.lineTo(x - w/2, y + h/2);
-  ctx.closePath();
-  ctx.strokeStyle = `rgba(${cr},${alpha * 0.6})`;
-  ctx.stroke();
-  // Right face
-  ctx.beginPath();
-  ctx.moveTo(x,      y);
-  ctx.lineTo(x + w/2, y - h/2);
-  ctx.lineTo(x + w/2, y + h/2);
-  ctx.lineTo(x,      y + h);
-  ctx.closePath();
-  ctx.strokeStyle = `rgba(${cr},${alpha * 0.8})`;
-  ctx.stroke();
-}
-
-const COLORS = ['191,47,255', '0,229,255', '255,34,163', '107,31,160', '255,90,175'];
-const SHAPE_TYPES = ['pentagon', 'hexagon', 'triangle', 'cube', 'diamond', 'square', 'ps3', 'cyber'];
-
-function spawnParticle() {
-  const x = Math.random() * W;
-  const y = Math.random() * H;
-  const type = SHAPE_TYPES[Math.floor(Math.random() * SHAPE_TYPES.length)];
-  const cr = COLORS[Math.floor(Math.random() * COLORS.length)];
-
-  const base = {
-    type, x, y, cr,
-    vx: (Math.random() - 0.5) * 0.18,
-    vy: (Math.random() - 0.5) * 0.18,
-    va: (Math.random() < 0.5 ? 1 : -1) * (Math.random() * 0.006 + 0.001),
-    angle: Math.random() * Math.PI * 2,
-    alpha: Math.random() * 0.18 + 0.04
-  };
-
-  if (type === 'ps3') {
-    return {...base,
-      r: Math.random() * 2.8 + 0.6,
-      vx: (Math.random() - 0.5) * 0.14,
-      vy: (Math.random() - 0.5) * 0.14,
-      hue: Math.random() < 0.5 ? 285 : 195,
-      alpha: Math.random() * 0.3 + 0.08,
-      trail: []
-    };
-  }
-  if (type === 'cyber') {
-    return {...base,
-      r: Math.random() * 2.2 + 0.6,
-      pulse: Math.random() * Math.PI * 2,
-      pSpeed: Math.random() * 0.018 + 0.006,
-      alpha: Math.random() * 0.35 + 0.08,
-      vx: 0, vy: 0
-    };
-  }
-  if (type === 'cube') {
-    return {...base,
-      size: Math.random() * 16 + 8,
-      vx: (Math.random() - 0.5) * 0.1,
-      vy: (Math.random() - 0.5) * 0.1,
-      va: (Math.random() < 0.5 ? 1 : -1) * 0.001
-    };
-  }
-  if (type === 'pentagon' || type === 'hexagon' || type === 'triangle') {
-    return {...base,
-      r: Math.random() * 14 + 5,
-      vx: (Math.random() - 0.5) * 0.12,
-      vy: (Math.random() - 0.5) * 0.12,
-    };
-  }
-  if (type === 'diamond' || type === 'square') {
-    return {...base,
-      size: Math.random() * 13 + 4,
-      vx: (Math.random() - 0.5) * 0.14,
-      vy: (Math.random() - 0.5) * 0.14,
-    };
-  }
-  return base;
-}
-
-function makeParticles() {
-  particles = Array.from({length: 45}, () => spawnParticle());
-}
-
-function wrap(p, pad = 40) {
-  if (p.x < -pad) p.x = W + pad;
-  if (p.x > W + pad) p.x = -pad;
-  if (p.y < -pad) p.y = H + pad;
-  if (p.y > H + pad) p.y = -pad;
-}
-
-resize();
-addEventListener('resize', resize);
-
-let t = 0;
-(function draw() {
-  ctx.clearRect(0, 0, W, H);
-  t++;
-
-  for (const s of stars) {
-    const tw = Math.sin(t * s.s * 60 + s.p) * 0.38 + 0.72;
-    const superBright = Math.sin(t * s.s * 15 + s.p + 2.1) > 0.94;
-    const a = s.baseA * tw * (superBright ? 1.8 : 1);
-    const r = s.r * (superBright ? 1.6 : 1);
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, r, 0, 6.283);
-    if (s.tint === 1) ctx.fillStyle = `rgba(160,210,255,${a})`;
-    else if (s.tint === 2) ctx.fillStyle = `rgba(255,245,210,${a})`;
-    else ctx.fillStyle = `rgba(210,215,230,${a})`;
-    ctx.fill();
-    if (superBright && s.r > 0.6) {
-      ctx.save();
-      ctx.strokeStyle = `rgba(200,225,255,${a * 0.5})`;
-      ctx.lineWidth = 0.4;
-      const len = r * 3.5;
-      ctx.beginPath();
-      ctx.moveTo(s.x - len, s.y); ctx.lineTo(s.x + len, s.y);
-      ctx.moveTo(s.x, s.y - len); ctx.lineTo(s.x, s.y + len);
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-
-  if (Math.random() < 0.0014) {
-    const fromLeft = Math.random() < 0.5;
-    shootingStars.push({
-      variant: 'classic',
-      x: fromLeft ? -20 : W + 20,
-      y: Math.random() * H * 0.65,
-      vx: (fromLeft ? 1 : -1) * (Math.random() * 5 + 4),
-      vy: Math.random() * 2.2 + 0.6,
-      life: 1,
-      decay: Math.random() * 0.015 + 0.01,
-      color: Math.random() < 0.7 ? '255,255,255' : '200,220,255'
-    });
-  }
-  if (Math.random() < 0.0009) {
-    shootingStars.push({
-      variant: 'tinted',
-      x: Math.random() * W * 0.6,
-      y: -10,
-      vx: (Math.random() - 0.5) * 3,
-      vy: Math.random() * 8 + 5,
-      life: 1,
-      decay: Math.random() * 0.025 + 0.018,
-      color: Math.random() < 0.5 ? '191,130,255' : '100,230,255'
-    });
-  }
-  if (Math.random() < 0.0006) {
-    const fromLeft = Math.random() < 0.5;
-    shootingStars.push({
-      variant: 'drifter',
-      x: fromLeft ? -20 : W + 20,
-      y: Math.random() * H * 0.5 + H * 0.1,
-      vx: (fromLeft ? 1 : -1) * (Math.random() * 3 + 2),
-      vy: Math.random() * 1.2 + 0.2,
-      life: 1,
-      decay: Math.random() * 0.008 + 0.005,
-      color: '255,200,230'
-    });
-  }
-
-  shootingStars = shootingStars.filter(ss => {
-    ss.x += ss.vx; ss.y += ss.vy; ss.life -= ss.decay;
-    const tailLen = ss.variant === 'drifter' ? 22 : (ss.variant === 'tinted' ? 10 : 13);
-    const headAlpha = ss.variant === 'tinted' ? ss.life * 0.7 : ss.life * 0.85;
-    const tailAlpha = ss.life * (ss.variant === 'drifter' ? 0.35 : 0.28);
-    const lineW = ss.variant === 'drifter' ? ss.life * 1.1 : ss.life * 1.4;
-
-    const grad = ctx.createLinearGradient(ss.x, ss.y, ss.x - ss.vx * tailLen, ss.y - ss.vy * tailLen);
-    grad.addColorStop(0, `rgba(${ss.color},${headAlpha})`);
-    grad.addColorStop(0.45, `rgba(${ss.color},${tailAlpha})`);
-    grad.addColorStop(1, `rgba(${ss.color},0)`);
-    ctx.beginPath();
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = lineW;
-    ctx.moveTo(ss.x, ss.y);
-    ctx.lineTo(ss.x - ss.vx * tailLen, ss.y - ss.vy * tailLen);
-    ctx.stroke();
-
-    if (ss.variant === 'drifter' && ss.life > 0.3) {
-      ctx.beginPath();
-      ctx.arc(ss.x, ss.y, 1.2 * ss.life, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${ss.color},${ss.life * 0.5})`;
-      ctx.fill();
-    }
-
-    return ss.life > 0 && ss.x > -300 && ss.x < W + 300 && ss.y < H + 200 && ss.y > -200;
-  });
-
-  for (const p of particles) {
-    const {type, x, y, alpha, cr} = p;
-
-    if (type === 'pentagon') {
-      ctx.save();
-      p.angle += p.va;
-      drawPentagon(ctx, x, y, p.r, p.angle);
-      ctx.strokeStyle = `rgba(${cr},${alpha})`;
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-      drawPentagon(ctx, x, y, p.r * 0.5, p.angle + 0.3);
-      ctx.strokeStyle = `rgba(${cr},${alpha * 0.3})`;
-      ctx.lineWidth = 0.4;
-      ctx.stroke();
-      ctx.restore();
-      p.x += p.vx; p.y += p.vy; wrap(p);
-    }
-
-    else if (type === 'hexagon') {
-      ctx.save();
-      p.angle += p.va;
-      drawHexagon(ctx, x, y, p.r, p.angle);
-      ctx.strokeStyle = `rgba(${cr},${alpha})`;
-      ctx.lineWidth = 0.7;
-      ctx.stroke();
-      ctx.restore();
-      p.x += p.vx; p.y += p.vy; wrap(p);
-    }
-
-    else if (type === 'triangle') {
-      ctx.save();
-      p.angle += p.va;
-      drawTriangle(ctx, x, y, p.r, p.angle);
-      ctx.strokeStyle = `rgba(${cr},${alpha})`;
-      ctx.lineWidth = 0.7;
-      ctx.stroke();
-      ctx.restore();
-      p.x += p.vx; p.y += p.vy; wrap(p);
-    }
-
-    else if (type === 'cube') {
-      p.angle += p.va;
-      drawCube(ctx, x, y, p.size, alpha, cr);
-      p.x += p.vx; p.y += p.vy; wrap(p);
-    }
-
-    else if (type === 'diamond') {
-      ctx.save();
-      ctx.translate(x, y);
-      p.angle += p.va;
-      ctx.rotate(p.angle + Math.PI / 4);
-      ctx.strokeStyle = `rgba(${cr},${alpha})`;
-      ctx.lineWidth = 0.7;
-      ctx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size);
-      ctx.restore();
-      p.x += p.vx; p.y += p.vy; wrap(p);
-    }
-
-    else if (type === 'square') {
-      ctx.save();
-      ctx.translate(x, y);
-      p.angle += p.va;
-      ctx.rotate(p.angle);
-      ctx.strokeStyle = `rgba(${cr},${alpha})`;
-      ctx.lineWidth = 0.7;
-      ctx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size);
-      ctx.strokeStyle = `rgba(${cr},${alpha * 0.35})`;
-      ctx.lineWidth = 0.35;
-      ctx.strokeRect(-p.size / 4, -p.size / 4, p.size / 2, p.size / 2);
-      ctx.restore();
-      p.x += p.vx; p.y += p.vy; wrap(p);
-    }
-
-    else if (type === 'ps3') {
-      p.trail.push({x: p.x, y: p.y});
-      if (p.trail.length > 7) p.trail.shift();
-      for (let i = 0; i < p.trail.length; i++) {
-        const ta = (i / p.trail.length) * p.alpha * 0.5;
-        ctx.beginPath();
-        ctx.arc(p.trail[i].x, p.trail[i].y, p.r * (i / p.trail.length) * 0.7, 0, 6.283);
-        ctx.fillStyle = `hsla(${p.hue},75%,72%,${ta})`;
-        ctx.fill();
-      }
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, 6.283);
-      ctx.fillStyle = `hsla(${p.hue},75%,80%,${p.alpha})`;
-      ctx.fill();
-      p.x += p.vx; p.y += p.vy; wrap(p);
-    }
-
-    else if (type === 'cyber') {
-      p.pulse += p.pSpeed;
-      const pa = (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, 6.283);
-      ctx.fillStyle = `rgba(${cr},${pa})`;
-      ctx.fill();
-      for (let ring = 1; ring <= 2; ring++) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * (1.8 + ring * 1.3), 0, 6.283);
-        ctx.strokeStyle = `rgba(${cr},${pa * 0.12 / ring})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-  }
-
+function drawPentagon(c,x,y,r,a){c.beginPath();for(let i=0;i<5;i++){const ag=a+i*1.2566-1.5708;i?c.lineTo(x+r*Math.cos(ag),y+r*Math.sin(ag)):c.moveTo(x+r*Math.cos(ag),y+r*Math.sin(ag))}c.closePath()}
+function drawHexagon(c,x,y,r,a){c.beginPath();for(let i=0;i<6;i++){const ag=a+i*1.0472;i?c.lineTo(x+r*Math.cos(ag),y+r*Math.sin(ag)):c.moveTo(x+r*Math.cos(ag),y+r*Math.sin(ag))}c.closePath()}
+function drawTriangle(c,x,y,r,a){c.beginPath();for(let i=0;i<3;i++){const ag=a+i*2.0944-1.5708;i?c.lineTo(x+r*Math.cos(ag),y+r*Math.sin(ag)):c.moveTo(x+r*Math.cos(ag),y+r*Math.sin(ag))}c.closePath()}
+function drawCube(c,x,y,size,alpha,cr){const h=size*.58,w=size;c.lineWidth=.8;c.beginPath();c.moveTo(x,y-h);c.lineTo(x+w/2,y-h/2);c.lineTo(x,y);c.lineTo(x-w/2,y-h/2);c.closePath();c.strokeStyle=`rgba(${cr},${alpha})`;c.stroke();c.beginPath();c.moveTo(x-w/2,y-h/2);c.lineTo(x,y);c.lineTo(x,y+h);c.lineTo(x-w/2,y+h/2);c.closePath();c.strokeStyle=`rgba(${cr},${alpha*.6})`;c.stroke();c.beginPath();c.moveTo(x,y);c.lineTo(x+w/2,y-h/2);c.lineTo(x+w/2,y+h/2);c.lineTo(x,y+h);c.closePath();c.strokeStyle=`rgba(${cr},${alpha*.8})`;c.stroke()}
+const COLORS=['191,47,255','0,229,255','255,34,163','107,31,160','255,90,175'];
+const SHAPE_TYPES=['pentagon','hexagon','triangle','cube','diamond','square','ps3','cyber'];
+const SHAPE_TYPES_MOBILE=['diamond','hexagon','triangle','cyber'];
+function makeParticles(){particles=Array.from({length:isLowEnd()?0:33},()=>spawnParticle(SHAPE_TYPES))}
+function makeParticlesMobile(){particles=Array.from({length:7},()=>spawnParticle(SHAPE_TYPES_MOBILE))}
+function spawnParticle(tp){const x=Math.random()*W,y=Math.random()*H,type=tp[Math.floor(Math.random()*tp.length)],cr=COLORS[Math.floor(Math.random()*COLORS.length)],base={type,x,y,cr,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,va:(Math.random()<.5?1:-1)*(Math.random()*.006+.001),angle:Math.random()*Math.PI*2,alpha:Math.random()*.18+.04};if(type==='ps3')return{...base,r:Math.random()*2.8+.6,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,hue:Math.random()<.5?285:195,alpha:Math.random()*.3+.08,trail:[]};if(type==='cyber')return{...base,r:Math.random()*2.5+.7,pulse:Math.random()*Math.PI*2,pSpeed:Math.random()*.018+.006,alpha:Math.random()*.35+.08,vx:0,vy:0};if(type==='cube')return{...base,size:Math.random()*16+8,vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1,va:(Math.random()<.5?1:-1)*.001};if(type==='pentagon'||type==='hexagon'||type==='triangle')return{...base,r:Math.random()*14+6,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12};return{...base,size:Math.random()*14+5,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14}}
+function wrap(p,pad=40){if(p.x<-pad)p.x=W+pad;if(p.x>W+pad)p.x=-pad;if(p.y<-pad)p.y=H+pad;if(p.y>H+pad)p.y=-pad}
+resize();window.addEventListener('resize',resize);
+ 
+let lastFrame=0,t=0;
+function draw(now){
   requestAnimationFrame(draw);
-})();
-
-const pL1 = document.getElementById('pL1'), pL2 = document.getElementById('pL2');
-addEventListener('scroll', () => {
-  const y = scrollY;
-  pL1.style.transform = `translateY(${y * -.03}px)`;
-  pL2.style.transform = `translateY(${y * -.06}px)`;
-}, {passive: true});
-
-const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
-(function aR() { rx += (mx - rx) * .1; ry += (my - ry) * .1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(aR) })();
-document.querySelectorAll('a,button').forEach(el => {
-  el.addEventListener('mouseenter', () => { ring.style.width = '40px'; ring.style.height = '40px'; cur.style.background = 'var(--neon-cyan)' });
-  el.addEventListener('mouseleave', () => { ring.style.width = '28px'; ring.style.height = '28px'; cur.style.background = 'var(--pink-hot)' });
-});
-
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } });
-}, {threshold: .06});
-function observeAll() { document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el)) }
-observeAll();
-
-const ambMap = {
-  home: 'ambHome',
-  technical: 'ambTechnical',
-  developmental: 'ambDevelopmental'
-};
-
-function goPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  const pg = document.getElementById('page-' + name);
-  if (pg) pg.classList.add('active');
-  document.querySelectorAll(`.nav-link[data-page="${name}"]`).forEach(l => l.classList.add('active'));
-
-  Object.values(ambMap).forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('visible');
-  });
-  const ambId = ambMap[name];
-  if (ambId) {
-    setTimeout(() => {
-      const el = document.getElementById(ambId);
-      if (el) el.classList.add('visible');
-    }, 100);
-  }
-
-  scrollTo({top: 0, behavior: 'smooth'});
-  setTimeout(observeAll, 80);
-  closeMobileMenu();
+  const frameMs=mobile?33:0;
+  if(frameMs>0&&now-lastFrame<frameMs)return;lastFrame=now;
+  if(prefersReducedMotion){ctx.clearRect(0,0,W,H);for(const s of stars){ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.283);ctx.fillStyle=`rgba(210,215,230,${s.baseA})`;ctx.fill()}return}
+  ctx.clearRect(0,0,W,H);t++;
+  for(const s of stars){const tw=Math.sin(t*s.s*40+s.p)*.22+.6;const sb=!mobile&&Math.sin(t*s.s*12+s.p+2.1)>.97;const a=s.baseA*tw*(sb?1.8:1);const r=s.r*(sb?1.7:1);ctx.beginPath();ctx.arc(s.x,s.y,r,0,6.283);ctx.fillStyle=s.tint===1?`rgba(160,210,255,${a})`:s.tint===2?`rgba(255,245,210,${a})`:`rgba(210,215,230,${a})`;ctx.fill();if(sb&&s.r>.55){ctx.save();ctx.strokeStyle=`rgba(200,225,255,${a*.45})`;ctx.lineWidth=.5;const l=r*4;ctx.beginPath();ctx.moveTo(s.x-l,s.y);ctx.lineTo(s.x+l,s.y);ctx.moveTo(s.x,s.y-l);ctx.lineTo(s.x,s.y+l);ctx.stroke();ctx.restore()}}
+  const maxSS=mobile?4:12;
+  if(shootingStars.length<maxSS){if(Math.random()<(mobile?.001:.0014)){const fl=Math.random()<.5;shootingStars.push({variant:'classic',x:fl?-20:W+20,y:Math.random()*H*.65,vx:(fl?1:-1)*(Math.random()*6+4),vy:Math.random()*2.2+.6,life:1,decay:Math.random()*.011+.007,color:Math.random()<.7?'255,255,255':'200,220,255'})}if(Math.random()<(mobile?.0006:.0009)){shootingStars.push({variant:'tinted',x:Math.random()*W*.6,y:-10,vx:(Math.random()-.5)*3,vy:Math.random()*9+5,life:1,decay:Math.random()*.018+.013,color:Math.random()<.5?'191,130,255':'100,230,255'})}if(Math.random()<(mobile?.0004:.0006)){const fl=Math.random()<.5;shootingStars.push({variant:'drifter',x:fl?-20:W+20,y:Math.random()*H*.5+H*.1,vx:(fl?1:-1)*(Math.random()*3+2),vy:Math.random()*1.2+.2,life:1,decay:Math.random()*.006+.004,color:'255,200,230'})}}
+  shootingStars=shootingStars.filter(ss=>{ss.x+=ss.vx;ss.y+=ss.vy;ss.life-=ss.decay;const tl=ss.variant==='drifter'?38:ss.variant==='tinted'?20:26;const ha=ss.variant==='tinted'?ss.life*.85:ss.life*.95;const ta=ss.life*(ss.variant==='drifter'?.45:.38);const lw=ss.variant==='drifter'?ss.life*1.4:ss.life*1.8;const g=ctx.createLinearGradient(ss.x,ss.y,ss.x-ss.vx*tl,ss.y-ss.vy*tl);g.addColorStop(0,`rgba(${ss.color},${ha})`);g.addColorStop(.35,`rgba(${ss.color},${ta})`);g.addColorStop(.7,`rgba(${ss.color},${ta*.15})`);g.addColorStop(1,`rgba(${ss.color},0)`);ctx.beginPath();ctx.strokeStyle=g;ctx.lineWidth=lw;ctx.moveTo(ss.x,ss.y);ctx.lineTo(ss.x-ss.vx*tl,ss.y-ss.vy*tl);ctx.stroke();if(ss.life>.25){const hr=2.2*ss.life;ctx.beginPath();ctx.arc(ss.x,ss.y,hr,0,Math.PI*2);ctx.fillStyle=`rgba(${ss.color},${ss.life*.75})`;ctx.fill();ctx.beginPath();ctx.arc(ss.x,ss.y,hr*3.5,0,Math.PI*2);ctx.fillStyle=`rgba(${ss.color},${ss.life*.08})`;ctx.fill()}return ss.life>0&&ss.x>-300&&ss.x<W+300&&ss.y<H+200&&ss.y>-200});
+  for(const p of particles){const{type,x,y,alpha,cr}=p;if(type==='pentagon'){ctx.save();p.angle+=p.va;drawPentagon(ctx,x,y,p.r,p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.9;ctx.stroke();drawPentagon(ctx,x,y,p.r*.5,p.angle+.3);ctx.strokeStyle=`rgba(${cr},${alpha*.3})`;ctx.lineWidth=.4;ctx.stroke();ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='hexagon'){ctx.save();p.angle+=p.va;drawHexagon(ctx,x,y,p.r,p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.stroke();ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='triangle'){ctx.save();p.angle+=p.va;drawTriangle(ctx,x,y,p.r,p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.stroke();ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='cube'){p.angle+=p.va;drawCube(ctx,x,y,p.size,alpha,cr);p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='diamond'){ctx.save();ctx.translate(x,y);p.angle+=p.va;ctx.rotate(p.angle+Math.PI/4);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='square'){ctx.save();ctx.translate(x,y);p.angle+=p.va;ctx.rotate(p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);ctx.strokeStyle=`rgba(${cr},${alpha*.35})`;ctx.lineWidth=.4;ctx.strokeRect(-p.size/4,-p.size/4,p.size/2,p.size/2);ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='ps3'){p.trail.push({x:p.x,y:p.y});if(p.trail.length>7)p.trail.shift();for(let i=0;i<p.trail.length;i++){const ta2=(i/p.trail.length)*p.alpha*.5;ctx.beginPath();ctx.arc(p.trail[i].x,p.trail[i].y,p.r*(i/p.trail.length)*.7,0,6.283);ctx.fillStyle=`hsla(${p.hue},75%,72%,${ta2})`;ctx.fill()}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle=`hsla(${p.hue},75%,80%,${p.alpha})`;ctx.fill();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='cyber'){p.pulse+=p.pSpeed;const pa=(Math.sin(p.pulse)*.5+.5)*p.alpha;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle=`rgba(${cr},${pa})`;ctx.fill();if(!mobile){for(let ring=1;ring<=2;ring++){ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1.8+ring*1.3),0,6.283);ctx.strokeStyle=`rgba(${cr},${pa*.12/ring})`;ctx.lineWidth=.5;ctx.stroke()}}}}
 }
-document.querySelectorAll('.nav-link[data-page]').forEach(b => { b.addEventListener('click', () => goPage(b.dataset.page)) });
-
-setTimeout(() => {
-  const el = document.getElementById('ambHome');
-  if (el) el.classList.add('visible');
-}, 200);
-
-const hamburger = document.getElementById('hamburger'), mobileMenu = document.getElementById('mobileMenu');
-let menuOpen = false;
-function openMobileMenu() { menuOpen = true; hamburger.classList.add('open'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden' }
-function closeMobileMenu() { menuOpen = false; hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = '' }
-hamburger.addEventListener('click', () => { menuOpen ? closeMobileMenu() : openMobileMenu() });
-
-(function () {
-  const track = document.getElementById('carouselTrack');
-  const dotsEl = document.getElementById('carouselDots');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
-  let current = 0;
-
-  function visCount() {
-    if (innerWidth >= 1100) return 3;
-    if (innerWidth >= 640) return 2;
-    return 1;
-  }
-
-  GAMES.forEach((g, i) => {
-    const card = document.createElement('div');
-    card.className = 'showcase-entry';
-    card.innerHTML = `
-      <div class="showcase-img">
-        ${g.img
-          ? `<img src="${g.img}" alt="${g.title}" loading="lazy">`
-          : `<div class="showcase-ph"><span>${g.tag || 'Coming Soon'}</span></div>`}
-      </div>
-      <div class="showcase-info">
-        ${g.tag ? `<span class="showcase-tag">${g.tag}</span>` : ''}
-        <h3 class="showcase-title">${g.title}</h3>
-        <p class="showcase-desc">${g.desc}</p>
-      </div>`;
-    track.appendChild(card);
-
-    const dot = document.createElement('button');
-    dot.className = 'showcase-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `Go to ${g.title}`);
-    dot.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(dot);
-  });
-
-  function setCardWidths() {
-    const vc = visCount();
-    const gap = vc > 1 ? (innerWidth >= 1100 ? 22 : 14) : 0;
-    const total = track.parentElement.offsetWidth;
-    const cardW = (total - gap * (vc - 1)) / vc;
-    track.querySelectorAll('.showcase-entry').forEach(c => {
-      c.style.width = cardW + 'px';
-      c.style.minWidth = cardW + 'px';
-    });
-    track.style.gap = gap + 'px';
-    return {cardW, gap};
-  }
-
-  function goTo(idx) {
-    const max = Math.max(0, GAMES.length - visCount());
-    current = Math.max(0, Math.min(idx, max));
-    const {cardW, gap} = setCardWidths();
-    track.style.transform = `translateX(-${current * (cardW + gap)}px)`;
-    dotsEl.querySelectorAll('.showcase-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current >= GAMES.length - visCount();
-  }
-
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-  addEventListener('resize', () => goTo(current));
-  goTo(0);
+requestAnimationFrame(draw);
+ 
+const pL1=document.getElementById('pL1'),pL2=document.getElementById('pL2');let scrollY_cached=0,rafPending=false;
+function applyParallax(){pL1.style.transform=`translate3d(0,${scrollY_cached*-.03}px,0)`;pL2.style.transform=`translate3d(0,${scrollY_cached*-.06}px,0)`;rafPending=false}
+if(!isMobile()){window.addEventListener('scroll',()=>{scrollY_cached=window.scrollY;if(!rafPending){rafPending=true;requestAnimationFrame(applyParallax)}},{passive:true})}
+ 
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.06});
+function observeAll(){document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el))}observeAll();
+ 
+const ambMap={home:'ambHome',technical:'ambTechnical',developmental:'ambDevelopmental'};
+function goPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  const pg=document.getElementById('page-'+name);if(pg)pg.classList.add('active');
+  document.querySelectorAll(`.nav-link[data-page="${name}"]`).forEach(l=>l.classList.add('active'));
+  Object.values(ambMap).forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('visible')});
+  const ambId=ambMap[name];if(ambId&&!isMobile()){setTimeout(()=>{const el=document.getElementById(ambId);if(el)el.classList.add('visible')},100)}
+  window.scrollTo({top:0,behavior:'smooth'});setTimeout(observeAll,80);closeMobileMenu();
+}
+document.querySelectorAll('.nav-link[data-page]').forEach(b=>{b.addEventListener('click',()=>goPage(b.dataset.page))});
+setTimeout(()=>{if(!isMobile()){const el=document.getElementById('ambHome');if(el)el.classList.add('visible')}},200);
+ 
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu');let menuOpen=false;
+function openMobileMenu(){menuOpen=true;hamburger.classList.add('open');mobileMenu.classList.add('open');document.body.style.overflow='hidden'}
+function closeMobileMenu(){menuOpen=false;hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',()=>{menuOpen?closeMobileMenu():openMobileMenu()});
+ 
+(function(){
+  const track=document.getElementById('carouselTrack'),dotsEl=document.getElementById('carouselDots'),prevBtn=document.getElementById('carouselPrev'),nextBtn=document.getElementById('carouselNext');let current=0;
+  function visCount(){if(window.innerWidth>=1100)return 3;if(window.innerWidth>=640)return 2;return 1}
+  GAMES.forEach((g,i)=>{const card=document.createElement('div');card.className='showcase-entry';card.innerHTML=`<div class="showcase-img">${g.img?`<img src="${g.img}" alt="${g.title}" loading="lazy">`:`<div class="showcase-ph"><span>${g.tag||'Coming Soon'}</span></div>`}</div><div class="showcase-info">${g.tag?`<span class="showcase-tag">${g.tag}</span>`:''}<h3 class="showcase-title">${g.title}</h3><p class="showcase-desc">${g.desc}</p></div>`;track.appendChild(card);const dot=document.createElement('button');dot.className='showcase-dot'+(i===0?' active':'');dot.setAttribute('aria-label',`Go to ${g.title}`);dot.addEventListener('click',()=>goTo(i));dotsEl.appendChild(dot)});
+  function setCardWidths(){const vc=visCount();const gap=vc>1?(window.innerWidth>=1100?22:14):0;const total=track.parentElement.offsetWidth;const cardW=(total-gap*(vc-1))/vc;track.querySelectorAll('.showcase-entry').forEach(c=>{c.style.width=cardW+'px';c.style.minWidth=cardW+'px'});track.style.gap=gap+'px';return{cardW,gap}}
+  function goTo(idx){const max=Math.max(0,GAMES.length-visCount());current=Math.max(0,Math.min(idx,max));const{cardW,gap}=setCardWidths();track.style.transform=`translateX(-${current*(cardW+gap)}px)`;dotsEl.querySelectorAll('.showcase-dot').forEach((d,i)=>d.classList.toggle('active',i===current));prevBtn.disabled=current===0;nextBtn.disabled=current>=GAMES.length-visCount()}
+  prevBtn.addEventListener('click',()=>goTo(current-1));nextBtn.addEventListener('click',()=>goTo(current+1));window.addEventListener('resize',()=>goTo(current));goTo(0);
 })();
 </script>
 </body>
