@@ -18,6 +18,8 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:var(--black);color:var(--silver-hi);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:auto}
+/* subtle film grain overlay */
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px;mix-blend-mode:overlay}
  
 .void-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}
 .void-blob{
@@ -100,7 +102,12 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);background:var(--neon-pink)}
 .mobile-menu{display:none;position:fixed;inset:0;z-index:190;background:rgba(4,4,7,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:70px 24px 40px;flex-direction:column}
 .mobile-menu.open{display:flex}
-.mobile-menu a,.mobile-menu button{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,7vw,36px);letter-spacing:0.03em;color:var(--silver-dim);text-decoration:none;text-transform:uppercase;padding:16px 0;border:none;border-bottom:1px solid var(--border);background:none;text-align:left;cursor:pointer;display:block;width:100%;transition:color 0.05s}
+.mobile-menu a,.mobile-menu button{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,7vw,36px);letter-spacing:0.03em;color:var(--silver-dim);text-decoration:none;text-transform:uppercase;padding:16px 0;border:none;border-bottom:1px solid var(--border);background:none;text-align:left;cursor:pointer;display:block;width:100%;transition:color 0.05s;opacity:0;transform:translateX(-20px);transition:color 0.3s,opacity 0.4s ease,transform 0.4s ease}
+.mobile-menu.open a,.mobile-menu.open button{opacity:1;transform:translateX(0)}
+.mobile-menu.open a:nth-child(1),.mobile-menu.open button:nth-child(1){transition-delay:0.08s}
+.mobile-menu.open a:nth-child(2),.mobile-menu.open button:nth-child(2){transition-delay:0.16s}
+.mobile-menu.open a:nth-child(3),.mobile-menu.open button:nth-child(3){transition-delay:0.24s}
+.mobile-menu.open .mobile-menu-actions{opacity:0;animation:fu 0.5s ease 0.35s forwards}
 .mobile-menu a:hover,.mobile-menu button:hover{color:var(--neon-pink)}
 .mobile-menu-actions{display:flex;gap:10px;margin-top:24px;flex-direction:column}
 .mobile-menu-actions a{font-size:11px;padding:14px 20px;text-align:center;font-family:'Space Mono',monospace;letter-spacing:0.14em;display:block}
@@ -120,7 +127,11 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .btn-p{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(10px,1vw,12px);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--silver-hi);padding:16px 32px;background:linear-gradient(135deg,var(--pink-hot),var(--purple-logo));clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:filter 0.3s,box-shadow 0.3s;box-shadow:0 0 30px rgba(204,46,138,0.2);position:relative}
 .btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent 50%)}
 .btn-p:hover{filter:brightness(1.15);box-shadow:0 0 50px rgba(204,46,138,0.35)}
-.btn-s{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(10px,1vw,12px);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--silver);padding:15px 32px;border:1px solid rgba(200,205,216,0.12);background:transparent;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:border-color 0.3s,color 0.3s}
+.btn-p{animation:ctaPulse 5s ease-in-out infinite}
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 30px rgba(204,46,138,0.2)}50%{box-shadow:0 0 45px rgba(204,46,138,0.32),0 0 80px rgba(107,31,160,0.1)}}
+.btn-s{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(10px,1vw,12px);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--silver);padding:15px 32px;border:1px solid rgba(200,205,216,0.12);background:transparent;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:border-color 0.3s,color 0.3s;position:relative;overflow:hidden}
+.btn-s::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.06),transparent);transition:left 0.5s ease}
+.btn-s:hover::before{left:120%}
 .btn-s:hover{border-color:var(--neon-cyan);color:var(--neon-cyan)}
 .hero-stats{position:absolute;bottom:0;left:0;right:0;display:flex;flex-wrap:wrap;z-index:2;border-top:1px solid var(--border);background:rgba(4,4,7,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;animation:fu 1s ease 1s forwards}
 .stat{flex:1;min-width:80px;padding:clamp(12px,1.5vw,20px) clamp(14px,2.5vw,28px);border-right:1px solid var(--border);position:relative;overflow:hidden}
@@ -178,8 +189,9 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .id-card{background:rgba(12,12,24,0.5);border:1px solid var(--border);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:clamp(24px,3.5vw,44px);position:relative;overflow:hidden;transition:border-color 0.4s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
 .id-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink-hot),var(--neon-purple));transform:scaleX(0);transform-origin:left;transition:transform 0.5s}
 .id-card:hover{border-color:var(--border-hi)}.id-card:hover::after{transform:scaleX(1)}
-.id-icon{margin-bottom:18px;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(107,31,160,0.08);border:1px solid rgba(107,31,160,0.15)}
+.id-icon{margin-bottom:18px;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(107,31,160,0.08);border:1px solid rgba(107,31,160,0.15);transition:transform 0.4s,box-shadow 0.4s,border-color 0.4s}
 .id-icon svg{width:22px;height:22px}
+.id-card:hover .id-icon{transform:rotate(8deg) scale(1.08);box-shadow:0 0 20px rgba(107,31,160,0.25);border-color:rgba(191,47,255,0.35)}
 .id-title{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(12px,1.2vw,14px);letter-spacing:0.06em;background:linear-gradient(90deg,var(--pink-hot),var(--purple-logo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase;margin-bottom:12px}
 .id-body{font-size:clamp(13px,1.25vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.8}
 .id-body strong{color:var(--silver);font-weight:500}
@@ -190,7 +202,37 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .spec-cell:hover{border-color:rgba(0,229,255,0.2)}
 .spec-key{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--neon-cyan);text-transform:uppercase;margin-bottom:8px;display:block;opacity:0.85}
 .spec-val{font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(13px,1.4vw,16px);color:var(--silver);display:block}
-.spec-banner{margin-top:20px;padding:clamp(18px,2.5vw,28px) clamp(22px,3.5vw,40px);background:rgba(12,12,24,0.5);border:1px solid var(--border);border-left:3px solid var(--neon-pink);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+
+/* ── interactive spec accordion ── */
+.spec-accordion{display:flex;flex-direction:column;gap:2px;margin-top:28px}
+.spec-item{background:rgba(12,12,24,0.5);border:1px solid var(--border);overflow:hidden;transition:border-color 0.4s,box-shadow 0.4s}
+.spec-item.active{border-color:rgba(0,229,255,0.22);box-shadow:0 4px 28px rgba(0,229,255,0.04)}
+.spec-header{display:flex;align-items:center;gap:clamp(12px,2vw,20px);padding:clamp(16px,2vw,22px) clamp(16px,3vw,28px);cursor:pointer;user-select:none;-webkit-user-select:none;transition:background 0.3s}
+.spec-header:hover{background:rgba(0,229,255,0.015)}
+.spec-header-icon{min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.1);transition:border-color 0.3s,background 0.3s,transform 0.3s}
+.spec-item.active .spec-header-icon{border-color:rgba(0,229,255,0.25);background:rgba(0,229,255,0.08);transform:scale(1.05)}
+.spec-header-icon svg{width:16px;height:16px}
+.spec-header-text{flex:1;min-width:0}
+.spec-header-key{font-family:'Space Mono',monospace;font-size:clamp(8px,0.8vw,9px);letter-spacing:0.2em;color:var(--neon-cyan);text-transform:uppercase;margin-bottom:3px;display:block;opacity:0.8}
+.spec-header-val{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(14px,1.5vw,18px);color:var(--silver-hi);display:block;text-transform:uppercase;letter-spacing:0.02em}
+.spec-chevron{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--silver-dim);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1),color 0.3s;flex-shrink:0}
+.spec-item.active .spec-chevron{transform:rotate(180deg);color:var(--neon-cyan)}
+.spec-chevron svg{width:16px;height:16px}
+.spec-detail{max-height:0;overflow:hidden;transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1),opacity 0.35s ease}
+.spec-detail-inner{padding:0 clamp(16px,3vw,28px) clamp(18px,2.5vw,26px);padding-left:clamp(64px,6vw,78px);opacity:0;transform:translateY(-6px);transition:opacity 0.3s ease 0.1s,transform 0.3s ease 0.1s}
+.spec-item.active .spec-detail-inner{opacity:1;transform:translateY(0)}
+.spec-detail-inner p{font-size:clamp(13px,1.2vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.85}
+.spec-detail-inner p strong{color:var(--silver);font-weight:500}
+.spec-detail-inner p .hl-cyan{color:var(--neon-cyan);font-weight:400}
+.spec-detail-inner p .hl-pink{color:var(--neon-pink);font-weight:400}
+/* left accent bar on active */
+.spec-item{position:relative}
+.spec-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--neon-cyan),var(--neon-purple));transform:scaleY(0);transform-origin:top;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);z-index:1}
+.spec-item.active::before{transform:scaleY(1)}
+
+.spec-banner{margin-top:20px;padding:clamp(18px,2.5vw,28px) clamp(22px,3.5vw,40px);background:rgba(12,12,24,0.5);border:1px solid var(--border);border-left:3px solid var(--neon-pink);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);position:relative;overflow:hidden}
+.spec-banner::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.03),transparent);animation:specScan 6s ease-in-out infinite;pointer-events:none}
+@keyframes specScan{0%{left:-50%}100%{left:150%}}
 .spec-banner p{font-size:clamp(12px,1.1vw,14px);font-weight:300;color:var(--silver-dim);line-height:2}
 .spec-banner strong{color:var(--neon-pink);font-weight:500}
  
@@ -201,7 +243,8 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .disc-stage::before,.disc-stage::after{content:'';position:absolute;width:24px;height:24px;border-color:rgba(204,46,138,0.25);border-style:solid}
 .disc-stage::before{top:14px;left:14px;border-width:1px 0 0 1px}.disc-stage::after{bottom:14px;right:14px;border-width:0 1px 1px 0}
 .disc-visual{width:clamp(140px,22vw,220px);height:clamp(140px,22vw,220px);position:relative}
-.disc-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--purple-deep),var(--purple-logo) 60deg,var(--pink-mid) 120deg,var(--pink-hot) 160deg,var(--silver) 200deg,var(--chrome) 240deg,var(--purple-logo) 300deg,var(--purple-deep) 360deg);animation:spin 14s linear infinite;box-shadow:0 0 50px rgba(204,46,138,0.25),0 0 100px rgba(107,31,160,0.1);will-change:transform;transform:translate3d(0,0,0)}
+.disc-outer{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--purple-deep),var(--purple-logo) 60deg,var(--pink-mid) 120deg,var(--pink-hot) 160deg,var(--silver) 200deg,var(--chrome) 240deg,var(--purple-logo) 300deg,var(--purple-deep) 360deg);animation:spin 14s linear infinite,discGlow 4s ease-in-out infinite alternate;will-change:transform;transform:translate3d(0,0,0)}
+@keyframes discGlow{0%{box-shadow:0 0 40px rgba(204,46,138,0.2),0 0 80px rgba(107,31,160,0.08)}100%{box-shadow:0 0 60px rgba(204,46,138,0.35),0 0 120px rgba(107,31,160,0.15),0 0 180px rgba(191,47,255,0.06)}}
 .disc-mid{position:absolute;border-radius:50%;top:15%;left:15%;right:15%;bottom:15%;background:rgba(0,0,0,0.35);border:1px solid rgba(200,205,216,0.08)}
 .disc-hub{position:absolute;border-radius:50%;top:40%;left:40%;right:40%;bottom:40%;background:var(--black);border:2px solid rgba(200,205,216,0.2);z-index:2}
 .disc-shine{position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent 45%);z-index:3}
@@ -257,7 +300,11 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .price-line{font-size:clamp(12px,1.25vw,14px);font-weight:300;color:var(--silver-dim);line-height:1.55;padding-left:16px;position:relative}
 .price-line::before{content:'\25C6';position:absolute;left:0;top:1px;color:var(--pink-hot);font-size:6px;opacity:0.6}
 .price-line strong{color:var(--silver);font-weight:500}
-.ks-card{background:rgba(12,12,24,0.55);border:1px solid var(--border);border-left:3px solid var(--neon-cyan);padding:clamp(28px,4vw,48px)}
+.ks-card{background:rgba(12,12,24,0.55);border:1px solid var(--border);border-left:3px solid var(--neon-cyan);padding:clamp(28px,4vw,48px);position:relative;overflow:hidden}
+.ks-card::before{content:'';position:absolute;top:0;right:0;width:2px;height:0;background:linear-gradient(180deg,var(--neon-cyan),var(--neon-purple));transition:height 0.8s ease}
+.ks-card:hover::before{height:100%}
+.ks-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neon-cyan),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.6s ease 0.2s}
+.ks-card:hover::after{transform:scaleX(1)}
 .ks-title{font-family:'Syne',sans-serif;font-weight:400;font-size:clamp(16px,2.2vw,24px);text-transform:uppercase;margin-bottom:14px;color:var(--neon-cyan);text-shadow:0 0 30px rgba(0,229,255,0.2)}
 .ks-body{font-size:clamp(13px,1.25vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.8;margin-bottom:28px}
 .ks-body strong{color:var(--silver);font-weight:500}
@@ -283,7 +330,8 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .oss-sdk-icon svg{width:16px;height:16px}
 .oss-sdk-name{font-family:'Space Mono',monospace;font-size:clamp(9px,0.9vw,11px);letter-spacing:0.08em;color:var(--silver);text-transform:uppercase}
 .oss-sdk-desc{font-size:clamp(10px,0.85vw,11px);color:var(--silver-dim);font-weight:300;margin-top:2px}
-.btn-github{display:inline-flex;align-items:center;gap:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(10px,1vw,12px);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--silver-hi);padding:16px 32px;background:linear-gradient(135deg,rgba(0,229,255,0.12),rgba(191,47,255,0.12));border:1px solid rgba(0,229,255,0.25);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all 0.4s;position:relative;overflow:hidden}
+.btn-github{display:inline-flex;align-items:center;gap:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(10px,1vw,12px);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--silver-hi);padding:16px 32px;background:linear-gradient(135deg,rgba(0,229,255,0.12),rgba(191,47,255,0.12));border:1px solid rgba(0,229,255,0.25);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all 0.4s;position:relative;overflow:hidden;animation:githubPulse 4s ease-in-out infinite}
+@keyframes githubPulse{0%,100%{box-shadow:0 0 15px rgba(0,229,255,0.05)}50%{box-shadow:0 0 30px rgba(0,229,255,0.12),0 0 60px rgba(191,47,255,0.06)}}
 .btn-github::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,255,0.08),rgba(191,47,255,0.06));opacity:0;transition:opacity 0.4s}
 .btn-github:hover{border-color:var(--neon-cyan);box-shadow:0 0 40px rgba(0,229,255,0.15),0 0 80px rgba(0,229,255,0.06);transform:translateY(-2px)}
 .btn-github:hover::before{opacity:1}
@@ -292,6 +340,19 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .oss-visual{position:relative;display:flex;align-items:center;justify-content:center;padding:clamp(40px,5vw,64px);background:rgba(0,229,255,0.01);border-left:1px solid rgba(107,31,160,0.1);overflow:hidden}
 @media(max-width:767px){.oss-visual{border-left:none;border-top:1px solid rgba(107,31,160,0.1);min-height:200px}}
 .oss-visual-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.04) 1px,transparent 1px);background-size:28px 28px;opacity:0.5}
+/* oss orbit animation */
+.oss-orbits{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0}
+.oss-orbit{position:absolute;border-radius:50%;border:1px solid transparent}
+.oss-orbit-1{width:clamp(120px,20vw,200px);height:clamp(120px,20vw,200px);border-color:rgba(0,229,255,0.08);animation:spin 20s linear infinite}
+.oss-orbit-2{width:clamp(200px,32vw,320px);height:clamp(200px,32vw,320px);border-color:rgba(191,47,255,0.06);animation:spin 35s linear infinite reverse}
+.oss-orbit-3{width:clamp(280px,44vw,440px);height:clamp(280px,44vw,440px);border-color:rgba(255,34,163,0.04);animation:spin 50s linear infinite;border-style:dashed}
+.oss-orbit-dot{position:absolute;width:5px;height:5px;border-radius:50%;z-index:1}
+.oss-od-1{background:var(--neon-cyan);box-shadow:0 0 10px var(--neon-cyan);animation:orbitDot1 20s linear infinite}
+.oss-od-2{background:var(--neon-purple);box-shadow:0 0 8px var(--neon-purple);animation:orbitDot2 35s linear infinite reverse;width:4px;height:4px}
+.oss-od-3{background:var(--neon-pink);box-shadow:0 0 8px var(--neon-pink);animation:orbitDot3 50s linear infinite;width:3px;height:3px}
+@keyframes orbitDot1{0%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(0deg) translateX(clamp(60px,10vw,100px))}100%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(360deg) translateX(clamp(60px,10vw,100px))}}
+@keyframes orbitDot2{0%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(0deg) translateX(clamp(100px,16vw,160px))}100%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(360deg) translateX(clamp(100px,16vw,160px))}}
+@keyframes orbitDot3{0%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(0deg) translateX(clamp(140px,22vw,220px))}100%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(360deg) translateX(clamp(140px,22vw,220px))}}
 .oss-terminal{position:relative;z-index:1;width:min(90%,320px);background:rgba(4,4,7,0.9);border:1px solid rgba(0,229,255,0.15);border-radius:8px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 30px rgba(0,229,255,0.05)}
 .oss-terminal-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:rgba(0,229,255,0.03);border-bottom:1px solid rgba(0,229,255,0.08)}
 .oss-terminal-dot{width:8px;height:8px;border-radius:50%}
@@ -316,11 +377,147 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ── FLAIR: gradient accent text on section titles ── */
+.st .gradient-pink{background:linear-gradient(135deg,var(--neon-pink),var(--pink-mid) 60%,var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(255,34,163,0.25))}
+.st .gradient-cyan{background:linear-gradient(135deg,var(--neon-cyan),#6be5ff 60%,var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(0,229,255,0.2))}
+.st .gradient-purple{background:linear-gradient(135deg,var(--neon-purple),var(--pink-hot));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(191,47,255,0.2))}
+.st .gradient-silver{background:linear-gradient(135deg,var(--silver-hi),var(--chrome),var(--neon-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── FLAIR: glitch text effect ── */
+.glitch{position:relative;animation:glitchShift 6s ease-in-out infinite}
+@keyframes glitchShift{0%,93%,100%{transform:none;opacity:1}94%{transform:translate(-2px,1px) skewX(-0.5deg);opacity:0.92}95%{transform:translate(2px,-1px) skewX(0.5deg);opacity:0.88}96%{transform:none;opacity:1}}
+
+/* ── FLAIR: animated section divider bars ── */
+.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent 5%,var(--pink-hot) 25%,var(--neon-purple) 50%,var(--neon-cyan) 75%,transparent 95%);opacity:0.25;margin:0;position:relative;z-index:1}
+.section-divider::after{content:'';position:absolute;inset:0;background:inherit;filter:blur(6px);opacity:0.5}
+
+/* ── FLAIR: pulsing glow on price card ── */
+.price-card{transition:box-shadow 0.6s ease,border-color 0.4s}
+.price-card:hover{border-color:var(--border-hi);box-shadow:0 0 60px rgba(204,46,138,0.12),0 0 120px rgba(107,31,160,0.06)}
+.price-amount{animation:priceGlow 4s ease-in-out infinite alternate}
+@keyframes priceGlow{0%{filter:drop-shadow(0 0 8px rgba(200,205,216,0.05))}100%{filter:drop-shadow(0 0 28px rgba(200,205,216,0.18))}}
+
+/* ── FLAIR: animated feature rows stagger ── */
+.feature-row{opacity:0;transform:translateX(-12px);transition:opacity 0.5s ease,transform 0.5s ease,border-left-color 0.3s,background 0.3s}
+.feature-list.visible .feature-row{opacity:1;transform:translateX(0)}
+.feature-list.visible .feature-row:nth-child(1){transition-delay:0.05s}
+.feature-list.visible .feature-row:nth-child(2){transition-delay:0.12s}
+.feature-list.visible .feature-row:nth-child(3){transition-delay:0.19s}
+.feature-list.visible .feature-row:nth-child(4){transition-delay:0.26s}
+.feature-list.visible .feature-row:nth-child(5){transition-delay:0.33s}
+
+/* ── FLAIR: tier rows hover glow ── */
+.tier{transition:border-color 0.3s,box-shadow 0.4s,transform 0.3s}
+.tier:hover{box-shadow:0 4px 30px rgba(204,46,138,0.08);transform:translateX(4px)}
+
+/* ── FLAIR: enhanced banks card float ── */
+.banks-card{transition:border-color 0.3s,transform 0.5s,box-shadow 0.4s}
+.banks-card:hover{border-color:var(--neon-pink);transform:translateY(-6px) scale(1.03);box-shadow:0 8px 32px rgba(204,46,138,0.12)}
+
+/* ── FLAIR: oss-sdk items animated entrance ── */
+.oss-sdk{opacity:0;transform:translateY(8px);transition:opacity 0.4s ease,transform 0.4s ease,border-color 0.3s,background 0.3s}
+.oss-wrapper.visible .oss-sdk{opacity:1;transform:translateY(0)}
+.oss-wrapper.visible .oss-sdk:nth-child(1){transition-delay:0.15s}
+.oss-wrapper.visible .oss-sdk:nth-child(2){transition-delay:0.25s}
+.oss-wrapper.visible .oss-sdk:nth-child(3){transition-delay:0.35s}
+
+/* ── FLAIR: terminal typing cursor ── */
+.terminal-cursor{display:inline-block;width:7px;height:14px;background:var(--neon-cyan);animation:cursorBlink 1s step-end infinite;vertical-align:middle;margin-left:4px}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── FLAIR: animated stat counters ── */
+.stat-val{transition:transform 0.3s}
+.stat:hover .stat-val{transform:scale(1.08)}
+
+/* ── FLAIR: spec cell animated highlight ── */
+.spec-cell{transition:border-color 0.3s,background 0.3s,transform 0.3s}
+.spec-cell:hover{border-color:rgba(0,229,255,0.25);background:rgba(0,229,255,0.02);transform:translateY(-2px)}
+
+/* ── FLAIR: ks-tier hover glow ── */
+.ks-tier{transition:background 0.3s,border-color 0.3s,transform 0.3s}
+.ks-tier:hover{background:rgba(0,229,255,0.05);border-color:rgba(0,229,255,0.15);transform:translateX(4px)}
+
+/* ── FLAIR: disc stage floating animation ── */
+.disc-stage{animation:discFloat 6s ease-in-out infinite}
+@keyframes discFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ── FLAIR: showcase entry shine sweep ── */
+.showcase-entry::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);z-index:2;transition:left 0.6s ease;pointer-events:none}
+.showcase-entry:hover::before{left:120%}
+
+/* ── FLAIR: footer link animated underline ── */
+.footer-links a{position:relative}
+.footer-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--neon-pink),var(--neon-purple));transition:width 0.3s}
+.footer-links a:hover::after{width:100%}
+
+/* ── FLAIR: nav glow pulse ── */
+nav::after{animation:navGlow 8s ease-in-out infinite alternate}
+@keyframes navGlow{0%{opacity:0.2}100%{opacity:0.45}}
+
+/* ── FLAIR: hero eyebrow line animated extend ── */
+.eyebrow-line{animation:eyebrowExtend 2s ease 0.8s both}
+@keyframes eyebrowExtend{from{width:0;opacity:0}to{width:36px;opacity:1}}
+
+/* ── FLAIR: rotur pill glow ── */
+.rotur-pill{transition:box-shadow 0.4s,border-color 0.3s}
+.rotur-pill:hover{box-shadow:0 0 24px rgba(255,90,175,0.12);border-color:rgba(255,90,175,0.3)}
+
+/* ── FLAIR: animated ring around disc hub ── */
+.disc-hub::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(200,205,216,0.1);animation:hubPulse 3s ease-in-out infinite}
+@keyframes hubPulse{0%,100%{transform:scale(1);opacity:0.3}50%{transform:scale(1.15);opacity:0.7}}
+
+/* disc orbit particles */
+@keyframes discOrbit1{0%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(0deg) translateX(clamp(85px,14vw,135px))}100%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(360deg) translateX(clamp(85px,14vw,135px))}}
+@keyframes discOrbit2{0%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(0deg) translateX(clamp(100px,16vw,155px))}100%{top:50%;left:50%;transform:translate(-50%,-50%) rotate(360deg) translateX(clamp(100px,16vw,155px))}}
  
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
   .mq-track,.void-blob,.amb-orb,.disc-outer{animation:none !important}
 }
+
+/* ── LOW-END DEVICE OPTIMIZATIONS ── */
+/* Applied via JS when device is detected as low-end */
+.low-end .void-blob{filter:none !important;opacity:0.15 !important}
+.low-end .amb-orb{display:none !important}
+.low-end .amb-page{display:none !important}
+.low-end .bg-scan{display:none !important}
+.low-end .deco-layer{display:none !important}
+.low-end .plx{display:none !important}
+.low-end body::after{display:none !important}
+/* kill backdrop-filter everywhere (expensive compositing) */
+.low-end nav{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:rgba(4,4,7,0.95) !important}
+.low-end .hero-stats{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:rgba(4,4,7,0.85) !important}
+.low-end .id-card{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+.low-end .spec-cell{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+.low-end .spec-banner{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+.low-end .spec-item{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+.low-end .mobile-menu{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+/* kill continuous box-shadow animations */
+.low-end .disc-outer{animation:spin 14s linear infinite !important;box-shadow:0 0 30px rgba(204,46,138,0.2) !important}
+.low-end .btn-p{animation:none !important;box-shadow:0 0 20px rgba(204,46,138,0.15) !important}
+.low-end .btn-github{animation:none !important}
+.low-end .price-amount{animation:none !important}
+.low-end nav::after{animation:none !important;opacity:0.3 !important}
+.low-end .disc-stage{animation:none !important}
+.low-end .disc-hub::after{animation:none !important}
+/* kill pseudo-element sweep animations */
+.low-end .spec-banner::before{animation:none !important;display:none !important}
+.low-end .showcase-entry::before{display:none !important}
+.low-end .btn-s::before{display:none !important}
+/* simplify filter effects */
+.low-end .st .gradient-pink,
+.low-end .st .gradient-cyan,
+.low-end .st .gradient-purple{filter:none !important}
+.low-end .title-warp{filter:none !important}
+.low-end .title-drive{filter:none !important}
+/* kill orbit particles */
+.low-end .oss-orbits{display:none !important}
+.low-end .hero-accents{display:none !important}
+/* simplify glitch to static */
+.low-end .glitch{animation:none !important}
+/* simplify section-divider blur */
+.low-end .section-divider::after{filter:none !important}
 @media(max-width:567px){
   .nav-links{display:none}.nav-ghost,.nav-cta{display:none}.hamburger{display:flex}
   nav{padding:0 16px;height:52px}
@@ -337,10 +534,37 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .footer-grid{grid-template-columns:1fr}
   .showcase-header{flex-direction:column;align-items:flex-start}
   .deco-layer{opacity:0.5}
+  .ds1{top:8%;left:4%}.ds2{top:22%;left:88%}.ds3{top:50%;left:3%}.ds4{top:68%;left:85%}
+  .ds5{top:85%;left:15%}.ds6{top:35%;left:45%}.ds7{top:4%;left:60%}.ds8{top:92%;left:70%}
+  .d-diamond{width:11px;height:11px}.d-square{width:7px;height:7px}
+  .hero-accents{display:none !important}
   .plx{display:none}
   .amb-page{display:none}
   .bg-grid{opacity:0.6}.bg-scan{display:none}
   .vb4,.vb5{opacity:0.04}
+  /* mobile disc float toned down */
+  .disc-stage{animation:discFloat 6s ease-in-out infinite}
+  @keyframes discFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  /* mobile feature rows - no slide, just fade */
+  .feature-row{transform:none}
+  .feature-list.visible .feature-row{transform:none}
+  /* mobile tier - no slide */
+  .tier:hover{transform:none}
+  /* mobile banks grid gap */
+  .banks-grid{gap:4px}
+  /* mobile oss terminal */
+  .oss-terminal{width:min(95%,300px)}
+  .oss-terminal-body{font-size:10px;padding:12px}
+  .oss-orbits{display:none}
+  /* mobile spec layout */
+  .spec-layout{gap:4px}
+  .spec-cell:hover{transform:none}
+  /* mobile price layout */
+  .price-amount{font-size:clamp(48px,14vw,80px)}
+  /* mobile void blobs scaled down */
+  .vb1{width:350px;height:300px}
+  .vb2{width:250px;height:220px}
+  .vb3{width:190px;height:180px}
 }
 @media(max-width:480px){
   .hero{padding:72px 16px 140px}.hero-title{font-size:clamp(60px,18vw,100px)}
@@ -350,6 +574,25 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .banks-grid{grid-template-columns:repeat(2,1fr)}
   section,.showcase,.oss-section{padding:48px 16px}
   .tier{flex-direction:column;gap:6px}.tier-cut{align-self:flex-end}
+  /* extra small screen void blobs */
+  .vb1{width:250px;height:200px;top:-5%;left:-10%}
+  .vb2{width:180px;height:150px}
+  .vb3{width:140px;height:130px}
+}
+/* mid-size tablets */
+@media(min-width:568px) and (max-width:767px){
+  .hamburger{display:flex}
+  .nav-links{display:none}
+  .hero{padding:80px 28px 180px}
+  .hero-title{font-size:clamp(80px,15vw,140px)}
+  .identity-grid{grid-template-columns:1fr}
+  .physical-layout,.banks-layout,.price-layout{grid-template-columns:1fr}
+  .vb1{width:450px;height:380px}
+  .vb2{width:320px;height:280px}
+  .vb3{width:240px;height:220px}
+  .deco-layer{opacity:0.6}
+  .plx{display:none}
+  .amb-page{display:none}
 }
 </style>
 </head>
@@ -422,6 +665,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <!-- home page -->
 <div class="page active" id="page-home">
   <section class="hero">
+    <div class="hero-accents" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1">
+      <div style="position:absolute;top:18%;right:8%;width:80px;height:80px;border:1px solid rgba(191,47,255,0.1);border-radius:50%;animation:spin 25s linear infinite"></div>
+      <div style="position:absolute;top:20%;right:10%;width:40px;height:40px;border:1px dashed rgba(0,229,255,0.08);border-radius:50%;animation:spin 15s linear infinite reverse"></div>
+      <div style="position:absolute;bottom:28%;right:14%;width:12px;height:12px;border:1px solid rgba(255,34,163,0.15);transform:rotate(45deg);animation:decoFloat 20s ease-in-out infinite"></div>
+      <div style="position:absolute;top:35%;right:5%;width:6px;height:6px;border-radius:50%;background:rgba(0,229,255,0.2);box-shadow:0 0 8px rgba(0,229,255,0.15);animation:blink 3s ease infinite"></div>
+    </div>
     <div class="hero-content">
       <p class="hero-eyebrow"><span class="eyebrow-line"></span>Now in development &#8212; Pre-orders Eventually</p>
       <div class="nav-brand" style="margin-bottom:14px"><img src="warpdrive-logo.png" alt="Warp" style="max-width:100%;width:700px;height:auto;display:block;margin-left:clamp(-85px,(768px - 100vw) * 1000,0px)" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none;font-size:18px">WARPDRIVE</span></div>
@@ -447,13 +696,17 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     {title:"Battle Bound",desc:"A side-scrolling Online Multiplayer shooter. A handful of gamemodes, maps, customizable weapon loadouts, and character customization. So far the closest thing we have to satify the Call of Duty Player's itch.",img:"",tag:"Game &#183; Fighting"}
   ];
   </script>
-  <div class="showcase"><div class="showcase-header reveal"><div class="showcase-header-left"><p class="showcase-eyebrow">Community Projects! (Work in Progress. There's a shit ton)</p><h2 class="showcase-heading">Under Construction.</h2></div><div class="showcase-nav"><button class="showcase-arrow" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><button class="showcase-arrow" id="carouselNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div></div><div class="showcase-carousel"><div class="showcase-track" id="carouselTrack"></div></div><div class="showcase-dots" id="carouselDots"></div></div>
+  <div class="showcase"><div class="showcase-header reveal"><div class="showcase-header-left"><p class="showcase-eyebrow">Community Projects! (Work in Progress. There's a shit ton)</p><h2 class="showcase-heading"><span style="background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Under</span> Construction.</h2></div><div class="showcase-nav"><button class="showcase-arrow" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><button class="showcase-arrow" id="carouselNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div></div><div class="showcase-carousel"><div class="showcase-track" id="carouselTrack"></div></div><div class="showcase-dots" id="carouselDots"></div></div>
   <section>
-    <div class="reveal"><p class="se">Meet the Mascot</p><h2 class="st">Banks.</h2></div>
+    <div class="section-divider"></div>
+  </section>
+  <section>
+    <div class="reveal"><p class="se">Meet the Mascot</p><h2 class="st"><span class="gradient-purple glitch">Banks.</span></h2></div>
     <div class="banks-layout"><div class="reveal"><p class="banks-intro">A raccoon with a <strong>purple bandana.</strong> He owns no other clothes fashionable enough to flaunt. Lazy. Gluttonous. Lurking, and stalking. He spends his days eating, drinking, sleeping, and gaming in alarming excess. He's a <strong>chud.</strong> We <strong>love</strong> him. (Made by Rigby @ToastGh0ast)</p></div><div class="banks-grid reveal"><div class="banks-card"><img src="banks-loving.png" alt="Banks"></div><div class="banks-card"><img src="banks-waving.png" alt="Banks"></div><div class="banks-card"><img src="banks-toking.png" alt="Banks"></div><div class="banks-card"><img src="banks-ew.png" alt="Banks"></div><div class="banks-card"><img src="banks-dorito.png" alt="Banks"></div><div class="banks-card"><img src="banks-autism.png" alt="Banks"></div></div></div>
   </section>
+  <section><div class="section-divider"></div></section>
   <section id="ks-section">
-    <div class="reveal"><p class="se">Pre-Order</p><h2 class="st">One Price.<br>No Tricks.</h2></div>
+    <div class="reveal"><p class="se">Pre-Order</p><h2 class="st"><span class="gradient-silver">One Price.</span><br>No Tricks.</h2></div>
     <div class="price-layout">
       <div class="price-card reveal"><div class="price-glow"></div><div class="price-amount"><sup>$</sup>225</div><div class="price-note">&#9670; Free shipping &#8212; United States</div><div class="price-lines"><div class="price-line"><strong>Warpdrive Console</strong> &#8212; customizable shell colors</div><div class="price-line"><strong>Banks Stickers</strong> &#8212; not optional. non-negotiable.</div><div class="price-line"><strong>Random Bundled Game</strong> &#8212; disc included.</div><div class="price-line"><strong>Free Shipping</strong> &#8212; USA, discounted world-wide.</div><div class="price-line"><strong>Gamepad support</strong> &#8212; BT, Wired, SNES, PS5, and most in-between.</div><div class="price-line"><strong>Printed mailerbox</strong> &#8212; inside and out</div><div class="price-line"><strong>Pre-Orders Available</strong> &#8212; Someday lmao</div></div></div>
       <div class="ks-card reveal"><div class="ks-title">&#9672; Kickstarter Coming</div><p class="ks-body">Pre-order batch size determined by demand. <strong>Plenty of color customization</strong> available. Quality over Quantity.</p><div class="ks-tiers"><div class="ks-tier"><span class="ks-tier-name">Thank You + Stickers</span><span class="ks-tier-val">~$15</span></div><div class="ks-tier"><span class="ks-tier-name">Physical Game</span><span class="ks-tier-val">~$25</span></div><div class="ks-tier"><span class="ks-tier-name">Console Bundle</span><span class="ks-tier-val">$225</span></div><div class="ks-tier"><span class="ks-tier-name">Console + 8BitDo Controller</span><span class="ks-tier-val">~$250</span></div><div class="ks-tier"><span class="ks-tier-name">Full Bundle + Storefront Credit</span><span class="ks-tier-val">~$300</span></div></div></div>
@@ -464,7 +717,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <!-- technical page -->
 <div class="page" id="page-technical">
   <section>
-    <div class="reveal"><p class="se">What is Warpdrive</p><h2 class="st">Built Different.<br>On Purpose.</h2></div>
+    <div class="reveal"><p class="se">What is Warpdrive</p><h2 class="st"><span class="gradient-cyan">Built Different.</span><br>On Purpose.</h2></div>
     <div class="identity-grid">
       <div class="id-card reveal"><span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><div class="id-title">Open Source Runtime</div><p class="id-body"><strong>Web games via Chromium</strong> with WebGPU. <strong>Native ARM binaries later down the line</strong> for full-performance titles, and the freedom to choose your game engine. From unity, or GMS2, to Scratch, GBStudio, and GDevelop, with dozens of tools in-between.</p></div>
       <div class="id-card reveal"><span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></span><div class="id-title">Real Culture</div><p class="id-body">The console Developers grew up with Newgrounds, Itch.io, and Gamejolt. PS3, Xbox360, and Wii modding culture. <strong>Open firmware. Moddable frontend, and a homebrew launcher out of the box.</strong> Warpdrive wouldn't exist without console-modding.</p></div>
@@ -473,20 +726,101 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </section>
   <div class="mq mq-technical" id="mq-technical"><div class="mq-inner"><div class="mq-track"><span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">&#9672;</span><span class="mq-item">6nm Process Node</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Custom Armbian OS</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8x DVD Drive</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Open Firmware</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Purple Disc Cases</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">&#9672;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">&#9672;</span><span class="mq-item">6nm Process Node</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Custom Armbian OS</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8x DVD Drive</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Open Firmware</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Purple Disc Cases</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">&#9672;</span></div></div></div>
   <section id="hardware-section">
-    <div class="reveal"><p class="se">Under the Hood</p><h2 class="st">Serious Hardware.</h2></div>
+    <div class="reveal"><p class="se">Under the Hood</p><h2 class="st"><span class="gradient-cyan">Serious</span> Hardware.</h2></div>
     <div class="spec-layout reveal"><div class="spec-cell"><span class="spec-key">CPU</span><span class="spec-val">QCS6490</span></div><div class="spec-cell"><span class="spec-key">GPU</span><span class="spec-val">Adreno 643</span></div><div class="spec-cell"><span class="spec-key">RAM</span><span class="spec-val">8GB LPDDR5</span></div><div class="spec-cell"><span class="spec-key">Process Node</span><span class="spec-val">6nm</span></div><div class="spec-cell"><span class="spec-key">Storage</span><span class="spec-val">0-256 eMMC / Micro SD</span></div><div class="spec-cell"><span class="spec-key">Graphics</span><span class="spec-val">WebGPU + Vulkan Support</span></div><div class="spec-cell"><span class="spec-key">Media</span><span class="spec-val">8x DVD Drive</span></div><div class="spec-cell"><span class="spec-key">OS</span><span class="spec-val">Custom Armbian Build</span></div></div>
-    <div class="spec-banner reveal"><p>Industrial Hardware at the developer's mercy &#8212; Push it to its limits, or use it to play 30 year old games. You choose.<br><strong>The most capable indie console at this price point.</strong></p></div>
+
+    <div class="spec-accordion reveal" id="specAccordion">
+
+      <div class="spec-item" data-spec="cpu">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">Processor</span><span class="spec-header-val">Qualcomm QCS6490</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p>The <strong>Qualcomm QCS6490</strong> is an industrial-grade <span class="hl-cyan">6nm</span> SoC with an octa-core Kryo 670 CPU. It's designed for always-on edge devices but has more than enough muscle for running indie games smoothly. It has a consumer-counterpart called the Snapdragon 778G, so think <strong>Linux gaming performance</strong>, industrial-grade hardware, stable clocks, <span class="hl-pink">low thermals</span>, and long-term silicon availability.</p></div></div>
+      </div>
+
+      <div class="spec-item" data-spec="gpu">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">GPU</span><span class="spec-header-val">Adreno 643</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p>The <strong>Adreno 643</strong> supports <span class="hl-cyan">Vulkan 1.1</span> and <span class="hl-cyan">OpenGL ES 3.2</span>. The real play: WebGPU through Chromium gives developers a <strong>modern GPU API</strong> with compute shaders, instanced rendering, and enough headroom to push 2D games hard and run 3D titles at respectable framerates. Hardware-accelerated video decode for media-rich menus and cutscenes. 4K@60Hz is easily doable as well. (If you know how to optimize lol)</p></div></div>
+      </div>
+
+      <div class="spec-item" data-spec="ram">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="10" y1="10" x2="10" y2="14"/><line x1="14" y1="10" x2="14" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">Memory</span><span class="spec-header-val">8GB LPDDR5</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p><span class="hl-cyan">8GB of LPDDR5</span> at up to 3200MHz. Shared between the system and GPU, no dedicated VRAM, but LPDDR5's bandwidth is massive compared to what indie games actually need. Room to breathe for <strong>multitasking</strong>: run your game, the social overlay, and background downloads simultaneously without choking.</p></div></div>
+      </div>
+
+      <div class="spec-item" data-spec="storage">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">Storage</span><span class="spec-header-val">0-256GB eMMC / Micro SD</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p>Flexible storage: <strong>eMMC onboard</strong> from 0 to 256GB, plus a <span class="hl-cyan">Micro SD</span> slot for expansion. Install disc games to storage and play without the disc later. The OS itself is lightweight enough to leave <span class="hl-pink">most of the storage for your library</span>. Hot-swap SD cards to carry your game collection.</p></div></div>
+      </div>
+
+      <div class="spec-item" data-spec="graphics">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">Graphics API</span><span class="spec-header-val">Vulkan / WebGPU / Wayland</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p><span class="hl-cyan">WebGPU</span> is the primary graphics path for web-based games, modern, fast, and cross-engine. <strong>Vulkan</strong> is available for native ARM titles that need direct GPU access. <span class="hl-pink">Wayland</span> handles compositing for the dashboard UI. Three layers, each purpose-built, zero bloat.</p></div></div>
+      </div>
+
+      <div class="spec-item" data-spec="media">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">Media</span><span class="spec-header-val">Physical &amp; Digital</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p><strong>8x DVD drive</strong> reads full-size 4.7GB discs in custom <span class="hl-pink">purple collector cases</span>. Install once, play forever; the disc becomes your proof of ownership, not a requirement. Digital storefront for those who prefer downloads. <span class="hl-cyan">Both paths, first-class.</span></p></div></div>
+      </div>
+
+      <div class="spec-item" data-spec="os">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">Operating System</span><span class="spec-header-val">Custom Armbian Derivative</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p>A <strong>custom Armbian-based Linux build</strong>, stripped down and purpose-built for Warpdrive, tweakers, and modders alike. Open firmware: <span class="hl-cyan">fully auditable, fully moddable</span>. The dashboard is a web app you can theme and hack. Homebrew launcher ships out of the box. It's <span class="hl-pink">your console</span>.</p></div></div>
+      </div>
+
+      <div class="spec-item" data-spec="process">
+        <div class="spec-header">
+          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="spec-header-text"><span class="spec-header-key">Process Node</span><span class="spec-header-val">6nm</span></div>
+          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="spec-detail"><div class="spec-detail-inner"><p><strong>6nm fabrication</strong> means excellent <span class="hl-cyan">power efficiency</span> and low heat output. No fan required in most scenarios. The chip sips power compared to older nodes, keeping the console <span class="hl-pink">quiet, cool, and compact</span>. Industrial silicon means long production availability, and no EOL surprises. I don't really know why 6nm is good. That's just what I've been told, and threw back up.</p></div></div>
+      </div>
+
+    </div>
+
+    <div class="spec-banner reveal"><p>Industrial Hardware at the developer's mercy - Push it to its limits, or use it to play 30 year old games. You choose. <br><strong>The most capable indie console at this price point.</strong></p></div>
+
   </section>
   <section>
-    <div class="reveal"><p class="se">Collector's Edition</p><h2 class="st">Hold Your Game.</h2></div>
-    <div class="physical-layout reveal"><div class="disc-stage"><div class="disc-visual"><div class="disc-outer"></div><div class="disc-mid"></div><div class="disc-hub"></div><div class="disc-shine"></div></div></div><div class="disc-info"><h3>Purple Collector Cases</h3><div class="disc-facts"><div class="disc-fact"><strong>Full-size DVD</strong> &#8212; 4.7GB per disc</div><div class="disc-fact"><strong>Custom Cases</strong> &#8212; A game case to match the developer's vision.</div><div class="disc-fact">Install once, <strong>play forever</strong>, no disc needed after.</div><div class="disc-fact"><strong>~$5/unit</strong> to produce. Cheap to make. Beautiful to own.</div><div class="disc-fact">Physicals granted to our <strong>favorite</strong> titles.</div></div></div></div>
+    <div class="reveal"><p class="se">Collector's Edition</p><h2 class="st"><span class="gradient-purple">Hold</span> Your Game.</h2></div>
+    <div class="physical-layout reveal"><div class="disc-stage"><div class="disc-visual"><div class="disc-outer"></div><div class="disc-mid"></div><div class="disc-hub"></div><div class="disc-shine"></div></div>
+      <div style="position:absolute;width:4px;height:4px;border-radius:50%;background:var(--neon-purple);box-shadow:0 0 8px var(--neon-purple);animation:discOrbit1 8s linear infinite;pointer-events:none"></div>
+      <div style="position:absolute;width:3px;height:3px;border-radius:50%;background:var(--neon-cyan);box-shadow:0 0 6px var(--neon-cyan);animation:discOrbit2 12s linear infinite reverse;pointer-events:none"></div>
+    </div><div class="disc-info"><h3>Purple Collector Cases</h3><div class="disc-facts"><div class="disc-fact"><strong>Full-size DVD</strong> &#8212; 4.7GB per disc</div><div class="disc-fact"><strong>Custom Cases</strong> &#8212; A game case to match the developer's vision.</div><div class="disc-fact">Install once, <strong>play forever</strong>, no disc needed after.</div><div class="disc-fact"><strong>~$5/unit</strong> to produce. Cheap to make. Beautiful to own.</div><div class="disc-fact">Physicals granted to our <strong>favorite</strong> titles.</div></div></div></div>
   </section>
 </div>
  
 <!-- developmental page -->
 <div class="page" id="page-developmental">
   <section>
-    <div class="reveal"><p class="se">For Developers</p><h2 class="st">Your Game.<br>Your Cut.</h2><p class="sd">Free to develop. No gatekeeping. Four ways to ship.</p></div>
+    <div class="reveal"><p class="se">For Developers</p><h2 class="st">Your Game.<br><span class="gradient-pink">Your Cut.</span></h2><p class="sd">Free to develop. No gatekeeping. Four ways to ship.</p></div>
     <div class="tier-list reveal">
       <div class="tier"><div class="tier-stripe" style="background:linear-gradient(180deg,var(--pink-hot),var(--purple-logo))"></div><div class="tier-num">01</div><div class="tier-info"><div class="tier-name">Storefront &#8212; Official</div><div class="tier-desc">Curated digital storefront. Quality bar, free to submit. Developers get 90% of the profit!</div></div><div class="tier-cut" style="background:linear-gradient(135deg,var(--pink-hot),var(--purple-logo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">90%</div></div>
       <div class="tier"><div class="tier-stripe" style="background:linear-gradient(180deg,var(--silver),var(--chrome))"></div><div class="tier-num">02</div><div class="tier-info"><div class="tier-name">Physical &#8212; Disc</div><div class="tier-desc">DVD games. Custom Casings, Printed Discs, collector's editions. 70% of profit!</div></div><div class="tier-cut" style="color:var(--silver)">70%</div></div>
@@ -495,11 +829,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     </div>
   </section>
   <section>
-    <div class="reveal"><p class="se">Powered by Rotur</p><h2 class="st">Get Social.<br>Make a Friend.</h2></div>
+    <div class="reveal"><p class="se">Powered by Rotur</p><h2 class="st"><span class="gradient-pink">Get Social.</span><br>Make a Friend.</h2></div>
     <div class="rotur-pill reveal"><div class="rotur-dot"></div><span class="rotur-label">Rotur.Dev &#8212; Mistium &#8212; LIVE</span></div>
     <div class="feature-list reveal">
-      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div class="feature-text">Account Profiles + Gamertag<span class="feature-sub">Sync across devices. Completely optional.</span></div></div>
-      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="feature-text">Friends, Parties + Networking API<span class="feature-sub">Real-time. Console-native. Xbox Live energy.</span></div></div>
+      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div class="feature-text">Account Profiles + Gamertag<span class="feature-sub">Sync across devices. Completely optional.</span></div></div>      <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="feature-text">Friends, Parties + Networking API<span class="feature-sub">Real-time. Console-native. Xbox Live energy.</span></div></div>
       <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></span><div class="feature-text">Voice Chat<span class="feature-sub">Built in. No app. No setup.</span></div></div>
       <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div class="feature-text">Messages + Communities<span class="feature-sub">Round up your buddies, make social spaces.</span></div></div>
       <div class="feature-row"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><div class="feature-text">Secure Payments via Phone<span class="feature-sub">Card info never touches the console.</span></div></div>
@@ -526,9 +859,18 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       </div>
       <div class="oss-visual">
         <div class="oss-visual-grid"></div>
+        <!-- animated orbit rings -->
+        <div class="oss-orbits">
+          <div class="oss-orbit oss-orbit-1"></div>
+          <div class="oss-orbit oss-orbit-2"></div>
+          <div class="oss-orbit oss-orbit-3"></div>
+          <div class="oss-orbit-dot oss-od-1"></div>
+          <div class="oss-orbit-dot oss-od-2"></div>
+          <div class="oss-orbit-dot oss-od-3"></div>
+        </div>
         <div class="oss-terminal">
           <div class="oss-terminal-bar"><div class="oss-terminal-dot" style="background:#ff5f57"></div><div class="oss-terminal-dot" style="background:#febc2e"></div><div class="oss-terminal-dot" style="background:#28c840"></div><span>terminal</span></div>
-          <div class="oss-terminal-body"><span class="comment"># Play around in the repo</span><br><span class="cmd">$</span> git clone warpdrive-console<br><span class="comment"># Check out our handful of APIs</span><br><span class="cmd">$</span> cd <span class="str">Warpdrive-console/Gamepad-Plus</span><br><span class="comment"># the next step</span><br><span class="cmd">$</span> random command <span class="str">@bungerdev on YT</span><br><span style="color:var(--neon-cyan)">&#10003;</span> Pretend it does something.</div>
+          <div class="oss-terminal-body"><span class="comment"># Play around in the repo</span><br><span class="cmd">$</span> git clone warpdrive-console<br><span class="comment"># Check out our handful of APIs</span><br><span class="cmd">$</span> cd <span class="str">Warpdrive-console/Gamepad-Plus</span><br><span class="comment"># the next step</span><br><span class="cmd">$</span> random command <span class="str">@bungerdev on YT</span><br><span style="color:var(--neon-cyan)">&#10003;</span> Pretend it does something.<span class="terminal-cursor"></span></div>
         </div>
       </div>
     </div>
@@ -546,16 +888,22 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
  
 <script>
 const isMobile=()=>window.innerWidth<768;
-const isLowEnd=()=>{if(isMobile())return true;if(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)return true;if(navigator.deviceMemory&&navigator.deviceMemory<=2)return true;return false};
+const isLowEnd=()=>{if(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)return true;if(navigator.deviceMemory&&navigator.deviceMemory<=4)return true;const c=document.createElement('canvas');const gl=c.getContext('webgl');if(gl){const dbg=gl.getExtension('WEBGL_debug_renderer_info');if(dbg){const r=gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)||'';if(/swiftshader|llvmpipe|mesa/i.test(r))return true}}return false};
 const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
- 
+const lowEnd=isLowEnd()||isMobile();
+if(lowEnd)document.documentElement.classList.add('low-end');
+
+/* visibility API — pause canvas when tab hidden */
+let tabVisible=true;
+document.addEventListener('visibilitychange',()=>{tabVisible=!document.hidden});
+
 /* starfield */
 const sf=document.getElementById('starfield');
 const ctx=sf.getContext('2d',{alpha:true,desynchronized:true});
 let W,H,stars=[],particles=[],shootingStars=[],mobile=false,dpr=1;
  
 function resize(){
-  dpr=Math.min(window.devicePixelRatio||1,2);
+  dpr=lowEnd?1:Math.min(window.devicePixelRatio||1,2);
   W=window.innerWidth;H=window.innerHeight;
   sf.width=W*dpr;sf.height=H*dpr;
   sf.style.width=W+'px';sf.style.height=H+'px';
@@ -564,7 +912,7 @@ function resize(){
   mobile?makeParticlesMobile():makeParticles();
 }
 function makeStars(){
-  const n=mobile?Math.min(90,Math.floor(W*H/9000)):Math.min(350,Math.floor(W*H/4800));
+  const n=lowEnd?Math.min(60,Math.floor(W*H/14000)):mobile?Math.min(90,Math.floor(W*H/9000)):Math.min(350,Math.floor(W*H/4800));
   stars=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.pow(Math.random(),1.8)*1.8+.15,baseA:Math.random()*.35+.03,s:Math.random()*.0003+.00006,p:Math.random()*Math.PI*2,tint:Math.random()<.6?0:(Math.random()<.5?1:2)}));
 }
 function drawPentagon(c,x,y,r,a){c.beginPath();for(let i=0;i<5;i++){const ag=a+i*1.2566-1.5708;i?c.lineTo(x+r*Math.cos(ag),y+r*Math.sin(ag)):c.moveTo(x+r*Math.cos(ag),y+r*Math.sin(ag))}c.closePath()}
@@ -574,23 +922,24 @@ function drawCube(c,x,y,size,alpha,cr){const h=size*.58,w=size;c.lineWidth=.8;c.
 const COLORS=['191,47,255','0,229,255','255,34,163','107,31,160','255,90,175'];
 const SHAPE_TYPES=['pentagon','hexagon','triangle','cube','diamond','square','ps3','cyber'];
 const SHAPE_TYPES_MOBILE=['diamond','hexagon','triangle','cyber'];
-function makeParticles(){particles=Array.from({length:isLowEnd()?0:33},()=>spawnParticle(SHAPE_TYPES))}
-function makeParticlesMobile(){particles=Array.from({length:7},()=>spawnParticle(SHAPE_TYPES_MOBILE))}
-function spawnParticle(tp){const x=Math.random()*W,y=Math.random()*H,type=tp[Math.floor(Math.random()*tp.length)],cr=COLORS[Math.floor(Math.random()*COLORS.length)],base={type,x,y,cr,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,va:(Math.random()<.5?1:-1)*(Math.random()*.006+.001),angle:Math.random()*Math.PI*2,alpha:Math.random()*.18+.04};if(type==='ps3')return{...base,r:Math.random()*2.8+.6,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,hue:Math.random()<.5?285:195,alpha:Math.random()*.3+.08,trail:[]};if(type==='cyber')return{...base,r:Math.random()*2.5+.7,pulse:Math.random()*Math.PI*2,pSpeed:Math.random()*.018+.006,alpha:Math.random()*.35+.08,vx:0,vy:0};if(type==='cube')return{...base,size:Math.random()*16+8,vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1,va:(Math.random()<.5?1:-1)*.001};if(type==='pentagon'||type==='hexagon'||type==='triangle')return{...base,r:Math.random()*14+6,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12};return{...base,size:Math.random()*14+5,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14}}
+function makeParticles(){particles=Array.from({length:lowEnd?0:33},()=>spawnParticle(SHAPE_TYPES))}
+function makeParticlesMobile(){particles=Array.from({length:lowEnd?3:Math.min(7,Math.floor(W*H/50000)+2)},()=>spawnParticle(SHAPE_TYPES_MOBILE))}
+function spawnParticle(tp){const x=Math.random()*W,y=Math.random()*H,type=tp[Math.floor(Math.random()*tp.length)],cr=COLORS[Math.floor(Math.random()*COLORS.length)],mobScale=mobile?0.6:1,base={type,x,y,cr,vx:(Math.random()-.5)*.18*mobScale,vy:(Math.random()-.5)*.18*mobScale,va:(Math.random()<.5?1:-1)*(Math.random()*.006+.001),angle:Math.random()*Math.PI*2,alpha:(Math.random()*.18+.04)*(mobile?0.7:1)};if(type==='ps3')return{...base,r:(Math.random()*2.8+.6)*mobScale,vx:(Math.random()-.5)*.14*mobScale,vy:(Math.random()-.5)*.14*mobScale,hue:Math.random()<.5?285:195,alpha:(Math.random()*.3+.08)*(mobile?0.6:1),trail:[]};if(type==='cyber')return{...base,r:(Math.random()*2.5+.7)*mobScale,pulse:Math.random()*Math.PI*2,pSpeed:Math.random()*.018+.006,alpha:(Math.random()*.35+.08)*(mobile?0.6:1),vx:0,vy:0};if(type==='cube')return{...base,size:(Math.random()*16+8)*mobScale,vx:(Math.random()-.5)*.1*mobScale,vy:(Math.random()-.5)*.1*mobScale,va:(Math.random()<.5?1:-1)*.001};if(type==='pentagon'||type==='hexagon'||type==='triangle')return{...base,r:(Math.random()*14+6)*mobScale,vx:(Math.random()-.5)*.12*mobScale,vy:(Math.random()-.5)*.12*mobScale};return{...base,size:(Math.random()*14+5)*mobScale,vx:(Math.random()-.5)*.14*mobScale,vy:(Math.random()-.5)*.14*mobScale}}
 function wrap(p,pad=40){if(p.x<-pad)p.x=W+pad;if(p.x>W+pad)p.x=-pad;if(p.y<-pad)p.y=H+pad;if(p.y>H+pad)p.y=-pad}
 resize();window.addEventListener('resize',resize);
  
 let lastFrame=0,t=0;
 function draw(now){
   requestAnimationFrame(draw);
-  const frameMs=mobile?33:0;
+  if(!tabVisible)return;
+  const frameMs=lowEnd?50:mobile?33:0;
   if(frameMs>0&&now-lastFrame<frameMs)return;lastFrame=now;
   if(prefersReducedMotion){ctx.clearRect(0,0,W,H);for(const s of stars){ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.283);ctx.fillStyle=`rgba(210,215,230,${s.baseA})`;ctx.fill()}return}
   ctx.clearRect(0,0,W,H);t++;
-  for(const s of stars){const tw=Math.sin(t*s.s*40+s.p)*.22+.6;const sb=!mobile&&Math.sin(t*s.s*12+s.p+2.1)>.97;const a=s.baseA*tw*(sb?1.8:1);const r=s.r*(sb?1.7:1);ctx.beginPath();ctx.arc(s.x,s.y,r,0,6.283);ctx.fillStyle=s.tint===1?`rgba(160,210,255,${a})`:s.tint===2?`rgba(255,245,210,${a})`:`rgba(210,215,230,${a})`;ctx.fill();if(sb&&s.r>.55){ctx.save();ctx.strokeStyle=`rgba(200,225,255,${a*.45})`;ctx.lineWidth=.5;const l=r*4;ctx.beginPath();ctx.moveTo(s.x-l,s.y);ctx.lineTo(s.x+l,s.y);ctx.moveTo(s.x,s.y-l);ctx.lineTo(s.x,s.y+l);ctx.stroke();ctx.restore()}}
-  const maxSS=mobile?4:12;
-  if(shootingStars.length<maxSS){if(Math.random()<(mobile?.001:.0014)){const fl=Math.random()<.5;shootingStars.push({variant:'classic',x:fl?-20:W+20,y:Math.random()*H*.65,vx:(fl?1:-1)*(Math.random()*6+4),vy:Math.random()*2.2+.6,life:1,decay:Math.random()*.011+.007,color:Math.random()<.7?'255,255,255':'200,220,255'})}if(Math.random()<(mobile?.0006:.0009)){shootingStars.push({variant:'tinted',x:Math.random()*W*.6,y:-10,vx:(Math.random()-.5)*3,vy:Math.random()*9+5,life:1,decay:Math.random()*.018+.013,color:Math.random()<.5?'191,130,255':'100,230,255'})}if(Math.random()<(mobile?.0004:.0006)){const fl=Math.random()<.5;shootingStars.push({variant:'drifter',x:fl?-20:W+20,y:Math.random()*H*.5+H*.1,vx:(fl?1:-1)*(Math.random()*3+2),vy:Math.random()*1.2+.2,life:1,decay:Math.random()*.006+.004,color:'255,200,230'})}}
-  shootingStars=shootingStars.filter(ss=>{ss.x+=ss.vx;ss.y+=ss.vy;ss.life-=ss.decay;const tl=ss.variant==='drifter'?38:ss.variant==='tinted'?20:26;const ha=ss.variant==='tinted'?ss.life*.85:ss.life*.95;const ta=ss.life*(ss.variant==='drifter'?.45:.38);const lw=ss.variant==='drifter'?ss.life*1.4:ss.life*1.8;const g=ctx.createLinearGradient(ss.x,ss.y,ss.x-ss.vx*tl,ss.y-ss.vy*tl);g.addColorStop(0,`rgba(${ss.color},${ha})`);g.addColorStop(.35,`rgba(${ss.color},${ta})`);g.addColorStop(.7,`rgba(${ss.color},${ta*.15})`);g.addColorStop(1,`rgba(${ss.color},0)`);ctx.beginPath();ctx.strokeStyle=g;ctx.lineWidth=lw;ctx.moveTo(ss.x,ss.y);ctx.lineTo(ss.x-ss.vx*tl,ss.y-ss.vy*tl);ctx.stroke();if(ss.life>.25){const hr=2.2*ss.life;ctx.beginPath();ctx.arc(ss.x,ss.y,hr,0,Math.PI*2);ctx.fillStyle=`rgba(${ss.color},${ss.life*.75})`;ctx.fill();ctx.beginPath();ctx.arc(ss.x,ss.y,hr*3.5,0,Math.PI*2);ctx.fillStyle=`rgba(${ss.color},${ss.life*.08})`;ctx.fill()}return ss.life>0&&ss.x>-300&&ss.x<W+300&&ss.y<H+200&&ss.y>-200});
+  for(const s of stars){const tw=lowEnd?0.6:Math.sin(t*s.s*40+s.p)*.22+.6;const sb=!lowEnd&&!mobile&&Math.sin(t*s.s*12+s.p+2.1)>.97;const a=s.baseA*tw*(sb?1.8:1);const r=s.r*(sb?1.7:1);ctx.beginPath();ctx.arc(s.x,s.y,r,0,6.283);ctx.fillStyle=s.tint===1?`rgba(160,210,255,${a})`:s.tint===2?`rgba(255,245,210,${a})`:`rgba(210,215,230,${a})`;ctx.fill();if(sb&&s.r>.55){ctx.save();ctx.strokeStyle=`rgba(200,225,255,${a*.45})`;ctx.lineWidth=.5;const l=r*4;ctx.beginPath();ctx.moveTo(s.x-l,s.y);ctx.lineTo(s.x+l,s.y);ctx.moveTo(s.x,s.y-l);ctx.lineTo(s.x,s.y+l);ctx.stroke();ctx.restore()}}
+  const maxSS=lowEnd?2:mobile?4:12;const ssScale=mobile?0.6:1;
+  if(shootingStars.length<maxSS){if(Math.random()<(mobile?.001:.0014)){const fl=Math.random()<.5;shootingStars.push({variant:'classic',x:fl?-20:W+20,y:Math.random()*H*.65,vx:(fl?1:-1)*(Math.random()*6+4)*ssScale,vy:(Math.random()*2.2+.6)*ssScale,life:1,decay:Math.random()*.011+.007,color:Math.random()<.7?'255,255,255':'200,220,255'})}if(Math.random()<(mobile?.0006:.0009)){shootingStars.push({variant:'tinted',x:Math.random()*W*.6,y:-10,vx:(Math.random()-.5)*3*ssScale,vy:(Math.random()*9+5)*ssScale,life:1,decay:Math.random()*.018+.013,color:Math.random()<.5?'191,130,255':'100,230,255'})}if(Math.random()<(mobile?.0004:.0006)){const fl=Math.random()<.5;shootingStars.push({variant:'drifter',x:fl?-20:W+20,y:Math.random()*H*.5+H*.1,vx:(fl?1:-1)*(Math.random()*3+2)*ssScale,vy:(Math.random()*1.2+.2)*ssScale,life:1,decay:Math.random()*.006+.004,color:'255,200,230'})}}
+  shootingStars=shootingStars.filter(ss=>{ss.x+=ss.vx;ss.y+=ss.vy;ss.life-=ss.decay;const tl=(ss.variant==='drifter'?38:ss.variant==='tinted'?20:26)*ssScale;const ha=ss.variant==='tinted'?ss.life*.85:ss.life*.95;const ta=ss.life*(ss.variant==='drifter'?.45:.38);const lw=(ss.variant==='drifter'?ss.life*1.4:ss.life*1.8)*ssScale;const g=ctx.createLinearGradient(ss.x,ss.y,ss.x-ss.vx*tl,ss.y-ss.vy*tl);g.addColorStop(0,`rgba(${ss.color},${ha})`);g.addColorStop(.35,`rgba(${ss.color},${ta})`);g.addColorStop(.7,`rgba(${ss.color},${ta*.15})`);g.addColorStop(1,`rgba(${ss.color},0)`);ctx.beginPath();ctx.strokeStyle=g;ctx.lineWidth=lw;ctx.moveTo(ss.x,ss.y);ctx.lineTo(ss.x-ss.vx*tl,ss.y-ss.vy*tl);ctx.stroke();if(!lowEnd&&ss.life>.25){const hr=2.2*ss.life*ssScale;ctx.beginPath();ctx.arc(ss.x,ss.y,hr,0,Math.PI*2);ctx.fillStyle=`rgba(${ss.color},${ss.life*.75})`;ctx.fill();ctx.beginPath();ctx.arc(ss.x,ss.y,hr*3.5,0,Math.PI*2);ctx.fillStyle=`rgba(${ss.color},${ss.life*.08})`;ctx.fill()}return ss.life>0&&ss.x>-300&&ss.x<W+300&&ss.y<H+200&&ss.y>-200});
   for(const p of particles){const{type,x,y,alpha,cr}=p;if(type==='pentagon'){ctx.save();p.angle+=p.va;drawPentagon(ctx,x,y,p.r,p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.9;ctx.stroke();drawPentagon(ctx,x,y,p.r*.5,p.angle+.3);ctx.strokeStyle=`rgba(${cr},${alpha*.3})`;ctx.lineWidth=.4;ctx.stroke();ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='hexagon'){ctx.save();p.angle+=p.va;drawHexagon(ctx,x,y,p.r,p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.stroke();ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='triangle'){ctx.save();p.angle+=p.va;drawTriangle(ctx,x,y,p.r,p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.stroke();ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='cube'){p.angle+=p.va;drawCube(ctx,x,y,p.size,alpha,cr);p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='diamond'){ctx.save();ctx.translate(x,y);p.angle+=p.va;ctx.rotate(p.angle+Math.PI/4);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='square'){ctx.save();ctx.translate(x,y);p.angle+=p.va;ctx.rotate(p.angle);ctx.strokeStyle=`rgba(${cr},${alpha})`;ctx.lineWidth=.8;ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);ctx.strokeStyle=`rgba(${cr},${alpha*.35})`;ctx.lineWidth=.4;ctx.strokeRect(-p.size/4,-p.size/4,p.size/2,p.size/2);ctx.restore();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='ps3'){p.trail.push({x:p.x,y:p.y});if(p.trail.length>7)p.trail.shift();for(let i=0;i<p.trail.length;i++){const ta2=(i/p.trail.length)*p.alpha*.5;ctx.beginPath();ctx.arc(p.trail[i].x,p.trail[i].y,p.r*(i/p.trail.length)*.7,0,6.283);ctx.fillStyle=`hsla(${p.hue},75%,72%,${ta2})`;ctx.fill()}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle=`hsla(${p.hue},75%,80%,${p.alpha})`;ctx.fill();p.x+=p.vx;p.y+=p.vy;wrap(p)}else if(type==='cyber'){p.pulse+=p.pSpeed;const pa=(Math.sin(p.pulse)*.5+.5)*p.alpha;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle=`rgba(${cr},${pa})`;ctx.fill();if(!mobile){for(let ring=1;ring<=2;ring++){ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1.8+ring*1.3),0,6.283);ctx.strokeStyle=`rgba(${cr},${pa*.12/ring})`;ctx.lineWidth=.5;ctx.stroke()}}}}
 }
 requestAnimationFrame(draw);
@@ -601,6 +950,15 @@ if(!isMobile()){window.addEventListener('scroll',()=>{scrollY_cached=window.scro
  
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.06});
 function observeAll(){document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el))}observeAll();
+/* also observe hero-stats for counter animation */
+const statObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){
+  e.target.querySelectorAll('.stat-val').forEach(sv=>{
+    const raw=sv.textContent.trim();const m=raw.match(/^([^\d]*)(\d+)(.*)$/);
+    if(m){const pre=m[1],end=parseInt(m[2]),suf=m[3];let cur=0;const step=Math.max(1,Math.floor(end/40));
+    const iv=setInterval(()=>{cur=Math.min(cur+step,end);sv.textContent=pre+cur+suf;if(cur>=end)clearInterval(iv)},28)}
+  });
+  statObs.unobserve(e.target)}})},{threshold:.2});
+document.querySelectorAll('.hero-stats').forEach(el=>statObs.observe(el));
  
 const ambMap={home:'ambHome',technical:'ambTechnical',developmental:'ambDevelopmental'};
 function goPage(name){
@@ -627,6 +985,36 @@ hamburger.addEventListener('click',()=>{menuOpen?closeMobileMenu():openMobileMen
   function setCardWidths(){const vc=visCount();const gap=vc>1?(window.innerWidth>=1100?22:14):0;const total=track.parentElement.offsetWidth;const cardW=(total-gap*(vc-1))/vc;track.querySelectorAll('.showcase-entry').forEach(c=>{c.style.width=cardW+'px';c.style.minWidth=cardW+'px'});track.style.gap=gap+'px';return{cardW,gap}}
   function goTo(idx){const max=Math.max(0,GAMES.length-visCount());current=Math.max(0,Math.min(idx,max));const{cardW,gap}=setCardWidths();track.style.transform=`translateX(-${current*(cardW+gap)}px)`;dotsEl.querySelectorAll('.showcase-dot').forEach((d,i)=>d.classList.toggle('active',i===current));prevBtn.disabled=current===0;nextBtn.disabled=current>=GAMES.length-visCount()}
   prevBtn.addEventListener('click',()=>goTo(current-1));nextBtn.addEventListener('click',()=>goTo(current+1));window.addEventListener('resize',()=>goTo(current));goTo(0);
+})();
+
+/* ── Spec accordion interaction ── */
+(function(){
+  const items=document.querySelectorAll('.spec-item');
+  if(!items.length)return;
+  items.forEach(item=>{
+    const header=item.querySelector('.spec-header');
+    const detail=item.querySelector('.spec-detail');
+    if(!header||!detail)return;
+    header.addEventListener('click',()=>{
+      const wasActive=item.classList.contains('active');
+      /* close all */
+      items.forEach(i=>{
+        i.classList.remove('active');
+        const d=i.querySelector('.spec-detail');
+        if(d)d.style.maxHeight='0';
+      });
+      /* open clicked if wasn't already open */
+      if(!wasActive){
+        item.classList.add('active');
+        detail.style.maxHeight=detail.scrollHeight+'px';
+      }
+    });
+  });
+  /* recalc open panel on resize */
+  window.addEventListener('resize',()=>{
+    const active=document.querySelector('.spec-item.active .spec-detail');
+    if(active)active.style.maxHeight=active.scrollHeight+'px';
+  });
 })();
 </script>
 </body>
