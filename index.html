@@ -24,7 +24,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .void-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}.void-layer::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:160px;mix-blend-mode:soft-light;}
 .void-blob{
   position:absolute;border-radius:50%;
-  filter:blur(90px);will-change:transform;
+  filter:blur(62px);will-change:transform;
   transform:translate3d(0,0,0);backface-visibility:hidden;
 }
 .vb1{animation:bd1 55s linear infinite}
@@ -42,7 +42,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 @keyframes bd3{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(-60px,40px,0)}100%{transform:translate3d(0,0,0)}}
  
 .ambient-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}
-.amb-orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;display:none;transform:translate3d(0,0,0);backface-visibility:hidden}
+.amb-orb{position:absolute;border-radius:50%;filter:blur(78px);pointer-events:none;display:none;transform:translate3d(0,0,0);backface-visibility:hidden}
 @media(min-width:768px){.amb-orb{display:block;animation:ambDrift linear infinite}.amb4,.amb5,.amb6{display:none}}
 @media(min-width:1024px){.amb4,.amb5,.amb6{display:block}}
 .amb1{width:420px;height:320px;background:radial-gradient(ellipse,rgba(107,31,160,0.18),transparent 70%);top:10%;left:15%;animation-duration:70s;opacity:0.7}
@@ -51,17 +51,17 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .amb4{width:260px;height:220px;background:radial-gradient(ellipse,rgba(191,47,255,0.13),transparent 70%);top:75%;left:20%;animation-duration:78s;animation-delay:-10s;opacity:0.6}
 .amb5{width:340px;height:280px;background:radial-gradient(ellipse,rgba(255,90,175,0.09),transparent 70%);top:5%;left:80%;animation-duration:110s;animation-delay:-55s;opacity:0.55}
 .amb6{width:200px;height:180px;background:radial-gradient(ellipse,rgba(0,229,255,0.08),transparent 70%);top:85%;left:55%;animation-duration:62s;animation-delay:-30s;opacity:0.45}
-.amb-page{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;opacity:0;transition:opacity 2s ease;z-index:0;transform:translate3d(0,0,0)}
+.amb-page{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;opacity:0;transition:opacity 2s ease;z-index:0;transform:translate3d(0,0,0)}
 .amb-page.visible{opacity:1}
 @keyframes ambDrift{0%{transform:translate3d(0,0,0)}20%{transform:translate3d(40px,-30px,0)}40%{transform:translate3d(-25px,50px,0)}60%{transform:translate3d(60px,20px,0)}80%{transform:translate3d(-40px,-20px,0)}100%{transform:translate3d(0,0,0)}}
  
 #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(107,31,160,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(107,31,160,0.04) 1px,transparent 1px);background-size:80px 80px;transform:translate3d(0,0,0)}
-.bg-scan{position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);transform:translate3d(0,0,0)}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;contain:paint;background-image:linear-gradient(rgba(107,31,160,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(107,31,160,0.04) 1px,transparent 1px);background-size:80px 80px;transform:translate3d(0,0,0)}
+.bg-scan{position:fixed;inset:0;z-index:0;pointer-events:none;contain:paint;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);transform:translate3d(0,0,0)}
 .plx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;will-change:transform;transform:translate3d(0,0,0)}
 @media(max-width:767px){.plx{display:none}}
  
-.deco-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}
+.deco-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0);contain:paint}
 .deco-shape{position:absolute;opacity:0}
 .d-diamond{width:16px;height:16px;border:1px solid rgba(191,47,255,0.32);transform:rotate(45deg)}
 .d-diamond.cyan{border-color:rgba(0,229,255,0.28)}.d-diamond.pink{border-color:rgba(255,34,163,0.28)}
@@ -951,18 +951,26 @@ function resize() {
   makeParticles();
 }
 
+const SIN_N = 4096, SIN_K = SIN_N / (Math.PI * 2);
+const SIN_TABLE = new Float32Array(SIN_N);
+for (let i = 0; i < SIN_N; i++) SIN_TABLE[i] = Math.sin(i / SIN_K);
+
 function makeStars() {
   const n = lowEnd ? Math.min(60, Math.floor(W * H / 14000)) : Math.min(350, Math.floor(W * H / 4800));
   stars = Array.from({ length: n }, () => {
-    const fg = Math.random() < .14;
+    const fg  = Math.random() < .14;
+    const spd = Math.random() * .0003 + .00006;
+    const t   = Math.random() < .6 ? 0 : (Math.random() < .5 ? 1 : 2);
     return {
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r:     fg ? Math.pow(Math.random(), 1.1) * 2.6 + .9  : Math.pow(Math.random(), 2.4) * 1.0 + .08,
+      x:     Math.random() * W,
+      y:     Math.random() * H,
+      r:     fg ? Math.pow(Math.random(), 1.1) * 2.6 + .9 : Math.pow(Math.random(), 2.4) * 1.0 + .08,
       baseA: fg ? Math.random() * .40 + .28               : Math.random() * .18 + .02,
-      s: Math.random() * .0003 + .00006,
-      p: Math.random() * Math.PI * 2,
-      tint: Math.random() < .6 ? 0 : (Math.random() < .5 ? 1 : 2)
+      phi:   Math.random() * SIN_N | 0,
+      dphi:  Math.max(1, spd * 40 * SIN_K | 0),
+      sphi:  Math.random() * SIN_N | 0,
+      dsphi: Math.max(1, spd * 12 * SIN_K | 0),
+      rgb:   t === 1 ? '160,210,255' : t === 2 ? '255,245,210' : '210,215,230',
     };
   });
 }
@@ -1003,13 +1011,16 @@ function spawnParticle(pool) {
       ? Math.random() * .16 + .18
       : Math.random() * .18 + .38;
 
+  const lw   = [.5, 1.0, 1.8][depth];
   const base = {
     type, x, y, cr, depth,
-    vx: (Math.random() - .5) * .18 * spd,
-    vy: (Math.random() - .5) * .18 * spd,
-    va: (Math.random() < .5 ? 1 : -1) * (Math.random() * .006 + .001) * (depth === 0 ? 0.4 : 1),
+    vx:    (Math.random() - .5) * .18 * spd,
+    vy:    (Math.random() - .5) * .18 * spd,
+    va:    (Math.random() < .5 ? 1 : -1) * (Math.random() * .006 + .001) * (depth === 0 ? 0.4 : 1),
     angle: Math.random() * Math.PI * 2,
-    alpha: alp
+    alpha: alp,
+    lw,
+    stroke: `rgba(${cr},${alp.toFixed(3)})`,
   };
   if (type === 'ps3')    return { ...base, r: (Math.random()*2.8+.6)*sz, vx: (Math.random()-.5)*.14*spd, vy: (Math.random()-.5)*.14*spd, hue: Math.random()<.5?285:195, trail: [] };
   if (type === 'cyber')  return { ...base, r: (Math.random()*2.5+.7)*sz, pulse: Math.random()*Math.PI*2, pSpeed: Math.random()*.018+.006, vx: 0, vy: 0 };
@@ -1050,19 +1061,19 @@ function draw(now) {
   t++;
 
   for (const s of stars) {
-    const tw      = lowEnd ? 0.6 : Math.sin(t * s.s * 40 + s.p) * .22 + .6;
-    const sparkle = !lowEnd && Math.sin(t * s.s * 12 + s.p + 2.1) > .97;
+    s.phi  = (s.phi  + s.dphi)  & (SIN_N - 1);
+    s.sphi = (s.sphi + s.dsphi) & (SIN_N - 1);
+    const tw      = lowEnd ? 0.6 : SIN_TABLE[s.phi] * .22 + .6;
+    const sparkle = !lowEnd && SIN_TABLE[s.sphi] > .97;
     const a = s.baseA * tw * (sparkle ? 1.8 : 1);
     const r = s.r * (sparkle ? 1.7 : 1);
     ctx.beginPath(); ctx.arc(s.x, s.y, r, 0, 6.283);
-    ctx.fillStyle = s.tint === 1 ? `rgba(160,210,255,${a})` : s.tint === 2 ? `rgba(255,245,210,${a})` : `rgba(210,215,230,${a})`;
+    ctx.fillStyle = `rgba(${s.rgb},${a})`;
     ctx.fill();
     if (sparkle && s.r > .55) {
-      ctx.save();
       ctx.strokeStyle = `rgba(200,225,255,${a * .45})`; ctx.lineWidth = .5;
       const l = r * 4;
       ctx.beginPath(); ctx.moveTo(s.x-l, s.y); ctx.lineTo(s.x+l, s.y); ctx.moveTo(s.x, s.y-l); ctx.lineTo(s.x, s.y+l); ctx.stroke();
-      ctx.restore();
     }
   }
 
@@ -1080,8 +1091,12 @@ function draw(now) {
       shootingStars.push({ variant: 'drifter', x: fl?-20:W+20, y: Math.random()*H*.5+H*.1, vx: (fl?1:-1)*(Math.random()*3+2), vy: Math.random()*1.2+.2, life: 1, decay: Math.random()*.006+.004, color: '255,200,230' });
     }
   }
-  shootingStars = shootingStars.filter(ss => {
+  for (let i = shootingStars.length - 1; i >= 0; i--) {
+    const ss = shootingStars[i];
     ss.x += ss.vx; ss.y += ss.vy; ss.life -= ss.decay;
+    if (ss.life <= 0 || ss.x < -300 || ss.x > W+300 || ss.y > H+200 || ss.y < -200) {
+      shootingStars.splice(i, 1); continue;
+    }
     const tl = ss.variant==='drifter'?38:ss.variant==='tinted'?20:26;
     const ha = ss.variant==='tinted' ? ss.life*.85 : ss.life*.95;
     const ta = ss.life * (ss.variant==='drifter'?.45:.38);
@@ -1098,37 +1113,34 @@ function draw(now) {
       ctx.beginPath(); ctx.arc(ss.x, ss.y, hr, 0, Math.PI*2); ctx.fillStyle = `rgba(${ss.color},${ss.life*.75})`; ctx.fill();
       ctx.beginPath(); ctx.arc(ss.x, ss.y, hr*3.5, 0, Math.PI*2); ctx.fillStyle = `rgba(${ss.color},${ss.life*.08})`; ctx.fill();
     }
-    return ss.life > 0 && ss.x > -300 && ss.x < W+300 && ss.y < H+200 && ss.y > -200;
-  });
+  }
 
   for (const p of particles) {
     const { type, x, y, alpha, cr } = p;
     if (type === 'pentagon') {
-      ctx.save(); p.angle += p.va;
-      const lw_p=[.5,1.0,1.8][p.depth??1];
-      drawPentagon(ctx, x, y, p.r, p.angle); ctx.strokeStyle=`rgba(${cr},${alpha})`; ctx.lineWidth=.9*lw_p; ctx.stroke();
-      drawPentagon(ctx, x, y, p.r*.5, p.angle+.3); ctx.strokeStyle=`rgba(${cr},${alpha*.3})`; ctx.lineWidth=.4*lw_p; ctx.stroke();
-      ctx.restore(); p.x+=p.vx; p.y+=p.vy; wrap(p);
+      p.angle += p.va;
+      drawPentagon(ctx, x, y, p.r, p.angle); ctx.strokeStyle=p.stroke; ctx.lineWidth=.9*p.lw; ctx.stroke();
+      drawPentagon(ctx, x, y, p.r*.5, p.angle+.3); ctx.strokeStyle=`rgba(${cr},${(alpha*.3).toFixed(3)})`; ctx.lineWidth=.4*p.lw; ctx.stroke();
+      p.x+=p.vx; p.y+=p.vy; wrap(p);
     } else if (type === 'hexagon') {
-      ctx.save(); p.angle += p.va;
-      drawHexagon(ctx, x, y, p.r, p.angle); ctx.strokeStyle=`rgba(${cr},${alpha})`; ctx.lineWidth=.8*[.5,1.0,1.8][p.depth??1]; ctx.stroke();
-      ctx.restore(); p.x+=p.vx; p.y+=p.vy; wrap(p);
+      p.angle += p.va;
+      drawHexagon(ctx, x, y, p.r, p.angle); ctx.strokeStyle=p.stroke; ctx.lineWidth=.8*p.lw; ctx.stroke();
+      p.x+=p.vx; p.y+=p.vy; wrap(p);
     } else if (type === 'triangle') {
-      ctx.save(); p.angle += p.va;
-      drawTriangle(ctx, x, y, p.r, p.angle); ctx.strokeStyle=`rgba(${cr},${alpha})`; ctx.lineWidth=.8*[.5,1.0,1.8][p.depth??1]; ctx.stroke();
-      ctx.restore(); p.x+=p.vx; p.y+=p.vy; wrap(p);
+      p.angle += p.va;
+      drawTriangle(ctx, x, y, p.r, p.angle); ctx.strokeStyle=p.stroke; ctx.lineWidth=.8*p.lw; ctx.stroke();
+      p.x+=p.vx; p.y+=p.vy; wrap(p);
     } else if (type === 'cube') {
       p.angle += p.va; drawCube(ctx, x, y, p.size, alpha, cr);
       p.x+=p.vx; p.y+=p.vy; wrap(p);
     } else if (type === 'diamond') {
       ctx.save(); ctx.translate(x, y); p.angle += p.va; ctx.rotate(p.angle + Math.PI/4);
-      ctx.strokeStyle=`rgba(${cr},${alpha})`; ctx.lineWidth=.8*[.5,1.0,1.8][p.depth??1]; ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);
+      ctx.strokeStyle=p.stroke; ctx.lineWidth=.8*p.lw; ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);
       ctx.restore(); p.x+=p.vx; p.y+=p.vy; wrap(p);
     } else if (type === 'square') {
       ctx.save(); ctx.translate(x, y); p.angle += p.va; ctx.rotate(p.angle);
-      const lw_s=[.5,1.0,1.8][p.depth??1];
-      ctx.strokeStyle=`rgba(${cr},${alpha})`; ctx.lineWidth=.8*lw_s; ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);
-      ctx.strokeStyle=`rgba(${cr},${alpha*.35})`; ctx.lineWidth=.4*lw_s; ctx.strokeRect(-p.size/4,-p.size/4,p.size/2,p.size/2);
+      ctx.strokeStyle=p.stroke; ctx.lineWidth=.8*p.lw; ctx.strokeRect(-p.size/2,-p.size/2,p.size,p.size);
+      ctx.strokeStyle=`rgba(${cr},${(alpha*.35).toFixed(3)})`; ctx.lineWidth=.4*p.lw; ctx.strokeRect(-p.size/4,-p.size/4,p.size/2,p.size/2);
       ctx.restore(); p.x+=p.vx; p.y+=p.vy; wrap(p);
     } else if (type === 'ps3') {
       p.trail.push({ x: p.x, y: p.y });
