@@ -92,7 +92,7 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .nav-ghost:hover{background:rgba(107,31,160,0.08);color:var(--silver)}
 .nav-right{display:flex;gap:6px;align-items:center;flex-shrink:0}
 .hamburger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer;z-index:201}
-.hamburger span{display:block;width:20px;height:1.5px;background:var(--silver-dim);transition:all 0.3s;transform-origin:center}
+.hamburger span{display:block;width:20px;height:1.5px;background:var(--silver-dim);transition:transform 0.3s,opacity 0.3s,background-color 0.3s;transform-origin:center}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);background:var(--neon-pink)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);background:var(--neon-pink)}
@@ -158,8 +158,8 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .showcase-arrow:hover:not(:disabled){background:rgba(204,46,138,0.14);border-color:var(--neon-pink);box-shadow:0 0 18px rgba(204,46,138,0.2)}
 .showcase-arrow:disabled{opacity:0.25;cursor:not-allowed}
 .showcase-arrow svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.showcase-carousel{position:relative;overflow:hidden}
-.showcase-track{display:flex;gap:clamp(14px,2vw,22px);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);will-change:transform}
+.showcase-carousel{position:relative;overflow:hidden;contain:layout}
+.showcase-track{display:flex;gap:clamp(14px,2vw,22px);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);will-change:transform;contain:layout style}
 .showcase-entry{background:var(--black-panel);border:1px solid var(--border);overflow:hidden;transition:border-color 0.4s,box-shadow 0.4s,transform 0.4s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);position:relative;flex-shrink:0}
 .showcase-entry:hover{border-color:var(--border-hi);box-shadow:0 0 40px rgba(204,46,138,0.07),0 10px 36px rgba(0,0,0,0.3);transform:translateY(-3px)}
 .showcase-img{width:100%;aspect-ratio:16/9;background:var(--black-card);overflow:hidden}
@@ -1683,6 +1683,55 @@ section::before, .showcase::before, .oss-section::before {
 /* stat::before was being overridden — reset old hover rule */
 .stat:hover::before { transform: scaleX(1); }
 
+
+/* ── compositor promotion for hover-animated elements ── */
+.showcase-entry,.stat,.id-card,.banks-card,
+.tier,.ks-tier,.spec-cell,.oss-sdk { will-change: transform; }
+
+/* ── 300ms tap delay fix on mobile ── */
+a,button,.showcase-entry,.stat,.banks-card,
+.spec-header,.ks-tier,.tier,.showcase-arrow,
+.nav-link,.nav-cta,.nav-ghost,.footer-egg {
+  touch-action: manipulation;
+}
+
+/* ── kill stale stat-val scale (relic from pre-skeuomorphic) ── */
+.stat-val { transition: none; }
+.stat:hover .stat-val { transform: none; }
+
+/* ── showcase dots wrap ── */
+.showcase-dots-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: clamp(20px,3vw,32px);
+}
+.showcase-dots { margin-top: 0; gap: 0; }
+
+/* ── carousel counter badge ── */
+.showcase-counter {
+  display: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(153,161,178,0.55);
+  background: linear-gradient(180deg, #09091a 0%, #05050d 100%);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-bottom-color: rgba(0,0,0,0.6);
+  border-radius: 5px;
+  padding: 5px 12px;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
+    inset 0 1px 4px rgba(0,0,0,0.5);
+  white-space: nowrap;
+  user-select: none;
+}
+.showcase-counter.visible { display: block; }
+.showcase-counter .sc-n { color: var(--neon-pink); }
+
 </style>
 </head>
 <body>
@@ -1716,7 +1765,7 @@ section::before, .showcase::before, .oss-section::before {
     <path d="M1420,20 L1420,70 M1420,20 L1370,20" stroke="rgba(0,229,255,0.09)" stroke-width="0.8" fill="none"/>
     <path d="M20,880 L20,830 M20,880 L70,880" stroke="rgba(191,47,255,0.09)" stroke-width="0.8" fill="none"/>
     <path d="M1420,880 L1420,830 M1420,880 L1370,880" stroke="rgba(204,46,138,0.08)" stroke-width="0.8" fill="none"/>
-    <g opacity="0.08" stroke="rgba(0,229,255,1)" stroke-width="0.8" fill="none"><path d="M0,350 H80 L100,330 H200 L220,350 H340 L360,330 H500" stroke-dasharray="900"><animate attributeName="stroke-dashoffset" from="900" to="0" dur="10s" repeatCount="indefinite"/></path></g>
+    <g opacity="0.06" stroke="rgba(0,229,255,1)" stroke-width="0.8" fill="none"><path d="M0,350 H80 L100,330 H200 L220,350 H340 L360,330 H500" stroke-dasharray="900" stroke-dashoffset="450"/></g>
     <line x1="0" y1="250" x2="1440" y2="250" stroke="rgba(204,46,138,0.03)" stroke-width="0.4" stroke-dasharray="80 200"/>
     <line x1="0" y1="650" x2="1440" y2="650" stroke="rgba(107,31,160,0.03)" stroke-width="0.4" stroke-dasharray="60 180"/>
     <rect x="720" y="44" width="10" height="10" fill="none" stroke="rgba(255,34,163,0.12)" stroke-width="0.7" transform="rotate(45,725,49)"/>
@@ -1803,22 +1852,17 @@ section::before, .showcase::before, .oss-section::before {
     {title:"Kiki's MicroDungeon",desc:"KKMD is a colorful, 2D Rogue-like Boss rush with tile-based movement, and bullet-hell aspects. Each run varies in terms of bosses, encounters, NPCs, Upgrades, and ways to build Kiki.",img:"",tag:"Game"},
     {title:"Spectrum in the Void",desc:"SITV is a Topdown Shoot Em' Up themed after space, abstract shapes, and neon lights. You and up to 3 other friends can blast holes through hordes of vibrant enemies. There's something kinda similar to a story involved. More or less pointing you in the right direction. You can upgrade your ship's attributes as you play, and really mess around with the interacting systems.",img:"",tag:"Game"},
     {title:"Ode to Aetherhold",desc:"Ode to Aetherhold is a topdown Action RPG made in GBStudio. It draws from Darksouls in terms of art direction, and story beats. There's real-time combat, character building, and 2 endings to this story. You're were brought back from the abyss, tugged towards the floating kingdom in the sky. Only one command plauges your mind: 'Forget me gently, and climb.'",img:"",tag:"Game"},
-    {title:"Battle Bound",desc:"A side-scrolling Online Multiplayer shooter. A handful of gamemodes, maps, customizable weapon loadouts, and character customization. So far the closest thing we have to satify the Call of Duty Player's itch.",img:"",tag:"Game &#183; Fighting"},
-    {title:"example",desc:"test.",img:"",tag:"Game"},
-    {title:"example",desc:"test.",img:"",tag:"Game"},
-    {title:"example",desc:"test.",img:"",tag:"Game"},
-    {title:"example",desc:"test.",img:"",tag:"Game"},
-    
+    {title:"Battle Bound",desc:"A side-scrolling Online Multiplayer shooter. A handful of gamemodes, maps, customizable weapon loadouts, and character customization. So far the closest thing we have to satify the Call of Duty Player's itch.",img:"",tag:"Game &#183; Fighting"}
   ];
   </script>
 
-  <div class="showcase"><div class="showcase-header reveal"><div class="showcase-header-left"><p class="showcase-eyebrow">Community Projects! (Work in Progress. There's a shit ton)</p><h2 class="showcase-heading"><span style="background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Under</span> Construction.</h2></div><div class="showcase-nav"><button class="showcase-arrow" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><button class="showcase-arrow" id="carouselNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div></div><div class="showcase-carousel"><div class="showcase-track" id="carouselTrack"></div></div><div class="showcase-dots" id="carouselDots"></div></div>
+  <div class="showcase"><div class="showcase-header reveal"><div class="showcase-header-left"><p class="showcase-eyebrow">Community Projects! (Work in Progress. There's a shit ton)</p><h2 class="showcase-heading"><span style="background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Under</span> Construction.</h2></div><div class="showcase-nav"><button class="showcase-arrow" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><button class="showcase-arrow" id="carouselNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div></div><div class="showcase-carousel"><div class="showcase-track" id="carouselTrack"></div></div><div class="showcase-dots-wrap"><div class="showcase-dots" id="carouselDots"></div><div class="showcase-counter" id="carouselCounter"></div></div></div>
   <section>
     <div class="section-divider"></div>
   </section>
   <section>
     <div class="reveal"><p class="se">Meet the Mascot</p><h2 class="st"><span class="gradient-purple glitch">Banks.</span></h2></div>
-    <div class="banks-layout"><div class="reveal"><p class="banks-intro">A raccoon with a <strong>purple bandana.</strong> He owns no other clothes fashionable enough to flaunt. Lazy. Gluttonous. Lurking, and stalking. He spends his days eating, drinking, sleeping, and gaming in alarming excess. He's a <strong>chud.</strong> We <strong>love</strong> him. (Made by Rigby @ToastGh0ast)</p></div><div class="banks-grid reveal"><div class="banks-card"><img src="banks-loving.png" alt="Banks"><div class="banks-caption">genuinely in love</div></div><div class="banks-card"><img src="banks-waving.png" alt="Banks"><div class="banks-caption">he's waving back</div></div><div class="banks-card"><img src="banks-toking.png" alt="Banks"><div class="banks-caption">no comment</div></div><div class="banks-card"><img src="banks-ew.png" alt="Banks"><div class="banks-caption">same tbh</div></div><div class="banks-card"><img src="banks-dorito.png" alt="Banks"><div class="banks-caption">all he eats</div></div><div class="banks-card"><img src="banks-autism.png" alt="Banks"><div class="banks-caption">peak form</div></div></div></div>
+    <div class="banks-layout"><div class="reveal"><p class="banks-intro">A raccoon with a <strong>purple bandana.</strong> He owns no other clothes fashionable enough to flaunt. Lazy. Gluttonous. Lurking, and stalking. He spends his days eating, drinking, sleeping, and gaming in alarming excess. He's a <strong>chud.</strong> We <strong>love</strong> him. (Made by Rigby @ToastGh0ast)</p></div><div class="banks-grid reveal"><div class="banks-card"><img src="banks-loving.png" alt="Banks" loading="lazy"><div class="banks-caption">genuinely in love</div></div><div class="banks-card"><img src="banks-waving.png" alt="Banks" loading="lazy"><div class="banks-caption">he's waving back</div></div><div class="banks-card"><img src="banks-toking.png" alt="Banks" loading="lazy"><div class="banks-caption">no comment</div></div><div class="banks-card"><img src="banks-ew.png" alt="Banks" loading="lazy"><div class="banks-caption">same tbh</div></div><div class="banks-card"><img src="banks-dorito.png" alt="Banks" loading="lazy"><div class="banks-caption">all he eats</div></div><div class="banks-card"><img src="banks-autism.png" alt="Banks" loading="lazy"><div class="banks-caption">peak form</div></div></div></div>
   </section>
   <section><div class="section-divider"></div></section>
   <section id="ks-section">
@@ -2377,11 +2421,14 @@ function closeMobileMenu() { menuOpen = false; hamburger.classList.remove('open'
 hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMobileMenu());
 
 (function() {
-  const track   = document.getElementById('carouselTrack');
-  const dotsEl  = document.getElementById('carouselDots');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
+  const track      = document.getElementById('carouselTrack');
+  const dotsEl     = document.getElementById('carouselDots');
+  const counterEl  = document.getElementById('carouselCounter');
+  const prevBtn    = document.getElementById('carouselPrev');
+  const nextBtn    = document.getElementById('carouselNext');
+  const MAX_DOTS   = 7;
   let current = 0;
+  let dotBtns = [];
 
   function visCount() {
     if (window.innerWidth >= 1100) return 3;
@@ -2389,23 +2436,56 @@ hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMob
     return 1;
   }
 
-  GAMES.forEach((g, i) => {
+  GAMES.forEach(g => {
     const card = document.createElement('div');
     card.className = 'showcase-entry';
     card.innerHTML = `<div class="showcase-img">${g.img ? `<img src="${g.img}" alt="${g.title}" loading="lazy">` : `<div class="showcase-ph"><span>${g.tag||'Coming Soon'}</span></div>`}</div><div class="showcase-info">${g.tag?`<span class="showcase-tag">${g.tag}</span>`:''}<h3 class="showcase-title">${g.title}</h3><p class="showcase-desc">${g.desc}</p></div>`;
     track.appendChild(card);
-    const dot = document.createElement('button');
-    dot.className = 'showcase-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `Go to ${g.title}`);
-    dot.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(dot);
   });
+
+  // build fixed number of dots (capped at MAX_DOTS)
+  const dotCount = Math.min(GAMES.length, MAX_DOTS);
+  for (let i = 0; i < dotCount; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'showcase-dot';
+    dot.setAttribute('aria-label', `Go to entry ${i + 1}`);
+    dot.addEventListener('click', () => goTo(dotIndexToGame(i)));
+    dotsEl.appendChild(dot);
+    dotBtns.push(dot);
+  }
+
+  // map a dot index (0..MAX_DOTS-1) to a game index, given current position
+  function dotIndexToGame(dotIdx) {
+    if (GAMES.length <= MAX_DOTS) return dotIdx;
+    const half = Math.floor(MAX_DOTS / 2);
+    const winStart = Math.max(0, Math.min(current - half, GAMES.length - MAX_DOTS));
+    return winStart + dotIdx;
+  }
+
+  function updateDots() {
+    const total = GAMES.length;
+    const useCounter = total > MAX_DOTS;
+
+    if (useCounter) {
+      const half = Math.floor(MAX_DOTS / 2);
+      const winStart = Math.max(0, Math.min(current - half, total - MAX_DOTS));
+      dotBtns.forEach((d, j) => d.classList.toggle('active', winStart + j === current));
+      counterEl.innerHTML = `<span class="sc-n">${current + 1}</span> / ${total}`;
+      counterEl.classList.add('visible');
+    } else {
+      dotBtns.forEach((d, i) => d.classList.toggle('active', i === current));
+      counterEl.classList.remove('visible');
+    }
+  }
 
   function setCardWidths() {
     const vc  = visCount();
     const gap = vc > 1 ? (window.innerWidth >= 1100 ? 22 : 14) : 0;
-    const cardW = (track.parentElement.offsetWidth - gap * (vc-1)) / vc;
-    track.querySelectorAll('.showcase-entry').forEach(c => { c.style.width = cardW+'px'; c.style.minWidth = cardW+'px'; });
+    const cardW = (track.parentElement.offsetWidth - gap * (vc - 1)) / vc;
+    track.querySelectorAll('.showcase-entry').forEach(c => {
+      c.style.width = cardW + 'px';
+      c.style.minWidth = cardW + 'px';
+    });
     track.style.gap = gap + 'px';
     return { cardW, gap };
   }
@@ -2413,14 +2493,14 @@ hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMob
   function goTo(idx) {
     current = Math.max(0, Math.min(idx, Math.max(0, GAMES.length - visCount())));
     const { cardW, gap } = setCardWidths();
-    track.style.transform = `translateX(-${current*(cardW+gap)}px)`;
-    dotsEl.querySelectorAll('.showcase-dot').forEach((d, i) => d.classList.toggle('active', i===current));
+    track.style.transform = `translateX(-${current * (cardW + gap)}px)`;
+    updateDots();
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current >= GAMES.length - visCount();
   }
 
-  prevBtn.addEventListener('click', () => goTo(current-1));
-  nextBtn.addEventListener('click', () => goTo(current+1));
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
   window.addEventListener('resize', () => goTo(current));
   goTo(0);
 })();
@@ -2540,3 +2620,4 @@ hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMob
 
 </body>
 </html>
+
