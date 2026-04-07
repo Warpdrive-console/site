@@ -141,12 +141,12 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .mq{position:relative;z-index:1;overflow:hidden;border-top:1px solid rgba(204,46,138,0.12);border-bottom:1px solid rgba(204,46,138,0.12);background:rgba(204,46,138,0.015);padding:12px 0}
 .mq-inner{display:flex;gap:40px;white-space:nowrap}
 .mq-track{display:flex;gap:40px;animation:mqScroll 28s linear infinite;white-space:nowrap;flex-shrink:0;will-change:transform;transform:translate3d(0,0,0)}
-.mq-item{font-family:'Space Mono',monospace;font-size:clamp(8px,0.8vw,10px);letter-spacing:0.18em;color:rgba(200,205,216,0.22);text-transform:uppercase;flex-shrink:0}
-.mq-item.hi{color:rgba(255,34,163,0.45)}.mq-item.dot{color:rgba(107,31,160,0.25)}
+.mq-item{font-family:'Space Mono',monospace;font-size:clamp(8px,0.8vw,10px);letter-spacing:0.18em;color:rgba(200,205,216,0.72);text-transform:uppercase;flex-shrink:0}
+.mq-item.hi{color:rgba(255,34,163,0.95)}.mq-item.dot{color:rgba(191,47,255,0.55)}
 @keyframes mqScroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-100%,0,0)}}
-.mq-technical .mq-item{color:rgba(0,229,255,0.18)}.mq-technical .mq-item.hi{color:rgba(0,229,255,0.45)}.mq-technical .mq-item.dot{color:rgba(0,140,200,0.25)}
+.mq-technical .mq-item{color:rgba(0,229,255,0.7)}.mq-technical .mq-item.hi{color:rgba(0,229,255,0.95)}.mq-technical .mq-item.dot{color:rgba(0,200,255,0.55)}
 .mq-technical{border-top-color:rgba(0,229,255,0.12);border-bottom-color:rgba(0,229,255,0.12);background:rgba(0,229,255,0.01)}
-.mq-developmental .mq-item{color:rgba(191,47,255,0.18)}.mq-developmental .mq-item.hi{color:rgba(191,47,255,0.45)}.mq-developmental .mq-item.dot{color:rgba(107,31,160,0.25)}
+.mq-developmental .mq-item{color:rgba(191,47,255,0.7)}.mq-developmental .mq-item.hi{color:rgba(191,47,255,0.95)}.mq-developmental .mq-item.dot{color:rgba(150,60,255,0.55)}
 .mq-developmental{border-top-color:rgba(191,47,255,0.12);border-bottom-color:rgba(191,47,255,0.12);background:rgba(191,47,255,0.01)}
  
 .showcase{position:relative;z-index:1;padding:clamp(60px,8vw,120px) clamp(24px,8vw,160px)}
@@ -471,7 +471,7 @@ nav::after{animation:navGlow 8s ease-in-out infinite alternate}
 #egg-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);z-index:6000;background:rgba(8,8,14,0.97);border:1px solid rgba(191,47,255,0.3);border-radius:8px;padding:10px 20px;font-family:'Space Mono',monospace;font-size:10px;color:var(--silver);letter-spacing:0.08em;opacity:0;transition:opacity 0.3s,transform 0.3s;pointer-events:none;white-space:nowrap}
 #egg-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-@keyframes mqTwinkle{0%,90%,100%{opacity:0.45}92%{opacity:1}96%{opacity:0.45}}
+@keyframes mqTwinkle{0%,90%,100%{opacity:0.8}92%{opacity:1;text-shadow:0 0 10px currentColor}96%{opacity:0.8}}
 .mq-item.hi{animation:mqTwinkle 8s ease-in-out infinite}
 .mq-item.hi:nth-child(4n){animation-delay:-2s}
 .mq-item.hi:nth-child(6n){animation-delay:-5s}
@@ -617,6 +617,1072 @@ section,.showcase,.oss-section{contain:layout style}
   *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
   .mq-track,.void-blob,.amb-orb,.disc-outer{animation:none !important}
 }
+
+/* ═══════════════════════════════════════════════════════
+   SKEUOMORPHIC DESIGN LAYER
+   All surfaces lit from top-left. Deep layered shadows.
+   Physical materials: anodized metal, moulded plastic,
+   rubberised accents, brushed panels, LCD readouts.
+═══════════════════════════════════════════════════════ */
+
+/* Shared surface token as inline CSS - applied through
+   box-shadow overrides rather than variables so cascade works */
+
+/* Body: add a heavier material grain */
+body::after {
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+  mix-blend-mode: soft-light;
+}
+
+/* ── Global: remove all flat clip-paths ── */
+.btn-p,.btn-s,.btn-github,
+.nav-cta,.nav-ghost,
+.id-card,.spec-cell,.spec-item,.spec-banner,
+.showcase-entry,.showcase-arrow,.showcase-tag,
+.tier,.banks-card,
+.price-card,.ks-card,.oss-wrapper,
+.rotur-pill { clip-path: none !important; }
+
+/* ── Global border-radius replacements ── */
+.btn-p,.btn-s   { border-radius: 5px; }
+.btn-github     { border-radius: 5px; }
+.nav-cta,.nav-ghost { border-radius: 3px; }
+.showcase-arrow { border-radius: 4px; }
+.showcase-tag   { border-radius: 3px; }
+.showcase-entry { border-radius: 7px; overflow:hidden; }
+.id-card        { border-radius: 7px; overflow:hidden; }
+.spec-cell      { border-radius: 5px; }
+.spec-item      { border-radius: 6px; }
+.spec-banner    { border-radius: 5px; }
+.tier           { border-radius: 5px; }
+.banks-card     { border-radius: 7px; }
+.price-card,.ks-card { border-radius: 10px; }
+.oss-wrapper    { border-radius: 10px; overflow:hidden; }
+.rotur-pill     { border-radius: 40px; }
+.spec-header-icon { border-radius: 7px; }
+.feature-icon   { border-radius: 7px; }
+.oss-sdk-icon   { border-radius: 7px; }
+.disc-fact      { border-radius: 3px; }
+
+/* ═══════════════════════════════════════════════════════
+   NAVIGATION — anodised aluminium panel
+═══════════════════════════════════════════════════════ */
+nav {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.009) 1px, rgba(255,255,255,0.009) 2px),
+    linear-gradient(180deg, #141426 0%, #0b0b16 100%);
+  border-bottom: 1px solid rgba(0,0,0,0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.09),
+    0 4px 24px rgba(0,0,0,0.95),
+    0 1px 4px rgba(0,0,0,0.9);
+}
+nav::after { animation-duration: 12s; }
+
+/* nav buttons — debossed labels */
+.nav-cta {
+  background: linear-gradient(180deg, rgba(204,46,138,0.12) 0%, rgba(204,46,138,0.04) 100%);
+  border: 1px solid rgba(204,46,138,0.22);
+  border-top-color: rgba(204,46,138,0.32);
+  border-bottom-color: rgba(0,0,0,0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.3),
+    0 2px 6px rgba(0,0,0,0.6);
+}
+.nav-cta:hover {
+  background: linear-gradient(180deg, rgba(204,46,138,0.22) 0%, rgba(204,46,138,0.1) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 0 14px rgba(204,46,138,0.2),
+    0 2px 8px rgba(0,0,0,0.7);
+}
+.nav-ghost {
+  background: linear-gradient(180deg, rgba(20,20,38,1) 0%, rgba(10,10,18,1) 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 2px 6px rgba(0,0,0,0.7);
+}
+.nav-ghost:hover {
+  background: linear-gradient(180deg, rgba(30,20,55,1) 0%, rgba(15,10,28,1) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE MENU — thick slab panel
+═══════════════════════════════════════════════════════ */
+.mobile-menu {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.007) 1px, rgba(255,255,255,0.007) 2px),
+    linear-gradient(180deg, #0e0e20, #06060c);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BUTTONS — moulded plastic
+═══════════════════════════════════════════════════════ */
+.btn-p {
+  background: linear-gradient(180deg,
+    rgba(248,40,165,1) 0%,
+    var(--pink-hot) 30%,
+    rgba(155,18,95,1) 100%);
+  border: 1px solid rgba(0,0,0,0.5);
+  border-top-color: rgba(255,130,200,0.35);
+  box-shadow:
+    0 6px 20px rgba(204,46,138,0.55),
+    0 3px 6px rgba(0,0,0,0.8),
+    0 1px 2px rgba(0,0,0,1),
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -2px 5px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.btn-p::before {
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.18) 0%,
+    rgba(255,255,255,0.04) 50%,
+    transparent 100%);
+  border-radius: 5px 5px 0 0;
+}
+.btn-p:hover {
+  filter: none;
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 32px rgba(204,46,138,0.7),
+    0 4px 10px rgba(0,0,0,0.8),
+    0 1px 3px rgba(0,0,0,1),
+    inset 0 1px 0 rgba(255,255,255,0.28),
+    inset 0 -2px 5px rgba(0,0,0,0.4);
+}
+.btn-p:active {
+  transform: translateY(1px) !important;
+  animation: none !important;
+  box-shadow:
+    0 2px 8px rgba(204,46,138,0.4),
+    0 1px 2px rgba(0,0,0,0.9),
+    inset 0 3px 8px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(0,0,0,0.3) !important;
+}
+
+.btn-s {
+  background: linear-gradient(180deg, rgba(16,16,30,1) 0%, rgba(8,8,14,1) 100%);
+  border: 1px solid rgba(200,205,216,0.1);
+  border-top-color: rgba(200,205,216,0.18);
+  border-bottom-color: rgba(0,0,0,0.7);
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.7),
+    0 1px 3px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.btn-s::before {
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,0.08), transparent);
+}
+.btn-s:hover {
+  background: linear-gradient(180deg, rgba(0,229,255,0.09) 0%, rgba(0,229,255,0.03) 100%);
+  box-shadow:
+    0 6px 20px rgba(0,229,255,0.1),
+    0 2px 6px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(0,229,255,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+.btn-github {
+  background: linear-gradient(180deg,
+    rgba(0,229,255,0.1) 0%, rgba(0,229,255,0.04) 50%, rgba(191,47,255,0.06) 100%);
+  border: 1px solid rgba(0,229,255,0.2);
+  border-top-color: rgba(0,229,255,0.3);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.7),
+    0 2px 6px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(0,229,255,0.14),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.btn-github:hover {
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   HERO STATS — instrument cluster panel
+═══════════════════════════════════════════════════════ */
+.hero-stats {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.007) 1px, rgba(255,255,255,0.007) 2px),
+    linear-gradient(180deg, #0c0c1c 0%, #060609 100%);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 -6px 24px rgba(0,0,0,0.8);
+}
+.stat {
+  border-right: none;
+  box-shadow: inset -1px 0 0 rgba(0,0,0,0.6), inset 1px 0 0 rgba(255,255,255,0.025);
+}
+.stat:last-child { box-shadow: none; }
+
+/* ═══════════════════════════════════════════════════════
+   MARQUEE — physical ticker tape
+═══════════════════════════════════════════════════════ */
+.mq {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.4) 100%),
+    rgba(204,46,138,0.018);
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.7),
+    inset 0 -2px 6px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(0,0,0,0.3);
+  border-top: 1px solid rgba(0,0,0,0.8);
+  border-bottom: 1px solid rgba(0,0,0,0.8);
+}
+.mq-technical {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.4) 100%),
+    rgba(0,229,255,0.012);
+}
+.mq-developmental {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.4) 100%),
+    rgba(191,47,255,0.012);
+}
+
+/* ═══════════════════════════════════════════════════════
+   CARDS — anodised aluminium panels
+   All follow: lit from top, heavier bottom shadow
+═══════════════════════════════════════════════════════ */
+.id-card {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.007) 1px, rgba(255,255,255,0.007) 2px),
+    linear-gradient(175deg, #0f0f22 0%, #09090f 55%, #060608 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-bottom-color: rgba(0,0,0,0.7);
+  box-shadow:
+    0 1px 3px rgba(0,0,0,1),
+    0 6px 20px rgba(0,0,0,0.75),
+    0 14px 48px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.09),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+}
+.id-card:hover {
+  box-shadow:
+    0 2px 4px rgba(0,0,0,1),
+    0 10px 32px rgba(0,0,0,0.8),
+    0 20px 60px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.11),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 0 0 1px rgba(204,46,138,0.12);
+}
+.id-card::after { border-radius: 0 0 7px 7px; }
+
+.id-icon {
+  background:
+    linear-gradient(135deg, rgba(107,31,160,0.14) 0%, rgba(107,31,160,0.04) 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom-color: rgba(0,0,0,0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -1px 0 rgba(0,0,0,0.3),
+    0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SPEC CELLS — LCD readout modules
+═══════════════════════════════════════════════════════ */
+.spec-cell {
+  background: linear-gradient(180deg, #0d0d1e 0%, #07070d 100%);
+  border: 1px solid rgba(255,255,255,0.045);
+  border-bottom-color: rgba(0,0,0,0.7);
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.9),
+    0 4px 14px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    inset 0 0 40px rgba(0,0,0,0.3);
+}
+.spec-cell:hover {
+  border-color: rgba(0,229,255,0.18);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.9),
+    0 6px 20px rgba(0,0,0,0.7),
+    0 0 20px rgba(0,229,255,0.04),
+    inset 0 1px 0 rgba(0,229,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SPEC ACCORDION — collapsible instrument panels
+═══════════════════════════════════════════════════════ */
+.spec-item {
+  background: linear-gradient(180deg, #0d0d1e 0%, #080810 100%);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.8),
+    0 1px 2px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.spec-item.active {
+  border-color: rgba(0,229,255,0.18);
+  box-shadow:
+    0 4px 16px rgba(0,229,255,0.06),
+    0 2px 6px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(0,229,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.spec-header:hover {
+  background: rgba(0,229,255,0.025);
+}
+.spec-header-icon {
+  background: linear-gradient(135deg, rgba(0,229,255,0.08) 0%, rgba(0,229,255,0.02) 100%);
+  border: 1px solid rgba(0,229,255,0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 2px 6px rgba(0,0,0,0.6);
+}
+.spec-detail-inner {
+  border-top: 1px solid rgba(255,255,255,0.03);
+  background: rgba(0,0,0,0.2);
+}
+
+.spec-banner {
+  background: linear-gradient(180deg, #0f0f1e 0%, #090910 100%);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 3px solid var(--neon-pink);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.7),
+    0 2px 6px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SHOWCASE — game cartridge cards
+═══════════════════════════════════════════════════════ */
+.showcase-entry {
+  background: linear-gradient(180deg, #0e0e1e 0%, #08080e 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-bottom-color: rgba(0,0,0,0.7);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.9),
+    0 8px 28px rgba(0,0,0,0.65),
+    0 16px 48px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+}
+.showcase-entry:hover {
+  border-color: rgba(204,46,138,0.25);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.95),
+    0 14px 44px rgba(0,0,0,0.75),
+    0 0 40px rgba(204,46,138,0.08),
+    0 0 80px rgba(107,31,160,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+  transform: translateY(-4px);
+}
+.showcase-ph {
+  background: linear-gradient(180deg, #0a0a18 0%, #060609 100%);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
+}
+.showcase-info {
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%);
+}
+
+.showcase-arrow {
+  background: linear-gradient(180deg, #141428 0%, #0a0a14 100%);
+  border: 1px solid rgba(204,46,138,0.2);
+  border-top-color: rgba(204,46,138,0.3);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.8),
+    0 1px 3px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.showcase-arrow:hover:not(:disabled) {
+  background: linear-gradient(180deg, rgba(204,46,138,0.18) 0%, rgba(204,46,138,0.06) 100%);
+  transform: none;
+  box-shadow:
+    0 4px 14px rgba(204,46,138,0.25),
+    0 2px 6px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.showcase-arrow:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 4px rgba(0,0,0,0.9),
+    inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.showcase-dot {
+  width: 28px; height: 6px;
+  border-radius: 3px;
+  background: rgba(200,205,216,0.12);
+  border: 1px solid rgba(0,0,0,0.4);
+  margin: 0 3px;
+  padding: 0;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.showcase-dot.active {
+  background: var(--pink-hot);
+  box-shadow:
+    0 0 8px rgba(204,46,138,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* ═══════════════════════════════════════════════════════
+   DISC STAGE — physical display plinth
+═══════════════════════════════════════════════════════ */
+.disc-stage {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.007) 1px, rgba(255,255,255,0.007) 2px),
+    linear-gradient(180deg, #0e0e1e 0%, #08080e 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-bottom-color: rgba(0,0,0,0.7);
+  border-radius: 8px;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.9),
+    0 10px 36px rgba(0,0,0,0.7),
+    0 24px 64px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 0 60px rgba(0,0,0,0.4);
+}
+.disc-stage{animation:discFloat 6s ease-in-out infinite}
+
+.disc-fact {
+  background: linear-gradient(180deg, #0c0c1c 0%, #080810 100%);
+  border-left: 2px solid var(--purple-logo);
+  border: 1px solid rgba(255,255,255,0.045);
+  border-left: 2px solid var(--purple-logo);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.disc-hub {
+  box-shadow:
+    0 0 0 1px rgba(200,205,216,0.15),
+    0 0 20px rgba(0,0,0,0.8),
+    inset 0 2px 6px rgba(0,0,0,0.8),
+    inset 0 -1px 2px rgba(255,255,255,0.05);
+}
+
+/* ═══════════════════════════════════════════════════════
+   TIERS — physical tier plates
+═══════════════════════════════════════════════════════ */
+.tier {
+  background: linear-gradient(180deg, #0e0e1e 0%, #080810 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.85),
+    0 6px 20px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+  transition: box-shadow 0.3s, transform 0.2s, border-color 0.3s;
+}
+.tier:hover {
+  border-color: rgba(204,46,138,0.22);
+  transform: translateX(5px) !important;
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.9),
+    0 10px 32px rgba(0,0,0,0.65),
+    0 0 24px rgba(204,46,138,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BANKS CARDS — display cells
+═══════════════════════════════════════════════════════ */
+.banks-card {
+  background: linear-gradient(180deg, #0d0d1e 0%, #08080e 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-bottom-color: rgba(0,0,0,0.7);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.9),
+    0 8px 24px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+}
+.banks-card:hover {
+  border-color: rgba(255,90,175,0.3);
+  transform: translateY(-5px);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.95),
+    0 16px 48px rgba(0,0,0,0.7),
+    0 0 28px rgba(255,90,175,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.09),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+}
+.banks-card img { filter: drop-shadow(0 2px 8px rgba(0,0,0,0.7)); }
+
+/* ═══════════════════════════════════════════════════════
+   PRICE CARD — heavy cast panel
+═══════════════════════════════════════════════════════ */
+.price-card {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.007) 1px, rgba(255,255,255,0.007) 2px),
+    linear-gradient(175deg, #10101e 0%, #08080e 55%, #050508 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom-color: rgba(0,0,0,0.8);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,1),
+    0 10px 36px rgba(0,0,0,0.8),
+    0 24px 80px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.09),
+    inset 0 -2px 4px rgba(0,0,0,0.6);
+}
+.price-card:hover {
+  box-shadow:
+    0 4px 12px rgba(0,0,0,1),
+    0 16px 56px rgba(0,0,0,0.85),
+    0 0 60px rgba(204,46,138,0.1),
+    0 0 120px rgba(107,31,160,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -2px 4px rgba(0,0,0,0.6);
+}
+.price-amount {
+  text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 0 40px rgba(200,205,216,0.1);
+}
+
+.ks-card {
+  background: linear-gradient(180deg, #0e0e1e 0%, #080810 100%);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-left: 3px solid var(--neon-cyan);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.9),
+    0 8px 32px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.ks-tier {
+  background: linear-gradient(180deg, rgba(0,229,255,0.04) 0%, rgba(0,229,255,0.01) 100%);
+  border: 1px solid rgba(0,229,255,0.08);
+  border-bottom-color: rgba(0,0,0,0.4);
+  border-radius: 4px;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(0,229,255,0.05);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.ks-tier:hover {
+  background: linear-gradient(180deg, rgba(0,229,255,0.08) 0%, rgba(0,229,255,0.03) 100%);
+  border-color: rgba(0,229,255,0.18);
+  transform: translateX(5px) !important;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.7),
+    0 0 12px rgba(0,229,255,0.06),
+    inset 0 1px 0 rgba(0,229,255,0.08);
+}
+
+/* ═══════════════════════════════════════════════════════
+   ROTUR PILL — LED status indicator
+═══════════════════════════════════════════════════════ */
+.rotur-pill {
+  background: linear-gradient(180deg,
+    rgba(107,31,160,0.16) 0%, rgba(107,31,160,0.06) 100%);
+  border: 1px solid rgba(107,31,160,0.3);
+  border-top-color: rgba(150,60,210,0.35);
+  border-bottom-color: rgba(0,0,0,0.5);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.7),
+    0 1px 3px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.rotur-pill:hover {
+  box-shadow:
+    0 4px 16px rgba(107,31,160,0.2),
+    0 0 24px rgba(255,90,175,0.1),
+    0 1px 4px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FEATURE ROWS — instrument panel rows
+═══════════════════════════════════════════════════════ */
+.feature-row {
+  background: linear-gradient(180deg, #0d0d1e 0%, #08080e 100%);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 3px solid var(--purple-deep);
+  border-bottom-color: rgba(0,0,0,0.6);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.8),
+    0 1px 2px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.feature-row:hover {
+  border-left-color: var(--neon-pink);
+  background: linear-gradient(180deg, #0f0f20 0%, #09090f 100%);
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.85),
+    0 0 20px rgba(204,46,138,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.feature-icon {
+  background: linear-gradient(135deg, rgba(107,31,160,0.1) 0%, rgba(107,31,160,0.03) 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-bottom-color: rgba(0,0,0,0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* ═══════════════════════════════════════════════════════
+   OSS WRAPPER — main console terminal unit
+═══════════════════════════════════════════════════════ */
+.oss-wrapper {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.007) 1px, rgba(255,255,255,0.007) 2px),
+    linear-gradient(175deg, #0e0e1e 0%, #08080e 55%, #050508 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-bottom-color: rgba(0,0,0,0.8);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,1),
+    0 14px 48px rgba(0,0,0,0.8),
+    0 32px 100px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -2px 4px rgba(0,0,0,0.6);
+}
+.oss-wrapper::before { opacity: 0.5; }
+
+.oss-sdk {
+  background: linear-gradient(180deg, rgba(0,229,255,0.04) 0%, rgba(0,229,255,0.01) 100%);
+  border: 1px solid rgba(0,229,255,0.09);
+  border-bottom-color: rgba(0,0,0,0.5);
+  border-radius: 5px;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(0,229,255,0.05),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.2s;
+}
+.oss-sdk:hover {
+  background: linear-gradient(180deg, rgba(0,229,255,0.08) 0%, rgba(0,229,255,0.03) 100%);
+  border-color: rgba(0,229,255,0.2);
+  transform: translateX(3px);
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.7),
+    0 0 16px rgba(0,229,255,0.05),
+    inset 0 1px 0 rgba(0,229,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.oss-sdk-icon {
+  background: linear-gradient(135deg, rgba(0,229,255,0.1) 0%, rgba(0,229,255,0.02) 100%);
+  border: 1px solid rgba(0,229,255,0.12);
+  border-bottom-color: rgba(0,0,0,0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* CRT terminal — recessed screen */
+.oss-terminal {
+  background: linear-gradient(180deg, #04040a 0%, #020205 100%);
+  border: 1px solid rgba(0,229,255,0.18);
+  border-top-color: rgba(0,229,255,0.1);
+  border-bottom-color: rgba(0,0,0,0.8);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.9),
+    0 2px 8px rgba(0,0,0,1),
+    inset 0 2px 8px rgba(0,0,0,0.8),
+    inset 0 0 60px rgba(0,229,255,0.015),
+    0 0 24px rgba(0,229,255,0.07);
+}
+.oss-terminal-bar {
+  background: linear-gradient(180deg, #0a0a18 0%, #060610 100%);
+  border-bottom: 1px solid rgba(0,229,255,0.1);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+.oss-terminal-body {
+  box-shadow: inset 0 4px 16px rgba(0,0,0,0.6);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION DIVIDER — physical ridge
+═══════════════════════════════════════════════════════ */
+.section-divider {
+  height: 3px;
+  background: transparent;
+  box-shadow:
+    0 1px 0 rgba(107,31,160,0.25),
+    0 2px 0 rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+  opacity: 1;
+}
+.section-divider::after {
+  background: linear-gradient(90deg, transparent 5%, var(--pink-hot) 25%, var(--neon-purple) 50%, var(--neon-cyan) 75%, transparent 95%);
+  filter: blur(4px);
+  opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER — cast base plate
+═══════════════════════════════════════════════════════ */
+footer {
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.006) 1px, rgba(255,255,255,0.006) 2px),
+    linear-gradient(180deg, #09091a 0%, #050509 100%);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    inset 0 4px 24px rgba(0,0,0,0.5);
+}
+footer::before { opacity: 0.2; }
+
+/* ═══════════════════════════════════════════════════════
+   SECTION BACKGROUNDS — elevated planes
+═══════════════════════════════════════════════════════ */
+section, .showcase, .oss-section {
+  position: relative;
+}
+section::before, .showcase::before, .oss-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.01) 0%,
+    transparent 8%,
+    transparent 92%,
+    rgba(0,0,0,0.15) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION HEADINGS — embossed metal lettering
+═══════════════════════════════════════════════════════ */
+.st {
+  text-shadow: 0 0 32px rgba(191,47,255,0.22), 0 0 12px rgba(204,46,138,0.12);
+}
+.se {
+  text-shadow: 0 0 12px rgba(255,34,163,0.45);
+}
+
+/* ═══════════════════════════════════════════════════════
+   HAMBURGER — physical toggle
+═══════════════════════════════════════════════════════ */
+.hamburger {
+  background: linear-gradient(180deg, rgba(20,20,36,1) 0%, rgba(10,10,18,1) 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom-color: rgba(0,0,0,0.6);
+  border-radius: 4px;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  padding: 8px 9px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   STAT VALUES — LED-style readout
+═══════════════════════════════════════════════════════ */
+.stat-val {
+  text-shadow: 0 0 24px rgba(204,46,138,0.4), 0 1px 3px rgba(0,0,0,0.7);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE OVERRIDES — keep performance, adapt skeuomorphism
+═══════════════════════════════════════════════════════ */
+@media(max-width:767px) {
+  .id-card, .spec-cell, .spec-item, .tier,
+  .banks-card, .price-card, .ks-card, .feature-row {
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      inset 0 -1px 0 rgba(0,0,0,0.4);
+  }
+  .showcase-entry {
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .btn-p, .btn-s {
+    box-shadow:
+      0 4px 14px rgba(204,46,138,0.4),
+      0 2px 4px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(255,255,255,0.15),
+      inset 0 -2px 4px rgba(0,0,0,0.35);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   MARQUEE — physical LED ticker channel
+═══════════════════════════════════════════════════════ */
+.mq {
+  padding: 16px 0;
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,0.55) 0%,
+      rgba(0,0,0,0.1) 22%,
+      rgba(0,0,0,0.1) 78%,
+      rgba(0,0,0,0.55) 100%),
+    rgba(204,46,138,0.035);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.9);
+  box-shadow:
+    inset 0 3px 10px rgba(0,0,0,0.85),
+    inset 0 -3px 10px rgba(0,0,0,0.85),
+    0 1px 0 rgba(255,255,255,0.03),
+    0 -1px 0 rgba(255,255,255,0.025);
+  -webkit-mask-image: linear-gradient(90deg,
+    transparent 0%, rgba(0,0,0,0.5) 3%, black 7%,
+    black 93%, rgba(0,0,0,0.5) 97%, transparent 100%);
+  mask-image: linear-gradient(90deg,
+    transparent 0%, rgba(0,0,0,0.5) 3%, black 7%,
+    black 93%, rgba(0,0,0,0.5) 97%, transparent 100%);
+}
+.mq-technical {
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 22%,
+      rgba(0,0,0,0.1) 78%, rgba(0,0,0,0.55) 100%),
+    rgba(0,229,255,0.025);
+}
+.mq-developmental {
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 22%,
+      rgba(0,0,0,0.1) 78%, rgba(0,0,0,0.55) 100%),
+    rgba(191,47,255,0.025);
+}
+.mq-item { font-size: clamp(9px,0.85vw,11px); letter-spacing: 0.2em; }
+.mq-item.hi {
+  text-shadow: 0 0 12px rgba(255,34,163,0.6);
+}
+.mq-technical .mq-item.hi { text-shadow: 0 0 12px rgba(0,229,255,0.6); }
+.mq-developmental .mq-item.hi { text-shadow: 0 0 12px rgba(191,47,255,0.6); }
+@media(max-width:767px) {
+  .mq { -webkit-mask-image: none; mask-image: none; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   HERO STATS — instrument cluster modules
+═══════════════════════════════════════════════════════ */
+.hero-stats {
+  display: flex;
+  gap: clamp(6px,1.2vw,14px);
+  padding: clamp(10px,1.5vw,16px) clamp(24px,10vw,180px);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(4,4,7,0.96) 100%);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 -8px 32px rgba(0,0,0,0.7);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(12px,1.6vw,18px) clamp(14px,2vw,22px);
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0, transparent 1px,
+      rgba(255,255,255,0.008) 1px, rgba(255,255,255,0.008) 2px),
+    linear-gradient(180deg, #0f0f22 0%, #08080e 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom-color: rgba(0,0,0,0.8);
+  border-radius: 7px;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,1),
+    0 4px 16px rgba(0,0,0,0.75),
+    0 10px 32px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.09),
+    inset 0 -1px 0 rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.stat:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,1),
+    0 8px 28px rgba(0,0,0,0.8),
+    0 0 40px rgba(204,46,138,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.11),
+    inset 0 -1px 0 rgba(0,0,0,0.6);
+}
+
+/* top accent per stat */
+.stat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: none;
+}
+.stat[data-color="pink"]::before    { background: linear-gradient(90deg, var(--pink-hot), var(--neon-purple)); box-shadow: 0 0 8px rgba(255,34,163,0.5); }
+.stat[data-color="purple"]::before  { background: linear-gradient(90deg, var(--neon-purple), var(--pink-hot)); box-shadow: 0 0 8px rgba(191,47,255,0.5); }
+.stat[data-color="cyan"]::before    { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple)); box-shadow: 0 0 8px rgba(0,229,255,0.5); }
+.stat[data-color="neon"]::before    { background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan)); box-shadow: 0 0 8px rgba(255,90,175,0.5); }
+
+/* icon */
+.stat-icon {
+  width: clamp(14px,1.4vw,18px);
+  height: clamp(14px,1.4vw,18px);
+  margin-bottom: 8px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.stat[data-color="pink"]   .stat-icon { color: var(--neon-pink); }
+.stat[data-color="purple"] .stat-icon { color: var(--neon-purple); }
+.stat[data-color="cyan"]   .stat-icon { color: var(--neon-cyan); }
+.stat[data-color="neon"]   .stat-icon { color: var(--neon-pink); }
+
+/* inset readout zone */
+.stat-val {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(20px,2.8vw,34px);
+  line-height: 1;
+  margin-bottom: 6px;
+  position: relative;
+}
+.stat[data-color="pink"]   .stat-val { background: linear-gradient(135deg,var(--neon-pink),var(--pink-hot)); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; text-shadow: none; filter: drop-shadow(0 0 10px rgba(255,34,163,0.5)); }
+.stat[data-color="purple"] .stat-val { background: linear-gradient(135deg,var(--neon-purple),var(--pink-hot)); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; text-shadow: none; filter: drop-shadow(0 0 10px rgba(191,47,255,0.5)); }
+.stat[data-color="cyan"]   .stat-val { background: linear-gradient(135deg,var(--neon-cyan),var(--neon-purple)); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; text-shadow: none; filter: drop-shadow(0 0 10px rgba(0,229,255,0.5)); }
+.stat[data-color="neon"]   .stat-val { background: linear-gradient(135deg,var(--neon-pink),var(--neon-cyan)); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; text-shadow: none; filter: drop-shadow(0 0 10px rgba(255,90,175,0.5)); }
+
+.stat-label {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(7px,0.65vw,9px);
+  letter-spacing: 0.18em;
+  color: rgba(153,161,178,0.65);
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+/* mobile: 2x2 grid */
+@media(max-width:567px) {
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .stat { border-right: none; box-shadow: 0 2px 8px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.07); }
+}
+@media(max-width:480px) {
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   MORE SKEUOMORPHISM — elements not yet treated
+═══════════════════════════════════════════════════════ */
+
+/* Section eyebrow line — engraved rule */
+.se::after {
+  background: linear-gradient(90deg, rgba(204,46,138,0.5), transparent);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.03);
+  height: 1px;
+}
+
+/* Showcase placeholder — recessed screen */
+.showcase-ph {
+  background: linear-gradient(180deg,
+    #060610 0%, #04040c 50%, #020208 100%);
+  box-shadow:
+    inset 0 4px 16px rgba(0,0,0,0.9),
+    inset 0 0 60px rgba(0,0,0,0.6);
+}
+.showcase-ph span {
+  text-shadow: 0 0 12px rgba(107,31,160,0.4);
+  color: rgba(153,161,178,0.35);
+}
+
+/* Disc facts — physical data plates */
+.disc-facts { gap: 3px; }
+.disc-fact + .disc-fact {
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+/* OSS visual — phosphor screen glow */
+.oss-visual {
+  background: linear-gradient(180deg,
+    rgba(0,229,255,0.015) 0%, transparent 40%,
+    transparent 60%, rgba(0,229,255,0.01) 100%);
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.6);
+}
+.oss-visual-grid {
+  opacity: 0.35;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+}
+.oss-orbit-1 { border-color: rgba(0,229,255,0.14); box-shadow: 0 0 8px rgba(0,229,255,0.04); }
+.oss-orbit-2 { border-color: rgba(191,47,255,0.1); box-shadow: 0 0 6px rgba(191,47,255,0.03); }
+
+/* Price glow — deeper shimmer */
+.price-glow {
+  height: 3px;
+  box-shadow: 0 0 12px rgba(204,46,138,0.4), 0 0 30px rgba(107,31,160,0.2);
+}
+
+/* Stat hover — cancel old scale, use translate */
+.stat:hover .stat-val { transform: none; }
+
+/* spec-banner accent stripe — glow it */
+.spec-banner { border-left: 3px solid var(--neon-pink); box-shadow: 0 4px 16px rgba(0,0,0,0.7), inset 4px 0 20px rgba(255,34,163,0.04), inset 0 1px 0 rgba(255,255,255,0.06); }
+
+/* showcase-tag — physical label badge */
+.showcase-tag {
+  background: linear-gradient(180deg, rgba(0,229,255,0.1) 0%, rgba(0,229,255,0.03) 100%);
+  border: 1px solid rgba(0,229,255,0.22);
+  border-top-color: rgba(0,229,255,0.32);
+  border-bottom-color: rgba(0,0,0,0.4);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(0,229,255,0.12);
+  text-shadow: 0 0 8px rgba(0,229,255,0.4);
+}
+
+/* id-card icon hover — deeper press */
+.id-card:hover .id-icon {
+  box-shadow: 0 0 24px rgba(107,31,160,0.35), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* stat::before was being overridden — reset old hover rule */
+.stat:hover::before { transform: scaleX(1); }
+
 </style>
 </head>
 <body>
@@ -710,10 +1776,22 @@ section,.showcase,.oss-section{contain:layout style}
       </div>
     </div>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-val">275+</span><span class="stat-label">Developers</span></div>
-      <div class="stat"><span class="stat-val">90%</span><span class="stat-label">Revenue Share</span></div>
-      <div class="stat"><span class="stat-val">$225</span><span class="stat-label">Launch Price</span></div>
-      <div class="stat"><span class="stat-val">8GB</span><span class="stat-label">LPDDR5</span></div>
+      <div class="stat" data-color="pink">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="stat-val">275+</span><span class="stat-label">Developers</span>
+      </div>
+      <div class="stat" data-color="purple">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span class="stat-val">90%</span><span class="stat-label">Revenue Share</span>
+      </div>
+      <div class="stat" data-color="cyan">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        <span class="stat-val">$225</span><span class="stat-label">Launch Price</span>
+      </div>
+      <div class="stat" data-color="neon">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+        <span class="stat-val">8GB</span><span class="stat-label">LPDDR5</span>
+      </div>
     </div>
   </section>
   <div class="mq" id="mq-home"><div class="mq-inner"><div class="mq-track"><span class="mq-item">Physical Media</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Open Modding</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Rotur.Dev</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Engine Freedom</span><span class="mq-item dot">&#9670;</span><span class="mq-item">WebGPU</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Custom Shell Colors</span><span class="mq-item dot">&#9670;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">Physical Media</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Open Modding</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Rotur.Dev</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Engine Freedom</span><span class="mq-item dot">&#9670;</span><span class="mq-item">WebGPU</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Indie Forever</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Custom Shell Colors</span><span class="mq-item dot">&#9670;</span></div></div></div>
@@ -725,7 +1803,12 @@ section,.showcase,.oss-section{contain:layout style}
     {title:"Kiki's MicroDungeon",desc:"KKMD is a colorful, 2D Rogue-like Boss rush with tile-based movement, and bullet-hell aspects. Each run varies in terms of bosses, encounters, NPCs, Upgrades, and ways to build Kiki.",img:"",tag:"Game"},
     {title:"Spectrum in the Void",desc:"SITV is a Topdown Shoot Em' Up themed after space, abstract shapes, and neon lights. You and up to 3 other friends can blast holes through hordes of vibrant enemies. There's something kinda similar to a story involved. More or less pointing you in the right direction. You can upgrade your ship's attributes as you play, and really mess around with the interacting systems.",img:"",tag:"Game"},
     {title:"Ode to Aetherhold",desc:"Ode to Aetherhold is a topdown Action RPG made in GBStudio. It draws from Darksouls in terms of art direction, and story beats. There's real-time combat, character building, and 2 endings to this story. You're were brought back from the abyss, tugged towards the floating kingdom in the sky. Only one command plauges your mind: 'Forget me gently, and climb.'",img:"",tag:"Game"},
-    {title:"Battle Bound",desc:"A side-scrolling Online Multiplayer shooter. A handful of gamemodes, maps, customizable weapon loadouts, and character customization. So far the closest thing we have to satify the Call of Duty Player's itch.",img:"",tag:"Game &#183; Fighting"}
+    {title:"Battle Bound",desc:"A side-scrolling Online Multiplayer shooter. A handful of gamemodes, maps, customizable weapon loadouts, and character customization. So far the closest thing we have to satify the Call of Duty Player's itch.",img:"",tag:"Game &#183; Fighting"},
+    {title:"example",desc:"test.",img:"",tag:"Game"},
+    {title:"example",desc:"test.",img:"",tag:"Game"},
+    {title:"example",desc:"test.",img:"",tag:"Game"},
+    {title:"example",desc:"test.",img:"",tag:"Game"},
+    
   ];
   </script>
 
