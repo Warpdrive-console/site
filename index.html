@@ -101,7 +101,7 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .mobile-menu.open a:nth-child(3),.mobile-menu.open button:nth-child(3){transition-delay:0.24s}
 .mobile-menu.open .mobile-menu-actions{opacity:0;animation:fu 0.5s ease 0.35s forwards}
 .mobile-menu a:hover,.mobile-menu button:hover{color:var(--neon-pink)}
-.mobile-menu-actions{display:flex;gap:8px;margin-top:20px;flex-direction:row;flex-wrap:wrap}
+.mobile-menu-actions{display:flex;gap:8px;margin-top:20px;flex-direction:row;flex-wrap:wrap;align-items:stretch}
 .mobile-menu-actions .btn-p{
   background:linear-gradient(180deg,rgba(215,50,142,0.24) 0%,rgba(204,46,138,0.08) 100%) !important;
   border-top:1px solid rgba(255,140,205,0.48) !important;
@@ -112,7 +112,7 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
   padding:8px 16px !important;font-family:'Space Mono',monospace !important;font-weight:400 !important;
   font-size:clamp(9px,2.5vw,11px) !important;letter-spacing:0.13em !important;
   color:var(--pink-hot) !important;text-shadow:0 0 10px rgba(255,34,163,0.45) !important;
-  flex:1;min-width:110px;justify-content:center;animation:none !important;
+  flex:1 1 0;min-width:110px;justify-content:center;text-align:center;animation:none !important;
 }
 .mobile-menu-actions .btn-p::before,.mobile-menu-actions .btn-p::after{display:none !important}
 .mobile-menu-actions .btn-github{
@@ -125,9 +125,8 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
   padding:8px 16px !important;font-family:'Space Mono',monospace !important;font-weight:400 !important;
   font-size:clamp(9px,2.5vw,11px) !important;letter-spacing:0.13em !important;
   color:var(--silver-dim) !important;
-  flex:1;min-width:110px;justify-content:center;
+  flex:1 1 0;min-width:110px;justify-content:center;text-align:center;
 }
-.mobile-menu-actions .btn-github svg{width:13px !important;height:13px !important}
 .mobile-menu-actions .btn-github::before{display:none !important}
  
 .page{display:none;position:relative;z-index:1}.page.active{display:block}
@@ -788,12 +787,15 @@ section,.showcase,.oss-section{contain:layout style}
   .spec-cell{backdrop-filter:none;-webkit-backdrop-filter:none}
   .spec-item{backdrop-filter:none;-webkit-backdrop-filter:none}
   .spec-banner{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .void-layer{transform:none}
   .void-layer::before{display:none}
   .void-blob{filter:none;transform:none;animation:none;will-change:auto;backface-visibility:visible;isolation:auto}
   .deco-shape{animation:none !important}
+  .deco-layer{display:none}
   .vb3,.vb4,.vb5{display:none}
   body::after{display:none}
   .bg-scan{display:none}
+  .bg-grid{transform:none}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
@@ -3548,7 +3550,7 @@ footer {
   <button onclick="goPage('developmental')">Developmental</button>
   <div class="mobile-menu-actions">
     <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener">Join the Discord</a>
-    <a href="https://github.com/Warpdrive-console" class="btn-github" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="var(--silver-hi)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg><span>View on GitHub</span></a>
+    <a href="https://github.com/Warpdrive-console" class="btn-github" target="_blank" rel="noopener">View on GitHub</a>
   </div>
 </div>
  
@@ -3820,10 +3822,16 @@ const sf = document.getElementById('starfield');
 const ctx = sf.getContext('2d', { alpha: true });
 let W, H, stars = [], particles = [], shootingStars = [], mobile = false, dpr = 1;
 
+let _lastW = 0;
 function resize() {
+  const newW = window.innerWidth;
+  const newH = window.innerHeight;
+  const widthChanged = newW !== _lastW;
+  _lastW = newW;
+
   dpr = lowEnd ? 1 : Math.min(window.devicePixelRatio || 1, 2);
-  W = window.innerWidth;
-  H = window.innerHeight;
+  W = newW;
+  H = newH;
   sf.width = W * dpr;
   sf.height = H * dpr;
   sf.style.width = W + 'px';
@@ -3833,8 +3841,12 @@ function resize() {
   starCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
   starF = 0;
   mobile = isMobile();
-  makeStars();
-  makeParticles();
+  // On mobile, height-only changes are the URL bar appearing/disappearing.
+  // Rebuilding stars in that case makes them teleport, so skip it.
+  if (widthChanged || !stars.length) {
+    makeStars();
+    makeParticles();
+  }
 }
 
 const SIN_N = 4096, SIN_K = SIN_N / (Math.PI * 2);
