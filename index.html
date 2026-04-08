@@ -101,8 +101,34 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .mobile-menu.open a:nth-child(3),.mobile-menu.open button:nth-child(3){transition-delay:0.24s}
 .mobile-menu.open .mobile-menu-actions{opacity:0;animation:fu 0.5s ease 0.35s forwards}
 .mobile-menu a:hover,.mobile-menu button:hover{color:var(--neon-pink)}
-.mobile-menu-actions{display:flex;gap:10px;margin-top:24px;flex-direction:column}
-.mobile-menu-actions .btn,.mobile-menu-actions .btn-p,.mobile-menu-actions .btn-github{display:flex;width:100%;justify-content:center}
+.mobile-menu-actions{display:flex;gap:8px;margin-top:20px;flex-direction:row;flex-wrap:wrap}
+.mobile-menu-actions .btn-p{
+  background:linear-gradient(180deg,rgba(215,50,142,0.24) 0%,rgba(204,46,138,0.08) 100%) !important;
+  border-top:1px solid rgba(255,140,205,0.48) !important;
+  border-left:1px solid rgba(220,72,162,0.28) !important;
+  border-right:1px solid rgba(0,0,0,0.48) !important;
+  border-bottom:2px solid rgba(0,0,0,0.75) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(0,0,0,0.42),0 2px 0 rgba(0,0,0,0.65),0 3px 10px rgba(0,0,0,0.75),0 0 10px rgba(204,46,138,0.1) !important;
+  padding:8px 16px !important;font-family:'Space Mono',monospace !important;font-weight:400 !important;
+  font-size:clamp(9px,2.5vw,11px) !important;letter-spacing:0.13em !important;
+  color:var(--pink-hot) !important;text-shadow:0 0 10px rgba(255,34,163,0.45) !important;
+  flex:1;min-width:110px;justify-content:center;animation:none !important;
+}
+.mobile-menu-actions .btn-p::before,.mobile-menu-actions .btn-p::after{display:none !important}
+.mobile-menu-actions .btn-github{
+  background:linear-gradient(180deg,rgba(16,16,40,1) 0%,rgba(7,7,18,1) 100%) !important;
+  border-top:1px solid rgba(255,255,255,0.14) !important;
+  border-left:1px solid rgba(255,255,255,0.08) !important;
+  border-right:1px solid rgba(0,0,0,0.58) !important;
+  border-bottom:2px solid rgba(0,0,0,0.8) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),inset 0 -1px 0 rgba(0,0,0,0.48),0 2px 0 rgba(0,0,0,0.65),0 3px 10px rgba(0,0,0,0.75) !important;
+  padding:8px 16px !important;font-family:'Space Mono',monospace !important;font-weight:400 !important;
+  font-size:clamp(9px,2.5vw,11px) !important;letter-spacing:0.13em !important;
+  color:var(--silver-dim) !important;
+  flex:1;min-width:110px;justify-content:center;
+}
+.mobile-menu-actions .btn-github svg{width:13px !important;height:13px !important}
+.mobile-menu-actions .btn-github::before{display:none !important}
  
 .page{display:none;position:relative;z-index:1}.page.active{display:block}
  
@@ -174,7 +200,7 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .btn:disabled, .btn[disabled],
 .showcase-arrow:disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; }
 
-@keyframes ctaGlow { 0%,100%{opacity:0.35} 50%{opacity:1} }
+@keyframes ctaGlow { 0%,100%{opacity:0.25} 50%{opacity:0.6} }
 
 .btn-p {
   --_ga: #ff45b5; --_gb: #a00870; --_gah: #ff55c5; --_gbh: #b01080;
@@ -193,7 +219,7 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 }
 .btn-p::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit;
-  box-shadow: 0 0 28px rgba(220,30,130,0.55);
+  box-shadow: 0 0 14px rgba(220,30,130,0.25);
   animation: ctaGlow 4s ease-in-out infinite;
   pointer-events: none; z-index: -1;
 }
@@ -764,8 +790,10 @@ section,.showcase,.oss-section{contain:layout style}
   .spec-banner{backdrop-filter:none;-webkit-backdrop-filter:none}
   .void-layer::before{display:none}
   .void-blob{filter:none;transform:none;animation:none;will-change:auto;backface-visibility:visible;isolation:auto}
-.deco-shape{animation:none !important}
+  .deco-shape{animation:none !important}
   .vb3,.vb4,.vb5{display:none}
+  body::after{display:none}
+  .bg-scan{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
@@ -1408,8 +1436,8 @@ section::before, .showcase::before, .oss-section::before {
 .stat-val {
   display: block;
   font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: clamp(20px,2.8vw,34px);
+  font-weight: 900;
+  font-size: clamp(23px,2.8vw,36px);
   line-height: 1;
   margin-bottom: 6px;
   position: relative;
@@ -1424,7 +1452,7 @@ section::before, .showcase::before, .oss-section::before {
   font-family: 'Space Mono', monospace;
   font-size: clamp(7px,0.65vw,9px);
   letter-spacing: 0.18em;
-  color: rgba(153,161,178,0.65);
+  color: rgba(153,161,178,0.82);
   text-transform: uppercase;
   margin-top: 0;
 }
@@ -1978,8 +2006,8 @@ nav::after{
     inset -4px 0 12px rgba(255,255,255,0.05),
     0 5px 0 rgba(70,0,45,0.95),
     0 6px 2px rgba(0,0,0,0.85),
-    0 8px 32px rgba(220,30,130,0.75),
-    0 16px 60px rgba(150,0,90,0.45),
+    0 8px 22px rgba(220,30,130,0.3),
+    0 16px 40px rgba(150,0,90,0.18),
     0 1px 4px rgba(0,0,0,1);
   --_txts:0 1px 5px rgba(0,0,0,0.9),0 0 24px rgba(255,100,200,0.35)
 }
@@ -1992,7 +2020,7 @@ nav::after{
 }
 .btn-p::after{
   content:'';position:absolute;inset:0;border-radius:inherit;
-  box-shadow:0 0 28px rgba(220,30,130,0.55);
+  box-shadow:0 0 14px rgba(220,30,130,0.25);
   animation:ctaGlow 4s ease-in-out infinite;
   pointer-events:none;z-index:-1
 }
@@ -2048,8 +2076,8 @@ nav::after{
     inset 0 0 40px rgba(0,229,255,0.05),
     0 3px 0 rgba(0,0,0,0.75),
     0 4px 2px rgba(0,0,0,0.65),
-    0 0 32px rgba(0,229,255,0.25),
-    0 0 80px rgba(0,229,255,0.1),
+    0 0 18px rgba(0,229,255,0.14),
+    0 0 48px rgba(0,229,255,0.05),
     0 6px 22px rgba(0,0,0,0.85)
 }
 .btn-s:active{
@@ -2074,7 +2102,7 @@ nav::after{
     0 3px 0 rgba(0,0,0,0.75),
     0 4px 2px rgba(0,0,0,0.65),
     0 6px 28px rgba(0,0,0,0.85),
-    0 0 24px rgba(0,229,255,0.14)
+    0 0 14px rgba(0,229,255,0.08)
 }
 .btn-github:hover{
   border-top-color:rgba(0,229,255,0.65);
@@ -2100,7 +2128,7 @@ nav::after{
     inset 0 -1px 0 rgba(0,0,0,0.45),
     0 2px 0 rgba(0,0,0,0.65),
     0 3px 10px rgba(0,0,0,0.75),
-    0 0 16px rgba(204,46,138,0.16);
+    0 0 10px rgba(204,46,138,0.1);
   text-shadow:0 0 14px rgba(255,34,163,0.6)
 }
 .nav-cta:hover{
@@ -2108,8 +2136,8 @@ nav::after{
     inset 0 1px 0 rgba(255,255,255,0.15),
     inset 0 -1px 0 rgba(0,0,0,0.45),
     0 2px 0 rgba(0,0,0,0.65),
-    0 0 24px rgba(204,46,138,0.45),
-    0 0 56px rgba(204,46,138,0.16),
+    0 0 14px rgba(204,46,138,0.22),
+    0 0 32px rgba(204,46,138,0.08),
     0 3px 10px rgba(0,0,0,0.75)
 }
 
@@ -2697,8 +2725,8 @@ footer::before{opacity:0.28}
     0 9px 24px rgba(0,0,0,0.88),
     0 20px 52px rgba(0,0,0,0.6),
     0 0 36px rgba(204,46,138,0.65),
-    0 0 90px rgba(204,46,138,0.32),
-    0 0 160px rgba(107,31,160,0.2);
+    0 0 40px rgba(204,46,138,0.14),
+    0 0 80px rgba(107,31,160,0.08);
 }
 .btn-p:hover {
   box-shadow:
@@ -2709,9 +2737,9 @@ footer::before{opacity:0.28}
     0 3px 6px rgba(0,0,0,1),
     0 8px 20px rgba(0,0,0,1),
     0 18px 48px rgba(0,0,0,0.85),
-    0 0 60px rgba(204,46,138,1),
-    0 0 130px rgba(204,46,138,0.55),
-    0 0 220px rgba(107,31,160,0.35);
+    0 0 32px rgba(204,46,138,0.45),
+    0 0 70px rgba(204,46,138,0.18),
+    0 0 120px rgba(107,31,160,0.12);
 }
 .btn-p:active {
   box-shadow:
@@ -2732,7 +2760,7 @@ footer::before{opacity:0.28}
 }
 .btn-p::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit;
-  box-shadow: 0 0 28px rgba(220,30,130,0.55);
+  box-shadow: 0 0 14px rgba(220,30,130,0.25);
   animation: ctaGlow 4s ease-in-out infinite;
   pointer-events: none; z-index: -1;
 }
@@ -2764,8 +2792,8 @@ footer::before{opacity:0.28}
     inset 3px 0 10px rgba(0,229,255,0.03),
     0 2px 8px rgba(0,0,0,1),
     0 10px 28px rgba(0,0,0,0.88),
-    0 0 32px rgba(0,229,255,0.22),
-    0 0 80px rgba(0,229,255,0.1);
+    0 0 20px rgba(0,229,255,0.14),
+    0 0 50px rgba(0,229,255,0.06);
 }
 .btn-s:active {
   box-shadow:
@@ -2799,9 +2827,8 @@ footer::before{opacity:0.28}
     inset 0 -2px 0 rgba(0,0,0,0.52),
     0 3px 10px rgba(0,0,0,1),
     0 12px 32px rgba(0,0,0,0.9),
-    0 0 50px rgba(0,229,255,0.38),
-    0 0 110px rgba(0,229,255,0.18),
-    0 0 180px rgba(191,47,255,0.12);
+    0 0 28px rgba(0,229,255,0.2),
+    0 0 60px rgba(0,229,255,0.08);
 }
 .btn-github:active {
   box-shadow:
@@ -3438,9 +3465,8 @@ nav {
 }
 .stat-val {
   text-shadow:
-    0 0 36px rgba(204,46,138,0.65),
-    0 2px 6px rgba(0,0,0,0.85),
-    0 0 100px rgba(204,46,138,0.2);
+    0 0 14px rgba(204,46,138,0.35),
+    0 1px 4px rgba(0,0,0,0.9);
 }
 
 footer {
@@ -3791,7 +3817,7 @@ let tabVisible = true;
 document.addEventListener('visibilitychange', () => { tabVisible = !document.hidden; });
 
 const sf = document.getElementById('starfield');
-const ctx = sf.getContext('2d', { alpha: true, desynchronized: true });
+const ctx = sf.getContext('2d', { alpha: true });
 let W, H, stars = [], particles = [], shootingStars = [], mobile = false, dpr = 1;
 
 function resize() {
@@ -3816,7 +3842,7 @@ const SIN_TABLE = new Float32Array(SIN_N);
 for (let i = 0; i < SIN_N; i++) SIN_TABLE[i] = Math.sin(i / SIN_K);
 
 const starSf = document.createElement('canvas');
-const starCtx = starSf.getContext('2d', { alpha: true, desynchronized: true });
+const starCtx = starSf.getContext('2d', { alpha: true });
 let starF = 0;
 
 function makeStars() {
