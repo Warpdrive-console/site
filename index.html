@@ -102,7 +102,7 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
 .mobile-menu.open .mobile-menu-actions{opacity:0;animation:fu 0.5s ease 0.35s forwards}
 .mobile-menu a:hover,.mobile-menu button:hover{color:var(--neon-pink)}
 .mobile-menu-actions{display:flex;gap:10px;margin-top:24px;flex-direction:column}
-.mobile-menu-actions .btn{font-size:11px;padding:14px 20px;text-align:center;display:block;width:100%;justify-content:center}
+.mobile-menu-actions .btn,.mobile-menu-actions .btn-p,.mobile-menu-actions .btn-github{display:flex;width:100%;justify-content:center}
  
 .page{display:none;position:relative;z-index:1}.page.active{display:block}
  
@@ -192,10 +192,10 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
   border-radius: 5px 5px 0 0; pointer-events: none;
 }
 .btn-p::after {
-  content: ''; position: absolute; inset: -6px; border-radius: 8px;
-  background: radial-gradient(ellipse at 30% 50%, rgba(255,34,163,0.55) 0%, rgba(107,31,160,0.25) 20%, transparent 55%);
-  animation: ctaGlow 5s ease-in-out infinite;
-  pointer-events: none; will-change: opacity; mix-blend-mode: screen; z-index: 2;
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 28px rgba(220,30,130,0.55);
+  animation: ctaGlow 4s ease-in-out infinite;
+  pointer-events: none; z-index: -1;
 }
 .btn-s {
   --_ga: rgba(17,17,40,1); --_gb: rgba(8,8,14,1);
@@ -276,10 +276,6 @@ nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;ba
   --_drp: rgba(0,0,0,0.75); --_rad: 4px; --_lift: 0px;
   display: none; gap: 5px; padding: 8px 9px; z-index: 201;
 }
-
-
-
-
 
 .hero-stats{position:absolute;bottom:0;left:0;right:0;display:flex;flex-wrap:wrap;z-index:2;border-top:1px solid var(--border);background:rgba(4,4,7,0.6);opacity:0;animation:fu 1s ease 1s forwards}
 .stat{flex:1;min-width:80px;padding:clamp(12px,1.5vw,20px) clamp(14px,2.5vw,28px);border-right:1px solid var(--border);position:relative;overflow:hidden}
@@ -1995,10 +1991,10 @@ nav::after{
   pointer-events:none
 }
 .btn-p::after{
-  content:'';position:absolute;inset:-10px;border-radius:12px;
-  background:radial-gradient(ellipse at 35% 55%,rgba(255,34,163,0.75) 0%,rgba(191,47,255,0.4) 30%,transparent 65%);
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  box-shadow:0 0 28px rgba(220,30,130,0.55);
   animation:ctaGlow 4s ease-in-out infinite;
-  pointer-events:none;will-change:opacity;mix-blend-mode:screen;z-index:-1
+  pointer-events:none;z-index:-1
 }
 .btn-p:hover{
   background:linear-gradient(180deg,#ff72d4 0%,#f828b8 12%,#dc189e 40%,#bc108a 70%,#9a0874 100%);
@@ -2735,14 +2731,10 @@ footer::before{opacity:0.28}
   border-radius: 5px 5px 0 0; pointer-events: none; z-index: 1;
 }
 .btn-p::after {
-  content: ''; position: absolute; inset: -12px; border-radius: 12px;
-  background: radial-gradient(ellipse at 28% 38%,
-    rgba(255,34,163,0.85) 0%,
-    rgba(204,46,138,0.5) 20%,
-    rgba(107,31,160,0.25) 46%,
-    transparent 68%);
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: 0 0 28px rgba(220,30,130,0.55);
   animation: ctaGlow 4s ease-in-out infinite;
-  pointer-events: none; will-change: opacity; mix-blend-mode: screen; z-index: 2;
+  pointer-events: none; z-index: -1;
 }
 
 .btn-s {
@@ -2865,7 +2857,7 @@ footer::before{opacity:0.28}
   --_rgt: rgba(0,0,0,0.58); --_bot: rgba(0,0,0,0.8); --_bw: 2px;
   --_hi: rgba(255,255,255,0.1); --_lo: rgba(0,0,0,0.48);
   --_drp: rgba(0,0,0,0.82); --_rad: 4px; --_lift: 0px;
-  display: none; gap: 5px; padding: 8px 9px; z-index: 201;
+  gap: 5px; padding: 8px 9px; z-index: 201;
 }
 
 nav {
@@ -3529,8 +3521,8 @@ footer {
   <button onclick="goPage('technical')">Technical</button>
   <button onclick="goPage('developmental')">Developmental</button>
   <div class="mobile-menu-actions">
-    <a href="https://github.com/Warpdrive-console" class="nav-ghost" target="_blank" rel="noopener" style="display:block">GitHub</a>
-    <a href="https://discord.gg/Dv6K2vNyfK" class="nav-cta" target="_blank" rel="noopener" style="display:block">Discord</a>
+    <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener">Join the Discord</a>
+    <a href="https://github.com/Warpdrive-console" class="btn-github" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="var(--silver-hi)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg><span>View on GitHub</span></a>
   </div>
 </div>
  
