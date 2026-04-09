@@ -1133,9 +1133,6 @@ nav::after { animation-duration: 12s; }
     inset 0 1px 0 rgba(255,255,255,0.1),
     inset 0 -2px 4px rgba(0,0,0,0.6);
 }
-.price-amount {
-  text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 0 40px rgba(200,205,216,0.1);
-}
 
 .ks-card {
   background: linear-gradient(180deg, #0e0e1e 0%, #080810 100%);
@@ -1335,11 +1332,6 @@ section::before, .showcase::before, .oss-section::before {
 }
 .se {
   text-shadow: 0 0 12px rgba(255,34,163,0.45);
-}
-
-
-.stat-val {
-  text-shadow: 0 0 24px rgba(204,46,138,0.4), 0 1px 3px rgba(0,0,0,0.7);
 }
 
 @media(max-width:767px) {
@@ -1740,10 +1732,12 @@ a,button,.showcase-entry,.stat,.banks-card,
 }
 .price-amount {
   text-shadow:
-    0 0 32px rgba(200,205,216,0.15),
-    0 2px 4px rgba(0,0,0,0.8);
+    0 0 13px rgba(230,255,255,0.83),
+    -0.8px 3px rgba(0,0,0,0.22);
   letter-spacing: -0.02em;
+  mix-blend-mode: color-dodge;
 }
+  
 .price-line { letter-spacing: 0.01em; }
 .price-line::before { font-size: 8px; }
 
@@ -2490,7 +2484,6 @@ nav::after{
     0 0 200px rgba(107,31,160,0.08)
 }
 .price-glow{height:4px;box-shadow:0 0 28px rgba(204,46,138,0.75),0 0 80px rgba(191,47,255,0.32)}
-.price-amount{text-shadow:0 2px 24px rgba(0,0,0,0.95),0 0 80px rgba(200,205,216,0.18),0 0 6px rgba(200,205,216,0.1)}
 
 /* ks card */
 .ks-card{
@@ -3447,13 +3440,6 @@ nav {
     inset 0 1px 0 rgba(0,0,0,0.65);
 }
 
-.price-amount {
-  text-shadow:
-    0 0 50px rgba(200,205,216,0.22),
-    0 2px 10px rgba(0,0,0,0.95),
-    0 0 150px rgba(200,205,216,0.08);
-  letter-spacing: -0.02em;
-}
 .st {
   text-shadow:
     0 0 50px rgba(191,47,255,0.38),
@@ -3463,10 +3449,12 @@ nav {
 .se {
   text-shadow: 0 0 20px rgba(255,34,163,0.72), 0 0 55px rgba(255,34,163,0.28);
 }
+
+/*Hero Stats*/
 .stat-val {
   text-shadow:
-    0 0 14px rgba(204,46,138,0.35),
-    0 1px 4px rgba(0,0,0,0.9);
+    0 0 14px rgba(204,15,80,0.35),
+    0 3px 3px rgba(0,0,0,0.68)
 }
 
 footer {
