@@ -920,7 +920,7 @@ nav::after { animation-duration: 12s; }
     0 4px 14px rgba(0,0,0,0.7),
     inset 0 1px 0 rgba(255,255,255,0.07),
     inset 0 -1px 0 rgba(0,0,0,0.5),
-    inset 0 0 40px rgba(0,0,0,0.3);
+    inset 0 0 40px rgba(0,0,0,0.08);
 }
 .spec-cell:hover {
   border-color: rgba(0,229,255,0.18);
@@ -1606,15 +1606,15 @@ a,button,.showcase-entry,.stat,.banks-card,
 
 .spec-cell {
   background: linear-gradient(180deg,
-    #0e0e22 0%,
-    #08080e 45%,
-    #050508 100%);
+    #101028 0%,
+    #0c0c1a 45%,
+    #0a0a14 100%);
   border-top:    1px solid rgba(255,255,255,0.07);
   border-left:   1px solid rgba(255,255,255,0.04);
   border-right:  1px solid rgba(0,0,0,0.6);
   border-bottom: 2px solid rgba(0,0,0,0.8);
   box-shadow:
-    0 2px 8px rgba(0,0,0,0.7) inset,
+    0 1px 3px rgba(0,0,0,0.25) inset,
     0 1px 0 rgba(255,255,255,0.06) inset,
     0 2px 8px rgba(0,0,0,0.8),
     0 1px 3px rgba(0,0,0,0.95);
@@ -1623,7 +1623,7 @@ a,button,.showcase-entry,.stat,.banks-card,
   border-top-color:  rgba(0,229,255,0.2);
   border-left-color: rgba(0,229,255,0.1);
   box-shadow:
-    0 2px 6px rgba(0,0,0,0.6) inset,
+    0 1px 3px rgba(0,0,0,0.2) inset,
     0 1px 0 rgba(0,229,255,0.08) inset,
     0 0 16px rgba(0,229,255,0.06),
     0 2px 8px rgba(0,0,0,0.8);
@@ -1632,7 +1632,7 @@ a,button,.showcase-entry,.stat,.banks-card,
   text-shadow: 0 0 8px rgba(0,229,255,0.5);
   letter-spacing: 0.22em;
 }
-.spec-val { font-weight: 600; letter-spacing: 0.02em; }
+.spec-val { font-weight: 600; letter-spacing: 0.02em; color: var(--silver-hi); }
 
 .spec-item {
   background: linear-gradient(180deg, #0d0d1e 0%, #070710 100%);
@@ -2281,15 +2281,14 @@ nav::after{
 
 /* spec cells - deep recessed readout */
 .spec-cell{
-  background:linear-gradient(180deg,#0c0c20 0%,#080812 40%,#04040a 100%);
+  background:linear-gradient(180deg,#0e0e24 0%,#0a0a18 40%,#080810 100%);
   border-top:1px solid rgba(255,255,255,0.07);
   border-left:1px solid rgba(255,255,255,0.045);
   border-right:1px solid rgba(0,0,0,0.75);
   border-bottom:2px solid rgba(0,0,0,0.95);
   box-shadow:
-    inset 0 3px 10px rgba(0,0,0,0.85),
+    inset 0 1px 4px rgba(0,0,0,0.35),
     inset 0 1px 0 rgba(255,255,255,0.06),
-    inset 0 0 50px rgba(0,0,0,0.5),
     0 1px 4px rgba(0,0,0,0.98),
     0 4px 14px rgba(0,0,0,0.85)
 }
@@ -2297,9 +2296,9 @@ nav::after{
   border-top-color:rgba(0,229,255,0.26);
   border-left-color:rgba(0,229,255,0.12);
   box-shadow:
-    inset 0 3px 8px rgba(0,0,0,0.75),
+    inset 0 1px 3px rgba(0,0,0,0.25),
     inset 0 1px 0 rgba(0,229,255,0.12),
-    inset 0 0 40px rgba(0,229,255,0.04),
+    inset 0 0 20px rgba(0,229,255,0.04),
     0 0 24px rgba(0,229,255,0.1),
     0 0 60px rgba(0,229,255,0.04),
     0 2px 12px rgba(0,0,0,0.9)
@@ -2943,7 +2942,7 @@ nav {
 }
 
 .spec-cell {
-  background: linear-gradient(172deg, #111126 0%, #09090e 52%, #040408 100%);
+  background: linear-gradient(172deg, #121230 0%, #0b0b18 52%, #080810 100%);
   border-top:    1px solid rgba(255,255,255,0.09);
   border-left:   1px solid rgba(255,255,255,0.055);
   border-right:  1px solid rgba(0,0,0,0.68);
@@ -2951,7 +2950,6 @@ nav {
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.09),
     inset 0 -1px 0 rgba(0,0,0,0.58),
-    inset 4px 0 14px rgba(0,0,0,0.28),
     0 1px 2px rgba(0,0,0,1),
     0 4px 14px rgba(0,0,0,0.92),
     0 12px 34px rgba(0,0,0,0.72);
@@ -3484,6 +3482,233 @@ footer {
     0 -6px 50px rgba(107,31,160,0.1);
 }
 
+/* ROTUR ACCOUNT */
+.acct-page-layout{display:flex;flex-direction:column;gap:clamp(20px,3vw,32px);max-width:640px}
+.acct-profile-card{
+  background:
+    repeating-linear-gradient(90deg,transparent 0,transparent 1px,rgba(255,255,255,0.007) 1px,rgba(255,255,255,0.007) 2px),
+    linear-gradient(175deg,#12122a 0%,#0a0a14 55%,#060608 100%);
+  border-top:1px solid rgba(255,255,255,0.09);
+  border-left:1px solid rgba(255,255,255,0.06);
+  border-right:1px solid rgba(0,0,0,0.6);
+  border-bottom:2px solid rgba(0,0,0,0.8);
+  border-radius:10px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.09),0 4px 20px rgba(0,0,0,0.85);
+  padding:clamp(24px,4vw,40px);
+}
+.acct-profile-header{display:flex;align-items:center;gap:clamp(16px,3vw,24px)}
+.acct-big-avatar{
+  width:56px;height:56px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--purple-deep),var(--pink-hot));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:#fff;
+  border:2px solid rgba(255,255,255,0.12);
+  box-shadow:0 0 20px rgba(204,46,138,0.3),inset 0 1px 0 rgba(255,255,255,0.15);
+  text-transform:uppercase;
+}
+.acct-profile-name{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(18px,2.5vw,24px);
+  color:var(--silver-hi);text-transform:uppercase;letter-spacing:0.03em;
+}
+.acct-profile-sub{
+  font-family:'Space Mono',monospace;font-size:clamp(9px,0.85vw,11px);
+  letter-spacing:0.14em;color:var(--silver-dim);text-transform:uppercase;margin-top:4px;
+}
+.acct-profile-actions{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+
+.acct-section-title{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(13px,1.4vw,16px);
+  color:var(--neon-cyan);text-transform:uppercase;letter-spacing:0.06em;
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  text-shadow:0 0 12px rgba(0,229,255,0.3);
+}
+.acct-keys-list{display:flex;flex-direction:column;gap:2px}
+.acct-key-row{
+  display:flex;align-items:center;gap:clamp(12px,2vw,20px);
+  padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);
+  background:linear-gradient(180deg,#0d0d1e 0%,#080810 100%);
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-left:1px solid rgba(255,255,255,0.04);
+  border-right:1px solid rgba(0,0,0,0.55);
+  border-bottom:1px solid rgba(0,0,0,0.65);
+  border-radius:6px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 2px 8px rgba(0,0,0,0.7);
+  transition:border-color 0.15s,transform 0.15s;
+}
+.acct-key-row:hover{border-top-color:rgba(0,229,255,0.15);transform:translateX(3px)}
+.acct-key-id{
+  font-family:'Space Mono',monospace;font-size:clamp(9px,0.85vw,11px);
+  letter-spacing:0.1em;color:var(--neon-cyan);opacity:0.7;min-width:40px;
+}
+.acct-key-data{
+  flex:1;font-size:clamp(12px,1.2vw,14px);color:var(--silver);font-weight:400;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.acct-key-price{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(14px,1.5vw,18px);
+  background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  white-space:nowrap;
+}
+.acct-keys-empty{
+  padding:32px;text-align:center;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;
+  color:var(--silver-dim);text-transform:uppercase;
+}
+.acct-not-logged{max-width:640px}
+.acct-not-logged-inner{
+  text-align:center;padding:clamp(40px,6vw,80px) clamp(24px,4vw,48px);
+  background:linear-gradient(175deg,#0e0e22 0%,#08080e 100%);
+  border:1px solid rgba(255,255,255,0.05);border-bottom:2px solid rgba(0,0,0,0.7);
+  border-radius:10px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.07),0 4px 20px rgba(0,0,0,0.8);
+}
+.acct-not-logged-inner p{
+  font-size:clamp(14px,1.4vw,16px);font-weight:300;color:var(--silver-dim);line-height:1.8;
+}
+.acct-not-logged-inner p strong{color:var(--neon-pink);font-weight:500}
+.nav-account-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Space Mono',monospace;font-size:clamp(8px,0.8vw,10px);
+  letter-spacing:0.13em;color:var(--silver-dim);text-transform:uppercase;
+  padding:6px 12px;cursor:pointer;border:none;
+  background:linear-gradient(180deg,rgba(107,31,160,0.18) 0%,rgba(107,31,160,0.06) 100%);
+  border-top:1px solid rgba(150,60,210,0.3);
+  border-left:1px solid rgba(140,50,220,0.18);
+  border-right:1px solid rgba(0,0,0,0.5);
+  border-bottom:2px solid rgba(0,0,0,0.65);
+  border-radius:40px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.07),inset 0 -1px 0 rgba(0,0,0,0.4),
+    0 3px 10px rgba(0,0,0,0.7);
+  transition:all 0.2s;white-space:nowrap;
+}
+.nav-account-btn:hover{
+  color:var(--neon-pink);
+  border-top-color:rgba(255,90,175,0.35);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.09),0 0 16px rgba(255,90,175,0.12),0 3px 10px rgba(0,0,0,0.7);
+}
+.nav-account-btn:active{
+  border-top-color:rgba(0,0,0,0.3)!important;border-bottom-width:1px!important;
+  box-shadow:inset 0 3px 8px rgba(0,0,0,0.8)!important;transform:translateY(1px)!important;
+}
+.nav-account-btn svg{width:14px;height:14px;flex-shrink:0}
+.nav-account-btn .acct-name{max-width:80px;overflow:hidden;text-overflow:ellipsis}
+
+/* logged-in avatar circle */
+.acct-avatar{
+  width:22px;height:22px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple-deep),var(--pink-hot));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:10px;color:#fff;
+  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 0 8px rgba(204,46,138,0.3);
+  text-transform:uppercase;flex-shrink:0;
+}
+
+/* auth modal overlay */
+.rotur-auth-overlay{
+  position:fixed;inset:0;z-index:10000;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(4,4,7,0.88);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  animation:fu 0.3s ease forwards;
+}
+.rotur-auth-overlay.open{display:flex}
+.rotur-auth-modal{
+  width:min(420px,92vw);
+  background:
+    repeating-linear-gradient(90deg,transparent 0,transparent 1px,rgba(255,255,255,0.007) 1px,rgba(255,255,255,0.007) 2px),
+    linear-gradient(175deg,#12122a 0%,#0a0a14 55%,#060608 100%);
+  border-top:1px solid rgba(255,255,255,0.1);
+  border-left:1px solid rgba(255,255,255,0.06);
+  border-right:1px solid rgba(0,0,0,0.7);
+  border-bottom:3px solid rgba(0,0,0,0.85);
+  border-radius:12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 8px 40px rgba(0,0,0,0.95),
+    0 0 80px rgba(107,31,160,0.15);
+  overflow:hidden;position:relative;
+}
+.rotur-auth-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 22px;
+  background:linear-gradient(180deg,rgba(107,31,160,0.12),transparent);
+  border-bottom:1px solid rgba(107,31,160,0.15);
+}
+.rotur-auth-header span{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:0.06em;color:var(--silver-hi);text-transform:uppercase;
+}
+.rotur-auth-close{
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,rgba(14,14,28,1),rgba(8,8,14,1));
+  border-top:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(0,0,0,0.7);
+  border-left:1px solid rgba(255,255,255,0.04);
+  border-right:1px solid rgba(0,0,0,0.5);
+  border-radius:6px;cursor:pointer;color:var(--silver-dim);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 2px 6px rgba(0,0,0,0.6);
+  transition:all 0.15s;
+}
+.rotur-auth-close:hover{color:var(--neon-pink);border-top-color:rgba(255,90,175,0.2)}
+.rotur-auth-close:active{
+  border-top-color:rgba(0,0,0,0.3)!important;border-bottom-width:0!important;
+  box-shadow:inset 0 2px 6px rgba(0,0,0,0.8)!important;transform:translateY(1px)!important;
+}
+.rotur-auth-close svg{width:14px;height:14px}
+.rotur-auth-body{height:480px;position:relative}
+.rotur-auth-body iframe{width:100%;height:100%;border:none;border-radius:0 0 12px 12px}
+.rotur-auth-loading{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;
+  color:var(--silver-dim);text-transform:uppercase;
+}
+.rotur-auth-loading .rotur-dot{margin-right:10px}
+
+/* user dropdown */
+.acct-dropdown{
+  position:absolute;top:calc(100% + 8px);right:0;min-width:180px;
+  background:
+    repeating-linear-gradient(90deg,transparent 0,transparent 1px,rgba(255,255,255,0.007) 1px,rgba(255,255,255,0.007) 2px),
+    linear-gradient(180deg,#12122a 0%,#0a0a14 100%);
+  border-top:1px solid rgba(255,255,255,0.08);
+  border-left:1px solid rgba(255,255,255,0.05);
+  border-right:1px solid rgba(0,0,0,0.6);
+  border-bottom:2px solid rgba(0,0,0,0.8);
+  border-radius:8px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.9),inset 0 1px 0 rgba(255,255,255,0.07);
+  padding:6px;z-index:300;display:none;
+}
+.acct-dropdown.open{display:block}
+.acct-dropdown-item{
+  display:flex;align-items:center;gap:10px;width:100%;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;
+  color:var(--silver-dim);text-transform:uppercase;
+  padding:10px 14px;border:none;background:transparent;border-radius:5px;
+  cursor:pointer;transition:all 0.15s;text-align:left;
+}
+.acct-dropdown-item:hover{background:rgba(107,31,160,0.12);color:var(--neon-pink)}
+.acct-dropdown-item svg{width:14px;height:14px;flex-shrink:0}
+.acct-dropdown-name{
+  padding:10px 14px 6px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:12px;
+  color:var(--silver-hi);letter-spacing:0.04em;text-transform:uppercase;
+  border-bottom:1px solid rgba(107,31,160,0.15);margin-bottom:4px;
+}
+
+/* mobile account link */
+.mobile-menu .mobile-acct-btn{
+  font-size:clamp(14px,4vw,18px)!important;
+  color:var(--neon-pink)!important;
+  border-bottom:1px solid rgba(204,46,138,0.2)!important;
+}
+
+@media(max-width:567px){
+  .nav-account-btn .acct-name{display:none}
+  .nav-account-btn{padding:6px 8px}
+  .acct-dropdown{right:-8px;min-width:160px}
+}
 </style>
 </head>
 <body>
@@ -3538,9 +3763,27 @@ footer {
     <button class="nav-link active" data-page="home">Home</button>
     <button class="nav-link" data-page="technical">Technical</button>
     <button class="nav-link" data-page="developmental">Developmental</button>
+    <button class="nav-link" data-page="account" id="navAcctLink" style="display:none">Account</button>
     <div class="nav-divider"></div>
-    <a href="https://github.com/Warpdrive-console" class="nav-ghost" target="_blank" rel="noopener" style="margin-left:500px">GitHub</a>
+    <a href="https://github.com/Warpdrive-console" class="nav-ghost" target="_blank" rel="noopener" style="margin-left:auto">GitHub</a>
     <a href="https://discord.gg/Dv6K2vNyfK" class="nav-cta" target="_blank" rel="noopener">Discord</a>
+    <div style="position:relative">
+      <button class="nav-account-btn" id="navAcctBtn" onclick="roturAcct.toggle()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="acct-name" id="navAcctLabel">Sign In</span>
+      </button>
+      <div class="acct-dropdown" id="acctDropdown">
+        <div class="acct-dropdown-name" id="dropdownName"></div>
+        <button class="acct-dropdown-item" onclick="goPage('account');document.getElementById('acctDropdown').classList.remove('open')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          View Account
+        </button>
+        <button class="acct-dropdown-item" onclick="roturAcct.logout()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Log Out
+        </button>
+      </div>
+    </div>
   </div>
   <div class="nav-right"><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
 </nav>
@@ -3548,6 +3791,7 @@ footer {
   <button onclick="goPage('home')">Home</button>
   <button onclick="goPage('technical')">Technical</button>
   <button onclick="goPage('developmental')">Developmental</button>
+  <button class="mobile-acct-btn" id="mobileAcctBtn" onclick="roturAcct.mobileToggle()">Sign In</button>
   <div class="mobile-menu-actions">
     <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener">Join the Discord</a>
     <a href="https://github.com/Warpdrive-console" class="btn-github" target="_blank" rel="noopener">View on GitHub</a>
@@ -3783,6 +4027,47 @@ footer {
   </div>
 </div>
  
+<!-- account page -->
+<div class="page" id="page-account">
+  <section>
+    <div class="reveal"><p class="se">Your Account</p><h2 class="st"><span class="gradient-pink">Rotur</span> Profile</h2></div>
+    <div class="acct-page-layout">
+      <div class="acct-profile-card reveal" id="acctProfileCard">
+        <div class="acct-profile-header">
+          <div class="acct-big-avatar" id="acctBigAvatar">?</div>
+          <div class="acct-profile-info">
+            <div class="acct-profile-name" id="acctProfileName">Not signed in</div>
+            <div class="acct-profile-sub" id="acctProfileSub">Sign in with Rotur to view your profile</div>
+          </div>
+        </div>
+        <div class="acct-profile-actions">
+          <button class="btn-s" id="acctSignInBtn" onclick="roturAcct.openModal()" style="display:none">Sign In</button>
+          <button class="btn-s" id="acctLogoutBtn" onclick="roturAcct.logout()" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Log Out
+          </button>
+        </div>
+      </div>
+      <div class="acct-keys-section reveal" id="acctKeysSection" style="display:none">
+        <div class="acct-section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          Your Keys
+        </div>
+        <div id="acctKeysList" class="acct-keys-list">
+          <div class="acct-keys-empty">Loading keys...</div>
+        </div>
+      </div>
+      <div class="acct-not-logged reveal" id="acctNotLogged">
+        <div class="acct-not-logged-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--silver-dim)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;opacity:0.4;margin-bottom:20px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <p>Sign in with your <strong>Rotur</strong> account to see your profile and manage your keys.</p>
+          <button class="btn-p" onclick="roturAcct.openModal()" style="margin-top:20px">Sign In with Rotur</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 <footer>
   <div class="footer-grid">
     <div><div class="nav-brand" style="margin-bottom:14px"><img src="warpdrive-logo.png" alt="Warpdrive" style="width:180px;height:auto;margin-left:-12px" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none;font-size:18px">WARPDRIVE</span></div><div class="footer-tagline">A love-letter to indie gaming.<br>The system we wish we had.</div></div>
@@ -4171,7 +4456,7 @@ const statObs = new IntersectionObserver(entries => {
 }, { threshold: .2 });
 document.querySelectorAll('.hero-stats').forEach(el => statObs.observe(el));
 
-const ambMap = { home: 'ambHome', technical: 'ambTechnical', developmental: 'ambDevelopmental' };
+const ambMap = { home: 'ambHome', technical: 'ambTechnical', developmental: 'ambDevelopmental', account: 'ambHome' };
 function goPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -4375,6 +4660,272 @@ hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMob
   });
 })();
 
+</script>
+
+<!-- Rotur Auth Modal -->
+<div class="rotur-auth-overlay" id="roturAuthOverlay">
+  <div class="rotur-auth-modal">
+    <div class="rotur-auth-header">
+      <span>&#9670; Sign in with Rotur</span>
+      <button class="rotur-auth-close" onclick="roturAcct.closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="rotur-auth-body">
+      <div class="rotur-auth-loading" id="roturAuthLoading">
+        <div class="rotur-dot" style="width:6px;height:6px;border-radius:50%;background:var(--neon-pink);box-shadow:0 0 8px var(--neon-pink);animation:blink 2s ease infinite"></div>
+        Connecting to Rotur...
+      </div>
+      <iframe id="roturAuthIframe" src="" style="opacity:0;transition:opacity 0.3s"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Rotur Account System */
+const roturAcct = (() => {
+  const STORAGE_KEY = 'warpdrive_rotur_token';
+  const STORAGE_USER = 'warpdrive_rotur_user';
+  const API_BASE = 'https://social.rotur.dev';
+  let loggedIn = false;
+  let username = '';
+  let userKeys = [];
+
+  function init() {
+    const token = localStorage.getItem(STORAGE_KEY);
+    const user = localStorage.getItem(STORAGE_USER);
+    if (token && user) {
+      loggedIn = true;
+      username = user;
+      updateUI();
+      fetchKeys(token);
+    }
+    updateAccountPage();
+    window.addEventListener('message', handleAuthMessage);
+    document.addEventListener('click', (e) => {
+      const dd = document.getElementById('acctDropdown');
+      const btn = document.getElementById('navAcctBtn');
+      if (dd && !dd.contains(e.target) && !btn.contains(e.target)) {
+        dd.classList.remove('open');
+      }
+    });
+  }
+
+  function handleAuthMessage(event) {
+    if (event.origin !== 'https://rotur.dev') return;
+    if (event.data && event.data.type === 'rotur-auth-token') {
+      const token = event.data.token;
+      localStorage.setItem(STORAGE_KEY, token);
+      // Try JWT decode for username first
+      let user = '';
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        user = payload.user || payload.username || payload.name || payload.sub || '';
+      } catch(e) {}
+      if (!user) user = 'User';
+      localStorage.setItem(STORAGE_USER, user);
+      loggedIn = true;
+      username = user;
+      updateUI();
+      updateAccountPage();
+      closeModal();
+      fetchKeys(token);
+    }
+  }
+
+  function fetchKeys(token) {
+    if (!token) return;
+    fetch(API_BASE + '/keys/mine?auth=' + encodeURIComponent(token))
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          userKeys = data;
+        } else if (data && Array.isArray(data.keys)) {
+          userKeys = data.keys;
+        } else {
+          userKeys = [];
+        }
+        renderKeys();
+      })
+      .catch(() => {
+        userKeys = [];
+        renderKeys();
+      });
+  }
+
+  function renderKeys() {
+    const list = document.getElementById('acctKeysList');
+    if (!list) return;
+    if (!userKeys.length) {
+      list.innerHTML = '<div class="acct-keys-empty">No keys found</div>';
+      return;
+    }
+    list.innerHTML = userKeys.map(k => {
+      const id = k.id || k.ID || '?';
+      const data = k.data || k.Data || '';
+      const price = k.price !== undefined ? k.price : (k.Price !== undefined ? k.Price : '');
+      return `<div class="acct-key-row">
+        <span class="acct-key-id">#${id}</span>
+        <span class="acct-key-data">${escHtml(String(data))}</span>
+        ${price !== '' ? `<span class="acct-key-price">${escHtml(String(price))}</span>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  function escHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function updateUI() {
+    const navLabel = document.getElementById('navAcctLabel');
+    const navBtn = document.getElementById('navAcctBtn');
+    const mobileBtn = document.getElementById('mobileAcctBtn');
+    const dropdownName = document.getElementById('dropdownName');
+    const navAcctLink = document.getElementById('navAcctLink');
+
+    if (loggedIn) {
+      const existingAvatar = navBtn.querySelector('.acct-avatar');
+      const existingSvg = navBtn.querySelector('svg');
+      if (!existingAvatar && existingSvg) {
+        const av = document.createElement('div');
+        av.className = 'acct-avatar';
+        av.textContent = username.charAt(0);
+        existingSvg.replaceWith(av);
+      } else if (existingAvatar) {
+        existingAvatar.textContent = username.charAt(0);
+      }
+      navLabel.textContent = username;
+      if (mobileBtn) mobileBtn.textContent = username;
+      if (dropdownName) dropdownName.textContent = username;
+      if (navAcctLink) navAcctLink.style.display = '';
+    } else {
+      const existingAvatar = navBtn.querySelector('.acct-avatar');
+      if (existingAvatar) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttribute('viewBox','0 0 24 24');
+        svg.setAttribute('fill','none');
+        svg.setAttribute('stroke','currentColor');
+        svg.setAttribute('stroke-width','1.5');
+        svg.setAttribute('stroke-linecap','round');
+        svg.setAttribute('stroke-linejoin','round');
+        svg.innerHTML = '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>';
+        existingAvatar.replaceWith(svg);
+      }
+      navLabel.textContent = 'Sign In';
+      if (mobileBtn) mobileBtn.textContent = 'Sign In';
+      if (navAcctLink) navAcctLink.style.display = 'none';
+    }
+  }
+
+  function updateAccountPage() {
+    const profileName = document.getElementById('acctProfileName');
+    const profileSub = document.getElementById('acctProfileSub');
+    const bigAvatar = document.getElementById('acctBigAvatar');
+    const keysSection = document.getElementById('acctKeysSection');
+    const notLogged = document.getElementById('acctNotLogged');
+    const signInBtn = document.getElementById('acctSignInBtn');
+    const logoutBtn = document.getElementById('acctLogoutBtn');
+
+    if (!profileName) return;
+
+    if (loggedIn) {
+      profileName.textContent = username;
+      profileSub.textContent = 'Rotur Account';
+      bigAvatar.textContent = username.charAt(0);
+      if (keysSection) keysSection.style.display = '';
+      if (notLogged) notLogged.style.display = 'none';
+      if (signInBtn) signInBtn.style.display = 'none';
+      if (logoutBtn) logoutBtn.style.display = '';
+    } else {
+      profileName.textContent = 'Not signed in';
+      profileSub.textContent = 'Sign in with Rotur to view your profile';
+      bigAvatar.textContent = '?';
+      if (keysSection) keysSection.style.display = 'none';
+      if (notLogged) notLogged.style.display = '';
+      if (signInBtn) signInBtn.style.display = '';
+      if (logoutBtn) logoutBtn.style.display = 'none';
+    }
+  }
+
+  function toggle() {
+    if (loggedIn) {
+      const dd = document.getElementById('acctDropdown');
+      dd.classList.toggle('open');
+    } else {
+      openModal();
+    }
+    const mm = document.getElementById('mobileMenu');
+    const hb = document.getElementById('hamburger');
+    if (mm && mm.classList.contains('open')) {
+      mm.classList.remove('open');
+      if (hb) hb.classList.remove('open');
+    }
+  }
+
+  function openModal() {
+    const overlay = document.getElementById('roturAuthOverlay');
+    const iframe = document.getElementById('roturAuthIframe');
+    const loading = document.getElementById('roturAuthLoading');
+    overlay.classList.add('open');
+    loading.style.display = 'flex';
+    iframe.style.opacity = '0';
+    iframe.src = 'https://rotur.dev/auth';
+    iframe.onload = () => {
+      loading.style.display = 'none';
+      iframe.style.opacity = '1';
+    };
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const overlay = document.getElementById('roturAuthOverlay');
+    const iframe = document.getElementById('roturAuthIframe');
+    overlay.classList.remove('open');
+    iframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  function logout() {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_USER);
+    loggedIn = false;
+    username = '';
+    userKeys = [];
+    updateUI();
+    updateAccountPage();
+    document.getElementById('acctDropdown').classList.remove('open');
+  }
+
+  function mobileToggle() {
+    const mm = document.getElementById('mobileMenu');
+    const hb = document.getElementById('hamburger');
+    if (mm && mm.classList.contains('open')) {
+      mm.classList.remove('open');
+      if (hb) hb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    if (loggedIn) {
+      goPage('account');
+    } else {
+      openModal();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('roturAuthOverlay');
+    if (overlay) {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+      });
+    }
+    init();
+  });
+  if (document.readyState !== 'loading') init();
+
+  return { toggle, mobileToggle, openModal, closeModal, logout };
+})();
 </script>
 
 </body>
