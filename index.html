@@ -3516,45 +3516,19 @@ footer {
 }
 .acct-profile-actions{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
 
-.acct-section-title{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(13px,1.4vw,16px);
-  color:var(--neon-cyan);text-transform:uppercase;letter-spacing:0.06em;
-  display:flex;align-items:center;gap:10px;margin-bottom:14px;
-  text-shadow:0 0 12px rgba(0,229,255,0.3);
+.acct-big-avatar-img{
+  width:56px;height:56px;border-radius:50%;flex-shrink:0;object-fit:cover;
+  border:2px solid rgba(255,255,255,0.12);
+  box-shadow:0 0 20px rgba(204,46,138,0.3),inset 0 1px 0 rgba(255,255,255,0.15);
 }
-.acct-keys-list{display:flex;flex-direction:column;gap:2px}
-.acct-key-row{
-  display:flex;align-items:center;gap:clamp(12px,2vw,20px);
-  padding:clamp(14px,2vw,20px) clamp(16px,2.5vw,24px);
-  background:linear-gradient(180deg,#0d0d1e 0%,#080810 100%);
-  border-top:1px solid rgba(255,255,255,0.06);
-  border-left:1px solid rgba(255,255,255,0.04);
-  border-right:1px solid rgba(0,0,0,0.55);
-  border-bottom:1px solid rgba(0,0,0,0.65);
-  border-radius:6px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05),0 2px 8px rgba(0,0,0,0.7);
-  transition:border-color 0.15s,transform 0.15s;
+.acct-bio{
+  margin-top:18px;padding:16px 20px;
+  background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.08));
+  border:1px solid rgba(255,255,255,0.04);border-radius:6px;
+  box-shadow:inset 0 1px 4px rgba(0,0,0,0.3);
+  font-size:clamp(13px,1.2vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.8;
 }
-.acct-key-row:hover{border-top-color:rgba(0,229,255,0.15);transform:translateX(3px)}
-.acct-key-id{
-  font-family:'Space Mono',monospace;font-size:clamp(9px,0.85vw,11px);
-  letter-spacing:0.1em;color:var(--neon-cyan);opacity:0.7;min-width:40px;
-}
-.acct-key-data{
-  flex:1;font-size:clamp(12px,1.2vw,14px);color:var(--silver);font-weight:400;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.acct-key-price{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(14px,1.5vw,18px);
-  background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  white-space:nowrap;
-}
-.acct-keys-empty{
-  padding:32px;text-align:center;
-  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.16em;
-  color:var(--silver-dim);text-transform:uppercase;
-}
+
 .acct-not-logged{max-width:640px}
 .acct-not-logged-inner{
   text-align:center;padding:clamp(40px,6vw,80px) clamp(24px,4vw,48px);
@@ -3816,19 +3790,19 @@ footer {
       </div>
     </div>
     <div class="hero-stats">
-      <div class="stat" data-color="pink">
+      <div class="stat" data-color="Purpose">
         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <span class="stat-val">275+</span><span class="stat-label">Developers</span>
       </div>
-      <div class="stat" data-color="purple">
+      <div class="stat" data-color="Purpose">
         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         <span class="stat-val">90%</span><span class="stat-label">Revenue Share</span>
       </div>
-      <div class="stat" data-color="cyan">
+      <div class="stat" data-color="Purpose">
         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
         <span class="stat-val">$225</span><span class="stat-label">Launch Price</span>
       </div>
-      <div class="stat" data-color="neon">
+      <div class="stat" data-color="Purpose">
         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
         <span class="stat-val">8GB</span><span class="stat-label">LPDDR5</span>
       </div>
@@ -4034,12 +4008,14 @@ footer {
     <div class="acct-page-layout">
       <div class="acct-profile-card reveal" id="acctProfileCard">
         <div class="acct-profile-header">
+          <img class="acct-big-avatar-img" id="acctBigAvatarImg" src="" alt="" style="display:none">
           <div class="acct-big-avatar" id="acctBigAvatar">?</div>
           <div class="acct-profile-info">
             <div class="acct-profile-name" id="acctProfileName">Not signed in</div>
             <div class="acct-profile-sub" id="acctProfileSub">Sign in with Rotur to view your profile</div>
           </div>
         </div>
+        <div class="acct-bio" id="acctBio" style="display:none"></div>
         <div class="acct-profile-actions">
           <button class="btn-s" id="acctSignInBtn" onclick="roturAcct.openModal()" style="display:none">Sign In</button>
           <button class="btn-s" id="acctLogoutBtn" onclick="roturAcct.logout()" style="display:none">
@@ -4048,19 +4024,10 @@ footer {
           </button>
         </div>
       </div>
-      <div class="acct-keys-section reveal" id="acctKeysSection" style="display:none">
-        <div class="acct-section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-          Your Keys
-        </div>
-        <div id="acctKeysList" class="acct-keys-list">
-          <div class="acct-keys-empty">Loading keys...</div>
-        </div>
-      </div>
       <div class="acct-not-logged reveal" id="acctNotLogged">
         <div class="acct-not-logged-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--silver-dim)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;opacity:0.4;margin-bottom:20px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <p>Sign in with your <strong>Rotur</strong> account to see your profile and manage your keys.</p>
+          <p>Sign in with your <strong>Rotur</strong> account to see your profile.</p>
           <button class="btn-p" onclick="roturAcct.openModal()" style="margin-top:20px">Sign In with Rotur</button>
         </div>
       </div>
@@ -4689,16 +4656,16 @@ const roturAcct = (() => {
   const API_BASE = 'https://social.rotur.dev';
   let loggedIn = false;
   let username = '';
-  let userKeys = [];
+  let userData = null;
 
   function init() {
     const token = localStorage.getItem(STORAGE_KEY);
     const user = localStorage.getItem(STORAGE_USER);
-    if (token && user) {
+    if (token) {
       loggedIn = true;
-      username = user;
+      username = user || 'User';
       updateUI();
-      fetchKeys(token);
+      fetchUserData(token);
     }
     updateAccountPage();
     window.addEventListener('message', handleAuthMessage);
@@ -4716,66 +4683,44 @@ const roturAcct = (() => {
     if (event.data && event.data.type === 'rotur-auth-token') {
       const token = event.data.token;
       localStorage.setItem(STORAGE_KEY, token);
-      // Try JWT decode for username first
-      let user = '';
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        user = payload.user || payload.username || payload.name || payload.sub || '';
-      } catch(e) {}
-      if (!user) user = 'User';
-      localStorage.setItem(STORAGE_USER, user);
       loggedIn = true;
-      username = user;
+      username = 'User';
+      localStorage.setItem(STORAGE_USER, username);
       updateUI();
-      updateAccountPage();
       closeModal();
-      fetchKeys(token);
+      fetchUserData(token);
     }
   }
 
-  function fetchKeys(token) {
+  function fetchUserData(token) {
     if (!token) return;
-    fetch(API_BASE + '/keys/mine?auth=' + encodeURIComponent(token))
+    fetch(API_BASE + '/get_user?auth=' + encodeURIComponent(token))
       .then(r => r.json())
       .then(data => {
-        if (Array.isArray(data)) {
-          userKeys = data;
-        } else if (data && Array.isArray(data.keys)) {
-          userKeys = data.keys;
-        } else {
-          userKeys = [];
+        if (data && !data.error) {
+          userData = data;
+          const name = data.username || data.user || data.name || data.display_name || '';
+          if (name) {
+            username = name;
+            localStorage.setItem(STORAGE_USER, username);
+          }
+          updateUI();
+          updateAccountPage();
         }
-        renderKeys();
       })
-      .catch(() => {
-        userKeys = [];
-        renderKeys();
+      .catch(err => {
+        console.warn('Failed to fetch Rotur user data:', err);
       });
   }
 
-  function renderKeys() {
-    const list = document.getElementById('acctKeysList');
-    if (!list) return;
-    if (!userKeys.length) {
-      list.innerHTML = '<div class="acct-keys-empty">No keys found</div>';
-      return;
-    }
-    list.innerHTML = userKeys.map(k => {
-      const id = k.id || k.ID || '?';
-      const data = k.data || k.Data || '';
-      const price = k.price !== undefined ? k.price : (k.Price !== undefined ? k.Price : '');
-      return `<div class="acct-key-row">
-        <span class="acct-key-id">#${id}</span>
-        <span class="acct-key-data">${escHtml(String(data))}</span>
-        ${price !== '' ? `<span class="acct-key-price">${escHtml(String(price))}</span>` : ''}
-      </div>`;
-    }).join('');
+  function getAvatarUrl(user) {
+    if (!user) return '';
+    return 'https://avatars.rotur.dev/' + encodeURIComponent(user);
   }
 
-  function escHtml(s) {
-    const d = document.createElement('div');
-    d.textContent = s;
-    return d.innerHTML;
+  function getBio() {
+    if (!userData) return '';
+    return userData.bio || userData.description || userData.about || '';
   }
 
   function updateUI() {
@@ -4792,9 +4737,22 @@ const roturAcct = (() => {
         const av = document.createElement('div');
         av.className = 'acct-avatar';
         av.textContent = username.charAt(0);
+        if (username && username !== 'User') {
+          av.style.backgroundImage = 'url(' + getAvatarUrl(username) + ')';
+          av.style.backgroundSize = 'cover';
+          av.style.backgroundPosition = 'center';
+          av.textContent = '';
+        }
         existingSvg.replaceWith(av);
       } else if (existingAvatar) {
-        existingAvatar.textContent = username.charAt(0);
+        if (username && username !== 'User') {
+          existingAvatar.style.backgroundImage = 'url(' + getAvatarUrl(username) + ')';
+          existingAvatar.style.backgroundSize = 'cover';
+          existingAvatar.style.backgroundPosition = 'center';
+          existingAvatar.textContent = '';
+        } else {
+          existingAvatar.textContent = username.charAt(0);
+        }
       }
       navLabel.textContent = username;
       if (mobileBtn) mobileBtn.textContent = username;
@@ -4823,7 +4781,8 @@ const roturAcct = (() => {
     const profileName = document.getElementById('acctProfileName');
     const profileSub = document.getElementById('acctProfileSub');
     const bigAvatar = document.getElementById('acctBigAvatar');
-    const keysSection = document.getElementById('acctKeysSection');
+    const bigAvatarImg = document.getElementById('acctBigAvatarImg');
+    const bioEl = document.getElementById('acctBio');
     const notLogged = document.getElementById('acctNotLogged');
     const signInBtn = document.getElementById('acctSignInBtn');
     const logoutBtn = document.getElementById('acctLogoutBtn');
@@ -4833,16 +4792,40 @@ const roturAcct = (() => {
     if (loggedIn) {
       profileName.textContent = username;
       profileSub.textContent = 'Rotur Account';
-      bigAvatar.textContent = username.charAt(0);
-      if (keysSection) keysSection.style.display = '';
+      if (username && username !== 'User') {
+        const avatarSrc = getAvatarUrl(username);
+        if (bigAvatarImg) {
+          bigAvatarImg.src = avatarSrc;
+          bigAvatarImg.alt = username;
+          bigAvatarImg.style.display = '';
+          bigAvatarImg.onerror = function() {
+            this.style.display = 'none';
+            if (bigAvatar) { bigAvatar.style.display = ''; bigAvatar.textContent = username.charAt(0); }
+          };
+        }
+        if (bigAvatar) bigAvatar.style.display = 'none';
+      } else {
+        if (bigAvatar) { bigAvatar.style.display = ''; bigAvatar.textContent = username.charAt(0); }
+        if (bigAvatarImg) bigAvatarImg.style.display = 'none';
+      }
+      const bio = getBio();
+      if (bioEl) {
+        if (bio) {
+          bioEl.textContent = bio;
+          bioEl.style.display = '';
+        } else {
+          bioEl.style.display = 'none';
+        }
+      }
       if (notLogged) notLogged.style.display = 'none';
       if (signInBtn) signInBtn.style.display = 'none';
       if (logoutBtn) logoutBtn.style.display = '';
     } else {
       profileName.textContent = 'Not signed in';
       profileSub.textContent = 'Sign in with Rotur to view your profile';
-      bigAvatar.textContent = '?';
-      if (keysSection) keysSection.style.display = 'none';
+      if (bigAvatar) { bigAvatar.style.display = ''; bigAvatar.textContent = '?'; }
+      if (bigAvatarImg) bigAvatarImg.style.display = 'none';
+      if (bioEl) bioEl.style.display = 'none';
       if (notLogged) notLogged.style.display = '';
       if (signInBtn) signInBtn.style.display = '';
       if (logoutBtn) logoutBtn.style.display = 'none';
@@ -4892,7 +4875,7 @@ const roturAcct = (() => {
     localStorage.removeItem(STORAGE_USER);
     loggedIn = false;
     username = '';
-    userKeys = [];
+    userData = null;
     updateUI();
     updateAccountPage();
     document.getElementById('acctDropdown').classList.remove('open');
