@@ -1954,10 +1954,11 @@ footer {
 
 
 /* scrollbar */
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:rgba(4,4,7,0.98)}
-::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(191,47,255,0.5),rgba(204,46,138,0.4));border-radius:3px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 0 8px rgba(191,47,255,0.35)}
-::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,rgba(191,47,255,0.75),rgba(204,46,138,0.65))}
+* { scrollbar-width: thin; scrollbar-color: rgba(191,47,255,0.35) transparent; }
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(191,47,255,0.3);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:rgba(191,47,255,0.55)}
 
 /* body depth vignette */
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 140% 90% at 50% 0%,transparent 25%,rgba(0,0,0,0.55) 100%)}
@@ -3516,6 +3517,28 @@ footer {
   box-shadow:inset 0 1px 4px rgba(0,0,0,0.3);
   font-size:clamp(13px,1.2vw,15px);font-weight:300;color:var(--silver-dim);line-height:1.8;
 }
+.acct-edit-wrap{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.acct-edit-row{display:flex;flex-direction:column;gap:6px}
+.acct-edit-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.18em;color:var(--silver-dim);text-transform:uppercase}
+.acct-edit-textarea{
+  width:100%;font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:var(--silver-hi);
+  background:linear-gradient(180deg,#0a0a1a 0%,#060610 100%);
+  border-top:1px solid rgba(255,255,255,0.07);border-left:1px solid rgba(255,255,255,0.04);
+  border-right:1px solid rgba(0,0,0,0.55);border-bottom:2px solid rgba(0,0,0,0.75);
+  border-radius:6px;padding:10px 14px;min-height:80px;line-height:1.7;resize:none;outline:none;
+  box-shadow:inset 0 2px 6px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04);
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.acct-edit-textarea:focus{border-top-color:rgba(191,47,255,0.25);box-shadow:inset 0 2px 6px rgba(0,0,0,0.5),0 0 12px rgba(191,47,255,0.08)}
+.acct-edit-textarea::placeholder{color:rgba(153,161,178,0.35)}
+.acct-edit-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.acct-edit-status{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--silver-dim);text-transform:uppercase;min-height:16px;margin-top:4px}
+.acct-edit-status.ok{color:var(--neon-cyan)}.acct-edit-status.err{color:var(--neon-pink)}
+.acct-pfp-edit{position:relative;cursor:pointer;flex-shrink:0;width:56px;height:56px}
+.acct-pfp-edit:hover .acct-pfp-overlay{opacity:1}
+.acct-pfp-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(4,4,7,0.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s;pointer-events:none;z-index:2}
+.acct-pfp-overlay svg{width:20px;height:20px;color:var(--silver-hi)}
+.acct-pfp-file{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:3}
 
 .acct-not-logged{max-width:640px}
 .acct-not-logged-inner{
@@ -3996,7 +4019,11 @@ footer {
     <div class="acct-page-layout">
       <div class="acct-profile-card reveal" id="acctProfileCard">
         <div class="acct-profile-header">
-          <img class="acct-big-avatar-img" id="acctBigAvatarImg" src="" alt="" style="display:none">
+          <div class="acct-pfp-edit" id="acctPfpEdit" style="display:none">
+            <img class="acct-big-avatar-img" id="acctBigAvatarImg" src="" alt="">
+            <div class="acct-pfp-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+            <input type="file" class="acct-pfp-file" id="acctPfpFile" accept="image/*" title="Change profile picture">
+          </div>
           <div class="acct-big-avatar" id="acctBigAvatar">?</div>
           <div class="acct-profile-info">
             <div class="acct-profile-name" id="acctProfileName">Not signed in</div>
@@ -4004,7 +4031,22 @@ footer {
           </div>
         </div>
         <div class="acct-bio" id="acctBio" style="display:none"></div>
-        <div class="acct-profile-actions">
+        <div class="acct-edit-wrap" id="acctEditWrap" style="display:none">
+          <div class="acct-edit-row">
+            <label class="acct-edit-label">Bio</label>
+            <textarea class="acct-edit-textarea" id="acctEditBio" placeholder="Tell people about yourself..." maxlength="500"></textarea>
+          </div>
+          <div class="acct-edit-actions">
+            <button class="btn-p" onclick="roturAcct.saveProfile()" style="padding:8px 20px;font-size:10px">Save</button>
+            <button class="btn-s" onclick="roturAcct.cancelEdit()" style="padding:8px 20px;font-size:10px">Cancel</button>
+          </div>
+          <div class="acct-edit-status" id="acctEditStatus"></div>
+        </div>
+        <div class="acct-profile-actions" id="acctProfileActions">
+          <button class="btn-s" id="acctEditBtn" onclick="roturAcct.startEdit()" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit Profile
+          </button>
           <button class="btn-s" id="acctSignInBtn" onclick="roturAcct.openModal()" style="display:none">Sign In</button>
           <button class="btn-s" id="acctLogoutBtn" onclick="roturAcct.logout()" style="display:none">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -4639,20 +4681,93 @@ hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMob
 <script>
 /* Rotur Account System */
 const roturAcct = (() => {
-  const STORAGE_KEY = 'warpdrive_rotur_token';
-  const STORAGE_USER = 'warpdrive_rotur_user';
-  const API_BASE = 'https://social.rotur.dev';
+  const TOKEN_KEY = 'rotur_token';
+  const API = 'https://api.rotur.dev';
+  const WS_URL = 'wss://ws.rotur.dev';
   let loggedIn = false;
   let username = '';
   let userData = null;
+  let editing = false;
+  let ws = null;
+  let wsAuthed = false;
+  let wsReconnectTimer = null;
+  let avatarCacheBust = 0;
+
+  function getToken() { return localStorage.getItem(TOKEN_KEY); }
+
+  /* WebSocket auto-auth */
+  function connectWS() {
+    const token = getToken();
+    if (!token || !username) return;
+    if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
+
+    wsAuthed = false;
+    try {
+      ws = new WebSocket(WS_URL);
+    } catch (e) { return; }
+
+    ws.onopen = () => {
+      send({ cmd: 'handshake', val: { language: 'Javascript', version: { editorType: 'Warpdrive' } } });
+    };
+
+    ws.onmessage = (evt) => {
+      let data;
+      try { data = JSON.parse(evt.data); } catch (e) { return; }
+
+      if (data.cmd === 'client_obj' || data.cmd === 'motd' || (data.cmd === 'statuscode' && !wsAuthed)) {
+        if (!wsAuthed && data.cmd === 'statuscode' && data.code_id === 100) {
+          send({ cmd: 'link', val: ['roturTW'] });
+          setTimeout(() => {
+            send({ cmd: 'direct', val: { cmd: 'auth', val: token }, id: 'sys-rotur' });
+          }, 200);
+        }
+      }
+
+      if (data.cmd === 'statuscode' && data.code_id === 100 && wsAuthed) {
+        /* already authed, ignore */
+      }
+
+      if (data.cmd === 'direct' && data.origin === 'sys-rotur') {
+        if (data.val && data.val.cmd === 'auth' && data.val.val === true) {
+          wsAuthed = true;
+          console.log('Rotur WS: authenticated as', username);
+        }
+      }
+
+      if (data.cmd === 'ulist') {
+        if (!wsAuthed) {
+          send({ cmd: 'setid', val: username });
+        }
+      }
+    };
+
+    ws.onclose = () => {
+      wsAuthed = false;
+      if (loggedIn && username) {
+        clearTimeout(wsReconnectTimer);
+        wsReconnectTimer = setTimeout(connectWS, 8000);
+      }
+    };
+
+    ws.onerror = () => {};
+  }
+
+  function send(obj) {
+    if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(obj));
+  }
+
+  function disconnectWS() {
+    clearTimeout(wsReconnectTimer);
+    wsAuthed = false;
+    if (ws) { try { ws.close(); } catch(e){} ws = null; }
+  }
 
   function init() {
-    const token = localStorage.getItem(STORAGE_KEY);
-    const user = localStorage.getItem(STORAGE_USER);
+    const token = getToken();
     if (token) {
       loggedIn = true;
-      username = user || 'User';
-      updateUI();
+      username = localStorage.getItem('warpdrive_rotur_user') || '';
+      if (username) updateUI();
       fetchUserData(token);
     }
     updateAccountPage();
@@ -4660,55 +4775,51 @@ const roturAcct = (() => {
     document.addEventListener('click', (e) => {
       const dd = document.getElementById('acctDropdown');
       const btn = document.getElementById('navAcctBtn');
-      if (dd && !dd.contains(e.target) && !btn.contains(e.target)) {
-        dd.classList.remove('open');
-      }
+      if (dd && !dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
     });
+    const pfpFile = document.getElementById('acctPfpFile');
+    if (pfpFile) pfpFile.addEventListener('change', handlePfpFile);
   }
 
   function handleAuthMessage(event) {
     if (event.origin !== 'https://rotur.dev') return;
     if (event.data && event.data.type === 'rotur-auth-token') {
-      const token = event.data.token;
-      localStorage.setItem(STORAGE_KEY, token);
+      localStorage.setItem(TOKEN_KEY, event.data.token);
       loggedIn = true;
-      username = 'User';
-      localStorage.setItem(STORAGE_USER, username);
       updateUI();
       closeModal();
-      fetchUserData(token);
+      fetchUserData(event.data.token);
     }
   }
 
   function fetchUserData(token) {
     if (!token) return;
-    fetch(API_BASE + '/get_user?auth=' + encodeURIComponent(token))
+    fetch(API + '/get_user?auth=' + encodeURIComponent(token))
       .then(r => r.json())
       .then(data => {
         if (data && !data.error) {
           userData = data;
-          const name = data.username || data.user || data.name || data.display_name || '';
-          if (name) {
-            username = name;
-            localStorage.setItem(STORAGE_USER, username);
-          }
+          username = data.username || data.display_name || '';
+          localStorage.setItem('warpdrive_rotur_user', username);
           updateUI();
           updateAccountPage();
+          connectWS();
         }
       })
-      .catch(err => {
-        console.warn('Failed to fetch Rotur user data:', err);
-      });
+      .catch(err => console.warn('Rotur fetch failed:', err));
   }
 
-  function getAvatarUrl(user) {
+  function avatarUrl(user, size) {
     if (!user) return '';
-    return 'https://avatars.rotur.dev/' + encodeURIComponent(user);
+    let url = 'https://avatars.rotur.dev/' + encodeURIComponent(user) + '?radius=128';
+    if (size) url += '&s=' + size;
+    if (avatarCacheBust) url += '&_=' + avatarCacheBust;
+    return url;
   }
 
   function getBio() {
     if (!userData) return '';
-    return userData.bio || userData.description || userData.about || '';
+    return userData.bio || '';
   }
 
   function updateUI() {
@@ -4718,35 +4829,28 @@ const roturAcct = (() => {
     const dropdownName = document.getElementById('dropdownName');
     const navAcctLink = document.getElementById('navAcctLink');
 
-    if (loggedIn) {
+    if (loggedIn && username) {
+      const src = avatarUrl(username, 64);
       const existingAvatar = navBtn.querySelector('.acct-avatar');
       const existingSvg = navBtn.querySelector('svg');
       if (!existingAvatar && existingSvg) {
         const av = document.createElement('div');
         av.className = 'acct-avatar';
-        av.textContent = username.charAt(0);
-        if (username && username !== 'User') {
-          av.style.backgroundImage = 'url(' + getAvatarUrl(username) + ')';
-          av.style.backgroundSize = 'cover';
-          av.style.backgroundPosition = 'center';
-          av.textContent = '';
-        }
+        av.style.backgroundImage = 'url(' + src + ')';
+        av.style.backgroundSize = 'cover';
+        av.style.backgroundPosition = 'center';
         existingSvg.replaceWith(av);
       } else if (existingAvatar) {
-        if (username && username !== 'User') {
-          existingAvatar.style.backgroundImage = 'url(' + getAvatarUrl(username) + ')';
-          existingAvatar.style.backgroundSize = 'cover';
-          existingAvatar.style.backgroundPosition = 'center';
-          existingAvatar.textContent = '';
-        } else {
-          existingAvatar.textContent = username.charAt(0);
-        }
+        existingAvatar.style.backgroundImage = 'url(' + src + ')';
+        existingAvatar.style.backgroundSize = 'cover';
+        existingAvatar.style.backgroundPosition = 'center';
+        existingAvatar.textContent = '';
       }
       navLabel.textContent = username;
       if (mobileBtn) mobileBtn.textContent = username;
       if (dropdownName) dropdownName.textContent = username;
       if (navAcctLink) navAcctLink.style.display = '';
-    } else {
+    } else if (!loggedIn) {
       const existingAvatar = navBtn.querySelector('.acct-avatar');
       if (existingAvatar) {
         const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
@@ -4770,60 +4874,155 @@ const roturAcct = (() => {
     const profileSub = document.getElementById('acctProfileSub');
     const bigAvatar = document.getElementById('acctBigAvatar');
     const bigAvatarImg = document.getElementById('acctBigAvatarImg');
+    const pfpEdit = document.getElementById('acctPfpEdit');
     const bioEl = document.getElementById('acctBio');
     const notLogged = document.getElementById('acctNotLogged');
     const signInBtn = document.getElementById('acctSignInBtn');
     const logoutBtn = document.getElementById('acctLogoutBtn');
-
+    const editBtn = document.getElementById('acctEditBtn');
+    const editWrap = document.getElementById('acctEditWrap');
+    const actions = document.getElementById('acctProfileActions');
     if (!profileName) return;
 
-    if (loggedIn) {
-      profileName.textContent = username;
-      profileSub.textContent = 'Rotur Account';
-      if (username && username !== 'User') {
-        const avatarSrc = getAvatarUrl(username);
-        if (bigAvatarImg) {
-          bigAvatarImg.src = avatarSrc;
-          bigAvatarImg.alt = username;
-          bigAvatarImg.style.display = '';
-          bigAvatarImg.onerror = function() {
-            this.style.display = 'none';
-            if (bigAvatar) { bigAvatar.style.display = ''; bigAvatar.textContent = username.charAt(0); }
-          };
-        }
-        if (bigAvatar) bigAvatar.style.display = 'none';
-      } else {
-        if (bigAvatar) { bigAvatar.style.display = ''; bigAvatar.textContent = username.charAt(0); }
-        if (bigAvatarImg) bigAvatarImg.style.display = 'none';
+    if (loggedIn && username) {
+      const displayName = (userData && userData.display_name) ? userData.display_name : username;
+      profileName.textContent = displayName;
+      profileSub.textContent = '@' + username;
+      const src = avatarUrl(username, 256);
+      if (bigAvatarImg) {
+        bigAvatarImg.src = src;
+        bigAvatarImg.alt = username;
+        bigAvatarImg.style.display = '';
       }
+      if (bigAvatar) bigAvatar.style.display = 'none';
+      if (pfpEdit) pfpEdit.style.display = '';
       const bio = getBio();
-      if (bioEl) {
-        if (bio) {
-          bioEl.textContent = bio;
-          bioEl.style.display = '';
-        } else {
-          bioEl.style.display = 'none';
-        }
+      if (bioEl && !editing) {
+        if (bio) { bioEl.textContent = bio; bioEl.style.display = ''; }
+        else { bioEl.style.display = 'none'; }
       }
       if (notLogged) notLogged.style.display = 'none';
       if (signInBtn) signInBtn.style.display = 'none';
       if (logoutBtn) logoutBtn.style.display = '';
+      if (editBtn) editBtn.style.display = '';
+      if (!editing && editWrap) editWrap.style.display = 'none';
+      if (!editing && actions) actions.style.display = '';
     } else {
       profileName.textContent = 'Not signed in';
       profileSub.textContent = 'Sign in with Rotur to view your profile';
       if (bigAvatar) { bigAvatar.style.display = ''; bigAvatar.textContent = '?'; }
       if (bigAvatarImg) bigAvatarImg.style.display = 'none';
+      if (pfpEdit) pfpEdit.style.display = 'none';
       if (bioEl) bioEl.style.display = 'none';
       if (notLogged) notLogged.style.display = '';
       if (signInBtn) signInBtn.style.display = '';
       if (logoutBtn) logoutBtn.style.display = 'none';
+      if (editBtn) editBtn.style.display = 'none';
+      if (editWrap) editWrap.style.display = 'none';
     }
+  }
+
+  function startEdit() {
+    editing = true;
+    const editWrap = document.getElementById('acctEditWrap');
+    const actions = document.getElementById('acctProfileActions');
+    const bioEl = document.getElementById('acctBio');
+    const bioInput = document.getElementById('acctEditBio');
+    const status = document.getElementById('acctEditStatus');
+    if (editWrap) editWrap.style.display = '';
+    if (actions) actions.style.display = 'none';
+    if (bioEl) bioEl.style.display = 'none';
+    if (bioInput) bioInput.value = getBio();
+    if (status) { status.textContent = ''; status.className = 'acct-edit-status'; }
+  }
+
+  function cancelEdit() {
+    editing = false;
+    const editWrap = document.getElementById('acctEditWrap');
+    const actions = document.getElementById('acctProfileActions');
+    if (editWrap) editWrap.style.display = 'none';
+    if (actions) actions.style.display = '';
+    updateAccountPage();
+  }
+
+  async function saveProfile() {
+    const token = getToken();
+    if (!token) return;
+    const bioInput = document.getElementById('acctEditBio');
+    const status = document.getElementById('acctEditStatus');
+    const newBio = bioInput ? bioInput.value.trim() : '';
+    if (status) { status.textContent = 'Saving...'; status.className = 'acct-edit-status'; }
+    try {
+      const res = await fetch(API + '/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'bio', value: newBio, auth: token })
+      });
+      const result = await res.json();
+      if (result.error) {
+        if (status) { status.textContent = result.error; status.className = 'acct-edit-status err'; }
+      } else {
+        if (status) { status.textContent = 'Bio updated'; status.className = 'acct-edit-status ok'; }
+        fetchUserData(token);
+        setTimeout(cancelEdit, 1200);
+      }
+    } catch (e) {
+      if (status) { status.textContent = 'Network error'; status.className = 'acct-edit-status err'; }
+    }
+  }
+
+  function handlePfpFile(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    const token = getToken();
+    if (!token) return;
+    const status = document.getElementById('acctEditStatus');
+    if (!editing) startEdit();
+    if (status) { status.textContent = 'Uploading avatar...'; status.className = 'acct-edit-status'; }
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const base64 = reader.result;
+      let ok = false;
+      // Try PATCH /users first (works cross-origin, same as bio)
+      try {
+        const res = await fetch(API + '/users', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: 'pfp', value: base64, auth: token })
+        });
+        const result = await res.json();
+        if (!result.error) ok = true;
+        else if (status) { status.textContent = result.error; status.className = 'acct-edit-status err'; }
+      } catch (e1) {}
+      // Fallback: POST /me/update (official endpoint, may hit CORS from external domains)
+      if (!ok) {
+        try {
+          const res2 = await fetch(API + '/me/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+            body: JSON.stringify({ key: 'pfp', value: base64 })
+          });
+          const result2 = await res2.json();
+          if (!result2.error) ok = true;
+          else if (status) { status.textContent = result2.error; status.className = 'acct-edit-status err'; }
+        } catch (e2) {
+          if (status) { status.textContent = 'Upload failed'; status.className = 'acct-edit-status err'; }
+        }
+      }
+      if (ok) {
+        if (status) { status.textContent = 'Avatar updated'; status.className = 'acct-edit-status ok'; }
+        avatarCacheBust = Date.now();
+        fetchUserData(token);
+        setTimeout(cancelEdit, 1200);
+      }
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
   }
 
   function toggle() {
     if (loggedIn) {
-      const dd = document.getElementById('acctDropdown');
-      dd.classList.toggle('open');
+      document.getElementById('acctDropdown').classList.toggle('open');
     } else {
       openModal();
     }
@@ -4843,10 +5042,7 @@ const roturAcct = (() => {
     loading.style.display = 'flex';
     iframe.style.opacity = '0';
     iframe.src = 'https://rotur.dev/auth';
-    iframe.onload = () => {
-      loading.style.display = 'none';
-      iframe.style.opacity = '1';
-    };
+    iframe.onload = () => { loading.style.display = 'none'; iframe.style.opacity = '1'; };
     document.body.style.overflow = 'hidden';
   }
 
@@ -4859,11 +5055,13 @@ const roturAcct = (() => {
   }
 
   function logout() {
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(STORAGE_USER);
+    disconnectWS();
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem('warpdrive_rotur_user');
     loggedIn = false;
     username = '';
     userData = null;
+    editing = false;
     updateUI();
     updateAccountPage();
     document.getElementById('acctDropdown').classList.remove('open');
@@ -4877,25 +5075,18 @@ const roturAcct = (() => {
       if (hb) hb.classList.remove('open');
       document.body.style.overflow = '';
     }
-    if (loggedIn) {
-      goPage('account');
-    } else {
-      openModal();
-    }
+    if (loggedIn) goPage('account');
+    else openModal();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('roturAuthOverlay');
-    if (overlay) {
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeModal();
-      });
-    }
+    if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     init();
   });
   if (document.readyState !== 'loading') init();
 
-  return { toggle, mobileToggle, openModal, closeModal, logout };
+  return { toggle, mobileToggle, openModal, closeModal, logout, startEdit, cancelEdit, saveProfile };
 })();
 </script>
 
