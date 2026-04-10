@@ -58,7 +58,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;contain:paint;background-image:linear-gradient(rgba(107,31,160,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(107,31,160,0.04) 1px,transparent 1px);background-size:80px 80px;transform:translate3d(0,0,0)}
 .bg-scan{position:fixed;inset:0;z-index:0;pointer-events:none;contain:paint;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);transform:translate3d(0,0,0)}
-.plx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;will-change:transform;transform:translate3d(0,0,0)}
+.plx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0)}
 @media(max-width:767px){.plx{display:none}}
  
 .deco-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transform:translate3d(0,0,0);contain:paint}
@@ -551,7 +551,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 .footer-bottom{margin-top:clamp(28px,4vw,48px);padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .footer-copy{font-size:11px;color:rgba(122,130,148,0.25);letter-spacing:0.04em}
  
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1),transform 0.5s cubic-bezier(0.16,1,0.3,1);will-change:transform,opacity}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1),transform 0.5s cubic-bezier(0.16,1,0.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
@@ -635,7 +635,7 @@ nav::after{animation:navGlow 8s ease-in-out infinite alternate}
 
 /* (orphaned keyframe fragments removed) */
 
-.spark{position:fixed;pointer-events:none;z-index:9998;border-radius:50%;will-change:transform,opacity}
+.spark{position:fixed;pointer-events:none;z-index:9998;border-radius:50%}
 
 .someday-tip{position:relative;cursor:help;border-bottom:1px dashed rgba(255,34,163,0.3)}
 .someday-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:rgba(8,8,14,0.97);border:1px solid rgba(255,34,163,0.2);border-radius:6px;padding:6px 10px;font-size:9px;font-family:'Space Mono',monospace;color:var(--neon-pink);white-space:nowrap;letter-spacing:0.08em;opacity:0;pointer-events:none;transition:opacity 0.2s}
@@ -4084,13 +4084,17 @@ const isLowEnd = () => {
   if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) return true;
   if (navigator.deviceMemory && navigator.deviceMemory <= 4) return true;
   const c = document.createElement('canvas');
-  const gl = c.getContext('webgl');
+  const gl2 = c.getContext('webgl2');
+  const gl  = gl2 || c.getContext('webgl');
   if (gl) {
-    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
-    if (dbg) {
-      const r = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '';
-      if (/swiftshader|llvmpipe|mesa/i.test(r)) return true;
+    let r = '';
+    if (gl2) {
+      r = gl2.getParameter(gl2.RENDERER) || '';
+    } else {
+      const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+      if (dbg) r = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '';
     }
+    if (/swiftshader|llvmpipe|mesa/i.test(r)) return true;
   }
   return false;
 };
@@ -4778,7 +4782,7 @@ const roturAcct = (() => {
     document.addEventListener('click', (e) => {
       const dd = document.getElementById('acctDropdown');
       const btn = document.getElementById('navAcctBtn');
-      if (dd && !dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
+      if (dd && btn && !dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
     });
     const pfpFile = document.getElementById('acctPfpFile');
     if (pfpFile) pfpFile.addEventListener('change', handlePfpFile);
@@ -5105,12 +5109,16 @@ const roturAcct = (() => {
     else openModal();
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  let _inited = false;
+  function _init() {
+    if (_inited) return;
+    _inited = true;
     const overlay = document.getElementById('roturAuthOverlay');
     if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     init();
-  });
-  if (document.readyState !== 'loading') init();
+  }
+  document.addEventListener('DOMContentLoaded', _init);
+  if (document.readyState !== 'loading') _init();
 
   return { toggle, mobileToggle, openModal, closeModal, reopenPopup, logout, startEdit, cancelEdit, saveProfile };
 })();
