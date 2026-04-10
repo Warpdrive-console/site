@@ -3642,8 +3642,11 @@ footer {
   box-shadow:inset 0 2px 6px rgba(0,0,0,0.8)!important;transform:translateY(1px)!important;
 }
 .rotur-auth-close svg{width:14px;height:14px}
-.rotur-auth-body{height:480px;position:relative}
-.rotur-auth-body iframe{width:100%;height:100%;border:none;border-radius:0 0 12px 12px}
+.rotur-auth-body{height:200px;position:relative;display:flex;align-items:center;justify-content:center}
+.rotur-auth-popup-msg{display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px;text-align:center}
+.rotur-auth-popup-msg p{font-family:'Outfit',sans-serif;font-size:13px;color:var(--silver-dim);line-height:1.6}
+.rotur-auth-popup-msg a{font-family:'Space Mono',monospace;font-size:10px;color:var(--neon-pink);text-decoration:none;letter-spacing:0.1em}
+.rotur-auth-popup-msg a:hover{text-decoration:underline}
 .rotur-auth-loading{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;
@@ -4669,11 +4672,11 @@ hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMob
       </button>
     </div>
     <div class="rotur-auth-body">
-      <div class="rotur-auth-loading" id="roturAuthLoading">
+      <div class="rotur-auth-popup-msg" id="roturAuthLoading">
         <div class="rotur-dot" style="width:6px;height:6px;border-radius:50%;background:var(--neon-pink);box-shadow:0 0 8px var(--neon-pink);animation:blink 2s ease infinite"></div>
-        Connecting to Rotur...
+        <p>A sign-in window has been opened.<br>Complete login there to continue.</p>
+        <a href="#" onclick="roturAcct.reopenPopup();return false;">Didn't see it? Click to reopen &#8599;</a>
       </div>
-      <iframe id="roturAuthIframe" src="" style="opacity:0;transition:opacity 0.3s"></iframe>
     </div>
   </div>
 </div>
@@ -5034,24 +5037,47 @@ const roturAcct = (() => {
     }
   }
 
+  let authPopup = null;
+  let popupPollInterval = null;
+
   function openModal() {
     const overlay = document.getElementById('roturAuthOverlay');
-    const iframe = document.getElementById('roturAuthIframe');
-    const loading = document.getElementById('roturAuthLoading');
     overlay.classList.add('open');
-    loading.style.display = 'flex';
-    iframe.style.opacity = '0';
-    iframe.src = 'https://rotur.dev/auth';
-    iframe.onload = () => { loading.style.display = 'none'; iframe.style.opacity = '1'; };
     document.body.style.overflow = 'hidden';
+    openAuthPopup();
+  }
+
+  function openAuthPopup() {
+    const w = 480, h = 620;
+    const left = Math.max(0, (screen.width - w) / 2 + (screen.availLeft || 0));
+    const top  = Math.max(0, (screen.height - h) / 2 + (screen.availTop  || 0));
+    authPopup = window.open(
+      'https://rotur.dev/auth',
+      'rotur_auth',
+      `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`
+    );
+    clearInterval(popupPollInterval);
+    popupPollInterval = setInterval(() => {
+      if (authPopup && authPopup.closed) {
+        clearInterval(popupPollInterval);
+        authPopup = null;
+        closeModal();
+      }
+    }, 500);
+  }
+
+  function reopenPopup() {
+    if (authPopup && !authPopup.closed) { authPopup.focus(); return; }
+    openAuthPopup();
   }
 
   function closeModal() {
     const overlay = document.getElementById('roturAuthOverlay');
-    const iframe = document.getElementById('roturAuthIframe');
     overlay.classList.remove('open');
-    iframe.src = '';
     document.body.style.overflow = '';
+    clearInterval(popupPollInterval);
+    if (authPopup && !authPopup.closed) { authPopup.close(); }
+    authPopup = null;
   }
 
   function logout() {
@@ -5086,7 +5112,7 @@ const roturAcct = (() => {
   });
   if (document.readyState !== 'loading') init();
 
-  return { toggle, mobileToggle, openModal, closeModal, logout, startEdit, cancelEdit, saveProfile };
+  return { toggle, mobileToggle, openModal, closeModal, reopenPopup, logout, startEdit, cancelEdit, saveProfile };
 })();
 </script>
 
