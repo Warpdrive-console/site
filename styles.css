@@ -389,7 +389,7 @@ section{position:relative;z-index:1;padding:clamp(80px,10vw,160px) clamp(24px,8v
 .spec-chevron{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--silver-dim);transition:transform 0.15s ease,color 0.12s;flex-shrink:0}
 .spec-item.active .spec-chevron{transform:rotate(180deg);color:var(--neon-cyan)}
 .spec-chevron svg{width:16px;height:16px}
-
+/* CSS-grid accordion   compositor-only, no max-height jank */
 .spec-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.32s cubic-bezier(0.16,1,0.3,1)}
 .spec-item.active .spec-detail{grid-template-rows:1fr}
 .spec-detail-inner{overflow:hidden;min-height:0;padding:0 clamp(16px,3vw,28px) 0;padding-left:clamp(64px,6vw,78px);opacity:0;transform:translateY(-4px);transition:opacity 0.22s ease 0.06s,transform 0.22s ease 0.06s,padding-bottom 0.32s cubic-bezier(0.16,1,0.3,1)}
@@ -623,6 +623,8 @@ nav::after{animation:navGlow 8s ease-in-out infinite alternate}
 .banks-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(4,4,7,0.88);padding:8px 10px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.08em;color:var(--neon-pink);text-align:center;opacity:0;transform:translateY(4px);transition:opacity 0.25s,transform 0.25s;pointer-events:none;text-transform:uppercase}
 .banks-card:hover .banks-caption{opacity:1;transform:translateY(0)}
 
+/* (orphaned keyframe fragments removed) */
+
 .spark{position:fixed;pointer-events:none;z-index:9998;border-radius:50%}
 
 .someday-tip{position:relative;cursor:help;border-bottom:1px dashed rgba(255,34,163,0.3)}
@@ -633,6 +635,7 @@ nav::after{animation:navGlow 8s ease-in-out infinite alternate}
 .footer-egg:hover{color:var(--neon-pink) !important;transform:scale(1.3) rotate(45deg)}
 #egg-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);z-index:6000;background:rgba(8,8,14,0.97);border:1px solid rgba(191,47,255,0.3);border-radius:8px;padding:10px 20px;font-family:'Space Mono',monospace;font-size:10px;color:var(--silver);letter-spacing:0.08em;opacity:0;transition:opacity 0.3s,transform 0.3s;pointer-events:none;white-space:nowrap}
 #egg-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
 
 
 .low-end .void-blob{filter:none !important;opacity:0.15 !important}
@@ -678,6 +681,7 @@ nav::after{animation:navGlow 8s ease-in-out infinite alternate}
 
 section,.showcase,.oss-section{contain:layout style}
 
+/* Desktop compositor promotions   GPU-only hover transforms */
 .spec-item,.id-card,.showcase-entry,.tier,.banks-card,.ks-tier,.feature-row{will-change:auto}
 .spec-item:hover,.id-card:hover,.showcase-entry:hover,.tier:hover,.banks-card:hover{will-change:transform}
 .spec-chevron{transition:transform 0.22s cubic-bezier(0.16,1,0.3,1),color 0.12s}
@@ -1412,6 +1416,7 @@ section::before, .showcase::before, .oss-section::before {
 .stat[data-color="cyan"]   .stat-icon { color: var(--neon-cyan); }
 .stat[data-color="neon"]   .stat-icon { color: var(--neon-pink); }
 
+/* inset readout zone */
 .stat-val {
   display: block;
   font-family: 'Syne', sans-serif;
@@ -1948,6 +1953,7 @@ footer {
 /* body depth vignette */
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 140% 90% at 50% 0%,transparent 25%,rgba(0,0,0,0.55) 100%)}
 
+/* nav - machined panel */
 nav{
   background:
     repeating-linear-gradient(90deg,
@@ -1970,7 +1976,7 @@ nav::after{
   box-shadow:0 0 16px rgba(255,34,163,0.5),0 0 48px rgba(191,47,255,0.22);
   height:2px;bottom:-1px;opacity:0.6;animation-duration:12s}
 
-/* btn-p deep candy physical push button */
+/* btn-p - deep candy physical push button */
 .btn-p{
   --_ga:#ff60c8;--_gb:#8c0462;
   --_gah:#ff72d4;--_gbh:#9e0874;
@@ -2030,7 +2036,7 @@ nav::after{
   transform:translateY(3px) !important
 }
 
-/* btn-s dark machined with cyan pulse */
+/* btn-s - dark machined with cyan pulse */
 .btn-s{
   background:linear-gradient(180deg,#131328 0%,#0d0d20 35%,#080810 100%);
   border-top:1px solid rgba(200,205,216,0.2);
@@ -2069,7 +2075,7 @@ nav::after{
     0 1px 3px rgba(0,0,0,0.95) !important
 }
 
-/* btn-github iridescent cyan-purple */
+/* btn-github - iridescent cyan-purple */
 .btn-github{
   background:linear-gradient(180deg,rgba(0,229,255,0.16) 0%,rgba(0,200,240,0.08) 45%,rgba(191,47,255,0.1) 100%);
   border-top:1px solid rgba(0,229,255,0.45);
@@ -2258,7 +2264,7 @@ nav::after{
     0 0 100px rgba(107,31,160,0.04)
 }
 
-/* spec cells deep recessed readout */
+/* spec cells - deep recessed readout */
 .spec-cell{
   background:linear-gradient(180deg,#0e0e24 0%,#0a0a18 40%,#080810 100%);
   border-top:1px solid rgba(255,255,255,0.07);
@@ -3682,17 +3688,22 @@ footer {
   .acct-dropdown{right:-8px;min-width:160px}
 }
 
-/*Performance / Gorgeous mode*/
+/* ── Performance / Gorgeous mode ───────────────────────────── */
 body.perf-mode .void-layer,
 body.perf-mode .ambient-layer,
 body.perf-mode .amb-page,
 body.perf-mode .deco-layer,
 body.perf-mode .plx,
 body.perf-mode .bg-scan { display:none !important; }
+body.perf-mode .bg-grid {
+  background-image:
+    linear-gradient(rgba(107,31,160,0.14) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(107,31,160,0.14) 1px,transparent 1px);
+}
 body.perf-mode::after   { display:none !important; }
 #starfield.perf-hidden  { display:none !important; }
 
-/*First-visit mode picker modal*/
+/* ── First-visit mode picker modal ─────────────────────────── */
 #modePicker {
   position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;
   background:rgba(4,4,7,0.94);backdrop-filter:blur(8px);opacity:0;
@@ -3762,7 +3773,7 @@ body.perf-mode::after   { display:none !important; }
 .mode-cards { display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1; }
 @media(max-width:400px){ .mode-cards { grid-template-columns:1fr; } }
 
-/* Mode choice cards*/
+/* Mode choice cards — full skeuomorphic buttons */
 .mode-card {
   cursor:pointer;text-align:left;border-radius:7px;
   padding:clamp(16px,2.5vw,22px) clamp(14px,2vw,20px);
@@ -3876,7 +3887,7 @@ body.perf-mode::after   { display:none !important; }
   letter-spacing:0.1em;color:rgba(153,161,178,0.3);text-align:center;
 }
 
-/*Account page: display settings card*/
+/* ── Account page: display settings card ───────────────────── */
 .acct-settings-card {
   background:
     repeating-linear-gradient(90deg,transparent 0,transparent 1px,rgba(255,255,255,0.005) 1px,rgba(255,255,255,0.005) 2px),
@@ -3914,7 +3925,7 @@ body.perf-mode::after   { display:none !important; }
   display:grid;grid-template-columns:1fr 1fr;gap:8px;position:relative;z-index:1;
 }
 
-/*Toggle buttons*/
+/* Toggle buttons — skeuomorphic, matching the site's btn system */
 .mode-toggle-btn {
   cursor:pointer;text-align:center;
   font-family:'Space Mono',monospace;font-size:clamp(8px,0.85vw,10px);
@@ -3951,6 +3962,7 @@ body.perf-mode::after   { display:none !important; }
   transform:translateY(1px) !important;
 }
 
+/* icon well — inset like the modal cards */
 .mode-toggle-icon {
   width:32px;height:32px;border-radius:6px;
   display:flex;align-items:center;justify-content:center;
