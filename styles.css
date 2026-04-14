@@ -4070,9 +4070,43 @@ body.perf-mode::after   { display:none !important; }
   font-family:'Space Mono',monospace;position:relative;z-index:1;
 }
 
-/* 88x31 web badge */
-.badge-88x31{display:inline-flex;align-items:center;border-radius:3px;overflow:hidden;line-height:0;transition:filter 0.3s ease,transform 0.3s ease,opacity 0.3s ease;opacity:0.65;flex-shrink:0}
-.badge-88x31:hover{opacity:1;filter:drop-shadow(0 0 6px rgba(191,47,255,0.35));transform:translateY(-1px)}
-.badge-88x31 img{display:block;image-rendering:pixelated}
+/* 88x31 web badge — skeuomorphic bezel */
+.badge-88x31{
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+  padding:4px 5px 5px;
+  background:linear-gradient(180deg,rgba(28,20,54,1) 0%,rgba(14,9,28,1) 55%,rgba(8,5,16,1) 100%);
+  border-top:1px solid rgba(255,255,255,0.13);
+  border-left:1px solid rgba(255,255,255,0.08);
+  border-right:1px solid rgba(0,0,0,0.6);
+  border-bottom:2px solid rgba(0,0,0,0.8);
+  border-radius:5px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.09),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 2px 0 rgba(0,0,0,0.65),
+    0 3px 10px rgba(0,0,0,0.75);
+  transition:transform 0.12s ease,box-shadow 0.2s ease,border-color 0.18s ease;
+  cursor:pointer;line-height:0;
+}
+.badge-88x31:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 2px 0 rgba(0,0,0,0.65),
+    0 0 14px rgba(107,31,160,0.25),
+    0 0 32px rgba(107,31,160,0.08),
+    0 3px 10px rgba(0,0,0,0.75);
+}
+.badge-88x31:active{
+  transform:translateY(1px) !important;
+  border-top-color:rgba(0,0,0,0.3) !important;
+  border-bottom-width:1px !important;
+  box-shadow:
+    inset 0 3px 10px rgba(0,0,0,0.8),
+    inset 0 1px 3px rgba(0,0,0,0.95),
+    0 1px 2px rgba(0,0,0,0.9) !important;
+}
+.badge-88x31 img{display:block;image-rendering:pixelated;border-radius:2px}
 .mobile-menu-badge{display:flex;justify-content:center;margin-top:auto;padding-top:24px;opacity:0;transform:translateY(8px);transition:opacity 0.4s ease 0.4s,transform 0.4s ease 0.4s}
 .mobile-menu.open .mobile-menu-badge{opacity:1;transform:translateY(0)}
