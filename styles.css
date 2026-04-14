@@ -4070,6 +4070,7 @@ body.perf-mode::after   { display:none !important; }
   font-family:'Space Mono',monospace;position:relative;z-index:1;
 }
 
+
 /* 88x31 web badge — skeuomorphic bezel */
 .badge-88x31{
   display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
@@ -4110,3 +4111,4 @@ body.perf-mode::after   { display:none !important; }
 .badge-88x31 img{display:block;image-rendering:pixelated;border-radius:2px}
 .mobile-menu-badge{display:flex;justify-content:center;margin-top:auto;padding-top:24px;opacity:0;transform:translateY(8px);transition:opacity 0.4s ease 0.4s,transform 0.4s ease 0.4s}
 .mobile-menu.open .mobile-menu-badge{opacity:1;transform:translateY(0)}
+.mobile-menu-badge .badge-88x31{display:inline-flex;width:auto;padding:4px 5px 5px;font-size:0;letter-spacing:0;border-bottom:2px solid rgba(0,0,0,0.8);text-align:center;opacity:1;transform:none}
