@@ -1,2 +1,2 @@
 # site
-it's all 1 file now. I am sorry.
+This was a lovely way to learn HTML and CSS
