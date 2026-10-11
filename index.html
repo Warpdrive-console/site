@@ -1,1613 +1,2130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Warpdrive</title>
-<meta name="description" content="Warpdrive is an indie game console family. One handheld spec, one home console, one library. 90% revenue to the people who make the games.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@200;300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/pages.css">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-
-<div id="modePicker">
-  <div class="mode-picker-box slab lg">
-    <div class="mode-picker-eye">Display Preference</div>
-    <h2>How should Warpdrive look?</h2>
-    <p>Pick a visual mode. You can change it any time from your account page.</p>
-    <div class="mode-cards">
-      <button class="mode-card slab hov pk" onclick="pickMode('gorgeous')">
-        <div class="mode-card-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warpdrive</title>
+    <meta
+      name="description"
+      content="Warpdrive is an indie game console family. One handheld spec, one home console, one library. 90% revenue to the people who make the games." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@200;300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <div id="modePicker">
+      <div class="mode-picker-box slab lg">
+        <div class="mode-picker-eye">Display Preference</div>
+        <h2>How should Warpdrive look?</h2>
+        <p>Pick a visual mode. You can change it any time from your account page.</p>
+        <div class="mode-cards">
+          <button class="mode-card slab hov pk" onclick="pickMode('gorgeous')">
+            <div class="mode-card-icon">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-pink)"
+                stroke-width="1.5"
+                stroke-linecap="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <div class="mode-card-title gorgeous">Gorgeous</div>
+            <div class="mode-card-desc">
+              Every effect on. Animated blobs, starfield, particles, ambient light.
+            </div>
+          </button>
+          <button class="mode-card slab hov cy perf" onclick="pickMode('perf')">
+            <div class="mode-card-icon">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-cyan)"
+                stroke-width="1.5"
+                stroke-linecap="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </div>
+            <div class="mode-card-title perf">Performance</div>
+            <div class="mode-card-desc">
+              Minimal effects. Better on older hardware, laptops on battery, or if you just like it
+              clean.
+            </div>
+          </button>
         </div>
-        <div class="mode-card-title gorgeous">Gorgeous</div>
-        <div class="mode-card-desc">Every effect on. Animated blobs, starfield, particles, ambient light.</div>
-      </button>
-      <button class="mode-card slab hov cy perf" onclick="pickMode('perf')">
-        <div class="mode-card-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <div class="mode-card-title perf">Performance</div>
-        <div class="mode-card-desc">Minimal effects. Better on older hardware, laptops on battery, or if you just like it clean.</div>
-      </button>
+        <div class="mode-note">Change it later under Account, Display</div>
+      </div>
     </div>
-    <div class="mode-note">Change it later under Account, Display</div>
-  </div>
-</div>
 
-<div class="void-layer"><div class="void-blob vb1"></div><div class="void-blob vb2"></div><div class="void-blob vb3"></div><div class="void-blob vb4"></div><div class="void-blob vb5"></div></div>
-<div id="egg-toast"></div>
-<div class="ambient-layer"><div class="amb-orb amb1"></div><div class="amb-orb amb2"></div><div class="amb-orb amb3"></div><div class="amb-orb amb4"></div><div class="amb-orb amb5"></div><div class="amb-orb amb6"></div></div>
-<div class="amb-page" id="ambHome" style="width:500px;height:400px;top:20%;left:60%;background:radial-gradient(ellipse,rgba(255,34,163,0.07),transparent 80%)"></div>
-<div class="amb-page" id="ambTechnical" style="width:600px;height:400px;top:15%;left:50%;background:radial-gradient(ellipse,rgba(0,229,255,0.07),transparent 80%)"></div>
-<div class="amb-page" id="ambDevelopmental" style="width:500px;height:380px;top:25%;left:55%;background:radial-gradient(ellipse,rgba(191,47,255,0.07),transparent 80%)"></div>
-<canvas id="starfield"></canvas>
-<div class="bg-grid"></div><div class="bg-scan"></div>
-<div class="deco-layer">
-  <div class="deco-shape d-diamond cyan ds1"></div><div class="deco-shape d-diamond pink ds2"></div>
-  <div class="deco-shape d-diamond ds3"></div><div class="deco-shape d-diamond cyan ds4"></div>
-  <div class="deco-shape d-square ds5"></div><div class="deco-shape d-diamond pink ds6"></div>
-  <div class="deco-shape d-square ds7"></div><div class="deco-shape d-diamond ds8"></div>
-</div>
+    <div class="void-layer">
+      <div class="void-blob vb1"></div>
+      <div class="void-blob vb2"></div>
+      <div class="void-blob vb3"></div>
+      <div class="void-blob vb4"></div>
+      <div class="void-blob vb5"></div>
+    </div>
+    <div id="egg-toast"></div>
+    <div class="ambient-layer">
+      <div class="amb-orb amb1"></div>
+      <div class="amb-orb amb2"></div>
+      <div class="amb-orb amb3"></div>
+      <div class="amb-orb amb4"></div>
+      <div class="amb-orb amb5"></div>
+      <div class="amb-orb amb6"></div>
+    </div>
+    <div
+      class="amb-page"
+      id="ambHome"
+      style="
+        width: 500px;
+        height: 400px;
+        top: 20%;
+        left: 60%;
+        background: radial-gradient(ellipse, rgba(255, 34, 163, 0.07), transparent 80%);
+      "></div>
+    <div
+      class="amb-page"
+      id="ambTechnical"
+      style="
+        width: 600px;
+        height: 400px;
+        top: 15%;
+        left: 50%;
+        background: radial-gradient(ellipse, rgba(0, 229, 255, 0.07), transparent 80%);
+      "></div>
+    <div
+      class="amb-page"
+      id="ambDevelopmental"
+      style="
+        width: 500px;
+        height: 380px;
+        top: 25%;
+        left: 55%;
+        background: radial-gradient(ellipse, rgba(191, 47, 255, 0.07), transparent 80%);
+      "></div>
+    <canvas id="starfield"></canvas>
+    <div class="bg-grid"></div>
+    <div class="bg-scan"></div>
+    <div class="deco-layer">
+      <div class="deco-shape d-diamond cyan ds1"></div>
+      <div class="deco-shape d-diamond pink ds2"></div>
+      <div class="deco-shape d-diamond ds3"></div>
+      <div class="deco-shape d-diamond cyan ds4"></div>
+      <div class="deco-shape d-square ds5"></div>
+      <div class="deco-shape d-diamond pink ds6"></div>
+      <div class="deco-shape d-square ds7"></div>
+      <div class="deco-shape d-diamond ds8"></div>
+    </div>
 
-<div class="plx" id="pL1">
-  <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <line x1="52" y1="120" x2="68" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1"/><line x1="68" y1="120" x2="52" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1"/>
-    <line x1="1380" y1="300" x2="1396" y2="284" stroke="rgba(0,229,255,0.11)" stroke-width="0.8"/><line x1="1396" y1="300" x2="1380" y2="284" stroke="rgba(0,229,255,0.11)" stroke-width="0.8"/>
-    <path d="M20,20 L20,70 M20,20 L70,20" stroke="rgba(204,46,138,0.12)" stroke-width="0.8" fill="none"/>
-    <path d="M1420,20 L1420,70 M1420,20 L1370,20" stroke="rgba(0,229,255,0.09)" stroke-width="0.8" fill="none"/>
-    <path d="M20,880 L20,830 M20,880 L70,880" stroke="rgba(191,47,255,0.09)" stroke-width="0.8" fill="none"/>
-    <path d="M1420,880 L1420,830 M1420,880 L1370,880" stroke="rgba(204,46,138,0.08)" stroke-width="0.8" fill="none"/>
-    <line x1="0" y1="250" x2="1440" y2="250" stroke="rgba(204,46,138,0.03)" stroke-width="0.4" stroke-dasharray="80 200"/>
-    <line x1="0" y1="650" x2="1440" y2="650" stroke="rgba(107,31,160,0.03)" stroke-width="0.4" stroke-dasharray="60 180"/>
-    <rect x="720" y="44" width="10" height="10" fill="none" stroke="rgba(255,34,163,0.12)" stroke-width="0.7" transform="rotate(45,725,49)"/>
-    <rect x="1200" y="400" width="8" height="8" fill="none" stroke="rgba(0,229,255,0.10)" stroke-width="0.5" transform="rotate(45,1204,404)"/>
-    <polygon points="1320,160 1330,143 1350,143 1360,160 1350,177 1330,177" fill="none" stroke="rgba(0,229,255,0.06)" stroke-width="0.6"/>
-    <polygon points="100,780 110,763 130,763 140,780 130,797 110,797" fill="none" stroke="rgba(204,46,138,0.06)" stroke-width="0.6"/>
-  </svg>
-</div>
-<div class="plx" id="pL2">
-  <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <line x1="1400" y1="160" x2="1416" y2="144" stroke="rgba(107,31,160,0.13)" stroke-width="0.8"/><line x1="1416" y1="160" x2="1400" y2="144" stroke="rgba(107,31,160,0.13)" stroke-width="0.8"/>
-    <line x1="40" y1="760" x2="56" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8"/><line x1="56" y1="760" x2="40" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8"/>
-    <rect x="1240" y="60" width="12" height="12" fill="none" stroke="rgba(191,47,255,0.14)" stroke-width="0.8"><animateTransform attributeName="transform" type="rotate" from="0 1246 66" to="360 1246 66" dur="24s" repeatCount="indefinite"/></rect>
-    <rect x="180" y="480" width="10" height="10" fill="none" stroke="rgba(0,229,255,0.11)" stroke-width="0.7"><animateTransform attributeName="transform" type="rotate" from="45 185 485" to="405 185 485" dur="19s" repeatCount="indefinite"/></rect>
-    <polygon points="0,0 40,0 0,40" fill="rgba(204,46,138,0.05)"/><polygon points="1440,0 1400,0 1440,40" fill="rgba(0,229,255,0.04)"/>
-    <polygon points="0,900 40,900 0,860" fill="rgba(191,47,255,0.04)"/><polygon points="1440,900 1400,900 1440,860" fill="rgba(204,46,138,0.04)"/>
-  </svg>
-</div>
+    <div class="plx" id="pL1">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg">
+        <line x1="52" y1="120" x2="68" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1" />
+        <line x1="68" y1="120" x2="52" y2="106" stroke="rgba(255,34,163,0.14)" stroke-width="1" />
+        <line
+          x1="1380"
+          y1="300"
+          x2="1396"
+          y2="284"
+          stroke="rgba(0,229,255,0.11)"
+          stroke-width="0.8" />
+        <line
+          x1="1396"
+          y1="300"
+          x2="1380"
+          y2="284"
+          stroke="rgba(0,229,255,0.11)"
+          stroke-width="0.8" />
+        <path
+          d="M20,20 L20,70 M20,20 L70,20"
+          stroke="rgba(204,46,138,0.12)"
+          stroke-width="0.8"
+          fill="none" />
+        <path
+          d="M1420,20 L1420,70 M1420,20 L1370,20"
+          stroke="rgba(0,229,255,0.09)"
+          stroke-width="0.8"
+          fill="none" />
+        <path
+          d="M20,880 L20,830 M20,880 L70,880"
+          stroke="rgba(191,47,255,0.09)"
+          stroke-width="0.8"
+          fill="none" />
+        <path
+          d="M1420,880 L1420,830 M1420,880 L1370,880"
+          stroke="rgba(204,46,138,0.08)"
+          stroke-width="0.8"
+          fill="none" />
+        <line
+          x1="0"
+          y1="250"
+          x2="1440"
+          y2="250"
+          stroke="rgba(204,46,138,0.03)"
+          stroke-width="0.4"
+          stroke-dasharray="80 200" />
+        <line
+          x1="0"
+          y1="650"
+          x2="1440"
+          y2="650"
+          stroke="rgba(107,31,160,0.03)"
+          stroke-width="0.4"
+          stroke-dasharray="60 180" />
+        <rect
+          x="720"
+          y="44"
+          width="10"
+          height="10"
+          fill="none"
+          stroke="rgba(255,34,163,0.12)"
+          stroke-width="0.7"
+          transform="rotate(45,725,49)" />
+        <rect
+          x="1200"
+          y="400"
+          width="8"
+          height="8"
+          fill="none"
+          stroke="rgba(0,229,255,0.10)"
+          stroke-width="0.5"
+          transform="rotate(45,1204,404)" />
+        <polygon
+          points="1320,160 1330,143 1350,143 1360,160 1350,177 1330,177"
+          fill="none"
+          stroke="rgba(0,229,255,0.06)"
+          stroke-width="0.6" />
+        <polygon
+          points="100,780 110,763 130,763 140,780 130,797 110,797"
+          fill="none"
+          stroke="rgba(204,46,138,0.06)"
+          stroke-width="0.6" />
+      </svg>
+    </div>
+    <div class="plx" id="pL2">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg">
+        <line
+          x1="1400"
+          y1="160"
+          x2="1416"
+          y2="144"
+          stroke="rgba(107,31,160,0.13)"
+          stroke-width="0.8" />
+        <line
+          x1="1416"
+          y1="160"
+          x2="1400"
+          y2="144"
+          stroke="rgba(107,31,160,0.13)"
+          stroke-width="0.8" />
+        <line x1="40" y1="760" x2="56" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8" />
+        <line x1="56" y1="760" x2="40" y2="744" stroke="rgba(191,47,255,0.12)" stroke-width="0.8" />
+        <rect
+          x="1240"
+          y="60"
+          width="12"
+          height="12"
+          fill="none"
+          stroke="rgba(191,47,255,0.14)"
+          stroke-width="0.8">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 1246 66"
+            to="360 1246 66"
+            dur="24s"
+            repeatCount="indefinite" />
+        </rect>
+        <rect
+          x="180"
+          y="480"
+          width="10"
+          height="10"
+          fill="none"
+          stroke="rgba(0,229,255,0.11)"
+          stroke-width="0.7">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="45 185 485"
+            to="405 185 485"
+            dur="19s"
+            repeatCount="indefinite" />
+        </rect>
+        <polygon points="0,0 40,0 0,40" fill="rgba(204,46,138,0.05)" />
+        <polygon points="1440,0 1400,0 1440,40" fill="rgba(0,229,255,0.04)" />
+        <polygon points="0,900 40,900 0,860" fill="rgba(191,47,255,0.04)" />
+        <polygon points="1440,900 1400,900 1440,860" fill="rgba(204,46,138,0.04)" />
+      </svg>
+    </div>
 
-<nav>
-  <div class="nav-brand"><img src="warpdrive-logo.png" alt="Warpdrive" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none">WARPDRIVE</span></div>
-  <div class="nav-links">
-    <button class="nav-link active" data-page="home">Home</button>
-    <button class="nav-link" data-page="technical">Hardware</button>
-    <button class="nav-link" data-page="developmental">Developers</button>
-    <button class="nav-link" data-page="account" id="navAcctLink" style="display:none">Account</button>
-    <div class="nav-divider"></div>
-    <div class="nav-actions">
-      <a href="https://github.com/Warpdrive-console" class="nav-ghost" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://discord.gg/Dv6K2vNyfK" class="nav-cta" target="_blank" rel="noopener">Discord</a>
-      <a href="https://glue3d.net/" target="_blank" rel="noopener" class="badge-88x31"><img src="buttonglue3d.gif" alt="Glue3D" width="88" height="31" loading="lazy"></a>
-      <div style="position:relative">
-        <button class="nav-account-btn" id="navAcctBtn" onclick="roturAcct.toggle()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span class="acct-name" id="navAcctLabel">Sign In</span>
+    <nav>
+      <div class="nav-brand">
+        <img
+          src="/warpdrive-logo.png"
+          alt="Warpdrive"
+          onerror="
+            this.style.display = 'none';
+            this.nextElementSibling.style.display = 'block';
+          " /><span class="nav-brand-text" style="display: none">WARPDRIVE</span>
+      </div>
+      <div class="nav-links">
+        <button class="nav-link active" data-page="home">Home</button>
+        <button class="nav-link" data-page="technical">Hardware</button>
+        <button class="nav-link" data-page="developmental">Developers</button>
+        <button class="nav-link" data-page="account" id="navAcctLink" style="display: none">
+          Account
         </button>
-        <div class="acct-dropdown" id="acctDropdown">
-          <div class="acct-dropdown-name" id="dropdownName"></div>
-          <button class="acct-dropdown-item" onclick="goPage('account');document.getElementById('acctDropdown').classList.remove('open')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            View account
-          </button>
-          <button class="acct-dropdown-item" onclick="roturAcct.logout()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Log out
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="nav-right"><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div>
-</nav>
-
-<div class="mobile-menu" id="mobileMenu">
-  <button onclick="goPage('home')">Home</button>
-  <button onclick="goPage('technical')">Hardware</button>
-  <button onclick="goPage('developmental')">Developers</button>
-  <button class="mobile-acct-btn" id="mobileAcctBtn" onclick="roturAcct.mobileToggle()">Sign In</button>
-  <div class="mobile-menu-actions">
-    <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener">Join the Discord</a>
-    <a href="https://github.com/Warpdrive-console" class="btn-github" target="_blank" rel="noopener">View on GitHub</a>
-  </div>
-  <div class="mobile-menu-badge">
-    <a href="https://glue3d.net/" target="_blank" rel="noopener" class="badge-88x31"><img src="buttonglue3d.gif" alt="Glue3D" width="88" height="31" loading="lazy"></a>
-  </div>
-</div>
-
-<div class="page active" id="page-home">
-  <section class="hero">
-    <div class="hero-accents">
-      <div class="hero-ring"></div><div class="hero-ring2"></div><div class="hero-dot"></div>
-    </div>
-    <div class="hero-content">
-      <p class="hero-eyebrow"><span class="eyebrow-line"></span>In development / Pre-orders eventually</p>
-      <div class="hero-logo">
-        <img src="warpdrive-logo.png" alt="Warpdrive" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-        <span class="hero-wordmark" style="display:none">Warpdrive</span>
-      </div>
-      <p class="hero-sub">A console family built for <strong>indie culture</strong>. One handheld spec, one home console, <strong>one library</strong>. Physical media, real social, engine freedom, and 90% of revenue to the people who make the games.</p>
-      <div class="hero-cta">
-        <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener">Join the Discord</a>
-        <a href="#" class="btn-s" onclick="goPage('technical');return false;">See the hardware</a>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat slab hov pk">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span class="stat-val">275+</span><span class="stat-label">Developers</span>
-      </div>
-      <div class="stat slab hov pu">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        <span class="stat-val">90%</span><span class="stat-label">Revenue share</span>
-      </div>
-      <div class="stat slab hov nn">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-        <span class="stat-val">$225</span><span class="stat-label">Launch price</span>
-      </div>
-      <div class="stat slab hov cy">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        <span class="stat-val">1</span><span class="stat-label">Library, every device</span>
-      </div>
-    </div>
-  </section>
-
-  <div class="mq" id="mq-home"><div class="mq-inner"><div class="mq-track"><span class="mq-item">Physical Media</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Engine Agnostic</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Buy Once, Play Everywhere</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Rotur.Dev</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Handheld + Home Console</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Open Modding</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Indie Forever</span><span class="mq-item dot">&#9670;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">Physical Media</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Open Source Runtime</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Engine Agnostic</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">90% Rev Share</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Buy Once, Play Everywhere</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Rotur.Dev</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Handheld + Home Console</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Banks the Raccoon</span><span class="mq-item dot">&#9670;</span><span class="mq-item">Open Modding</span><span class="mq-item dot">&#9670;</span><span class="mq-item hi">Indie Forever</span><span class="mq-item dot">&#9670;</span></div></div></div>
-
-  <section id="creed-section">
-    <div class="reveal">
-      <p class="se">What we believe</p>
-      <h2 class="st">Three rules.<br><span class="gradient-pink">No exceptions.</span></h2>
-    </div>
-    <div class="creed-grid">
-      <article class="creed slab hov cy reveal">
-        <span class="creed-num">Rule 01</span>
-        <h3>The engine agnostic creed</h3>
-        <p>Warpdrive is a level playing field. Web engines like <strong>Scratch, TurboWarp and GB Studio</strong> and native engines like <strong>Unity, GameMaker and Godot</strong> are treated as absolute equals. Web games are not sidelined into a corner of the store. They get the same system level optimization, the same integration, and the same shelf space as a compiled binary.</p>
-        <div class="engine-chips">
-          <span class="chip web">Scratch</span><span class="chip web">TurboWarp</span><span class="chip web">GB Studio</span><span class="chip web">GDevelop</span>
-          <span class="chip">Unity</span><span class="chip">GameMaker</span><span class="chip">Godot</span><span class="chip">Anything else</span>
-        </div>
-        <p class="chip-note">Web on the left, native on the right, no hierarchy between them.</p>
-      </article>
-      <article class="creed slab hov pk reveal">
-        <span class="creed-num">Rule 02</span>
-        <h3>Empowering the next gen</h3>
-        <p>This is a stage for the developers nobody else is building for. A passionate crowd of <strong>young indie creators</strong> whose games currently live in a browser tab or a pocket project folder. Warpdrive turns them into real console experiences, with a real store page, a real disc, and a real audience.</p>
-      </article>
-      <article class="creed slab hov pu reveal">
-        <span class="creed-num">Rule 03</span>
-        <h3>Buy once, play everywhere</h3>
-        <p>Buy a game once, digital or physical, and your <strong>Rotur account</strong> binds it to your universal library. Move from the TV to any handheld in the lineup without paying twice. Saves follow you. Nobody gets charged again for owning the same game on a different shape of plastic.</p>
-      </article>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <script>
-  const GAMES = [
-    {title:"Warpdrive",desc:"A modern game console built for indie developers. Run and build games with the tools you already know, while keeping the spirit of classic disc based systems. Old school console design, powerful moddable platform, easy to create, share and play.",img:"",tag:"Hardware &#183; Radical"},
-    {title:"Kiki's MicroDungeon",desc:"KKMD is a colorful 2D roguelike boss rush with tile based movement and bullet hell aspects. Every run shuffles the bosses, encounters, NPCs, upgrades, and the ways you can build Kiki.",img:"",tag:"Game &#183; Roguelike &#183; Topdown"},
-    {title:"Spectrum in the Void",desc:"SITV is a topdown shoot em up themed around space, abstract shapes and neon light. You and up to 3 friends blast holes through hordes of vibrant enemies. There is something close to a story in there, pointing you in roughly the right direction. Upgrade your ship as you play and mess with the interacting systems.",img:"sitv-gaem.png",tag:"Game &#183; Shmup &#183; Bullet-hell"},
-    {title:"Ode to Aetherhold",desc:"A topdown action RPG made in GB Studio. It pulls from Dark Souls for art direction and story beats. Real time combat, character building, and 2 endings. You were dragged back from the abyss and tugged towards the floating kingdom in the sky. One command haunts you: forget me gently, and climb.",img:"",tag:"Game &#183; Action RPG &#183; Souls-Like"},
-    {title:"Battle Bound",desc:"A side scrolling online multiplayer shooter. Several gamemodes, maps, customizable weapon loadouts and character customization. The closest thing we have to scratching the Call of Duty itch.",img:"",tag:"Game &#183; Online Shooter &#183; Side-Scroller"}
-  ];
-  </script>
-
-  <div class="showcase">
-    <div class="showcase-header reveal">
-      <div>
-        <p class="showcase-eyebrow">Community projects, still very much in progress</p>
-        <h2 class="showcase-heading"><span class="gradient-purple">Under</span> Construction.</h2>
-      </div>
-      <div class="showcase-nav">
-        <button class="showcase-arrow" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <button class="showcase-arrow" id="carouselNext" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-      </div>
-    </div>
-    <div class="showcase-carousel"><div class="showcase-track" id="carouselTrack"></div></div>
-    <div class="showcase-dots-wrap"><div class="showcase-dots" id="carouselDots"></div><div class="showcase-counter" id="carouselCounter"></div></div>
-  </div>
-
-  <div class="section-divider"></div>
-
-  <section>
-    <div class="reveal"><p class="se">Meet the mascot</p><h2 class="st"><span class="gradient-purple glitch">Banks.</span></h2></div>
-    <div class="banks-layout">
-      <div class="reveal"><p class="banks-intro">A raccoon in a <strong>purple bandana</strong>. He owns no other clothes fashionable enough to flaunt. Lazy, gluttonous, lurking, stalking. He spends his days eating, drinking, sleeping and gaming in alarming excess. He is a <strong>chud</strong>. We <strong>love</strong> him. Drawn by Rigby, @ToastGh0ast.</p></div>
-      <div class="banks-grid reveal">
-        <div class="banks-card slab hov"><img src="banks-loving.png" alt="Banks" loading="lazy"><div class="banks-caption">genuinely in love</div></div>
-        <div class="banks-card slab hov"><img src="banks-waving.png" alt="Banks" loading="lazy"><div class="banks-caption">he's waving back</div></div>
-        <div class="banks-card slab hov"><img src="banks-toking.png" alt="Banks" loading="lazy"><div class="banks-caption">no comment</div></div>
-        <div class="banks-card slab hov"><img src="banks-ew.png" alt="Banks" loading="lazy"><div class="banks-caption">same tbh</div></div>
-        <div class="banks-card slab hov"><img src="banks-dorito.png" alt="Banks" loading="lazy"><div class="banks-caption">all he eats</div></div>
-        <div class="banks-card slab hov"><img src="banks-autism.png" alt="Banks" loading="lazy"><div class="banks-caption">peak form</div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <section id="ks-section">
-    <div class="reveal"><p class="se">Pre-order</p><h2 class="st"><span class="gradient-silver">One price.</span><br>No tricks.</h2></div>
-    <div class="price-layout">
-      <div class="price-card slab lg reveal">
-        <div class="price-glow"></div>
-        <div class="price-amount"><sup>$</sup>225</div>
-        <div class="price-note">&#9670; Free shipping, United States</div>
-        <div class="price-lines">
-          <div class="price-line"><strong>Warpdrive home console</strong> / customizable shell colors</div>
-          <div class="price-line"><strong>Banks stickers</strong> / not optional, non-negotiable</div>
-          <div class="price-line"><strong>A bundled game</strong> / disc included, picked at random</div>
-          <div class="price-line"><strong>Free shipping</strong> / USA, discounted worldwide</div>
-          <div class="price-line"><strong>Gamepad support</strong> / Bluetooth, wired, SNES, PS5, most things in between</div>
-          <div class="price-line"><strong>Printed mailer box</strong> / inside and out</div>
-          <div class="price-line"><strong>Pre-orders open</strong> / <span class="someday-tip" data-tip="no seriously though. one day. probably.">someday lmao</span></div>
-        </div>
-      </div>
-      <div class="ks-card slab reveal">
-        <div class="ks-title">&#9672; Kickstarter coming</div>
-        <p class="ks-body">Batch size follows demand. <strong>Plenty of color customization</strong> available. Quality over quantity.</p>
-        <div class="ks-tiers">
-          <div class="ks-tier"><span class="ks-tier-name">Thank you + stickers</span><span class="ks-tier-val">~$15</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Physical game</span><span class="ks-tier-val">~$25</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Console bundle</span><span class="ks-tier-val">$225</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Console + 8BitDo controller</span><span class="ks-tier-val">~$250</span></div>
-          <div class="ks-tier"><span class="ks-tier-name">Full bundle + store credit</span><span class="ks-tier-val">~$300</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="page" id="page-technical">
-  <section>
-    <div class="reveal"><p class="se cy">What Warpdrive is</p><h2 class="st"><span class="gradient-cyan">Built different.</span><br>On purpose.</h2></div>
-    <div class="identity-grid">
-      <div class="id-card slab hov cy reveal">
-        <span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-        <div class="id-title">Open source runtime</div>
-        <p class="id-body"><strong>Web games run through Chromium</strong> with WebGPU. <strong>Native ARM binaries</strong> land later for full performance titles. Either way you pick the engine, from Unity or GameMaker to Scratch, GB Studio and GDevelop, with dozens of tools in between.</p>
-      </div>
-      <div class="id-card slab hov pk reveal">
-        <span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></span>
-        <div class="id-title">Real culture</div>
-        <p class="id-body">We grew up on Newgrounds, itch.io and Game Jolt, and on PS3, Xbox 360 and Wii modding. <strong>Open firmware, moddable frontend, homebrew launcher out of the box.</strong> Warpdrive would not exist without console modding, so it ships ready for it.</p>
-      </div>
-      <div class="id-card slab hov pu reveal">
-        <span class="id-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg></span>
-        <div class="id-title">Physical media</div>
-        <p class="id-body">Full size DVDs in <strong>purple collector cases</strong>. The home console has a disc drive for physical games. It exists for collectors and for anyone without decent Wi-Fi. Install the disc to storage and it plays without it.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="mq mq-technical" id="mq-technical"><div class="mq-inner"><div class="mq-track"><span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Unified Handheld Spec</span><span class="mq-item dot">&#9672;</span><span class="mq-item">LPDDR4X Handhelds</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Custom Armbian OS</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">8x DVD Drive</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Open Firmware</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">&#9672;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">QCS6490 Processor</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Adreno 643 GPU</span><span class="mq-item dot">&#9672;</span><span class="mq-item">8GB LPDDR5</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Unified Handheld Spec</span><span class="mq-item dot">&#9672;</span><span class="mq-item">LPDDR4X Handhelds</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">WebGPU + Vulkan</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Custom Armbian OS</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">8x DVD Drive</span><span class="mq-item dot">&#9672;</span><span class="mq-item">Open Firmware</span><span class="mq-item dot">&#9672;</span><span class="mq-item hi">Rotur Social Layer</span><span class="mq-item dot">&#9672;</span></div></div></div>
-
-  <section id="tiers-section">
-    <div class="reveal">
-      <p class="se cy">Two tiers</p>
-      <h2 class="st">One family.<br><span class="gradient-cyan">Two form factors.</span></h2>
-      <p class="sd">Every handheld runs the same silicon so a mobile build is a single target. The home console steps up a tier for the television, with faster memory and a stronger GPU, while staying close enough architecturally that porting stays boring. <strong>Both play the same library.</strong></p>
-    </div>
-    <div class="hw-split">
-      <article class="hw-card slab hov pu reveal">
-        <span class="hw-badge">Handheld lineup</span>
-        <h3>Unified specs.<br>Diverse forms.</h3>
-        <p class="hw-body">Every handheld in the ecosystem ships with the <strong>same processor and the same LPDDR4X memory</strong>. Optimize your handheld build once and it performs identically on every device in the line. The shells, the screens and the layouts change. The silicon does not.</p>
-        <ul class="hw-list">
-          <li><strong>Shared SoC</strong> across every handheld we make</li>
-          <li><strong>LPDDR4X memory</strong>, same configuration everywhere</li>
-          <li><strong>One build target</strong>, no per device profiling</li>
-          <li><strong>Form factor freedom</strong>, different sizes, layouts and price points</li>
-        </ul>
-      </article>
-      <article class="hw-card slab hov cy reveal">
-        <span class="hw-badge">Home console</span>
-        <h3>The powerhouse.<br>Built for the TV.</h3>
-        <p class="hw-body">The home console targets the big screen, so it moves up a performance tier. It swaps the handheld memory for <strong>faster, higher bandwidth LPDDR5</strong> and carries a <strong>noticeably stronger GPU</strong> to hold higher resolutions and steadier framerates. Complex scenes stop fighting the memory bus.</p>
-        <ul class="hw-list">
-          <li><strong>8GB LPDDR5</strong>, more bandwidth for busy scenes</li>
-          <li><strong>Adreno 643 GPU</strong>, comfortable at higher resolutions</li>
-          <li><strong>Disc drive</strong>, physical games and collector cases</li>
-          <li><strong>Comparable architecture</strong>, so cross porting stays simple</li>
-        </ul>
-      </article>
-    </div>
-    <div class="hw-compare slab reveal">
-      <table>
-        <thead>
-          <tr><th scope="col">Spec</th><th scope="col">Handhelds</th><th scope="col">Home console</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Processor</th><td>Unified across the whole line</td><td>Qualcomm QCS6490</td></tr>
-          <tr><th scope="row">Memory</th><td>LPDDR4X, identical on every unit</td><td>8GB LPDDR5, higher bandwidth</td></tr>
-          <tr><th scope="row">Graphics</th><td>Shared handheld GPU, one profile</td><td>Adreno 643, higher tier</td></tr>
-          <tr><th scope="row">Output</th><td>Built in display</td><td>Television, up to 4K at 60Hz</td></tr>
-          <tr><th scope="row">Media</th><td>Digital and installed titles</td><td>Digital plus 8x DVD drive</td></tr>
-          <tr><th scope="row">Build target</th><td>One handheld build</td><td>One console build</td></tr>
-          <tr><th scope="row">Library</th><td>Your Rotur library</td><td>The same Rotur library</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="hardware-section">
-    <div class="reveal"><p class="se cy">Under the hood</p><h2 class="st"><span class="gradient-cyan">Serious</span> hardware.</h2><p class="sd">Home console silicon, broken down. Industrial parts, long availability, no surprise end of life.</p></div>
-    <div class="spec-layout reveal">
-      <div class="spec-cell slab cy"><span class="spec-key">CPU</span><span class="spec-val">QCS6490</span></div>
-      <div class="spec-cell slab cy"><span class="spec-key">GPU</span><span class="spec-val">Adreno 643</span></div>
-      <div class="spec-cell slab cy"><span class="spec-key">RAM</span><span class="spec-val">8GB LPDDR5</span></div>
-      <div class="spec-cell slab cy"><span class="spec-key">Process node</span><span class="spec-val">6nm</span></div>
-      <div class="spec-cell slab cy"><span class="spec-key">Storage</span><span class="spec-val">0-256GB eMMC / Micro SD</span></div>
-      <div class="spec-cell slab cy"><span class="spec-key">Graphics</span><span class="spec-val">WebGPU + Vulkan</span></div>
-      <div class="spec-cell slab cy"><span class="spec-key">Media</span><span class="spec-val">8x DVD drive</span></div>
-      <div class="spec-cell slab cy"><span class="spec-key">OS</span><span class="spec-val">Custom Armbian build</span></div>
-    </div>
-
-    <div class="spec-accordion reveal" id="specAccordion">
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">Processor</span><span class="spec-header-val">Qualcomm QCS6490</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p>The <strong>QCS6490</strong> is an industrial grade <span class="hl-cyan">6nm</span> SoC with an octa core Kryo 670 CPU. It is designed for always on edge devices and has more than enough muscle for indie games. Its consumer counterpart is the Snapdragon 778G, so think <strong>Linux gaming performance</strong> on industrial silicon: stable clocks, <span class="hl-pink">low thermals</span>, and long term availability.</p></div></div>
-      </div>
-
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">GPU</span><span class="spec-header-val">Adreno 643</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p>The <strong>Adreno 643</strong> supports <span class="hl-cyan">Vulkan 1.1</span> and <span class="hl-cyan">OpenGL ES 3.2</span>. The real play is WebGPU through Chromium, which hands developers a <strong>modern GPU API</strong> with compute shaders and instanced rendering, plus enough headroom to push 2D hard and run 3D at respectable framerates. Hardware video decode covers media heavy menus and cutscenes. 4K at 60Hz is on the table if you know how to optimize.</p></div></div>
-      </div>
-
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="10" y1="10" x2="10" y2="14"/><line x1="14" y1="10" x2="14" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">Memory</span><span class="spec-header-val">8GB LPDDR5</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p><span class="hl-cyan">8GB of LPDDR5</span> shared between system and GPU. No dedicated VRAM, but the bandwidth is enormous next to what indie games actually ask for, and it is the main reason the home console pulls ahead of the LPDDR4X handhelds on busy scenes. Room to run your game, the social overlay and background downloads at once without choking.</p></div></div>
-      </div>
-
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">Storage</span><span class="spec-header-val">0-256GB eMMC / Micro SD</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p><strong>eMMC onboard</strong> from 0 to 256GB, plus a <span class="hl-cyan">Micro SD</span> slot for expansion. Install disc games to storage and play without the disc later. The OS is light enough to leave <span class="hl-pink">most of the drive for your library</span>, and SD cards hot swap so you can carry a collection between units.</p></div></div>
-      </div>
-
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">Graphics API</span><span class="spec-header-val">Vulkan / WebGPU / Wayland</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p><span class="hl-cyan">WebGPU</span> is the primary path for web based games. Modern, fast, cross engine. <strong>Vulkan</strong> is there for native ARM titles that want direct GPU access. <span class="hl-pink">Wayland</span> composites the dashboard. Three layers, each doing one job, no bloat in between.</p></div></div>
-      </div>
-
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">Media</span><span class="spec-header-val">Physical and digital</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p>An <strong>8x DVD drive</strong> reads full size 4.7GB discs in custom <span class="hl-pink">purple collector cases</span>. Install once and play forever. The disc is proof of ownership, not a requirement, and buying it registers the game to your Rotur library so it also works on your handheld. <span class="hl-cyan">Both paths are first class.</span></p></div></div>
-      </div>
-
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">Operating system</span><span class="spec-header-val">Custom Armbian derivative</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p>A <strong>custom Armbian based Linux build</strong>, stripped down for Warpdrive, tweakers and modders alike. Open firmware, <span class="hl-cyan">fully auditable and fully moddable</span>. The dashboard is a web app you can theme and hack, and the homebrew launcher ships out of the box. It is <span class="hl-pink">your console</span>.</p></div></div>
-      </div>
-
-      <div class="spec-item slab cy">
-        <div class="spec-header">
-          <div class="spec-header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-          <div class="spec-header-text"><span class="spec-header-key">Process node</span><span class="spec-header-val">6nm</span></div>
-          <div class="spec-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-inner"><p><strong>6nm fabrication</strong> means good <span class="hl-cyan">power efficiency</span> and low heat. No fan needed in most scenarios. The chip sips power next to older nodes, which keeps the console <span class="hl-pink">quiet, cool and compact</span>. Industrial silicon also means long production availability. If you want the honest version: we were told 6nm is good, and we are repeating it with confidence.</p></div></div>
-      </div>
-    </div>
-
-    <div class="spec-banner slab reveal"><p>Industrial hardware at the developer's mercy. Push it to its limits, or use it to play 30 year old games. Your call.<br><strong>The most capable indie console at this price point.</strong></p></div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <section>
-    <div class="reveal"><p class="se">Collector's edition</p><h2 class="st"><span class="gradient-purple">Hold</span> your games.</h2></div>
-    <div class="physical-layout reveal">
-      <div class="disc-stage slab pu">
-        <div class="disc-visual"><div class="disc-outer"></div><div class="disc-mid"></div><div class="disc-hub"></div><div class="disc-shine"></div></div>
-      </div>
-      <div class="disc-info">
-        <h3>Purple collector cases</h3>
-        <div class="disc-facts">
-          <div class="disc-fact slab sm"><strong>Full size DVD</strong> / 4.7GB per disc</div>
-          <div class="disc-fact slab sm"><strong>Custom cases</strong> / a game case that matches the developer's vision</div>
-          <div class="disc-fact slab sm">Install once, <strong>play forever</strong>, no disc needed after</div>
-          <div class="disc-fact slab sm"><strong>Around $5 a unit</strong> to produce. Cheap to make, lovely to own.</div>
-          <div class="disc-fact slab sm">A disc run is granted to our <strong>favorite</strong> titles</div>
-          <div class="disc-fact slab sm">Buying the disc <strong>unlocks it on your handheld</strong> too</div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="page" id="page-developmental">
-  <section>
-    <div class="reveal"><p class="se">For developers</p><h2 class="st">Your game.<br><span class="gradient-pink">Your cut.</span></h2><p class="sd">Free to develop for. No gatekeeping. Four ways to ship, and you keep the majority on all of them.</p></div>
-    <div class="tier-list reveal">
-      <div class="tier slab hov pk">
-        <div class="tier-stripe" style="background:linear-gradient(180deg,var(--pink-hot),var(--purple-logo))"></div>
-        <div class="tier-num">01</div>
-        <div class="tier-info"><div class="tier-name">Storefront, official</div><div class="tier-desc">Curated digital store. There is a quality bar, submission is free, and developers keep 90% of the money.</div></div>
-        <div class="tier-cut gradient-pink">90%</div>
-      </div>
-      <div class="tier slab hov si">
-        <div class="tier-stripe" style="background:linear-gradient(180deg,var(--silver),var(--chrome))"></div>
-        <div class="tier-num">02</div>
-        <div class="tier-info"><div class="tier-name">Physical, disc</div><div class="tier-desc">DVD releases. Custom casing, printed discs, collector editions. Developers keep 70%.</div></div>
-        <div class="tier-cut" style="color:var(--silver)">70%</div>
-      </div>
-      <div class="tier slab hov pu">
-        <div class="tier-stripe" style="background:var(--purple-logo)"></div>
-        <div class="tier-num">03</div>
-        <div class="tier-info"><div class="tier-name">Open-Ware</div><div class="tier-desc">Third party store for fan games, emulators and mods. We take nothing.</div></div>
-        <div class="tier-cut" style="color:var(--silver-dim);font-size:15px">FREE</div>
-      </div>
-      <div class="tier slab hov pu">
-        <div class="tier-stripe" style="background:var(--purple-deep)"></div>
-        <div class="tier-num">04</div>
-        <div class="tier-info"><div class="tier-name">Homebrew</div><div class="tier-desc">Local sideloader for modders and tinkerers. No store, no approval, no permission.</div></div>
-        <div class="tier-cut" style="color:var(--neon-purple);font-size:14px">LOCAL</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="ecosystem-section">
-    <div class="reveal"><p class="se cy">Cross-device ecosystem</p><h2 class="st"><span class="gradient-cyan">One account.</span><br>Every device.</h2><p class="sd">Rotur bridges the hardware gap. The cloud layer syncs your library, your saves and your cross-play data, so the home console version and the handheld version feel like two halves of the same thing.</p></div>
-    <div class="eco-grid">
-      <article class="eco-card slab hov cy reveal">
-        <span class="eco-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-        <h3>Universal library</h3>
-        <p>Digital or disc, one purchase binds the game to your account. It shows up on every Warpdrive device you sign into.</p>
-      </article>
-      <article class="eco-card slab hov cy reveal">
-        <span class="eco-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>
-        <h3>Saves that follow you</h3>
-        <p>Put the TV down mid run and pick it back up on a handheld. Save files sync through the same account, no cables involved.</p>
-      </article>
-      <article class="eco-card slab hov cy reveal">
-        <span class="eco-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-        <h3>Cross-play by default</h3>
-        <p>Handheld players and console players sit in the same lobby. The networking API does not care which box you booted from.</p>
-      </article>
-    </div>
-    <div class="eco-banner slab reveal"><p>The handhelds share one spec so your mobile build is a single target. The home console gets LPDDR5 and a stronger GPU so the living room build can breathe. <strong>Nobody re-buys a game to move between them.</strong></p></div>
-  </section>
-
-  <section>
-    <div class="reveal"><p class="se">Powered by Rotur</p><h2 class="st"><span class="gradient-pink">Get social.</span><br>Make a friend.</h2></div>
-    <div class="rotur-pill reveal"><div class="rotur-dot"></div><span class="rotur-label">Rotur.Dev &#183; Mistium &#183; Live</span></div>
-    <div class="feature-list reveal">
-      <div class="feature-row slab"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div class="feature-text">Profiles and gamertags<span class="feature-sub">Sync across every device. Completely optional.</span></div></div>
-      <div class="feature-row slab"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="feature-text">Friends, parties and the networking API<span class="feature-sub">Real time, console native, Xbox Live energy.</span></div></div>
-      <div class="feature-row slab"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></span><div class="feature-text">Voice chat<span class="feature-sub">Built in. No app, no setup.</span></div></div>
-      <div class="feature-row slab"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div class="feature-text">Messages and communities<span class="feature-sub">Round up your buddies, build a space for them.</span></div></div>
-      <div class="feature-row slab"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><div class="feature-text">Payments from your phone<span class="feature-sub">Card details never touch the console.</span></div></div>
-    </div>
-  </section>
-
-  <div class="mq mq-developmental" id="mq-developmental"><div class="mq-inner"><div class="mq-track"><span class="mq-item">90% Revenue Share</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Free to Submit</span><span class="mq-item dot">&#9671;</span><span class="mq-item">No Gatekeeping</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Buy Once, Play Everywhere</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Cloud Saves</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Cross-Play</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Homebrew Launcher</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Open Modding</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Physical Discs</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Indie Forever</span><span class="mq-item dot">&#9671;</span></div><div class="mq-track" aria-hidden="true"><span class="mq-item">90% Revenue Share</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Free to Submit</span><span class="mq-item dot">&#9671;</span><span class="mq-item">No Gatekeeping</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Buy Once, Play Everywhere</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Cloud Saves</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Cross-Play</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Homebrew Launcher</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Open Modding</span><span class="mq-item dot">&#9671;</span><span class="mq-item">Physical Discs</span><span class="mq-item dot">&#9671;</span><span class="mq-item hi">Indie Forever</span><span class="mq-item dot">&#9671;</span></div></div></div>
-
-  <div class="oss-section" id="open-source-section">
-    <div class="oss-wrapper slab lg reveal">
-      <div class="oss-content">
-        <div class="oss-eyebrow">Open source</div>
-        <h2 class="oss-heading">Built in the<br>open.</h2>
-        <p class="oss-body">The runtime, the dev tools and the social layer are <strong>open source</strong>. No gatekept internals, no hidden bloat. Fork it, audit it, break it, fix it. The whole platform is there to inspect and contribute to. Moddability is not a feature we bolted on, it is <strong>the foundation</strong>.</p>
-        <div class="oss-sdk-list">
-          <div class="oss-sdk slab sm cy"><div class="oss-sdk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="oss-sdk-name">Warpdrive SDK</div><div class="oss-sdk-desc">Core dev tools, achievements, gamepad support, console integration</div></div></div>
-          <div class="oss-sdk slab sm cy"><div class="oss-sdk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div><div class="oss-sdk-name">Rotur API</div><div class="oss-sdk-desc">Social layer, library sync, friends, chat, multiplayer</div></div></div>
-          <div class="oss-sdk slab sm cy"><div class="oss-sdk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div><div class="oss-sdk-name">Frontend framework</div><div class="oss-sdk-desc">Console UI, theme or replace the dashboard</div></div></div>
-        </div>
-        <a href="https://github.com/Warpdrive-console" class="btn-github" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="var(--silver-hi)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>View on GitHub</span>
-        </a>
-      </div>
-      <div class="oss-visual">
-        <div class="oss-visual-grid"></div>
-        <div class="oss-orbits">
-          <div class="oss-orbit oss-orbit-1"></div>
-          <div class="oss-orbit oss-orbit-2"></div>
-          <div class="oss-orbit oss-orbit-3"></div>
-          <div class="oss-orbit-dot oss-od-1"></div>
-          <div class="oss-orbit-dot oss-od-2"></div>
-          <div class="oss-orbit-dot oss-od-3"></div>
-        </div>
-        <div class="oss-terminal">
-          <div class="oss-terminal-bar"><div class="oss-terminal-dot" style="background:#ff5f57"></div><div class="oss-terminal-dot" style="background:#febc2e"></div><div class="oss-terminal-dot" style="background:#28c840"></div><span>terminal</span></div>
-          <div class="oss-terminal-body"><span class="comment">poke around the repo</span><br><span class="cmd">$</span> git clone warpdrive-console<br><span class="comment">check out the APIs</span><br><span class="cmd">$</span> cd <span class="str">Warpdrive-console/Gamepad-Plus</span><br><span class="comment">the next step</span><br><span class="cmd">$</span> random command <span class="str">@bungerdev on YT</span><br><span style="color:var(--neon-cyan)">&#10003;</span> pretend it did something<span class="terminal-cursor"></span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="page" id="page-account">
-  <section>
-    <div class="reveal"><p class="se">Your account</p><h2 class="st"><span class="gradient-pink">Rotur</span> profile</h2></div>
-    <div class="acct-page-layout">
-      <div class="acct-profile-card slab reveal" id="acctProfileCard">
-        <div class="acct-profile-header">
-          <div class="acct-pfp-edit" id="acctPfpEdit" style="display:none">
-            <img class="acct-big-avatar-img" id="acctBigAvatarImg" src="" alt="">
-            <div class="acct-pfp-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-            <input type="file" class="acct-pfp-file" id="acctPfpFile" accept="image/*" title="Change profile picture">
-          </div>
-          <div class="acct-big-avatar" id="acctBigAvatar">?</div>
-          <div class="acct-profile-info">
-            <div class="acct-profile-name" id="acctProfileName">Not signed in</div>
-            <div class="acct-profile-sub" id="acctProfileSub">Sign in with Rotur to see your profile</div>
-          </div>
-        </div>
-        <div class="acct-bio" id="acctBio" style="display:none"></div>
-        <div class="acct-edit-wrap" id="acctEditWrap" style="display:none">
-          <div class="acct-edit-row">
-            <label class="acct-edit-label" for="acctEditBio">Bio</label>
-            <textarea class="acct-edit-textarea" id="acctEditBio" placeholder="Tell people about yourself" maxlength="500"></textarea>
-          </div>
-          <div class="acct-edit-actions">
-            <button class="btn-p" onclick="roturAcct.saveProfile()">Save changes</button>
-            <button class="btn-s" onclick="roturAcct.cancelEdit()">Cancel</button>
-          </div>
-          <div class="acct-edit-status" id="acctEditStatus"></div>
-        </div>
-        <div class="acct-profile-actions" id="acctProfileActions">
-          <button class="btn-s" id="acctEditBtn" onclick="roturAcct.startEdit()" style="display:none">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            Edit profile
-          </button>
-          <button class="btn-s" id="acctSignInBtn" onclick="roturAcct.openModal()" style="display:none">Sign in</button>
-          <button class="btn-s" id="acctLogoutBtn" onclick="roturAcct.logout()" style="display:none">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Log out
-          </button>
-        </div>
-      </div>
-
-      <div class="acct-settings-card slab reveal">
-        <div class="acct-settings-title">Display</div>
-        <div class="mode-toggle-row">
-          <button id="modeToggleGorgeous" class="mode-toggle-btn slab gorgeous" onclick="pickMode('gorgeous')">
-            <div class="mode-toggle-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div class="nav-divider"></div>
+        <div class="nav-actions">
+          <a
+            href="https://github.com/Warpdrive-console"
+            class="nav-ghost"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >
+          <a href="https://discord.gg/Dv6K2vNyfK" class="nav-cta" target="_blank" rel="noopener"
+            >Discord</a
+          >
+          <a href="https://glue3d.net/" target="_blank" rel="noopener" class="badge-88x31"
+            ><img src="/ads/buttonglue3d.gif" alt="Glue3D" width="88" height="31" loading="lazy"
+          /></a>
+          <div style="position: relative">
+            <button class="nav-account-btn" id="navAcctBtn" data-rotur-action="toggle">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span class="acct-name" id="navAcctLabel">Sign In</span>
+            </button>
+            <div class="acct-dropdown" id="acctDropdown">
+              <div class="acct-dropdown-name" id="dropdownName"></div>
+              <button
+                class="acct-dropdown-item"
+                onclick="
+                  goPage('account');
+                  document.getElementById('acctDropdown').classList.remove('open');
+                ">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                View account
+              </button>
+              <button class="acct-dropdown-item" data-rotur-action="logout">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+              </button>
             </div>
-            <div class="mode-toggle-title">Gorgeous</div>
-            <div class="mode-toggle-label">Full effects</div>
-          </button>
-          <button id="modeTogglePerf" class="mode-toggle-btn slab perf" onclick="pickMode('perf')">
-            <div class="mode-toggle-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <div class="mode-toggle-title">Performance</div>
-            <div class="mode-toggle-label">Minimal effects</div>
-          </button>
+          </div>
         </div>
       </div>
-
-      <div class="acct-not-logged slab reveal" id="acctNotLogged">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--silver-dim)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <p>Sign in with your <strong>Rotur</strong> account to see your library, your profile and your saves.</p>
-        <div style="margin-top:22px"><button class="btn-p" onclick="roturAcct.openModal()">Sign in with Rotur</button></div>
+      <div class="nav-right">
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-    </div>
-  </section>
-</div>
+    </nav>
 
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="nav-brand" style="margin-bottom:14px"><img src="warpdrive-logo.png" alt="Warpdrive" style="width:180px;height:auto;margin-left:-12px" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="nav-brand-text" style="display:none;font-size:18px">WARPDRIVE</span></div>
-      <div class="footer-tagline">A love letter to indie gaming.<br>The system we wish we had.</div>
-    </div>
-    <div>
-      <div class="footer-col-title">Platform</div>
-      <div class="footer-links">
-        <a href="#" onclick="goPage('technical');setTimeout(()=>document.getElementById('hardware-section').scrollIntoView({behavior:'smooth'}),300);return false;">Hardware</a>
-        <a href="#" onclick="goPage('technical');setTimeout(()=>document.getElementById('tiers-section').scrollIntoView({behavior:'smooth'}),300);return false;">Handheld vs console</a>
-        <a href="#" onclick="goPage('developmental');return false;">Storefront</a>
-        <a href="#" onclick="goPage('developmental');setTimeout(()=>document.getElementById('open-source-section').scrollIntoView({behavior:'smooth'}),300);return false;">Developer docs</a>
-        <a href="https://rotur.dev/" target="_blank" rel="noopener">Rotur.Dev</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Community</div>
-      <div class="footer-links">
-        <a href="https://discord.gg/Dv6K2vNyfK" target="_blank" rel="noopener">Discord</a>
-        <a href="https://github.com/Warpdrive-console" target="_blank" rel="noopener">GitHub</a>
-        <a href="#">Press kit</a>
-        <a href="#" onclick="goPage('home');setTimeout(()=>document.getElementById('ks-section').scrollIntoView({behavior:'smooth'}),300);return false;">Kickstarter</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">2026 Warpdrive.</span>
-    <span class="footer-copy" style="font-family:'Space Mono',monospace;letter-spacing:0.1em">WARP&#183;<span class="footer-egg" id="footerEgg" title="...">&#9670;</span>&#183;2026</span>
-  </div>
-</footer>
-
-<div class="rotur-auth-overlay" id="roturAuthOverlay">
-  <div class="rotur-auth-modal slab">
-    <div class="rotur-auth-header">
-      <span>&#9670; Sign in with Rotur</span>
-      <button class="rotur-auth-close" onclick="roturAcct.closeModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <div class="mobile-menu" id="mobileMenu">
+      <button onclick="goPage('home')">Home</button>
+      <button onclick="goPage('technical')">Hardware</button>
+      <button onclick="goPage('developmental')">Developers</button>
+      <button class="mobile-acct-btn" id="mobileAcctBtn" data-rotur-action="mobileToggle">
+        Sign In
       </button>
-    </div>
-    <div class="rotur-auth-body">
-      <div class="rotur-auth-popup-msg" id="roturAuthLoading">
-        <div class="rotur-dot"></div>
-        <p>A sign in window is open.<br>Finish logging in there to continue.</p>
-        <a href="#" onclick="roturAcct.reopenPopup();return false;">Did not see it? Reopen the window &#8599;</a>
+      <div class="mobile-menu-actions">
+        <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener"
+          >Join the Discord</a
+        >
+        <a
+          href="https://github.com/Warpdrive-console"
+          class="btn-github"
+          target="_blank"
+          rel="noopener"
+          >View on GitHub</a
+        >
+      </div>
+      <div class="mobile-menu-badge">
+        <a href="https://glue3d.net/" target="_blank" rel="noopener" class="badge-88x31"
+          ><img src="/ads/buttonglue3d.gif" alt="Glue3D" width="88" height="31" loading="lazy"
+        /></a>
       </div>
     </div>
-  </div>
-</div>
 
-<script>
-const MODE_KEY = 'wd_display_mode';
-const MODE_DAYS = 365;
-let _perfMode = false;
+    <div class="page active" id="page-home">
+      <section class="hero">
+        <div class="hero-accents">
+          <div class="hero-ring"></div>
+          <div class="hero-ring2"></div>
+          <div class="hero-dot"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-logo">
+            <img
+              src="/warpdrive-logo.png"
+              alt="Warpdrive"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              " />
+            <span class="hero-wordmark" style="display: none">Warpdrive</span>
+          </div>
+          <p class="hero-sub">
+            A console family built for <strong>indie culture</strong>. One handheld spec, one home
+            console, <strong>one library</strong>. Physical media, real social, engine freedom, and
+            90% of revenue to the people who make the games.
+          </p>
+          <div class="hero-cta">
+            <a href="https://discord.gg/Dv6K2vNyfK" class="btn-p" target="_blank" rel="noopener"
+              >Join the Discord</a
+            >
+            <a
+              href="#"
+              class="btn-s"
+              onclick="
+                goPage('technical');
+                return false;
+              "
+              >See the hardware</a
+            >
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat slab hov pk">
+            <svg
+              class="stat-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span class="stat-val">275+</span>
+            <span class="stat-label">Developers</span>
+          </div>
+          <div class="stat slab hov pu">
+            <svg
+              class="stat-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+            <span class="stat-val">90%</span>
+            <span class="stat-label">Revenue share</span>
+          </div>
+          <div class="stat slab hov nn">
+            <svg
+              class="stat-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+              <line x1="12" y1="12" x2="12" y2="16" />
+              <line x1="10" y1="14" x2="14" y2="14" />
+            </svg>
+            <span class="stat-val">$225</span>
+            <span class="stat-label">Launch price</span>
+          </div>
+          <div class="stat slab hov cy">
+            <svg
+              class="stat-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            <span class="stat-val">1</span>
+            <span class="stat-label">Library, every device</span>
+          </div>
+        </div>
+      </section>
 
-function _setCookie(name, val, days) {
-  const d = new Date();
-  d.setTime(d.getTime() + days * 86400000);
-  document.cookie = name + '=' + val + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
-}
-function _getCookie(name) {
-  const m = document.cookie.match('(?:^|; )' + name + '=([^;]*)');
-  return m ? decodeURIComponent(m[1]) : null;
-}
-function applyMode(mode) {
-  _perfMode = (mode === 'perf');
-  document.body.classList.toggle('perf-mode', _perfMode);
-  const sf = document.getElementById('starfield');
-  if (sf) sf.classList.toggle('perf-hidden', _perfMode);
-  const bg = document.getElementById('modeToggleGorgeous');
-  const bp = document.getElementById('modeTogglePerf');
-  if (bg && bp) { bg.classList.toggle('active', !_perfMode); bp.classList.toggle('active', _perfMode); }
-}
-function pickMode(mode) {
-  _setCookie(MODE_KEY, mode, MODE_DAYS);
-  applyMode(mode);
-  const mp = document.getElementById('modePicker');
-  if (mp) { mp.classList.remove('visible'); setTimeout(() => { mp.style.display = 'none'; }, 400); }
-}
-(function() {
-  const saved = _getCookie(MODE_KEY);
-  const show = () => { const mp = document.getElementById('modePicker'); if (mp) mp.classList.add('visible'); };
-  if (saved) { applyMode(saved); return; }
-  if (document.readyState !== 'loading') setTimeout(show, 600);
-  else window.addEventListener('DOMContentLoaded', () => setTimeout(show, 600));
-})();
+      <div class="mq" id="mq-home">
+        <div class="mq-inner">
+          <div class="mq-track">
+            <span class="mq-item">Physical Media</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Open Source Runtime</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Engine Agnostic</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">90% Rev Share</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Buy Once, Play Everywhere</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Rotur.Dev</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Handheld + Home Console</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Banks the Raccoon</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Open Modding</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Indie Forever</span>
+            <span class="mq-item dot">&#9670;</span>
+          </div>
+          <div class="mq-track" aria-hidden="true">
+            <span class="mq-item">Physical Media</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Open Source Runtime</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Engine Agnostic</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">90% Rev Share</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Buy Once, Play Everywhere</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Rotur.Dev</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Handheld + Home Console</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Banks the Raccoon</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item">Open Modding</span>
+            <span class="mq-item dot">&#9670;</span>
+            <span class="mq-item hi">Indie Forever</span>
+            <span class="mq-item dot">&#9670;</span>
+          </div>
+        </div>
+      </div>
 
-const isMobile = () => window.innerWidth < 768;
-const isLowEnd = () => {
-  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) return true;
-  if (navigator.deviceMemory && navigator.deviceMemory <= 4) return true;
-  const c = document.createElement('canvas');
-  const gl2 = c.getContext('webgl2');
-  const gl = gl2 || c.getContext('webgl');
-  if (gl) {
-    let r = '';
-    if (gl2) r = gl2.getParameter(gl2.RENDERER) || '';
-    else { const dbg = gl.getExtension('WEBGL_debug_renderer_info'); if (dbg) r = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || ''; }
-    if (/swiftshader|llvmpipe|mesa/i.test(r)) return true;
-  }
-  return false;
-};
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const lowEnd = isLowEnd();
-if (lowEnd) document.documentElement.classList.add('low-end');
+      <section id="creed-section">
+        <div class="reveal">
+          <h2 class="st">Three rules.<br /><span class="gradient-pink">No exceptions.</span></h2>
+        </div>
+        <div class="creed-grid">
+          <article class="creed slab hov cy reveal">
+            <span class="creed-num">Rule 01</span>
+            <h3>The engine agnostic creed</h3>
+            <p>
+              Warpdrive is a level playing field. Web engines like
+              <strong>Scratch, TurboWarp and GB Studio</strong> and native engines like
+              <strong>Unity, GameMaker and Godot</strong> are treated as absolute equals. Web games
+              are not sidelined into a corner of the store. They get the same system level
+              optimization, the same integration, and the same shelf space as a compiled binary.
+            </p>
+            <div class="engine-chips">
+              <span class="chip web">Scratch</span><span class="chip web">TurboWarp</span
+              ><span class="chip web">GB Studio</span><span class="chip web">GDevelop</span>
+              <span class="chip">Unity</span><span class="chip">GameMaker</span
+              ><span class="chip">Godot</span><span class="chip">Anything else</span>
+            </div>
+            <p class="chip-note">
+              Web on the left, native on the right, no hierarchy between them.
+            </p>
+          </article>
+          <article class="creed slab hov pk reveal">
+            <span class="creed-num">Rule 02</span>
+            <h3>Empowering the next gen</h3>
+            <p>
+              This is a stage for the developers nobody else is building for. A passionate crowd of
+              <strong>young indie creators</strong> whose games currently live in a browser tab or a
+              pocket project folder. Warpdrive turns them into real console experiences, with a real
+              store page, a real disc, and a real audience.
+            </p>
+          </article>
+          <article class="creed slab hov pu reveal">
+            <span class="creed-num">Rule 03</span>
+            <h3>Buy once, play everywhere</h3>
+            <p>
+              Buy a game once, digital or physical, and your
+              <strong>Rotur account</strong> binds it to your universal library. Move from the TV to
+              any handheld in the lineup without paying twice. Saves follow you. Nobody gets charged
+              again for owning the same game on a different shape of plastic.
+            </p>
+          </article>
+        </div>
+      </section>
 
-let tabVisible = true;
-document.addEventListener('visibilitychange', () => { tabVisible = !document.hidden; });
+      <div class="section-divider"></div>
+      <div class="showcase">
+        <div class="showcase-header reveal">
+          <div>
+            <h2 class="showcase-heading">
+              <span class="gradient-purple">Under</span> Construction.
+            </h2>
+          </div>
+          <div class="showcase-nav">
+            <button class="showcase-arrow" id="carouselPrev" aria-label="Previous">
+              <svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button class="showcase-arrow" id="carouselNext" aria-label="Next">
+              <svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="showcase-carousel">
+          <div class="showcase-track" id="carouselTrack"></div>
+        </div>
+        <div class="showcase-dots-wrap">
+          <div class="showcase-dots" id="carouselDots"></div>
+          <div class="showcase-counter" id="carouselCounter"></div>
+        </div>
+      </div>
 
-const sf = document.getElementById('starfield');
-const ctx = sf.getContext('2d', { alpha: true });
-let W, H, stars = [], particles = [], shootingStars = [], mobile = false, dpr = 1;
-const starSf = document.createElement('canvas');
-const starCtx = starSf.getContext('2d', { alpha: true });
-let starF = 0;
-let _lastW = 0;
+      <div class="section-divider"></div>
 
-const SIN_N = 4096, SIN_K = SIN_N / (Math.PI * 2);
-const SIN_TABLE = new Float32Array(SIN_N);
-for (let i = 0; i < SIN_N; i++) SIN_TABLE[i] = Math.sin(i / SIN_K);
+      <section>
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-purple glitch">Banks.</span></h2>
+        </div>
+        <div class="banks-layout">
+          <div class="reveal">
+            <p class="banks-intro">
+              A raccoon in a <strong>purple bandana</strong>. He owns no other clothes fashionable
+              enough to flaunt. Lazy, gluttonous, lurking, stalking. He spends his days eating,
+              drinking, sleeping and gaming in alarming excess. He is a <strong>chud</strong>. We
+              <strong>love</strong> him. Drawn by Rigby, @ToastGh0ast.
+            </p>
+          </div>
+          <div class="banks-grid reveal">
+            <div class="banks-card slab hov">
+              <img src="/banks/loving.png" alt="Banks" loading="lazy" />
+              <div class="banks-caption">genuinely in love</div>
+            </div>
+            <div class="banks-card slab hov">
+              <img src="/banks/waving.png" alt="Banks" loading="lazy" />
+              <div class="banks-caption">he's waving back</div>
+            </div>
+            <div class="banks-card slab hov">
+              <img src="/banks/toking.png" alt="Banks" loading="lazy" />
+              <div class="banks-caption">no comment</div>
+            </div>
+            <div class="banks-card slab hov">
+              <img src="/banks/ew.png" alt="Banks" loading="lazy" />
+              <div class="banks-caption">same tbh</div>
+            </div>
+            <div class="banks-card slab hov">
+              <img src="/banks/dorito.png" alt="Banks" loading="lazy" />
+              <div class="banks-caption">all he eats</div>
+            </div>
+            <div class="banks-card slab hov">
+              <img src="/banks/autism.png" alt="Banks" loading="lazy" />
+              <div class="banks-caption">peak form</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-function resize() {
-  const newW = window.innerWidth, newH = window.innerHeight;
-  const widthChanged = newW !== _lastW;
-  _lastW = newW;
-  dpr = lowEnd ? 1 : Math.min(window.devicePixelRatio || 1, 2);
-  W = newW; H = newH;
-  sf.width = W * dpr; sf.height = H * dpr;
-  sf.style.width = W + 'px'; sf.style.height = H + 'px';
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  starSf.width = W * dpr; starSf.height = H * dpr;
-  starCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  starF = 0;
-  mobile = isMobile();
-  if (widthChanged || !stars.length) { makeStars(); makeParticles(); }
-}
+      <div class="section-divider"></div>
 
-function makeStars() {
-  const n = lowEnd ? Math.min(60, Math.floor(W * H / 14000)) : mobile ? Math.min(120, Math.floor(W * H / 8000)) : Math.min(350, Math.floor(W * H / 4800));
-  stars = Array.from({ length: n }, () => {
-    const fg = Math.random() < .14;
-    const spd = Math.random() * .0003 + .00006;
-    const t = Math.random() < .6 ? 0 : (Math.random() < .5 ? 1 : 2);
-    return {
-      x: Math.random() * W, y: Math.random() * H,
-      r: fg ? Math.pow(Math.random(), 1.1) * 2.6 + .9 : Math.pow(Math.random(), 2.4) * 1 + .08,
-      baseA: fg ? Math.random() * .4 + .28 : Math.random() * .18 + .02,
-      phi: Math.random() * SIN_N | 0,
-      dphi: Math.max(1, spd * 40 * SIN_K | 0),
-      sphi: Math.random() * SIN_N | 0,
-      dsphi: Math.max(1, spd * 12 * SIN_K | 0),
-      solidFill: t === 1 ? '#a0d2ff' : t === 2 ? '#fff5d2' : '#d2d7e6'
-    };
-  });
-}
+      <section id="ks-section">
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-silver">One price.</span><br />No tricks.</h2>
+        </div>
+        <div class="price-layout">
+          <div class="price-card slab lg reveal">
+            <div class="price-glow"></div>
+            <div class="price-amount"><sup>$</sup>225</div>
+            <div class="price-note">&#9670; Free shipping, United States</div>
+            <div class="price-lines">
+              <div class="price-line">
+                <strong>Warpdrive home console</strong> / customizable shell colors
+              </div>
+              <div class="price-line">
+                <strong>Banks stickers</strong> / not optional, non-negotiable
+              </div>
+              <div class="price-line">
+                <strong>A bundled game</strong> / disc included, picked at random
+              </div>
+              <div class="price-line">
+                <strong>Free shipping</strong> / USA, discounted worldwide
+              </div>
+              <div class="price-line">
+                <strong>Gamepad support</strong> / Bluetooth, wired, SNES, PS5, most things in
+                between
+              </div>
+              <div class="price-line"><strong>Printed mailer box</strong> / inside and out</div>
+              <div class="price-line">
+                <strong>Pre-orders open</strong> /
+                <span class="someday-tip" data-tip="no seriously though. one day. probably."
+                  >someday lmao</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="ks-card slab reveal">
+            <div class="ks-title">&#9672; Kickstarter coming</div>
+            <p class="ks-body">
+              Batch size follows demand.
+              <strong>Plenty of color customization</strong> available. Quality over quantity.
+            </p>
+            <div class="ks-tiers">
+              <div class="ks-tier">
+                <span class="ks-tier-name">Thank you + stickers</span
+                ><span class="ks-tier-val">~$15</span>
+              </div>
+              <div class="ks-tier">
+                <span class="ks-tier-name">Physical game</span><span class="ks-tier-val">~$25</span>
+              </div>
+              <div class="ks-tier">
+                <span class="ks-tier-name">Console bundle</span
+                ><span class="ks-tier-val">$225</span>
+              </div>
+              <div class="ks-tier">
+                <span class="ks-tier-name">Console + 8BitDo controller</span
+                ><span class="ks-tier-val">~$250</span>
+              </div>
+              <div class="ks-tier">
+                <span class="ks-tier-name">Full bundle + store credit</span
+                ><span class="ks-tier-val">~$300</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-function drawPoly(c, x, y, r, a, sides, step) {
-  const b = ((a * SIN_K | 0) + 3072) & (SIN_N - 1);
-  c.beginPath();
-  for (let i = 0; i < sides; i++) {
-    const si = (b + i * step) & (SIN_N - 1);
-    if (i) c.lineTo(x + r * SIN_TABLE[(si + 1024) & (SIN_N - 1)], y + r * SIN_TABLE[si]);
-    else c.moveTo(x + r * SIN_TABLE[(si + 1024) & (SIN_N - 1)], y + r * SIN_TABLE[si]);
-  }
-  c.closePath();
-}
+    <div class="page" id="page-technical">
+      <section>
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-cyan">Built different.</span><br />On purpose.</h2>
+        </div>
+        <div class="identity-grid">
+          <div class="id-card slab hov cy reveal">
+            <span class="id-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-cyan)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg
+            ></span>
+            <div class="id-title">Open source runtime</div>
+            <p class="id-body">
+              <strong>Web games run through Chromium</strong> with WebGPU.
+              <strong>Native ARM binaries</strong> land later for full performance titles. Either
+              way you pick the engine, from Unity or GameMaker to Scratch, GB Studio and GDevelop,
+              with dozens of tools in between.
+            </p>
+          </div>
+          <div class="id-card slab hov pk reveal">
+            <span class="id-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-pink)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="6" y1="11" x2="10" y2="11" />
+                <line x1="8" y1="9" x2="8" y2="13" />
+                <line x1="15" y1="12" x2="15.01" y2="12" />
+                <line x1="18" y1="10" x2="18.01" y2="10" />
+                <path
+                  d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg
+            ></span>
+            <div class="id-title">Real culture</div>
+            <p class="id-body">
+              We grew up on Newgrounds, itch.io and Game Jolt, and on PS3, Xbox 360 and Wii modding.
+              <strong>Open firmware, moddable frontend, homebrew launcher out of the box.</strong>
+              Warpdrive would not exist without console modding, so it ships ready for it.
+            </p>
+          </div>
+          <div class="id-card slab hov pu reveal">
+            <span class="id-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-purple)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+                <line x1="12" y1="2" x2="12" y2="6" />
+                <line x1="12" y1="18" x2="12" y2="22" /></svg
+            ></span>
+            <div class="id-title">Physical media</div>
+            <p class="id-body">
+              Full size DVDs in <strong>purple collector cases</strong>. The home console has a disc
+              drive for physical games. It exists for collectors and for anyone without decent
+              Wi-Fi. Install the disc to storage and it plays without it.
+            </p>
+          </div>
+        </div>
+      </section>
 
-const COLORS = ['191,47,255', '0,229,255', '255,34,163', '107,31,160', '255,90,175'];
-const SOLID = { '191,47,255': '#bf2fff', '0,229,255': '#00e5ff', '255,34,163': '#ff22a3', '107,31,160': '#6b1fa0', '255,90,175': '#ff5aaf' };
-const SS_SOLID = { '255,255,255': '#ffffff', '200,220,255': '#c8dcff', '191,130,255': '#bf82ff', '100,230,255': '#64e6ff', '255,200,230': '#ffc8e6' };
-const SHAPES = ['pentagon', 'hexagon', 'triangle', 'cube', 'diamond', 'square', 'ps3', 'cyber'];
+      <div class="mq mq-technical" id="mq-technical">
+        <div class="mq-inner">
+          <div class="mq-track">
+            <span class="mq-item">QCS6490 Processor</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">Adreno 643 GPU</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">8GB LPDDR5</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">Unified Handheld Spec</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">LPDDR4X Handhelds</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">WebGPU + Vulkan</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">Custom Armbian OS</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">8x DVD Drive</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">Open Firmware</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">Rotur Social Layer</span>
+            <span class="mq-item dot">&#9672;</span>
+          </div>
+          <div class="mq-track" aria-hidden="true">
+            <span class="mq-item">QCS6490 Processor</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">Adreno 643 GPU</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">8GB LPDDR5</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">Unified Handheld Spec</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">LPDDR4X Handhelds</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">WebGPU + Vulkan</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">Custom Armbian OS</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">8x DVD Drive</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item">Open Firmware</span>
+            <span class="mq-item dot">&#9672;</span>
+            <span class="mq-item hi">Rotur Social Layer</span>
+            <span class="mq-item dot">&#9672;</span>
+          </div>
+        </div>
+      </div>
 
-function makeParticles() {
-  particles = Array.from({ length: lowEnd ? 0 : mobile ? 16 : 33 }, () => spawnParticle(SHAPES));
-}
+      <section id="tiers-section">
+        <div class="reveal">
+          <h2 class="st">One family.<br /><span class="gradient-cyan">Two form factors.</span></h2>
+          <p class="sd">
+            Every handheld runs the same silicon so a mobile build is a single target. The home
+            console steps up a tier for the television, with faster memory and a stronger GPU, while
+            staying close enough architecturally that porting stays boring.
+            <strong>Both play the same library.</strong>
+          </p>
+        </div>
+        <div class="hw-split">
+          <article class="hw-card slab hov pu reveal">
+            <h3>Unified specs.<br />Diverse forms.</h3>
+            <p class="hw-body">
+              Every handheld in the ecosystem ships with the
+              <strong>same processor and the same LPDDR4X memory</strong>. Optimize your handheld
+              build once and it performs identically on every device in the line. The shells, the
+              screens and the layouts change. The silicon does not.
+            </p>
+            <ul class="hw-list">
+              <li><strong>Shared SoC</strong> across every handheld we make</li>
+              <li><strong>LPDDR4X memory</strong>, same configuration everywhere</li>
+              <li><strong>One build target</strong>, no per device profiling</li>
+              <li>
+                <strong>Form factor freedom</strong>, different sizes, layouts and price points
+              </li>
+            </ul>
+          </article>
+          <article class="hw-card slab hov cy reveal">
+            <h3>The powerhouse.<br />Built for the TV.</h3>
+            <p class="hw-body">
+              The home console targets the big screen, so it moves up a performance tier. It swaps
+              the handheld memory for
+              <strong>faster, higher bandwidth LPDDR5</strong> and carries a
+              <strong>noticeably stronger GPU</strong> to hold higher resolutions and steadier
+              framerates. Complex scenes stop fighting the memory bus.
+            </p>
+            <ul class="hw-list">
+              <li><strong>8GB LPDDR5</strong>, more bandwidth for busy scenes</li>
+              <li><strong>Adreno 643 GPU</strong>, comfortable at higher resolutions</li>
+              <li><strong>Disc drive</strong>, physical games and collector cases</li>
+              <li><strong>Comparable architecture</strong>, so cross porting stays simple</li>
+            </ul>
+          </article>
+        </div>
+        <div class="hw-compare slab reveal">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Spec</th>
+                <th scope="col">Handhelds</th>
+                <th scope="col">Home console</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Processor</th>
+                <td>Unified across the whole line</td>
+                <td>Qualcomm QCS6490</td>
+              </tr>
+              <tr>
+                <th scope="row">Memory</th>
+                <td>LPDDR4X, identical on every unit</td>
+                <td>8GB LPDDR5, higher bandwidth</td>
+              </tr>
+              <tr>
+                <th scope="row">Graphics</th>
+                <td>Shared handheld GPU, one profile</td>
+                <td>Adreno 643, higher tier</td>
+              </tr>
+              <tr>
+                <th scope="row">Output</th>
+                <td>Built in display</td>
+                <td>Television, up to 4K at 60Hz</td>
+              </tr>
+              <tr>
+                <th scope="row">Media</th>
+                <td>Digital and installed titles</td>
+                <td>Digital plus 8x DVD drive</td>
+              </tr>
+              <tr>
+                <th scope="row">Build target</th>
+                <td>One handheld build</td>
+                <td>One console build</td>
+              </tr>
+              <tr>
+                <th scope="row">Library</th>
+                <td>Your Rotur library</td>
+                <td>The same Rotur library</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-function spawnParticle(pool) {
-  const x = Math.random() * W, y = Math.random() * H;
-  const type = pool[Math.floor(Math.random() * pool.length)];
-  const cr = COLORS[Math.floor(Math.random() * COLORS.length)];
-  const depth = Math.random() < .3 ? 0 : Math.random() < .6 ? 1 : 2;
-  const sz = [0.4, 0.85, 1.45][depth];
-  const spd = [0.4, 1, 1.6][depth];
-  const alp = depth === 0 ? Math.random() * .08 + .04 : depth === 1 ? Math.random() * .16 + .18 : Math.random() * .18 + .38;
-  const lw = [.5, 1, 1.8][depth];
-  const base = {
-    type, x, y, cr, depth,
-    vx: (Math.random() - .5) * .18 * spd,
-    vy: (Math.random() - .5) * .18 * spd,
-    va: (Math.random() < .5 ? 1 : -1) * (Math.random() * .006 + .001) * (depth === 0 ? .4 : 1),
-    angle: Math.random() * Math.PI * 2,
-    alpha: alp, lw,
-    stroke: 'rgba(' + cr + ',' + alp.toFixed(3) + ')',
-    solidFill: SOLID[cr]
-  };
-  if (type === 'ps3') { const h = Math.random() < .5 ? 285 : 195; return Object.assign({}, base, { r: (Math.random() * 2.8 + .6) * sz, solidFill: h === 285 ? '#d282ed' : '#82d2ed', trail: new Float32Array(14), tw: 0, tc: 0 }); }
-  if (type === 'cyber') return Object.assign({}, base, { r: (Math.random() * 2.5 + .7) * sz, phi: Math.random() * SIN_N | 0, dphi: Math.max(1, (Math.random() * .018 + .006) * SIN_K | 0), vx: 0, vy: 0 });
-  if (type === 'cube') return Object.assign({}, base, { size: (Math.random() * 11 + 6) * sz, va: (Math.random() < .5 ? 1 : -1) * .001, s2: 'rgba(' + cr + ',' + (alp * .6).toFixed(3) + ')', s3: 'rgba(' + cr + ',' + (alp * .8).toFixed(3) + ')' });
-  if (type === 'pentagon' || type === 'hexagon' || type === 'triangle') return Object.assign({}, base, { r: (Math.random() * 10 + 5) * sz, strokeInner: 'rgba(' + cr + ',' + (alp * .3).toFixed(3) + ')' });
-  return Object.assign({}, base, { size: (Math.random() * 10 + 4) * sz, strokeInner: 'rgba(' + cr + ',' + (alp * .35).toFixed(3) + ')' });
-}
+      <section id="hardware-section">
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-cyan">Serious</span> hardware.</h2>
+          <p class="sd">
+            Home console silicon, broken down. Industrial parts, long availability, no surprise end
+            of life.
+          </p>
+        </div>
+        <div class="spec-layout reveal">
+          <div class="spec-cell slab cy">
+            <span class="spec-key">CPU</span>
+            <span class="spec-val">QCS6490</span>
+          </div>
+          <div class="spec-cell slab cy">
+            <span class="spec-key">GPU</span>
+            <span class="spec-val">Adreno 643</span>
+          </div>
+          <div class="spec-cell slab cy">
+            <span class="spec-key">RAM</span>
+            <span class="spec-val">8GB LPDDR5</span>
+          </div>
+          <div class="spec-cell slab cy">
+            <span class="spec-key">Process node</span>
+            <span class="spec-val">6nm</span>
+          </div>
+          <div class="spec-cell slab cy">
+            <span class="spec-key">Storage</span>
+            <span class="spec-val">0-256GB eMMC / Micro SD</span>
+          </div>
+          <div class="spec-cell slab cy">
+            <span class="spec-key">Graphics</span>
+            <span class="spec-val">WebGPU + Vulkan</span>
+          </div>
+          <div class="spec-cell slab cy">
+            <span class="spec-key">Media</span>
+            <span class="spec-val">8x DVD drive</span>
+          </div>
+          <div class="spec-cell slab cy">
+            <span class="spec-key">OS</span>
+            <span class="spec-val">Custom Armbian build</span>
+          </div>
+        </div>
 
-function wrap(p, pad = 40) {
-  if (p.x < -pad) p.x = W + pad;
-  if (p.x > W + pad) p.x = -pad;
-  if (p.y < -pad) p.y = H + pad;
-  if (p.y > H + pad) p.y = -pad;
-}
+        <div class="spec-accordion reveal" id="specAccordion">
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <rect x="9" y="9" width="6" height="6" />
+                  <line x1="9" y1="1" x2="9" y2="4" />
+                  <line x1="15" y1="1" x2="15" y2="4" />
+                  <line x1="9" y1="20" x2="9" y2="23" />
+                  <line x1="15" y1="20" x2="15" y2="23" />
+                  <line x1="20" y1="9" x2="23" y2="9" />
+                  <line x1="20" y1="14" x2="23" y2="14" />
+                  <line x1="1" y1="9" x2="4" y2="9" />
+                  <line x1="1" y1="14" x2="4" y2="14" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">Processor</span
+                ><span class="spec-header-val">Qualcomm QCS6490</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  The <strong>QCS6490</strong> is an industrial grade
+                  <span class="hl-cyan">6nm</span> SoC with an octa core Kryo 670 CPU. It is
+                  designed for always on edge devices and has more than enough muscle for indie
+                  games. Its consumer counterpart is the Snapdragon 778G, so think
+                  <strong>Linux gaming performance</strong> on industrial silicon: stable clocks,
+                  <span class="hl-pink">low thermals</span>, and long term availability.
+                </p>
+              </div>
+            </div>
+          </div>
 
-resize();
-let _rt;
-window.addEventListener('resize', () => { clearTimeout(_rt); _rt = setTimeout(resize, 150); });
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">GPU</span
+                ><span class="spec-header-val">Adreno 643</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  The <strong>Adreno 643</strong> supports
+                  <span class="hl-cyan">Vulkan 1.1</span> and
+                  <span class="hl-cyan">OpenGL ES 3.2</span>. The real play is WebGPU through
+                  Chromium, which hands developers a <strong>modern GPU API</strong> with compute
+                  shaders and instanced rendering, plus enough headroom to push 2D hard and run 3D
+                  at respectable framerates. Hardware video decode covers media heavy menus and
+                  cutscenes. 4K at 60Hz is on the table if you know how to optimize.
+                </p>
+              </div>
+            </div>
+          </div>
 
-let lastFrame = 0;
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="2" y="6" width="20" height="12" rx="2" />
+                  <line x1="6" y1="10" x2="6" y2="14" />
+                  <line x1="10" y1="10" x2="10" y2="14" />
+                  <line x1="14" y1="10" x2="14" y2="14" />
+                  <line x1="18" y1="10" x2="18" y2="14" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">Memory</span
+                ><span class="spec-header-val">8GB LPDDR5</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  <span class="hl-cyan">8GB of LPDDR5</span> shared between system and GPU. No
+                  dedicated VRAM, but the bandwidth is enormous next to what indie games actually
+                  ask for, and it is the main reason the home console pulls ahead of the LPDDR4X
+                  handhelds on busy scenes. Room to run your game, the social overlay and background
+                  downloads at once without choking.
+                </p>
+              </div>
+            </div>
+          </div>
 
-function draw(now) {
-  requestAnimationFrame(draw);
-  if (!tabVisible || _perfMode) return;
-  if (lowEnd && now - lastFrame < 50) return;
-  if (mobile && now - lastFrame < 16) return;
-  const dt = Math.min(3, lastFrame ? (now - lastFrame) / 16.67 : 1);
-  lastFrame = now;
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <ellipse cx="12" cy="5" rx="9" ry="3" />
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">Storage</span
+                ><span class="spec-header-val">0-256GB eMMC / Micro SD</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  <strong>eMMC onboard</strong> from 0 to 256GB, plus a
+                  <span class="hl-cyan">Micro SD</span> slot for expansion. Install disc games to
+                  storage and play without the disc later. The OS is light enough to leave
+                  <span class="hl-pink">most of the drive for your library</span>, and SD cards hot
+                  swap so you can carry a collection between units.
+                </p>
+              </div>
+            </div>
+          </div>
 
-  if (prefersReducedMotion) {
-    ctx.clearRect(0, 0, W, H);
-    for (const s of stars) {
-      ctx.globalAlpha = s.baseA;
-      ctx.fillStyle = s.solidFill;
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    return;
-  }
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">Graphics API</span
+                ><span class="spec-header-val">Vulkan / WebGPU / Wayland</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  <span class="hl-cyan">WebGPU</span> is the primary path for web based games.
+                  Modern, fast, cross engine. <strong>Vulkan</strong> is there for native ARM titles
+                  that want direct GPU access. <span class="hl-pink">Wayland</span> composites the
+                  dashboard. Three layers, each doing one job, no bloat in between.
+                </p>
+              </div>
+            </div>
+          </div>
 
-  ctx.globalAlpha = 1;
-  ctx.clearRect(0, 0, W, H);
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="3" />
+                  <line x1="12" y1="2" x2="12" y2="5" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">Media</span
+                ><span class="spec-header-val">Physical and digital</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  An <strong>8x DVD drive</strong> reads full size 4.7GB discs in custom
+                  <span class="hl-pink">purple collector cases</span>. Install once and play
+                  forever. The disc is proof of ownership, not a requirement, and buying it
+                  registers the game to your Rotur library so it also works on your handheld.
+                  <span class="hl-cyan">Both paths are first class.</span>
+                </p>
+              </div>
+            </div>
+          </div>
 
-  if (starF === 0) {
-    starCtx.globalAlpha = 1;
-    starCtx.clearRect(0, 0, W, H);
-    for (const s of stars) {
-      s.phi = (s.phi + s.dphi * 3) & (SIN_N - 1);
-      s.sphi = (s.sphi + s.dsphi * 3) & (SIN_N - 1);
-      const tw = lowEnd ? .6 : SIN_TABLE[s.phi] * .22 + .6;
-      const sparkle = !lowEnd && SIN_TABLE[s.sphi] > .97;
-      const a = s.baseA * tw * (sparkle ? 1.8 : 1);
-      const r = s.r * (sparkle ? 1.7 : 1);
-      starCtx.globalAlpha = a;
-      starCtx.fillStyle = s.solidFill;
-      starCtx.beginPath(); starCtx.arc(s.x, s.y, r, 0, 6.283); starCtx.fill();
-      if (sparkle && s.r > .55) {
-        starCtx.globalAlpha = a * .45;
-        starCtx.strokeStyle = '#c8e1ff'; starCtx.lineWidth = .5;
-        const l = r * 4;
-        starCtx.beginPath();
-        starCtx.moveTo(s.x - l, s.y); starCtx.lineTo(s.x + l, s.y);
-        starCtx.moveTo(s.x, s.y - l); starCtx.lineTo(s.x, s.y + l);
-        starCtx.stroke();
-      }
-    }
-    starCtx.globalAlpha = 1;
-  }
-  starF = (starF + 1) % 3;
-  ctx.drawImage(starSf, 0, 0, starSf.width, starSf.height, 0, 0, W, H);
-  ctx.globalAlpha = 1;
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                  <line x1="4" y1="22" x2="4" y2="15" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">Operating system</span
+                ><span class="spec-header-val">Custom Armbian derivative</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  A <strong>custom Armbian based Linux build</strong>, stripped down for Warpdrive,
+                  tweakers and modders alike. Open firmware,
+                  <span class="hl-cyan">fully auditable and fully moddable</span>. The dashboard is
+                  a web app you can theme and hack, and the homebrew launcher ships out of the box.
+                  It is <span class="hl-pink">your console</span>.
+                </p>
+              </div>
+            </div>
+          </div>
 
-  const maxSS = lowEnd ? 2 : mobile ? 5 : 12;
-  if (shootingStars.length < maxSS) {
-    if (Math.random() < .0014) {
-      const fl = Math.random() < .5;
-      const col = Math.random() < .7 ? '255,255,255' : '200,220,255';
-      shootingStars.push({ tl: 26, x: fl ? -20 : W + 20, y: Math.random() * H * .65, vx: (fl ? 1 : -1) * (Math.random() * 6 + 4), vy: Math.random() * 2.2 + .6, life: 1, decay: Math.random() * .011 + .007, solidColor: SS_SOLID[col], lwk: 1.8, hs: true });
-    }
-    if (Math.random() < .0009) {
-      const col = Math.random() < .5 ? '191,130,255' : '100,230,255';
-      shootingStars.push({ tl: 20, x: Math.random() * W * .6, y: -10, vx: (Math.random() - .5) * 3, vy: Math.random() * 9 + 5, life: 1, decay: Math.random() * .018 + .013, solidColor: SS_SOLID[col], lwk: 1.8, hs: true });
-    }
-    if (Math.random() < .0006) {
-      const fl = Math.random() < .5;
-      shootingStars.push({ tl: 38, x: fl ? -20 : W + 20, y: Math.random() * H * .5 + H * .1, vx: (fl ? 1 : -1) * (Math.random() * 3 + 2), vy: Math.random() * 1.2 + .2, life: 1, decay: Math.random() * .006 + .004, solidColor: '#ffc8e6', lwk: 1.4, hs: false });
-    }
-  }
-  for (let i = shootingStars.length - 1; i >= 0; i--) {
-    const ss = shootingStars[i];
-    ss.x += ss.vx * dt; ss.y += ss.vy * dt; ss.life -= ss.decay * dt;
-    if (ss.life <= 0 || ss.x < -300 || ss.x > W + 300 || ss.y > H + 200 || ss.y < -200) { shootingStars.splice(i, 1); continue; }
-    ctx.strokeStyle = ss.solidColor;
-    ctx.globalAlpha = ss.life * .9;
-    ctx.lineWidth = ss.life * ss.lwk;
-    ctx.beginPath();
-    ctx.moveTo(ss.x, ss.y);
-    ctx.lineTo(ss.x - ss.vx * ss.tl, ss.y - ss.vy * ss.tl);
-    ctx.stroke();
-    if (!lowEnd && ss.hs && ss.life > .25) {
-      const hr = 2.2 * ss.life;
-      ctx.fillStyle = ss.solidColor;
-      ctx.globalAlpha = ss.life * .75;
-      ctx.beginPath(); ctx.arc(ss.x, ss.y, hr, 0, 6.283); ctx.fill();
-      ctx.globalAlpha = ss.life * .08;
-      ctx.beginPath(); ctx.arc(ss.x, ss.y, hr * 3.5, 0, 6.283); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-  }
+          <div class="spec-item slab cy">
+            <div class="spec-header">
+              <div class="spec-header-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--neon-cyan)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <div class="spec-header-text">
+                <span class="spec-header-key">Process node</span
+                ><span class="spec-header-val">6nm</span>
+              </div>
+              <div class="spec-chevron">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </div>
+            <div class="spec-detail">
+              <div class="spec-detail-inner">
+                <p>
+                  <strong>6nm fabrication</strong> means good
+                  <span class="hl-cyan">power efficiency</span> and low heat. No fan needed in most
+                  scenarios. The chip sips power next to older nodes, which keeps the console
+                  <span class="hl-pink">quiet, cool and compact</span>. Industrial silicon also
+                  means long production availability. If you want the honest version: we were told
+                  6nm is good, and we are repeating it with confidence.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  for (const p of particles) {
-    const { type, x, y } = p;
-    if (type === 'pentagon') {
-      p.angle += p.va;
-      drawPoly(ctx, x, y, p.r, p.angle, 5, 819); ctx.strokeStyle = p.stroke; ctx.lineWidth = .9 * p.lw; ctx.stroke();
-      drawPoly(ctx, x, y, p.r * .5, p.angle + .3, 5, 819); ctx.strokeStyle = p.strokeInner; ctx.lineWidth = .4 * p.lw; ctx.stroke();
-      p.x += p.vx * dt; p.y += p.vy * dt; wrap(p);
-    } else if (type === 'hexagon') {
-      p.angle += p.va;
-      drawPoly(ctx, x, y, p.r, p.angle, 6, 682); ctx.strokeStyle = p.stroke; ctx.lineWidth = .8 * p.lw; ctx.stroke();
-      p.x += p.vx * dt; p.y += p.vy * dt; wrap(p);
-    } else if (type === 'triangle') {
-      p.angle += p.va;
-      drawPoly(ctx, x, y, p.r, p.angle, 3, 1365); ctx.strokeStyle = p.stroke; ctx.lineWidth = .8 * p.lw; ctx.stroke();
-      p.x += p.vx * dt; p.y += p.vy * dt; wrap(p);
-    } else if (type === 'cube') {
-      p.angle += p.va;
-      const h = p.size * .58, w = p.size;
-      ctx.lineWidth = .8 * p.lw;
-      ctx.beginPath(); ctx.moveTo(x, y - h); ctx.lineTo(x + w / 2, y - h / 2); ctx.lineTo(x, y); ctx.lineTo(x - w / 2, y - h / 2); ctx.closePath(); ctx.strokeStyle = p.stroke; ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x - w / 2, y - h / 2); ctx.lineTo(x, y); ctx.lineTo(x, y + h); ctx.lineTo(x - w / 2, y + h / 2); ctx.closePath(); ctx.strokeStyle = p.s2; ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + w / 2, y - h / 2); ctx.lineTo(x + w / 2, y + h / 2); ctx.lineTo(x, y + h); ctx.closePath(); ctx.strokeStyle = p.s3; ctx.stroke();
-      p.x += p.vx * dt; p.y += p.vy * dt; wrap(p);
-    } else if (type === 'diamond' || type === 'square') {
-      p.angle += p.va;
-      const off = type === 'diamond' ? 512 : 0;
-      const si = ((p.angle * SIN_K | 0) + off) & (SIN_N - 1);
-      const cs = SIN_TABLE[(si + 1024) & (SIN_N - 1)], sn = SIN_TABLE[si], hh = p.size / 2;
-      const A = hh * cs, B = hh * sn;
-      ctx.beginPath();
-      ctx.moveTo(x + A - B, y + A + B); ctx.lineTo(x - A - B, y + A - B);
-      ctx.lineTo(x - A + B, y - A - B); ctx.lineTo(x + A + B, y - A + B);
-      ctx.closePath(); ctx.strokeStyle = p.stroke; ctx.lineWidth = .8 * p.lw; ctx.stroke();
-      const h2 = hh / 2, A2 = h2 * cs, B2 = h2 * sn;
-      ctx.beginPath();
-      ctx.moveTo(x + A2 - B2, y + A2 + B2); ctx.lineTo(x - A2 - B2, y + A2 - B2);
-      ctx.lineTo(x - A2 + B2, y - A2 - B2); ctx.lineTo(x + A2 + B2, y - A2 + B2);
-      ctx.closePath(); ctx.strokeStyle = p.strokeInner; ctx.lineWidth = .4 * p.lw; ctx.stroke();
-      p.x += p.vx * dt; p.y += p.vy * dt; wrap(p);
-    } else if (type === 'ps3') {
-      p.trail[p.tw] = p.x; p.trail[p.tw + 1] = p.y;
-      p.tw = (p.tw + 2) % 14; if (p.tc < 7) p.tc++;
-      const inv = 1 / p.tc;
-      ctx.fillStyle = p.solidFill;
-      for (let i = 0; i < p.tc; i++) {
-        const ti = (p.tw + 14 - 2 * (p.tc - i)) % 14;
-        ctx.globalAlpha = i * inv * p.alpha * .5;
-        ctx.beginPath(); ctx.arc(p.trail[ti], p.trail[ti + 1], p.r * (i * inv) * .7, 0, 6.283); ctx.fill();
-      }
-      ctx.globalAlpha = p.alpha;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
-      ctx.globalAlpha = 1;
-      p.x += p.vx * dt; p.y += p.vy * dt; wrap(p);
-    } else if (type === 'cyber') {
-      p.phi = (p.phi + p.dphi) & (SIN_N - 1);
-      const pa = (SIN_TABLE[p.phi] * .5 + .5) * p.alpha;
-      ctx.fillStyle = p.solidFill;
-      ctx.strokeStyle = p.solidFill;
-      ctx.globalAlpha = pa;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
-      ctx.lineWidth = .5;
-      ctx.globalAlpha = pa * .12;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 3.1, 0, 6.283); ctx.stroke();
-      ctx.globalAlpha = pa * .06;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4.4, 0, 6.283); ctx.stroke();
-      ctx.globalAlpha = 1;
-    }
-  }
-  ctx.globalAlpha = 1;
-}
-requestAnimationFrame(draw);
+        <div class="spec-banner slab reveal">
+          <p>
+            Industrial hardware at the developer's mercy. Push it to its limits, or use it to play
+            30 year old games. Your call.<br /><strong
+              >The most capable indie console at this price point.</strong
+            >
+          </p>
+        </div>
+      </section>
 
-const pL1 = document.getElementById('pL1'), pL2 = document.getElementById('pL2');
-let scrollY_cached = 0, rafPending = false;
-function applyParallax() {
-  pL1.style.transform = 'translate3d(0,' + (scrollY_cached * -.03) + 'px,0)';
-  pL2.style.transform = 'translate3d(0,' + (scrollY_cached * -.06) + 'px,0)';
-  rafPending = false;
-}
-if (!isMobile()) {
-  window.addEventListener('scroll', () => {
-    scrollY_cached = window.scrollY;
-    if (!rafPending) { rafPending = true; requestAnimationFrame(applyParallax); }
-  }, { passive: true });
-}
+      <div class="section-divider"></div>
 
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold: .06 });
-function observeAll() { document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el)); }
-observeAll();
+      <section>
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-purple">Hold</span> your games.</h2>
+        </div>
+        <div class="physical-layout reveal">
+          <div class="disc-stage slab pu">
+            <div class="disc-visual">
+              <div class="disc-outer"></div>
+              <div class="disc-mid"></div>
+              <div class="disc-hub"></div>
+              <div class="disc-shine"></div>
+            </div>
+          </div>
+          <div class="disc-info">
+            <h3>Purple collector cases</h3>
+            <div class="disc-facts">
+              <div class="disc-fact slab sm"><strong>Full size DVD</strong> / 4.7GB per disc</div>
+              <div class="disc-fact slab sm">
+                <strong>Custom cases</strong> / a game case that matches the developer's vision
+              </div>
+              <div class="disc-fact slab sm">
+                Install once, <strong>play forever</strong>, no disc needed after
+              </div>
+              <div class="disc-fact slab sm">
+                <strong>Around $5 a unit</strong> to produce. Cheap to make, lovely to own.
+              </div>
+              <div class="disc-fact slab sm">
+                A disc run is granted to our <strong>favorite</strong> titles
+              </div>
+              <div class="disc-fact slab sm">
+                Buying the disc <strong>unlocks it on your handheld</strong> too
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-const statObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.querySelectorAll('.stat-val').forEach(sv => {
-      const m = sv.textContent.trim().match(/^([^\d]*)(\d+)(.*)$/);
-      if (!m) return;
-      const pre = m[1], end = parseInt(m[2]), suf = m[3];
-      let cur = 0;
-      const step = Math.max(1, Math.floor(end / 40));
-      const iv = setInterval(() => {
-        cur = Math.min(cur + step, end);
-        sv.textContent = pre + cur + suf;
-        if (cur >= end) clearInterval(iv);
-      }, 28);
-    });
-    statObs.unobserve(e.target);
-  });
-}, { threshold: .2 });
-document.querySelectorAll('.hero-stats').forEach(el => statObs.observe(el));
+    <div class="page" id="page-developmental">
+      <section>
+        <div class="reveal">
+          <h2 class="st">Your game.<br /><span class="gradient-pink">Your cut.</span></h2>
+          <p class="sd">
+            Free to develop for. No gatekeeping. Four ways to ship, and you keep the majority on all
+            of them.
+          </p>
+        </div>
+        <div class="tier-list reveal">
+          <div class="tier slab hov pk">
+            <div
+              class="tier-stripe"
+              style="
+                background: linear-gradient(180deg, var(--pink-hot), var(--purple-logo));
+              "></div>
+            <div class="tier-num">01</div>
+            <div class="tier-info">
+              <div class="tier-name">Storefront, official</div>
+              <div class="tier-desc">
+                Curated digital store. There is a quality bar, submission is free, and developers
+                keep 90% of the money.
+              </div>
+            </div>
+            <div class="tier-cut gradient-pink">90%</div>
+          </div>
+          <div class="tier slab hov si">
+            <div
+              class="tier-stripe"
+              style="background: linear-gradient(180deg, var(--silver), var(--chrome))"></div>
+            <div class="tier-num">02</div>
+            <div class="tier-info">
+              <div class="tier-name">Physical, disc</div>
+              <div class="tier-desc">
+                DVD releases. Custom casing, printed discs, collector editions. Developers keep 70%.
+              </div>
+            </div>
+            <div class="tier-cut" style="color: var(--silver)">70%</div>
+          </div>
+          <div class="tier slab hov pu">
+            <div class="tier-stripe" style="background: var(--purple-logo)"></div>
+            <div class="tier-num">03</div>
+            <div class="tier-info">
+              <div class="tier-name">Open-Ware</div>
+              <div class="tier-desc">
+                Third party store for fan games, emulators and mods. We take nothing.
+              </div>
+            </div>
+            <div class="tier-cut" style="color: var(--silver-dim); font-size: 15px">FREE</div>
+          </div>
+          <div class="tier slab hov pu">
+            <div class="tier-stripe" style="background: var(--purple-deep)"></div>
+            <div class="tier-num">04</div>
+            <div class="tier-info">
+              <div class="tier-name">Homebrew</div>
+              <div class="tier-desc">
+                Local sideloader for modders and tinkerers. No store, no approval, no permission.
+              </div>
+            </div>
+            <div class="tier-cut" style="color: var(--neon-purple); font-size: 14px">LOCAL</div>
+          </div>
+        </div>
+      </section>
 
-const ambMap = { home: 'ambHome', technical: 'ambTechnical', developmental: 'ambDevelopmental', account: 'ambHome' };
-function goPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  const pg = document.getElementById('page-' + name);
-  if (pg) pg.classList.add('active');
-  document.querySelectorAll('.nav-link[data-page="' + name + '"]').forEach(l => l.classList.add('active'));
-  Object.values(ambMap).forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('visible'); });
-  const ambId = ambMap[name];
-  if (ambId && !isMobile()) setTimeout(() => { const el = document.getElementById(ambId); if (el) el.classList.add('visible'); }, 100);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  setTimeout(observeAll, 80);
-  closeMobileMenu();
-  if (name === 'account') applyMode(_perfMode ? 'perf' : 'gorgeous');
-}
-document.querySelectorAll('.nav-link[data-page]').forEach(b => b.addEventListener('click', () => goPage(b.dataset.page)));
-setTimeout(() => { if (!isMobile()) { const el = document.getElementById('ambHome'); if (el) el.classList.add('visible'); } }, 200);
+      <section id="ecosystem-section">
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-cyan">One account.</span><br />Every device.</h2>
+          <p class="sd">
+            Rotur bridges the hardware gap. The cloud layer syncs your library, your saves and your
+            cross-play data, so the home console version and the handheld version feel like two
+            halves of the same thing.
+          </p>
+        </div>
+        <div class="eco-grid">
+          <article class="eco-card slab hov cy reveal">
+            <span class="eco-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-cyan)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg
+            ></span>
+            <h3>Universal library</h3>
+            <p>Digital or disc, one purchase for every warpdrive device you own</p>
+          </article>
+          <article class="eco-card slab hov cy reveal">
+            <span class="eco-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-cyan)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" /></svg
+            ></span>
+            <h3>Saves from anywhere</h3>
+            <p>
+              Casual gaming turned competitive? Switch to the console from your handheld without
+              missing a beat
+            </p>
+          </article>
+          <article class="eco-card slab hov cy reveal">
+            <span class="eco-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-cyan)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg
+            ></span>
+            <h3>Cross-play by default</h3>
+            <p>Handheld and console get the same lobbies, play together seamlessly</p>
+          </article>
+        </div>
+        <div class="eco-banner slab reveal">
+          <p>
+            The handheld brings portability, the home console brings power
+            <strong>Nobody rebuys the same game on both</strong>
+          </p>
+        </div>
+      </section>
 
-const hamburger = document.getElementById('hamburger'), mobileMenu = document.getElementById('mobileMenu');
-let menuOpen = false;
-function openMobileMenu() { menuOpen = true; hamburger.classList.add('open'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeMobileMenu() { menuOpen = false; hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
-hamburger.addEventListener('click', () => menuOpen ? closeMobileMenu() : openMobileMenu());
+      <section>
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-pink">Get social.</span><br />Make a friend.</h2>
+        </div>
+        <div class="feature-list reveal">
+          <div class="feature-row slab">
+            <span class="feature-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-pink)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" /></svg
+            ></span>
+            <div class="feature-text">
+              Profiles and gamertags<span class="feature-sub"
+                >Sync across every device. Completely optional.</span
+              >
+            </div>
+          </div>
+          <div class="feature-row slab">
+            <span class="feature-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-pink)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg
+            ></span>
+            <div class="feature-text">
+              Friends, parties and the networking API<span class="feature-sub"
+                >Real time, console native, Xbox Live energy.</span
+              >
+            </div>
+          </div>
+          <div class="feature-row slab">
+            <span class="feature-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-cyan)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                <line x1="12" y1="19" x2="12" y2="23" />
+                <line x1="8" y1="23" x2="16" y2="23" /></svg
+            ></span>
+            <div class="feature-text">
+              Voice chat<span class="feature-sub">Built in. No app, no setup.</span>
+            </div>
+          </div>
+          <div class="feature-row slab">
+            <span class="feature-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-purple)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg
+            ></span>
+            <div class="feature-text">
+              Messages and communities<span class="feature-sub"
+                >Round up your buddies, build a space for them.</span
+              >
+            </div>
+          </div>
+          <div class="feature-row slab">
+            <span class="feature-icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--neon-cyan)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg
+            ></span>
+            <div class="feature-text">
+              Payments from your phone<span class="feature-sub"
+                >Card details never touch the console.</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
 
-(function() {
-  const track = document.getElementById('carouselTrack');
-  const dotsEl = document.getElementById('carouselDots');
-  const counterEl = document.getElementById('carouselCounter');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
-  const MAX_DOTS = 7;
-  let current = 0, dotBtns = [], lastPositionCount = -1;
+      <div class="mq mq-developmental" id="mq-developmental">
+        <div class="mq-inner">
+          <div class="mq-track">
+            <span class="mq-item">90% Revenue Share</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Free to Submit</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">No Gatekeeping</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Buy Once, Play Everywhere</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">Cloud Saves</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Cross-Play</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">Homebrew Launcher</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Open Modding</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">Physical Discs</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Indie Forever</span>
+            <span class="mq-item dot">&#9671;</span>
+          </div>
+          <div class="mq-track" aria-hidden="true">
+            <span class="mq-item">90% Revenue Share</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Free to Submit</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">No Gatekeeping</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Buy Once, Play Everywhere</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">Cloud Saves</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Cross-Play</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">Homebrew Launcher</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Open Modding</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item">Physical Discs</span>
+            <span class="mq-item dot">&#9671;</span>
+            <span class="mq-item hi">Indie Forever</span>
+            <span class="mq-item dot">&#9671;</span>
+          </div>
+        </div>
+      </div>
 
-  const visCount = () => window.innerWidth >= 1100 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-  const posCount = () => Math.max(1, GAMES.length - visCount() + 1);
+      <div class="oss-section" id="open-source-section">
+        <div class="oss-wrapper slab lg reveal">
+          <div class="oss-content">
+            <h2 class="oss-heading">Built in the<br />open.</h2>
+            <p class="oss-body">
+              The runtime, the dev tools and the social layer are
+              <strong>open source</strong>. No gatekept internals, no hidden bloat. Fork it, audit
+              it, break it, fix it. The whole platform is there to inspect and contribute to.
+              Moddability is not a feature we bolted on, it is <strong>the foundation</strong>.
+            </p>
+            <div class="oss-sdk-list">
+              <div class="oss-sdk slab sm cy">
+                <div class="oss-sdk-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--neon-cyan)"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="oss-sdk-name">Warpdrive SDK</div>
+                  <div class="oss-sdk-desc">
+                    Core dev tools, achievements, gamepad support, console integration
+                  </div>
+                </div>
+              </div>
+              <div class="oss-sdk slab sm cy">
+                <div class="oss-sdk-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--neon-purple)"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                      d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="oss-sdk-name">Rotur API</div>
+                  <div class="oss-sdk-desc">
+                    Social layer, library sync, friends, chat, multiplayer
+                  </div>
+                </div>
+              </div>
+              <div class="oss-sdk slab sm cy">
+                <div class="oss-sdk-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--neon-pink)"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="oss-sdk-name">Frontend framework</div>
+                  <div class="oss-sdk-desc">Console UI, theme or replace the dashboard</div>
+                </div>
+              </div>
+            </div>
+            <a
+              href="https://github.com/Warpdrive-console"
+              class="btn-github"
+              target="_blank"
+              rel="noopener">
+              <svg viewBox="0 0 24 24" fill="var(--silver-hi)">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              <span>View on GitHub</span>
+            </a>
+          </div>
+          <div class="oss-visual">
+            <div class="oss-visual-grid"></div>
+            <div class="oss-orbits">
+              <div class="oss-orbit oss-orbit-1"></div>
+              <div class="oss-orbit oss-orbit-2"></div>
+              <div class="oss-orbit oss-orbit-3"></div>
+              <div class="oss-orbit-dot oss-od-1"></div>
+              <div class="oss-orbit-dot oss-od-2"></div>
+              <div class="oss-orbit-dot oss-od-3"></div>
+            </div>
+            <div class="oss-terminal">
+              <div class="oss-terminal-bar">
+                <div class="oss-terminal-dot" style="background: #ff5f57"></div>
+                <div class="oss-terminal-dot" style="background: #febc2e"></div>
+                <div class="oss-terminal-dot" style="background: #28c840"></div>
+                <span>terminal</span>
+              </div>
+              <div class="oss-terminal-body">
+                <span class="comment">poke around the repo</span><br /><span class="cmd">$</span>
+                git clone warpdrive-console<br /><span class="comment">check out the APIs</span
+                ><br /><span class="cmd">$</span> cd
+                <span class="str">Warpdrive-console/Gamepad-Plus</span><br /><span class="comment"
+                  >the next step</span
+                ><br /><span class="cmd">$</span> random command
+                <span class="str">@bungerdev on YT</span><br /><span style="color: var(--neon-cyan)"
+                  >&#10003;</span
+                >
+                pretend it did something<span class="terminal-cursor"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  GAMES.forEach(g => {
-    const card = document.createElement('div');
-    card.className = 'showcase-entry slab hov';
-    const media = g.img
-      ? '<img src="' + g.img + '" alt="' + g.title + '" loading="lazy">'
-      : '<div class="showcase-ph"><span>' + (g.tag || 'Coming soon') + '</span></div>';
-    card.innerHTML =
-      '<div class="showcase-img">' + media + '</div>' +
-      '<div class="showcase-info">' +
-      (g.tag ? '<span class="showcase-tag">' + g.tag + '</span>' : '') +
-      '<h3 class="showcase-title">' + g.title + '</h3>' +
-      '<p class="showcase-desc">' + g.desc + '</p></div>';
-    track.appendChild(card);
-  });
+    <div class="page" id="page-account">
+      <section>
+        <div class="reveal">
+          <h2 class="st"><span class="gradient-pink">Rotur</span> profile</h2>
+        </div>
+        <div class="acct-page-layout">
+          <div class="acct-profile-card slab reveal" id="acctProfileCard">
+            <div class="acct-profile-header">
+              <div class="acct-pfp-edit" id="acctPfpEdit" style="display: none">
+                <img class="acct-big-avatar-img" id="acctBigAvatarImg" src="" alt="" />
+                <div class="acct-pfp-overlay">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                      d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                  </svg>
+                </div>
+                <input
+                  type="file"
+                  class="acct-pfp-file"
+                  id="acctPfpFile"
+                  accept="image/*"
+                  title="Change profile picture" />
+              </div>
+              <div class="acct-big-avatar" id="acctBigAvatar">?</div>
+              <div class="acct-profile-info">
+                <div class="acct-profile-name" id="acctProfileName">Not signed in</div>
+                <div class="acct-profile-sub" id="acctProfileSub">
+                  Sign in with Rotur to see your profile
+                </div>
+              </div>
+            </div>
+            <div class="acct-bio" id="acctBio" style="display: none"></div>
+            <div class="acct-edit-wrap" id="acctEditWrap" style="display: none">
+              <div class="acct-edit-row">
+                <label class="acct-edit-label" for="acctEditBio">Bio</label>
+                <textarea
+                  class="acct-edit-textarea"
+                  id="acctEditBio"
+                  placeholder="Tell people about yourself"
+                  maxlength="500"></textarea>
+              </div>
+              <div class="acct-edit-actions">
+                <button class="btn-p" data-rotur-action="saveProfile">Save changes</button>
+                <button class="btn-s" data-rotur-action="cancelEdit">Cancel</button>
+              </div>
+              <div class="acct-edit-status" id="acctEditStatus"></div>
+            </div>
+            <div class="acct-profile-actions" id="acctProfileActions">
+              <button
+                class="btn-s"
+                id="acctEditBtn"
+                data-rotur-action="startEdit"
+                style="display: none">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                </svg>
+                Edit profile
+              </button>
+              <button
+                class="btn-s"
+                id="acctSignInBtn"
+                data-rotur-action="openModal"
+                style="display: none">
+                Sign in
+              </button>
+              <button
+                class="btn-s"
+                id="acctLogoutBtn"
+                data-rotur-action="logout"
+                style="display: none">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
 
-  function rebuildDots() {
-    const pc = posCount();
-    if (pc === lastPositionCount) return;
-    lastPositionCount = pc;
-    dotsEl.innerHTML = '';
-    dotBtns = [];
-    const count = Math.min(pc, MAX_DOTS);
-    for (let i = 0; i < count; i++) {
-      const dot = document.createElement('button');
-      dot.className = 'showcase-dot';
-      dot.setAttribute('aria-label', 'Go to position ' + (i + 1));
-      dot.addEventListener('click', () => goTo(dotIndexToPos(i)));
-      dotsEl.appendChild(dot);
-      dotBtns.push(dot);
-    }
-  }
-  function dotIndexToPos(dotIdx) {
-    const pc = posCount();
-    if (pc <= MAX_DOTS) return dotIdx;
-    const half = Math.floor(MAX_DOTS / 2);
-    const winStart = Math.max(0, Math.min(current - half, pc - MAX_DOTS));
-    return winStart + dotIdx;
-  }
-  function updateDots() {
-    const pc = posCount();
-    if (pc > MAX_DOTS) {
-      const half = Math.floor(MAX_DOTS / 2);
-      const winStart = Math.max(0, Math.min(current - half, pc - MAX_DOTS));
-      dotBtns.forEach((d, j) => d.classList.toggle('active', winStart + j === current));
-      counterEl.innerHTML = '<span class="sc-n">' + (current + 1) + '</span> / ' + pc;
-      counterEl.classList.add('visible');
-    } else {
-      dotBtns.forEach((d, i) => d.classList.toggle('active', i === current));
-      counterEl.classList.remove('visible');
-    }
-  }
-  function setCardWidths() {
-    const vc = visCount();
-    const gap = vc > 1 ? (window.innerWidth >= 1100 ? 22 : 14) : 0;
-    const cardW = (track.parentElement.offsetWidth - gap * (vc - 1)) / vc;
-    track.querySelectorAll('.showcase-entry').forEach(c => {
-      c.style.width = cardW + 'px';
-      c.style.minWidth = cardW + 'px';
-    });
-    track.style.gap = gap + 'px';
-    return { cardW, gap };
-  }
-  function goTo(idx) {
-    current = Math.max(0, Math.min(idx, Math.max(0, GAMES.length - visCount())));
-    rebuildDots();
-    const { cardW, gap } = setCardWidths();
-    track.style.transform = 'translateX(-' + (current * (cardW + gap)) + 'px)';
-    updateDots();
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current >= GAMES.length - visCount();
-  }
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-  window.addEventListener('resize', () => goTo(current));
-  goTo(0);
-})();
+          <div class="acct-settings-card slab reveal">
+            <div class="acct-settings-title">Display</div>
+            <div class="mode-toggle-row">
+              <button
+                id="modeToggleGorgeous"
+                class="mode-toggle-btn slab gorgeous"
+                onclick="pickMode('gorgeous')">
+                <div class="mode-toggle-icon">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+                <div class="mode-toggle-title">Gorgeous</div>
+                <div class="mode-toggle-label">Full effects</div>
+              </button>
+              <button
+                id="modeTogglePerf"
+                class="mode-toggle-btn slab perf"
+                onclick="pickMode('perf')">
+                <div class="mode-toggle-icon">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                  </svg>
+                </div>
+                <div class="mode-toggle-title">Performance</div>
+                <div class="mode-toggle-label">Minimal effects</div>
+              </button>
+            </div>
+          </div>
 
-(function() {
-  if (isMobile() || lowEnd) return;
-  const colors = ['191,47,255', '255,34,163', '0,229,255'];
-  let last = 0;
-  document.addEventListener('mousemove', e => {
-    if (_perfMode) return;
-    const now = Date.now();
-    if (now - last < 80 || Math.random() > .45) return;
-    last = now;
-    const s = document.createElement('div');
-    const sz = Math.random() * 4 + 2;
-    const c = colors[Math.floor(Math.random() * colors.length)];
-    s.className = 'spark';
-    s.style.cssText = 'width:' + sz + 'px;height:' + sz + 'px;left:' + (e.clientX - sz / 2) + 'px;top:' + (e.clientY - sz / 2) + 'px;background:rgba(' + c + ',' + (Math.random() * .6 + .3) + ');box-shadow:0 0 ' + (sz * 2) + 'px rgba(' + c + ',0.5)';
-    document.body.appendChild(s);
-    s.animate(
-      [{ opacity: 1, transform: 'scale(1) translate(0,0)' },
-       { opacity: 0, transform: 'scale(0) translate(' + ((Math.random() - .5) * 20) + 'px,' + (-Math.random() * 14 - 4) + 'px)' }],
-      { duration: 500 + Math.random() * 300, easing: 'ease-out' }
-    ).onfinish = () => s.remove();
-  }, { passive: true });
-})();
+          <div class="acct-not-logged slab reveal" id="acctNotLogged">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--silver-dim)"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <p>
+              Sign in with your <strong>Rotur</strong> account to see your library, your profile and
+              your saves.
+            </p>
+            <div style="margin-top: 22px">
+              <button class="btn-p" data-rotur-action="openModal">Sign in with Rotur</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 
-(function() {
-  const egg = document.getElementById('footerEgg');
-  const toast = document.getElementById('egg-toast');
-  if (!egg || !toast) return;
-  const msgs = [
-    '\u{1F49C} banks says hi',
-    '\u{1F99D} he ate another dorito',
-    'you found the secret. congratulations on nothing.',
-    'disc drive goes brrr',
-    'indie forever. no notes.'
-  ];
-  let i = 0, timer;
-  egg.addEventListener('click', () => {
-    toast.textContent = msgs[i % msgs.length];
-    i++;
-    toast.classList.add('show');
-    clearTimeout(timer);
-    timer = setTimeout(() => toast.classList.remove('show'), 2800);
-  });
-})();
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="nav-brand" style="margin-bottom: 14px">
+            <img
+              src="/warpdrive-logo.png"
+              alt="Warpdrive"
+              style="width: 180px; height: auto; margin-left: -12px"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              " /><span class="nav-brand-text" style="display: none; font-size: 18px"
+              >WARPDRIVE</span
+            >
+          </div>
+          <div class="footer-tagline">
+            A love letter to indie gaming.<br />The system we wish we had.
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <div class="footer-links">
+            <a
+              href="#"
+              onclick="
+                goPage('technical');
+                setTimeout(
+                  () =>
+                    document
+                      .getElementById('hardware-section')
+                      .scrollIntoView({ behavior: 'smooth' }),
+                  300,
+                );
+                return false;
+              "
+              >Hardware</a
+            >
+            <a
+              href="#"
+              onclick="
+                goPage('technical');
+                setTimeout(
+                  () =>
+                    document.getElementById('tiers-section').scrollIntoView({ behavior: 'smooth' }),
+                  300,
+                );
+                return false;
+              "
+              >Handheld vs console</a
+            >
+            <a
+              href="#"
+              onclick="
+                goPage('developmental');
+                return false;
+              "
+              >Storefront</a
+            >
+            <a
+              href="#"
+              onclick="
+                goPage('developmental');
+                setTimeout(
+                  () =>
+                    document
+                      .getElementById('open-source-section')
+                      .scrollIntoView({ behavior: 'smooth' }),
+                  300,
+                );
+                return false;
+              "
+              >Developer docs</a
+            >
+            <a href="https://rotur.dev/" target="_blank" rel="noopener">Rotur.Dev</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Community</div>
+          <div class="footer-links">
+            <a href="https://discord.gg/Dv6K2vNyfK" target="_blank" rel="noopener">Discord</a>
+            <a href="https://github.com/Warpdrive-console" target="_blank" rel="noopener">GitHub</a>
+            <a href="#">Press kit</a>
+            <a
+              href="#"
+              onclick="
+                goPage('home');
+                setTimeout(
+                  () =>
+                    document.getElementById('ks-section').scrollIntoView({ behavior: 'smooth' }),
+                  300,
+                );
+                return false;
+              "
+              >Kickstarter</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">2026 Warpdrive.</span>
+        <span
+          class="footer-copy"
+          style="font-family: 'Space Mono', monospace; letter-spacing: 0.1em"
+          >WARP&#183;<span class="footer-egg" id="footerEgg" title="...">&#9670;</span
+          >&#183;2026</span
+        >
+      </div>
+    </footer>
 
-(function() {
-  const seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-  let idx = 0;
-  document.addEventListener('keydown', e => {
-    idx = e.keyCode === seq[idx] ? idx + 1 : 0;
-    if (idx === seq.length) { idx = 0; showBanks(); }
-  });
-  function showBanks() {
-    const div = document.createElement('div');
-    div.style.cssText = 'position:fixed;inset:0;z-index:9990;display:flex;align-items:center;justify-content:center;background:rgba(4,4,7,0.92);cursor:pointer;animation:fu 0.4s ease forwards';
-    div.innerHTML = '<div style="text-align:center;font-family:\'Space Mono\',monospace">' +
-      '<div style="font-size:clamp(48px,10vw,96px);margin-bottom:24px">\u{1F99D}</div>' +
-      '<div style="font-size:12px;letter-spacing:0.2em;color:var(--neon-pink);text-transform:uppercase;margin-bottom:8px">banks approved</div>' +
-      '<div style="font-size:10px;color:var(--silver-dim);letter-spacing:0.12em">click anywhere to close</div></div>';
-    div.addEventListener('click', () => div.remove());
-    document.body.appendChild(div);
-  }
-})();
+    <div class="rotur-auth-overlay" id="roturAuthOverlay">
+      <div class="rotur-auth-modal slab">
+        <div class="rotur-auth-header">
+          <span>&#9670; Sign in with Rotur</span>
+          <button class="rotur-auth-close" data-rotur-action="closeModal">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="rotur-auth-body">
+          <div class="rotur-auth-popup-msg" id="roturAuthLoading">
+            <div class="rotur-dot"></div>
+            <p>A sign in window is open.<br />Finish logging in there to continue.</p>
+            <a href="#" data-rotur-action="reopenPopup"
+              >Did not see it? Reopen the window &#8599;</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
 
-(function() {
-  const items = document.querySelectorAll('.spec-item');
-  items.forEach(item => {
-    const header = item.querySelector('.spec-header');
-    if (!header) return;
-    header.addEventListener('click', () => {
-      const wasOpen = item.classList.contains('active');
-      items.forEach(i => i.classList.remove('active'));
-      if (!wasOpen) item.classList.add('active');
-    });
-  });
-})();
-</script>
-
-<script>
-const roturAcct = (() => {
-  const TOKEN_KEY = 'rotur_token';
-  const API = 'https://api.rotur.dev';
-  const WS_URL = 'wss://ws.rotur.dev';
-  let loggedIn = false, username = '', userData = null, editing = false;
-  let ws = null, wsAuthed = false, wsReconnectTimer = null, avatarCacheBust = 0;
-  let authPopup = null, popupPollInterval = null, _inited = false;
-
-  const getToken = () => localStorage.getItem(TOKEN_KEY);
-
-  function send(obj) { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(obj)); }
-
-  function connectWS() {
-    const token = getToken();
-    if (!token || !username) return;
-    if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
-    wsAuthed = false;
-    try { ws = new WebSocket(WS_URL); } catch (e) { return; }
-
-    ws.onopen = () => send({ cmd: 'handshake', val: { language: 'Javascript', version: { editorType: 'Warpdrive' } } });
-    ws.onmessage = (evt) => {
-      let data;
-      try { data = JSON.parse(evt.data); } catch (e) { return; }
-      if (!wsAuthed && data.cmd === 'statuscode' && data.code_id === 100) {
-        send({ cmd: 'link', val: ['roturTW'] });
-        setTimeout(() => send({ cmd: 'direct', val: { cmd: 'auth', val: token }, id: 'sys-rotur' }), 200);
-      }
-      if (data.cmd === 'direct' && data.origin === 'sys-rotur' && data.val && data.val.cmd === 'auth' && data.val.val === true) {
-        wsAuthed = true;
-      }
-      if (data.cmd === 'ulist' && !wsAuthed) send({ cmd: 'setid', val: username });
-    };
-    ws.onclose = () => {
-      wsAuthed = false;
-      if (loggedIn && username) {
-        clearTimeout(wsReconnectTimer);
-        wsReconnectTimer = setTimeout(connectWS, 8000);
-      }
-    };
-    ws.onerror = () => {};
-  }
-
-  function disconnectWS() {
-    clearTimeout(wsReconnectTimer);
-    wsAuthed = false;
-    if (ws) { try { ws.close(); } catch (e) {} ws = null; }
-  }
-
-  function avatarUrl(user, size) {
-    if (!user) return '';
-    let url = 'https://avatars.rotur.dev/' + encodeURIComponent(user) + '?radius=128';
-    if (size) url += '&s=' + size;
-    if (avatarCacheBust) url += '&_=' + avatarCacheBust;
-    return url;
-  }
-  const getBio = () => (userData && userData.bio) ? userData.bio : '';
-
-  function fetchUserData(token) {
-    if (!token) return;
-    fetch(API + '/get_user?auth=' + encodeURIComponent(token))
-      .then(r => r.json())
-      .then(data => {
-        if (data && !data.error) {
-          userData = data;
-          username = data.username || data.display_name || '';
-          localStorage.setItem('warpdrive_rotur_user', username);
-          updateUI();
-          updateAccountPage();
-          connectWS();
-        }
-      })
-      .catch(() => {});
-  }
-
-  function updateUI() {
-    const navLabel = document.getElementById('navAcctLabel');
-    const navBtn = document.getElementById('navAcctBtn');
-    const mobileBtn = document.getElementById('mobileAcctBtn');
-    const dropdownName = document.getElementById('dropdownName');
-    const navAcctLink = document.getElementById('navAcctLink');
-    if (!navBtn) return;
-
-    if (loggedIn && username) {
-      const src = avatarUrl(username, 64);
-      let av = navBtn.querySelector('.acct-avatar');
-      if (!av) {
-        const svg = navBtn.querySelector('svg');
-        av = document.createElement('div');
-        av.className = 'acct-avatar';
-        if (svg) svg.replaceWith(av);
-        else navBtn.prepend(av);
-      }
-      av.style.backgroundImage = 'url(' + src + ')';
-      av.style.backgroundSize = 'cover';
-      av.style.backgroundPosition = 'center';
-      navLabel.textContent = username;
-      if (mobileBtn) mobileBtn.textContent = username;
-      if (dropdownName) dropdownName.textContent = username;
-      if (navAcctLink) navAcctLink.style.display = '';
-    } else {
-      const av = navBtn.querySelector('.acct-avatar');
-      if (av) {
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', '0 0 24 24');
-        svg.setAttribute('fill', 'none');
-        svg.setAttribute('stroke', 'currentColor');
-        svg.setAttribute('stroke-width', '1.5');
-        svg.setAttribute('stroke-linecap', 'round');
-        svg.setAttribute('stroke-linejoin', 'round');
-        svg.innerHTML = '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>';
-        av.replaceWith(svg);
-      }
-      navLabel.textContent = 'Sign In';
-      if (mobileBtn) mobileBtn.textContent = 'Sign In';
-      if (navAcctLink) navAcctLink.style.display = 'none';
-    }
-  }
-
-  function updateAccountPage() {
-    const profileName = document.getElementById('acctProfileName');
-    if (!profileName) return;
-    const profileSub = document.getElementById('acctProfileSub');
-    const bigAvatar = document.getElementById('acctBigAvatar');
-    const bigAvatarImg = document.getElementById('acctBigAvatarImg');
-    const pfpEdit = document.getElementById('acctPfpEdit');
-    const bioEl = document.getElementById('acctBio');
-    const notLogged = document.getElementById('acctNotLogged');
-    const signInBtn = document.getElementById('acctSignInBtn');
-    const logoutBtn = document.getElementById('acctLogoutBtn');
-    const editBtn = document.getElementById('acctEditBtn');
-    const editWrap = document.getElementById('acctEditWrap');
-    const actions = document.getElementById('acctProfileActions');
-
-    if (loggedIn && username) {
-      profileName.textContent = (userData && userData.display_name) ? userData.display_name : username;
-      profileSub.textContent = '@' + username;
-      if (bigAvatarImg) {
-        bigAvatarImg.src = avatarUrl(username, 256);
-        bigAvatarImg.alt = username;
-        bigAvatarImg.style.display = '';
-      }
-      if (bigAvatar) bigAvatar.style.display = 'none';
-      if (pfpEdit) pfpEdit.style.display = '';
-      const bio = getBio();
-      if (bioEl && !editing) {
-        bioEl.textContent = bio;
-        bioEl.style.display = bio ? '' : 'none';
-      }
-      if (notLogged) notLogged.style.display = 'none';
-      if (signInBtn) signInBtn.style.display = 'none';
-      if (logoutBtn) logoutBtn.style.display = '';
-      if (editBtn) editBtn.style.display = '';
-      if (!editing && editWrap) editWrap.style.display = 'none';
-      if (!editing && actions) actions.style.display = '';
-    } else {
-      profileName.textContent = 'Not signed in';
-      profileSub.textContent = 'Sign in with Rotur to see your profile';
-      if (bigAvatar) { bigAvatar.style.display = ''; bigAvatar.textContent = '?'; }
-      if (bigAvatarImg) bigAvatarImg.style.display = 'none';
-      if (pfpEdit) pfpEdit.style.display = 'none';
-      if (bioEl) bioEl.style.display = 'none';
-      if (notLogged) notLogged.style.display = '';
-      if (signInBtn) signInBtn.style.display = '';
-      if (logoutBtn) logoutBtn.style.display = 'none';
-      if (editBtn) editBtn.style.display = 'none';
-      if (editWrap) editWrap.style.display = 'none';
-    }
-  }
-
-  function startEdit() {
-    editing = true;
-    const editWrap = document.getElementById('acctEditWrap');
-    const actions = document.getElementById('acctProfileActions');
-    const bioEl = document.getElementById('acctBio');
-    const bioInput = document.getElementById('acctEditBio');
-    const status = document.getElementById('acctEditStatus');
-    if (editWrap) editWrap.style.display = '';
-    if (actions) actions.style.display = 'none';
-    if (bioEl) bioEl.style.display = 'none';
-    if (bioInput) bioInput.value = getBio();
-    if (status) { status.textContent = ''; status.className = 'acct-edit-status'; }
-  }
-
-  function cancelEdit() {
-    editing = false;
-    const editWrap = document.getElementById('acctEditWrap');
-    const actions = document.getElementById('acctProfileActions');
-    if (editWrap) editWrap.style.display = 'none';
-    if (actions) actions.style.display = '';
-    updateAccountPage();
-  }
-
-  async function saveProfile() {
-    const token = getToken();
-    if (!token) return;
-    const bioInput = document.getElementById('acctEditBio');
-    const status = document.getElementById('acctEditStatus');
-    const newBio = bioInput ? bioInput.value.trim() : '';
-    if (status) { status.textContent = 'Saving'; status.className = 'acct-edit-status'; }
-    try {
-      const res = await fetch(API + '/users', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: 'bio', value: newBio, auth: token })
-      });
-      const result = await res.json();
-      if (result.error) {
-        if (status) { status.textContent = result.error; status.className = 'acct-edit-status err'; }
-      } else {
-        if (status) { status.textContent = 'Bio updated'; status.className = 'acct-edit-status ok'; }
-        fetchUserData(token);
-        setTimeout(cancelEdit, 1200);
-      }
-    } catch (e) {
-      if (status) { status.textContent = 'Could not reach Rotur. Try again.'; status.className = 'acct-edit-status err'; }
-    }
-  }
-
-  function handlePfpFile(e) {
-    const file = e.target.files && e.target.files[0];
-    if (!file || !file.type.startsWith('image/')) return;
-    const token = getToken();
-    if (!token) return;
-    const status = document.getElementById('acctEditStatus');
-    if (!editing) startEdit();
-    if (status) { status.textContent = 'Uploading avatar'; status.className = 'acct-edit-status'; }
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const base64 = reader.result;
-      let ok = false;
-      try {
-        const res = await fetch(API + '/users', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ key: 'pfp', value: base64, auth: token })
-        });
-        const result = await res.json();
-        if (!result.error) ok = true;
-        else if (status) { status.textContent = result.error; status.className = 'acct-edit-status err'; }
-      } catch (e1) {}
-      if (!ok) {
-        try {
-          const res2 = await fetch(API + '/me/update', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-            body: JSON.stringify({ key: 'pfp', value: base64 })
-          });
-          const result2 = await res2.json();
-          if (!result2.error) ok = true;
-          else if (status) { status.textContent = result2.error; status.className = 'acct-edit-status err'; }
-        } catch (e2) {
-          if (status) { status.textContent = 'Upload failed. Try a smaller image.'; status.className = 'acct-edit-status err'; }
-        }
-      }
-      if (ok) {
-        if (status) { status.textContent = 'Avatar updated'; status.className = 'acct-edit-status ok'; }
-        avatarCacheBust = Date.now();
-        fetchUserData(token);
-        setTimeout(cancelEdit, 1200);
-      }
-    };
-    reader.readAsDataURL(file);
-    e.target.value = '';
-  }
-
-  function openAuthPopup() {
-    const w = 480, h = 620;
-    const left = Math.max(0, (screen.width - w) / 2 + (screen.availLeft || 0));
-    const top = Math.max(0, (screen.height - h) / 2 + (screen.availTop || 0));
-    authPopup = window.open('https://rotur.dev/auth', 'rotur_auth', 'width=' + w + ',height=' + h + ',left=' + left + ',top=' + top + ',resizable=yes,scrollbars=yes');
-    clearInterval(popupPollInterval);
-    popupPollInterval = setInterval(() => {
-      if (authPopup && authPopup.closed) {
-        clearInterval(popupPollInterval);
-        authPopup = null;
-        closeModal();
-      }
-    }, 500);
-  }
-  function reopenPopup() {
-    if (authPopup && !authPopup.closed) { authPopup.focus(); return; }
-    openAuthPopup();
-  }
-  function openModal() {
-    document.getElementById('roturAuthOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    openAuthPopup();
-  }
-  function closeModal() {
-    document.getElementById('roturAuthOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-    clearInterval(popupPollInterval);
-    if (authPopup && !authPopup.closed) authPopup.close();
-    authPopup = null;
-  }
-
-  function handleAuthMessage(event) {
-    if (event.origin !== 'https://rotur.dev') return;
-    if (event.data && event.data.type === 'rotur-auth-token') {
-      localStorage.setItem(TOKEN_KEY, event.data.token);
-      loggedIn = true;
-      updateUI();
-      closeModal();
-      fetchUserData(event.data.token);
-    }
-  }
-
-  function toggle() {
-    if (loggedIn) document.getElementById('acctDropdown').classList.toggle('open');
-    else openModal();
-  }
-  function mobileToggle() {
-    const mm = document.getElementById('mobileMenu');
-    const hb = document.getElementById('hamburger');
-    if (mm && mm.classList.contains('open')) {
-      mm.classList.remove('open');
-      if (hb) hb.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    if (loggedIn) goPage('account');
-    else openModal();
-  }
-  function logout() {
-    disconnectWS();
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem('warpdrive_rotur_user');
-    loggedIn = false;
-    username = '';
-    userData = null;
-    editing = false;
-    updateUI();
-    updateAccountPage();
-    document.getElementById('acctDropdown').classList.remove('open');
-  }
-
-  function init() {
-    const token = getToken();
-    if (token) {
-      loggedIn = true;
-      username = localStorage.getItem('warpdrive_rotur_user') || '';
-      if (username) updateUI();
-      fetchUserData(token);
-    }
-    updateAccountPage();
-    window.addEventListener('message', handleAuthMessage);
-    document.addEventListener('click', (e) => {
-      const dd = document.getElementById('acctDropdown');
-      const btn = document.getElementById('navAcctBtn');
-      if (dd && btn && !dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
-    });
-    const pfpFile = document.getElementById('acctPfpFile');
-    if (pfpFile) pfpFile.addEventListener('change', handlePfpFile);
-    const overlay = document.getElementById('roturAuthOverlay');
-    if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-  }
-  function _init() {
-    if (_inited) return;
-    _inited = true;
-    init();
-  }
-  document.addEventListener('DOMContentLoaded', _init);
-  if (document.readyState !== 'loading') _init();
-
-  return { toggle, mobileToggle, openModal, closeModal, reopenPopup, logout, startEdit, cancelEdit, saveProfile };
-})();
-</script>
-
-</body>
+    <script type="module" src="/js"></script>
+  </body>
 </html>
-
