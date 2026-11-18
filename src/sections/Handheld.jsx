@@ -7,6 +7,13 @@ import { SHELLS, shellById, shellVars } from "../data/shells.js";
 import { shell, setShell, nextShell } from "../lib/shell.js";
 import { signedIn } from "../lib/rotur.js";
 
+// the 3D code is its own chunk; a flaky network shouldn't drop us to the flat
+// drawing on the first failed request, so try a few times before giving up
+const load3d = (n = 0) =>
+  import("../lib/handheld3d.js").catch((e) =>
+    n < 3 ? new Promise((r) => setTimeout(r, 700 * (n + 1))).then(() => load3d(n + 1)) : Promise.reject(e),
+  );
+
 const webgl = (() => {
   try {
     const c = document.createElement("canvas");
@@ -45,7 +52,7 @@ export function Handheld() {
   useEffect(() => {
     if (mode !== "loading") return;
     let dead = false;
-    import("../lib/handheld3d.js")
+    load3d()
       .then(({ mountHandheld }) => {
         if (dead) return;
         view.current = mountHandheld(host.current, {
