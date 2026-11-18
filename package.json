@@ -1,7 +1,7 @@
 {
   "name": "warpdrive-site",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
     "vite": "^8.3.4"
+  },
+  "dependencies": {
+    "@preact/signals": "^2.11.4",
+    "preact": "^10.29.8",
+    "rotur-sdk": "^3.14.1",
+    "three": "^0.187.0"
   }
 }
