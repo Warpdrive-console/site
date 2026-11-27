@@ -1,2 +1,2 @@
 # site
-This was a lovely way to learn HTML and CSS
+Warpdrive.team site. where you'll find the important stuff
