@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // Assets are copied to the deployed site's root, preserving their folders.
-  publicDir: "assets",
-});
+  plugins: [react()],
+})
