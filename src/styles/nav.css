@@ -1,0 +1,117 @@
+.nav-shell {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 12px 20px 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  width: min(1160px, 100%);
+  margin-inline: auto;
+  padding: 8px 10px 8px 18px;
+  border-radius: 999px;
+}
+
+.nav.glass::before {
+  border-radius: 999px 999px 40% 40%;
+  height: 50%;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--metal);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* tiny square screen as the mark */
+.wordmark-mark {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 65%, #fff),
+    var(--accent-deep) 52%,
+    color-mix(in srgb, var(--accent) 80%, var(--accent-deep))
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 0 0 1px color-mix(in srgb, var(--accent-deep) 85%, #000);
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  margin-right: auto;
+}
+
+.nav-links a,
+.nav-out a {
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.nav-links a:hover,
+.nav-out a:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.nav-links a.active {
+  background: color-mix(in srgb, var(--accent) calc(0.14 * 100%), transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) calc(0.35 * 100%), transparent);
+}
+
+.nav-out {
+  display: flex;
+  gap: 2px;
+}
+
+.nav-out a {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+@media (max-width: 760px) {
+  .nav-shell {
+    padding: 8px 10px 0;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    border-radius: 22px;
+    padding: 8px 10px;
+  }
+
+  .nav.glass::before {
+    border-radius: 21px 21px 40% 40%;
+    height: 40%;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    margin-right: 0;
+    justify-content: space-between;
+  }
+
+  .nav-out {
+    margin-left: auto;
+  }
+
+  .nav-links a,
+  .nav-out a {
+    padding: 6px 10px;
+    font-size: 15px;
+  }
+}

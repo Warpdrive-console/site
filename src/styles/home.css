@@ -1,0 +1,339 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 48px;
+}
+
+/* a few soft clouds, only up here */
+.sky-clouds {
+  position: absolute;
+  inset: -40px 0 auto;
+  height: 520px;
+  background:
+    radial-gradient(260px 90px at 12% 22%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(200px 70px at 22% 30%, rgba(255, 255, 255, 0.7), transparent 70%),
+    radial-gradient(320px 100px at 78% 14%, rgba(255, 255, 255, 0.8), transparent 70%),
+    radial-gradient(220px 70px at 90% 26%, rgba(255, 255, 255, 0.6), transparent 70%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 470px) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+}
+
+/* the 1:1 panel echoes the 720x720 screen */
+.hero-square {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  padding: 44px;
+}
+
+.hero-square h1 {
+  font-size: clamp(30px, 3.3vw, 40px);
+  text-wrap: pretty;
+}
+
+.hero-ratio {
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+/* renders have a baked floor shadow, fade the edges so it melts into the sky */
+.hero-device,
+.hardware-device {
+  -webkit-mask-image: radial-gradient(58% 52% at 52% 46%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(58% 52% at 52% 46%, #000 62%, transparent 100%);
+}
+
+.hero-device {
+  width: 122%;
+  max-width: none;
+  margin-left: -8%;
+  margin-block: -40px -20px;
+}
+
+/* glossy aero horizon the device floats over */
+.horizon {
+  position: relative;
+  height: 90px;
+  margin-top: -40px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0));
+}
+
+/* the deep sky band behind the hero follows the console colour too */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--sky-top) 55%, var(--shell)), transparent 85%);
+  pointer-events: none;
+}
+
+.keep h2 {
+  margin-bottom: 28px;
+}
+
+.keep-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.keep-main {
+  padding: 40px;
+  display: grid;
+  gap: 16px;
+  background-image:
+    radial-gradient(120% 90% at 100% 0%, rgba(109, 179, 63, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.36));
+}
+
+.keep-main h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.keep-aside {
+  font-size: 15px;
+  color: var(--ink-soft);
+  padding-left: 12px;
+  border-left: 3px solid var(--leaf);
+}
+
+.keep-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.keep-list li {
+  display: grid;
+  gap: 4px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(11, 57, 84, 0.14);
+}
+
+.keep-list li:first-child {
+  border-top: 0;
+  padding-top: 4px;
+}
+
+.keep-list p {
+  color: var(--ink-soft);
+}
+
+.hardware-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hardware-device {
+  width: 116%;
+  max-width: none;
+  margin: -40px 0 -40px -12%;
+}
+
+.specs {
+  margin: 28px 0 0;
+  display: grid;
+  gap: 22px;
+}
+
+.specs > div {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  align-items: baseline;
+}
+
+.specs dt {
+  white-space: nowrap;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.specs dd {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.split-band {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 44px;
+}
+
+.split-band h2 {
+  margin-bottom: 14px;
+}
+
+@media (max-width: 900px) {
+  .hero-grid,
+  .keep-grid,
+  .hardware-grid,
+  .split-band {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-square {
+    aspect-ratio: auto;
+    padding: 32px 28px 44px;
+  }
+
+  .hero-device,
+  .hardware-device {
+    width: 100%;
+    margin: 0;
+  }
+
+  .horizon {
+    margin-top: -20px;
+  }
+
+  .split-band {
+    padding: 28px;
+    gap: 28px;
+  }
+
+  .keep-main {
+    padding: 28px;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .specs > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+.hero-stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  touch-action: pan-y;
+}
+
+.hero-stage canvas {
+  position: relative;
+  z-index: 1;
+  cursor: grab;
+}
+
+.hero-stage canvas:active {
+  cursor: grabbing;
+}
+
+.hero-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  width: 62%;
+  height: 50px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(11, 57, 84, 0.3), transparent 70%);
+  filter: blur(6px);
+}
+
+.hero-drag {
+  position: absolute;
+  left: 50%;
+  bottom: 2%;
+  transform: translateX(-50%);
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.engine-strip {
+  position: relative;
+  z-index: 1;
+  padding-block: 10px 26px;
+}
+
+.engine-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 18px;
+}
+
+.engine-row ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.engine-row li {
+  padding: 3px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 57, 84, 0.18);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 0 #fff;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.engine-row .text-link {
+  margin-top: 0;
+  font-size: 15px;
+}
+
+.stores h2 {
+  margin-bottom: 28px;
+}
+
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.store {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 28px;
+}
+
+.store h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 21px;
+}
+
+.store p:last-child {
+  color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  .store-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stage {
+    aspect-ratio: 16 / 11;
+  }
+}

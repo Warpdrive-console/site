@@ -1,0 +1,109 @@
+.profile {
+  overflow: hidden;
+  padding: 0;
+}
+
+.profile.glass::before {
+  display: none;
+}
+
+.profile-banner {
+  height: 150px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--shell) 88%, #fff),
+    color-mix(in srgb, var(--shell) 38%, #fff)
+  );
+}
+
+.profile-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-body {
+  display: grid;
+  gap: 16px;
+  padding: 0 28px 28px;
+}
+
+.profile-pfp {
+  width: 96px;
+  height: 96px;
+  margin-top: -48px;
+  border-radius: 22px;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 0 0 4px #fff, 0 12px 24px -12px rgba(11, 57, 84, 0.6);
+}
+
+.profile-names h2 {
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.profile-handle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--ink-soft);
+}
+
+.profile-pronouns::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.profile-bio {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.profile-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 0;
+}
+
+.profile-stats dt {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.profile-stats dd {
+  margin: 0;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.profile-badges {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-badges li {
+  padding: 2px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  background: color-mix(in srgb, var(--accent) calc(0.1 * 100%), transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) calc(0.3 * 100%), transparent);
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}

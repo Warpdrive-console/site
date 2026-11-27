@@ -1,0 +1,137 @@
+.account-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* grid items default to min-width: auto, which lets long buttons blow out the column */
+.account-grid > * {
+  min-width: 0;
+}
+
+.account-panel {
+  padding: 40px;
+}
+
+.signin {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  max-width: 520px;
+}
+
+.signin-new {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.account-wait {
+  color: var(--ink-soft);
+}
+
+/* inputs have an intrinsic width that would otherwise size this grid column */
+.lookup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.lookup > p {
+  color: var(--ink-soft);
+}
+
+.lookup-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.lookup-row {
+  display: flex;
+  gap: 10px;
+}
+
+.lookup-row .field {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+.lookup .profile-banner {
+  height: 100px;
+}
+
+@media (max-width: 900px) {
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signin {
+    aspect-ratio: auto;
+  }
+
+  /* grid items default to min-width: auto, which lets long buttons blow out the column */
+.account-grid > * {
+  min-width: 0;
+}
+
+.account-panel {
+    padding: 28px;
+  }
+}
+
+.color-pick {
+  padding-bottom: 0;
+}
+
+.color-lede {
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+
+.color-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.color-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px 9px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 57, 84, 0.2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(230, 243, 250, 0.75));
+  box-shadow: inset 0 1px 0 #fff, 0 5px 12px -8px rgba(11, 57, 84, 0.45);
+  font: 600 16px var(--body);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.color-chip:hover {
+  filter: brightness(1.04);
+}
+
+.color-chip.on {
+  border-color: var(--accent);
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 2px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.color-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background:
+    radial-gradient(60% 45% at 50% 22%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%),
+    var(--c);
+  box-shadow: inset 0 0 0 1px rgba(11, 57, 84, 0.25);
+}
+
+.color-dot-random {
+  background:
+    radial-gradient(60% 45% at 50% 22%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 70%),
+    conic-gradient(#94d4e2, #fab3c7, #cae9c3, #f1ef8e, #f6a79b, #ae87b8, #94d4e2);
+}

@@ -1,0 +1,177 @@
+.diagram {
+  margin: 0;
+  padding: 24px;
+}
+
+.diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.callout path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.callout circle {
+  fill: #fff;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.callout-title {
+  font: 600 34px var(--body);
+  fill: var(--ink);
+}
+
+.callout-sub {
+  font: 400 26px var(--mono);
+  fill: var(--ink-soft);
+}
+
+.diagram-list {
+  display: none;
+}
+
+.density {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.density-copy {
+  display: grid;
+  gap: 16px;
+}
+
+.density-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tile {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+/* each grid line is one pixel boundary at the real density */
+.tile-grid {
+  aspect-ratio: 1;
+  max-width: 240px;
+  border-radius: 14px;
+  border: 1px solid rgba(11, 57, 84, 0.3);
+  background-color: #0e2a3d;
+  background-image:
+    linear-gradient(90deg, rgba(120, 210, 245, 0.55) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(120, 210, 245, 0.55) 1px, transparent 1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 14px 26px -18px rgba(11, 57, 84, 0.6);
+}
+
+.tile figcaption {
+  display: grid;
+  color: var(--ink-soft);
+}
+
+.tile figcaption strong {
+  font-family: var(--mono);
+  font-size: 19px;
+  color: var(--ink);
+}
+
+.tile-note {
+  grid-column: 1 / -1;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.pillars article {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding-top: 22px;
+  border-top: 2px solid color-mix(in srgb, var(--accent) calc(0.35 * 100%), transparent);
+}
+
+.feel {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  padding: 44px;
+  align-items: center;
+}
+
+.feel h2 {
+  margin-bottom: 14px;
+}
+
+.battery {
+  display: grid;
+  gap: 8px;
+  padding-left: 32px;
+  border-left: 1px solid rgba(11, 57, 84, 0.15);
+}
+
+.battery-num {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.friends {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .density,
+  .pillars,
+  .feel {
+    grid-template-columns: 1fr;
+  }
+
+  .feel {
+    padding: 28px;
+    gap: 28px;
+  }
+
+  .battery {
+    padding-left: 0;
+    padding-top: 20px;
+    border-left: 0;
+    border-top: 1px solid rgba(11, 57, 84, 0.15);
+  }
+}
+
+@media (max-width: 760px) {
+  .diagram {
+    padding: 14px;
+  }
+
+  .callout text {
+    display: none;
+  }
+
+  .diagram-list {
+    display: grid;
+    gap: 8px;
+    margin: 14px 4px 4px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .diagram-list strong {
+    display: block;
+  }
+}
