@@ -60,7 +60,6 @@
   gap: 10px;
 }
 
-/* each grid line is one pixel boundary at the real density */
 .tile-grid {
   aspect-ratio: 1;
   max-width: 240px;

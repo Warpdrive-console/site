@@ -23,7 +23,6 @@
   color: var(--ink);
 }
 
-/* a sunken glass track with a gel fill */
 .split-track {
   height: 22px;
   border-radius: 999px;

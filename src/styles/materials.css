@@ -1,6 +1,3 @@
-/* glass = things that hold information, gel = things you press, chrome = the hardware itself.
-   one light source, from above. */
-
 .glass {
   position: relative;
   border-radius: 22px;
@@ -14,7 +11,6 @@
     0 22px 44px -26px rgba(11, 57, 84, 0.45);
 }
 
-/* the aero gloss: a hard-edged highlight on the top half */
 .glass::before {
   content: '';
   position: absolute;
@@ -99,7 +95,6 @@ button:disabled {
   cursor: wait;
 }
 
-/* y2k chrome reads as chrome because of the horizon: light sky, a hard dark band, ground bounce */
 .chrome {
   font-family: var(--metal);
   color: var(--ink);
@@ -111,7 +106,6 @@ button:disabled {
   filter: drop-shadow(0 1px 0 #fff);
 }
 
-/* technical corner ticks, only on things that are about the screen */
 .hud {
   --tick: color-mix(in srgb, var(--accent) 75%, transparent);
   background-image:

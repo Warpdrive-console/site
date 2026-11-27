@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import ProfileCard from '../components/ProfileCard.jsx'
-import { rotur } from '../config'
-import { useContext } from 'react'
 import { ColorContext } from '../App.jsx'
 import { colors, savedColorId } from '../lib/theme.js'
-import { startSignIn, finishSignIn, ensureToken, signOut, getUserInfo, getProfile } from '../lib/rotur.js'
+import { savedToken, saveToken, signOut, openSignIn, tokenFromMessage, tokenFromRedirect, getAccount, getProfile } from '../lib/rotur.js'
 import '../styles/account.css'
 
 export default function Account() {
@@ -18,49 +16,55 @@ export default function Account() {
   const [lookupErr, setLookupErr] = useState('')
   const [looking, setLooking] = useState(false)
 
+  async function loadFromToken(token) {
+    const acct = await getAccount(token)
+    const profile = await getProfile(acct.username)
+    setMe({
+      ...profile,
+      bio: profile.bio || acct.bio,
+      display_name: profile.display_name || acct.display_name,
+    })
+    setStatus('signedIn')
+  }
+
   useEffect(() => {
-    // the code can only be swapped once, so don't run this twice
     if (started.current) {
       return
     }
     started.current = true
 
-    async function load() {
-      const params = new URLSearchParams(location.search)
-      let token
-      if (params.has('code') || params.has('error')) {
-        token = await finishSignIn(params)
-      } else {
-        token = await ensureToken()
-      }
+    function onMessage(event) {
+      const token = tokenFromMessage(event)
       if (!token) {
-        setStatus('signedOut')
         return
       }
-      const user = await getUserInfo(token)
-      const profile = await getProfile(user.username)
-      // userinfo has the canonical avatar url and display name, prefer those
-      setMe({
-        ...profile,
-        pfp: user.picture || profile.pfp,
-        display_name: user.name || profile.display_name,
+      saveToken(token)
+      setErr('')
+      setStatus('loading')
+      loadFromToken(token).catch((e) => {
+        setErr(e.message)
+        setStatus('signedOut')
       })
-      setStatus('signedIn')
+    }
+    window.addEventListener('message', onMessage)
+
+    const token = tokenFromRedirect(new URLSearchParams(location.search)) || savedToken()
+    if (token) {
+      saveToken(token)
+      loadFromToken(token).catch((e) => {
+        setErr(e.message)
+        setStatus('signedOut')
+      })
+    } else {
+      setStatus('signedOut')
     }
 
-    load().catch((e) => {
-      setErr(e.message)
-      setStatus('signedOut')
-    })
+    return () => window.removeEventListener('message', onMessage)
   }, [])
 
-  async function onSignIn() {
+  function onSignIn() {
     setErr('')
-    try {
-      await startSignIn()
-    } catch (e) {
-      setErr(e.message)
-    }
+    openSignIn()
   }
 
   function onSignOut() {
@@ -80,8 +84,8 @@ export default function Account() {
     setFound(null)
     try {
       setFound(await getProfile(name))
-    } catch (e) {
-      setLookupErr(e.message)
+    } catch (e2) {
+      setLookupErr(e2.message)
     }
     setLooking(false)
   }
@@ -98,10 +102,10 @@ export default function Account() {
 
       <section className="section color-pick">
         <div className="wrap">
-          <h2>Console colour</h2>
+          <h2>Console color</h2>
           <p className="color-lede">
-            Pick the colour of your Warpdrive, and this site wears it too. Until you pick,
-            the site rolls a new colour every visit.
+            Pick the color of your Warpdrive, and this site wears it too. Until you pick,
+            the site rolls a new color every visit.
           </p>
           <ColorPicker />
         </div>
@@ -120,20 +124,13 @@ export default function Account() {
               <div className="glass account-panel signin">
                 <h2>Sign in with Rotur</h2>
                 <p>
-                  You'll go to rotur.dev to sign in, then come straight back here. Warpdrive
-                  only sees your public profile.
+                  A Rotur window opens, you sign in there, and you're back here with your
+                  profile. Warpdrive never sees your password.
                 </p>
                 {err && <p className="notice notice-error" role="alert">{err}</p>}
-                {rotur.clientId ? (
-                  <button className="gel" type="button" onClick={onSignIn}>Sign in with Rotur</button>
-                ) : (
-                  <p className="notice">
-                    Sign-in isn't switched on for this site yet. Add a Rotur app ID as
-                    <code>VITE_ROTUR_CLIENT_ID</code> and rebuild.
-                  </p>
-                )}
+                <button className="gel" type="button" onClick={onSignIn}>Sign in with Rotur</button>
                 <p className="signin-new">
-                  No account yet? You can make one on the Rotur sign-in page.
+                  No account yet? You can make one in the same window.
                 </p>
               </div>
             )}
@@ -189,7 +186,7 @@ function ColorPicker() {
   }
 
   return (
-    <div className="color-row" role="radiogroup" aria-label="Console colour">
+    <div className="color-row" role="radiogroup" aria-label="Console color">
       {colors.map((c) => (
         <button
           key={c.id}

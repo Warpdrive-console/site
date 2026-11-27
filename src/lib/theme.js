@@ -1,5 +1,3 @@
-// console colours. shell paints the 3d model, accent + deep drive the ui,
-// sky is the top of the page gradient (everything lighter derives from it)
 export const colors = [
   { id: 'sky', name: 'Sky Blue', shell: '#94d4e2', accent: '#139fd6', deep: '#0a6fa3', sky: '#b7e3f8' },
   { id: 'powder', name: 'Powder Pink', shell: '#fab3c7', accent: '#d34e7e', deep: '#a83463', sky: '#fcd4e2' },

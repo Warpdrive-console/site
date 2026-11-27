@@ -143,7 +143,7 @@ export default function Home() {
                 <dt className="chrome">8 GB</dt>
                 <dd>
                   Of LPDDR4X beside a Snapdragon 778G-class chip. Room to be ambitious,
-                  honest enough to reward optimisation.
+                  honest enough to reward optimization.
                 </dd>
               </div>
               <div>
@@ -162,7 +162,7 @@ export default function Home() {
             <h2>Developers keep most of it</h2>
             <p>
               Developing for Warpdrive is free, with no kit to buy and nothing to apply for.
-              When you sell, the split favours you.
+              When you sell, the split favors you.
             </p>
             <Link className="text-link" to="/developers">Start making games</Link>
           </div>

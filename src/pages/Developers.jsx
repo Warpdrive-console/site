@@ -64,9 +64,10 @@ export default function Developers() {
             </article>
           </div>
           <p className="runtime-note">
-            SDKs for a handful of these engines are in active development, alongside a
-            frontend SDK for building your own console UI. Both are open on{' '}
-            <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>.
+            These are the ones we've verified so far: anything else that exports HTML5 or
+            an Android binary runs too. SDKs for a handful of these engines are in active
+            development, alongside a frontend SDK for building your own console UI. Both
+            are open on <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>.
           </p>
         </div>
       </section>
@@ -78,7 +79,7 @@ export default function Developers() {
             <p>
               Every unit pairs a Snapdragon 778G-class chip with 8 GB of LPDDR4X and that
               720 × 720 screen. It's the middle ground on purpose: enough headroom that a
-              jam build runs fine, and enough of a ceiling that optimising your game is
+              jam build runs fine, and enough of a ceiling that optimizing your game is
               worth your while.
             </p>
           </div>

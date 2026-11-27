@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../styles/gamers.css'
 
-// points are in the diagram's own units: image sits at 310,170 and is 1180x659
 const callouts = [
   {
     title: 'Hall effect analog triggers',
@@ -40,7 +39,6 @@ const callouts = [
   },
 ]
 
-// same 2 mm of screen at each density
 const MM = 2
 const TILE = 240
 

@@ -5,7 +5,6 @@
   align-items: start;
 }
 
-/* grid items default to min-width: auto, which lets long buttons blow out the column */
 .account-grid > * {
   min-width: 0;
 }
@@ -30,7 +29,6 @@
   color: var(--ink-soft);
 }
 
-/* inputs have an intrinsic width that would otherwise size this grid column */
 .lookup {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -71,8 +69,7 @@
     aspect-ratio: auto;
   }
 
-  /* grid items default to min-width: auto, which lets long buttons blow out the column */
-.account-grid > * {
+  .account-grid > * {
   min-width: 0;
 }
 
